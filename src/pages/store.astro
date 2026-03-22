@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getProducts } from '../utils/sanity';
 
 const title = "Scripture Alive Store | Memorization Tools";
 const description = "Browse our store for curated tools and aids designed to help you memorize the Bible.";
@@ -7,64 +8,19 @@ const ogImage = "https://scripturealive.com/wp-content/uploads/elementor/thumbs/
 
 const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
 
-const products = [
-  {
-    image: `${BASE}/dd62f7369bcde9f6588eeddd8137695b_1200_80-rdodoupwjyz0ovcd8day09jlq35efnron1w2c5o2bq.webp`,
-    title: "Power Pack - 52\nMEMORY VERSE CARDS",
-    price: "$10.00",
-    href: "https://store.scripturealive.com/card-deck",
-    comingSoon: false,
-  },
-  {
-    image: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
-    title: "Power to Remember -\nHARDBACK",
-    price: "$20.00",
-    href: "https://store.scripturealive.com/hardback",
-    comingSoon: false,
-  },
-  {
-    image: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
-    title: "Power to Remember -\nPAPERBACK",
-    price: "$15.00",
-    href: "https://store.scripturealive.com/paperback",
-    comingSoon: false,
-  },
-  {
-    image: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
-    title: "Power to Remember -\neBOOK",
-    price: "$12.00",
-    href: "https://store.scripturealive.com/ebookcopy-page",
-    comingSoon: false,
-  },
-  {
-    image: `${BASE}/PTR-Work-Booklet-FINAL-1167-x-1646-px-1200-x-1914-px-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.png`,
-    title: "Power to Remember - WORK BOOKLET\n(Physical)",
-    price: "$5.00",
-    href: "https://store.scripturealive.com/ppwork-booklet-physical",
-    comingSoon: false,
-  },
-  {
-    image: `${BASE}/PTR-Work-Booklet-FINAL-1167-x-1646-px-1200-x-1914-px-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.png`,
-    title: "Power to Remember - WORK BOOKLET\n(Digital)",
-    price: "$5.00",
-    href: "https://store.scripturealive.com/ppwork-booklet-digital",
-    comingSoon: false,
-  },
-  {
-    image: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
-    title: "Power to Remember -\nAUDIO BOOK (COMING SOON IN 2025)",
-    price: "",
-    href: "",
-    comingSoon: true,
-  },
-  {
-    image: `${BASE}/Power-Toolkit-APP-8.0-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrq.png`,
-    title: "Bible Memory Video Course\nApp (COMING SOON IN 2025)",
-    price: "",
-    href: "",
-    comingSoon: true,
-  },
-];
+// Fallback images by order (until uploaded to Sanity)
+const fallbackImages: Record<number, string> = {
+  1: `${BASE}/dd62f7369bcde9f6588eeddd8137695b_1200_80-rdodoupwjyz0ovcd8day09jlq35efnron1w2c5o2bq.webp`,
+  2: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
+  3: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
+  4: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
+  5: `${BASE}/PTR-Work-Booklet-FINAL-1167-x-1646-px-1200-x-1914-px-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.png`,
+  6: `${BASE}/PTR-Work-Booklet-FINAL-1167-x-1646-px-1200-x-1914-px-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.png`,
+  7: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
+  8: `${BASE}/Power-Toolkit-APP-8.0-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrq.png`,
+};
+
+const products = await getProducts();
 ---
 
 <Layout title={title} description={description} ogImage={ogImage}>
@@ -83,34 +39,36 @@ const products = [
   <section class="bg-white py-12">
     <div class="max-w-5xl mx-auto px-6">
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-        {products.map((product) => {
-          const lines = product.title.split('\n');
+        {products.map((product: any) => {
+          const imgSrc = fallbackImages[product.order] ?? fallbackImages[1];
           return (
             <div class="flex flex-col items-center text-center">
               <div class="w-full overflow-hidden mb-4">
                 <img
-                  src={product.image}
+                  src={imgSrc}
                   alt={product.title}
                   class="w-full h-auto object-cover"
                   loading="lazy"
                 />
               </div>
-              <h3 class="text-sm font-bold text-gray-900 leading-snug mb-1">
-                {lines[0]}{lines.length > 1 && <><br />{lines[1]}</>}
-              </h3>
+              <h3 class="text-sm font-bold text-gray-900 leading-snug mb-1">{product.title}</h3>
               {product.price && (
                 <p class="text-sm text-gray-800 mb-3">{product.price}</p>
               )}
               {!product.price && <div class="mb-3"></div>}
-              {product.href ? (
+              {product.comingSoon === 'available' && product.storeUrl ? (
                 <a
-                  href={product.href}
+                  href={product.storeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="inline-block bg-[#c8a951] text-white font-semibold px-5 py-2 rounded text-sm hover:bg-[#b5963e] transition-colors mt-auto"
                 >
                   View Product
                 </a>
+              ) : product.comingSoon === 'coming_soon' ? (
+                <span class="inline-block bg-gray-200 text-gray-600 font-semibold px-5 py-2 rounded text-sm mt-auto">
+                  Coming Soon
+                </span>
               ) : null}
             </div>
           );

@@ -1,73 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getTestimonials } from '../utils/sanity';
 
-const testimonials = [
-  {
-    quote: '"Jeremy transports you back in time and into the pages of Scripture. He has an uncanny ability to embody all the characters in a story and keep you highly engaged. I highly recommend him when you seek to have people connect to God\'s Word in an entirely new way."',
-    name: 'Tami Heim, President and CEO',
-    org: 'Christian Leadership Alliance',
-  },
-  {
-    quote: '"I strongly encourage pastors and ministry leaders to utilize the ministry gifts of Jeremy Kluth. There\'s nothing like hearing God\'s Word memorized and expressed with passion. Your people will be inspired."',
-    name: 'Roy Patterson, Community Relations Director',
-    org: 'Moody Bible Institute, Chicago IL',
-  },
-  {
-    quote: '"Jeremy has been gifted by God. Blending passion and strong contextual attention to detail, Jeremy immerses listeners\' senses and emotions through his gifts of interpretive speaking. The experience brings the Word of God to life in a most memorable way."',
-    name: 'Chris Preuss, Executive Director',
-    org: 'Maranatha Bible & Missionary Conference, Muskegon MI',
-  },
-  {
-    quote: '"Jeremy Kluth is the real deal! His workshops are incredibly practical and inspiring. People who were intimidated by Scripture memory are now memorizing verses daily. Jeremy\'s dramatic recitation from Ezekiel was a highlight of our series on that book which helped make an obscure passage click for people."',
-    name: 'Clayton Keenon, Lead Teaching Pastor',
-    org: 'Christ Community Church, South Elgin IL',
-  },
-  {
-    quote: '"God has used Jeremy\'s dramatic interpretations of Scripture to ignite the hearts of our church family in faith. Jeremy\'s vibrant presentations help us to listen to God with fresh perspective through the ancient story. His ministry also has a lingering effect of spurring us to meditate on Scripture in our personal walk."',
-    name: 'Ritch Boerckel, Teaching & Disciple Pastor',
-    org: 'Bethany Baptist Church, Edwards IL',
-  },
-  {
-    quote: '"Scripture Alive certainly lives up to its name. Our church has walked away from Jeremy\'s dramatizations and workshops both in awe of the power of God\'s Word, and encouraged in our own walk with the Lord. I trust you\'ll have the same experience!"',
-    name: 'Matt Vogel, Senior Pastor',
-    org: 'Grace Evangelical Free Church, Davenport IA',
-  },
-  {
-    quote: '"Jeremy blessed us with his extraordinary ability to bring God\'s Word to life. Our people were amazed, engaged, and encouraged by his performance of the Christmas story, and many are still talking about the practical Scripture memory skills they learned in his workshop."',
-    name: 'Matt Trombley, Senior Pastor',
-    org: 'Life of Purpose Christian Church, St. Clair Shores, MI',
-  },
-  {
-    quote: '"Presenting the life of the Apostle Paul entirely from the words of the Bible itself gave us all a perspective unlike anything you can experience in a sermon or topical talk. It really came alive, especially the zeal and passion within the texts that are sometimes lost in our typical ways of reading them."',
-    name: 'Bob Wolniak, Senior Pastor',
-    org: 'Fulton Church, Edgerton WI',
-  },
-  {
-    quote: '"In a world lacking biblical knowledge and thirsty for truth, Scripture Alive offers an opportunity to learn and be refreshed. Jeremy Kluth is more than entertainment. He brings Scripture to life."',
-    name: 'Rick Miller, Executive Director',
-    org: 'Brethren Retreat at Shipshewana Lake, Shipshewana IN',
-  },
-  {
-    quote: '"Our volunteers and staff were mesmerized as Jeremy portrayed the Apostle Paul. We have never had anyone make such a lasting impression on everyone in attendance. They still talk about his portrayal!"',
-    name: 'Chuck Grimm, Executive Director',
-    org: 'Pathfinders Children\'s Ministry, Reno NV',
-  },
-  {
-    quote: '"Jeremy\'s dramatic presentations are professional, personable, and impactful. Jeremy\'s humble passion lets Scripture speak for itself. We immediately scheduled him to return in the near future."',
-    name: 'TY Spenst, Senior Pastor',
-    org: 'Trinity Evangelical Free Church, Plainview MN',
-  },
-  {
-    quote: '"Jeremy\'s high view of God and commitment to His Word have blessed and inspired our congregation to greater worship on numerous occasions through a clear expression of and careful attention to the Scriptures."',
-    name: 'Josh Beakley, Teaching & Care Pastor',
-    org: 'Bethany Baptist Church, Edwards IL',
-  },
-  {
-    quote: '"Jeremy has strong performance skills, conviction, and a deep passion to bring God\'s Word to life for others. I encourage you to invite him to your conference or event to inspire and engage those you serve to follow Christ more deeply."',
-    name: 'Peter Mayberry, Vice President',
-    org: 'Awana Clubs International',
-  },
-];
+const testimonials = await getTestimonials();
 ---
 
 <Layout
@@ -87,13 +22,13 @@ const testimonials = [
   <section class="pb-16 px-4 bg-white">
     <div class="max-w-4xl mx-auto">
 
-      {testimonials.map((t) => (
+      {testimonials.map((t: any) => (
         <article class="text-center mb-14">
           <p class="text-gray-800 text-sm leading-relaxed mb-4 mx-auto">
-            {t.quote}
+            "{t.quote}"
           </p>
-          <p class="font-bold text-gray-900 text-sm">{t.name}</p>
-          <p class="text-gray-500 text-xs mt-1">{t.org}</p>
+          <p class="font-bold text-gray-900 text-sm">{t.authorName}{t.authorTitle ? `, ${t.authorTitle}` : ''}</p>
+          <p class="text-gray-500 text-xs mt-1">{t.authorOrganization}</p>
         </article>
       ))}
 
