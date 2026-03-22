@@ -69,8 +69,8 @@ Defined in `src/styles/global.css` — use ONLY these tokens, never hardcode hex
 | `text-accent` / `bg-accent` | `#3472B7` (blue) | Secondary CTAs, accents |
 | `text-gold` / `bg-gold` | `#c8a951` | Store, resource CTAs |
 | `bg-cream` | `#f5f0e8` | Section backgrounds |
-| `font-sans` | Montserrat | Body text |
-| `font-serif` | Lora | Headings, pull quotes |
+| `font-sans` | Roboto | Body text (matches WordPress) |
+| `font-serif` | Roboto Slab | Secondary headings (matches WordPress) |
 | `font-display` | Dancing Script | Decorative headings only |
 
 ---
