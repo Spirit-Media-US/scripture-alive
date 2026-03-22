@@ -49,11 +49,11 @@ const resources = await getResources();
               class="w-full rounded object-cover max-h-48"
             />
             <h2 class="text-lg font-bold text-primary font-serif">{r.title}</h2>
-            <p class="text-gray-700 text-sm leading-relaxed flex-1">{r.description}</p>
+            <p class="text-gray-700 leading-relaxed flex-1">{r.description}</p>
             <div class="flex gap-3 flex-wrap">
               <a
                 href={`/${r.slug}`}
-                class="inline-block bg-primary text-white font-semibold px-4 py-2 rounded text-sm hover:bg-primary/90 transition-colors"
+                class="inline-block bg-accent text-white font-semibold px-4 py-2 rounded text-sm hover:bg-accent/90 transition-colors"
               >
                 View Page
               </a>

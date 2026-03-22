@@ -29,7 +29,7 @@ const performances = await getPerformances();
   <!-- Hero Section -->
   <section class="py-10 px-4 bg-white text-center">
     <div class="max-w-3xl mx-auto">
-      <h1 class="text-3xl md:text-4xl font-bold text-primary font-serif mb-4">
+      <h1 class="text-3xl md:text-4xl font-bold text-accent font-serif mb-4">
         Word-for-Word Scripture Performances
       </h1>
       <p class="text-base md:text-lg text-gray-600 leading-relaxed">
@@ -60,7 +60,7 @@ const performances = await getPerformances();
             </div>
             <div class="w-full md:w-7/12 flex flex-col justify-start gap-4">
               <h2 class="text-xl font-bold text-primary font-serif">{perf.title}</h2>
-              <p class="text-gray-700 text-sm md:text-base leading-relaxed">{perf.description}</p>
+              <p class="text-gray-700 leading-relaxed">{perf.description}</p>
               {perf.duration && (
                 <p class="text-xs text-gray-500">Duration: {perf.duration}{perf.translations ? ` · ${perf.translations}` : ''}</p>
               )}
@@ -69,7 +69,7 @@ const performances = await getPerformances();
                   href={watchUrl}
                   target="_blank"
                   rel="noopener"
-                  class="inline-block bg-primary text-white font-semibold px-5 py-2 rounded hover:bg-accent hover:text-white transition-colors text-sm"
+                  class="inline-block bg-accent text-white font-semibold px-5 py-2 rounded hover:opacity-90 transition-opacity text-sm"
                 >
                   Watch
                 </a>
@@ -85,7 +85,7 @@ const performances = await getPerformances();
   <section class="py-12 px-4 bg-cream text-center">
     <div class="max-w-2xl mx-auto">
       <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">Book A Performance</h2>
-      <a href="/contact" class="inline-block bg-primary text-white font-semibold px-8 py-3 rounded hover:opacity-90 transition-opacity">
+      <a href="/contact" class="inline-block bg-accent text-white font-semibold px-8 py-3 rounded hover:opacity-90 transition-opacity">
         Contact Jeremy
       </a>
     </div>

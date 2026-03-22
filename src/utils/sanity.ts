@@ -10,9 +10,13 @@ export const EVENTS_QUERY = defineQuery(`
     venueName,
     venueCity,
     venueState,
+    venueAddress,
     startDate,
     endDate,
-    bookingUrl
+    bookingUrl,
+    eventSubtitle,
+    tags,
+    description
   }
 `)
 

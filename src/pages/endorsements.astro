@@ -24,11 +24,11 @@ const testimonials = await getTestimonials();
 
       {testimonials.map((t: any) => (
         <article class="text-center mb-14">
-          <p class="text-gray-800 text-sm leading-relaxed mb-4 mx-auto">
+          <p class="text-gray-800 leading-relaxed mb-4 mx-auto">
             "{t.quote}"
           </p>
-          <p class="font-bold text-gray-900 text-sm">{t.authorName}{t.authorTitle ? `, ${t.authorTitle}` : ''}</p>
-          <p class="text-gray-500 text-xs mt-1">{t.authorOrganization}</p>
+          <p class="font-semibold text-accent">{t.authorName}{t.authorTitle ? `, ${t.authorTitle}` : ''}</p>
+          <p class="text-sm text-primary mt-1">{t.authorOrganization}</p>
         </article>
       ))}
 

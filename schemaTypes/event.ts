@@ -58,6 +58,33 @@ export const event = defineType({
       description: 'Leave blank for single-day events',
     }),
     defineField({
+      name: 'eventSubtitle',
+      title: 'Event Occasion / Subtitle',
+      type: 'string',
+      description: 'e.g. "Senior Adult Day", "Sunday Morning Service"',
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Event Tags',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'e.g. "Senior Adult Day", "Passion of Christ", "Brownwood" — shown under the title in the popup',
+      options: { layout: 'tags' },
+    }),
+    defineField({
+      name: 'description',
+      title: 'Event Description',
+      type: 'text',
+      rows: 4,
+      description: 'Full description shown in the event popup — unique per event',
+    }),
+    defineField({
+      name: 'venueAddress',
+      title: 'Venue Street Address',
+      type: 'string',
+      description: 'e.g. "8025 FM2125, Brownwood, TX 76801"',
+    }),
+    defineField({
       name: 'bookingUrl',
       title: 'Event URL',
       type: 'url',

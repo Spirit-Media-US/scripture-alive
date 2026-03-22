@@ -3,16 +3,16 @@
 @theme {
   --color-primary: #FBC215;
   --color-accent:  #3472B7;
-  --color-gold:    #c8a951;
+  --color-gold:    #FBC215;
   --color-cream:   #f5f0e8;
   --font-sans:     'Roboto', ui-sans-serif, system-ui, sans-serif;
   --font-serif:    'Roboto Slab', Georgia, ui-serif, serif;
-  --font-display:  'Dancing Script', cursive;
+  --font-display:  'Roboto', ui-sans-serif, sans-serif;
 }
 
 @layer base {
   html { scroll-behavior: smooth; }
-  body { @apply font-sans text-[#7A7A7A] bg-white; }
+  body { @apply font-sans text-[#7A7A7A] bg-white; font-size: 18px; }
   h1, h2, h3, h4 { @apply font-sans; }
   a { @apply transition-colors; }
 }

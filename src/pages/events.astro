@@ -57,10 +57,10 @@ function fmtTime(startStr: string, endStr?: string) {
 >
 
   <!-- Page Hero -->
-  <section class="bg-primary py-16 px-4 text-center">
+  <section class="bg-white py-16 px-4 text-center">
     <div class="max-w-4xl mx-auto">
-      <h1 class="text-4xl md:text-5xl font-bold text-white font-serif mb-4">Upcoming Events</h1>
-      <p class="text-lg text-white/90 max-w-2xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold text-accent font-serif mb-4">Upcoming Events</h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
         Stay updated with the latest events, sessions, and gatherings by Scripture Alive.
       </p>
     </div>
@@ -75,7 +75,7 @@ function fmtTime(startStr: string, endStr?: string) {
           href="https://assets.spiritmediapublishing.com/scripture-alive/Scripture-Alive-One-Sheet-Churches-Camps-Schools.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary/90 transition-colors"
+          class="inline-flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-full font-semibold hover:bg-accent/90 transition-colors"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -122,10 +122,10 @@ function fmtTime(startStr: string, endStr?: string) {
           </div>
           <div class="p-6 flex flex-col flex-1">
             <h3 class="text-xl font-bold text-gray-900 font-serif mb-2">Live Scripture Performance</h3>
-            <p class="text-gray-600 text-sm flex-1 mb-4">
+            <p class="text-gray-600 flex-1 mb-4">
               Experience the Bible brought to life through dramatic performance. Scripture Alive presents powerful, memorized Scripture presentations that engage and inspire audiences of all ages.
             </p>
-            <a href="/contact" class="mt-auto inline-block text-center bg-primary text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors">
+            <a href="/contact" class="mt-auto inline-block text-center bg-accent text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-accent/90 transition-colors">
               Book This Event
             </a>
           </div>
@@ -143,7 +143,7 @@ function fmtTime(startStr: string, endStr?: string) {
           </div>
           <div class="p-6 flex flex-col flex-1">
             <h3 class="text-xl font-bold text-gray-900 font-serif mb-2">Scripture Memorization Workshop</h3>
-            <p class="text-gray-600 text-sm flex-1 mb-4">
+            <p class="text-gray-600 flex-1 mb-4">
               Learn the art and discipline of Scripture memorization. Jeremy Walker shares practical techniques for memorizing and presenting God's Word with passion and accuracy.
             </p>
             <a href="/contact" class="mt-auto inline-block text-center bg-accent text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-accent/90 transition-colors">
@@ -163,10 +163,10 @@ function fmtTime(startStr: string, endStr?: string) {
           </div>
           <div class="p-6 flex flex-col flex-1">
             <h3 class="text-xl font-bold text-gray-900 font-serif mb-2">Scripture Alive</h3>
-            <p class="text-gray-600 text-sm flex-1 mb-4">
+            <p class="text-gray-600 flex-1 mb-4">
               Scripture Alive brings the living Word of God to life through dramatic performance and Scripture memorization training for churches, camps, schools, and mainstage venues.
             </p>
-            <a href="/contact" class="mt-auto inline-block text-center bg-primary text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors">
+            <a href="/contact" class="mt-auto inline-block text-center bg-accent text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-accent/90 transition-colors">
               Book This Event
             </a>
           </div>
@@ -185,7 +185,25 @@ function fmtTime(startStr: string, endStr?: string) {
           <div>
             <h2 class="text-2xl font-bold text-gray-800 font-serif mb-4 mt-8 pb-2 border-b border-gray-200">{month}</h2>
             {events.map((event: any) => (
-              <div class="flex gap-4 md:gap-6 py-5 border-b border-gray-100 items-start">
+              <div
+                class="flex gap-4 md:gap-6 py-5 border-b border-gray-100 items-start cursor-pointer hover:bg-gray-50 rounded-lg px-2 transition-colors"
+                data-event={JSON.stringify({
+                  performance: event.performance,
+                  workshopIncluded: event.workshopIncluded,
+                  venueName: event.venueName,
+                  venueCity: event.venueCity,
+                  venueState: event.venueState,
+                  venueAddress: event.venueAddress ?? '',
+                  startDate: event.startDate,
+                  endDate: event.endDate,
+                  bookingUrl: event.bookingUrl ?? '',
+                  eventSubtitle: event.eventSubtitle ?? '',
+                  tags: event.tags ?? [],
+                  description: event.description ?? ''
+                })}
+                role="button"
+                tabindex="0"
+              >
                 <div class="flex-shrink-0 w-14 text-center">
                   <div class="text-xs font-bold text-gray-500 uppercase">{fmtMonth(event.startDate)}</div>
                   <div class="text-3xl font-bold text-primary leading-none">{fmtDay(event.startDate, event.endDate)}</div>
@@ -206,9 +224,7 @@ function fmtTime(startStr: string, endStr?: string) {
                       <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                       {event.venueName}
                     </span>
-                    {event.bookingUrl && (
-                      <a href={event.bookingUrl} target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Details →</a>
-                    )}
+                    <span class="text-accent font-semibold">View Details →</span>
                   </div>
                 </div>
               </div>
@@ -243,12 +259,215 @@ function fmtTime(startStr: string, endStr?: string) {
     </div>
   </section>
 
+  <!-- Event Popup Modal -->
+  <div id="event-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/60" role="dialog" aria-modal="true">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 relative max-h-[90vh] overflow-y-auto">
+      <button id="modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl leading-none" aria-label="Close">&times;</button>
+
+      <div id="modal-type" class="text-xs font-bold uppercase tracking-wider text-accent mb-1"></div>
+      <h2 id="modal-title" class="text-xl font-bold text-gray-900 font-serif mb-2"></h2>
+      <div id="modal-subtitle" class="text-sm text-gray-500 mb-1"></div>
+      <div id="modal-tags" class="flex flex-wrap gap-1.5 mb-3"></div>
+      <p id="modal-description" class="text-sm text-gray-600 leading-relaxed mb-4"></p>
+
+      <div class="space-y-3 text-sm mb-4">
+        <!-- When -->
+        <div>
+          <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">When</div>
+          <div class="flex items-start gap-2 text-gray-700">
+            <svg class="w-4 h-4 mt-0.5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <div>
+              <div id="modal-date"></div>
+              <div id="modal-time" class="text-gray-500"></div>
+            </div>
+          </div>
+          <div class="mt-2">
+            <a id="modal-cal-link" href="#" class="text-xs text-accent hover:underline font-semibold">+ Add to Calendar</a>
+          </div>
+        </div>
+
+        <!-- Where -->
+        <div>
+          <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Where</div>
+          <div class="flex items-start gap-2 text-gray-700">
+            <svg class="w-4 h-4 mt-0.5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <div>
+              <div id="modal-venue"></div>
+              <div id="modal-address" class="text-gray-500"></div>
+            </div>
+          </div>
+          <div class="mt-2">
+            <a id="modal-directions" href="#" target="_blank" rel="noopener noreferrer" class="text-xs text-accent hover:underline font-semibold">Get Directions</a>
+          </div>
+          <div class="mt-2 rounded overflow-hidden" style="height:160px;">
+            <iframe id="modal-map" src="" width="100%" height="160" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Event location map"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3 mb-4">
+        <a id="modal-booking-link" href="/contact" class="flex-1 text-center bg-accent text-white font-semibold px-6 py-3 rounded hover:opacity-90 transition-opacity">Book Jeremy for Your Event</a>
+      </div>
+
+      <!-- Share options -->
+      <div class="border-t border-gray-100 pt-4">
+        <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Share</div>
+        <div class="flex flex-wrap gap-3">
+          <button id="modal-copy-link" class="flex items-center gap-1.5 text-xs text-gray-600 hover:text-accent font-semibold border border-gray-200 rounded px-3 py-1.5 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            <span id="modal-copy-label">Copy Link</span>
+          </button>
+          <a id="modal-share-email" href="#" class="flex items-center gap-1.5 text-xs text-gray-600 hover:text-accent font-semibold border border-gray-200 rounded px-3 py-1.5 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            Invite via Email
+          </a>
+          <a id="modal-share-facebook" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-xs text-gray-600 hover:text-accent font-semibold border border-gray-200 rounded px-3 py-1.5 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073C24 5.406 18.627 0 12 0S0 5.406 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047v-2.66c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.265h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+            Facebook
+          </a>
+          <a id="modal-share-x" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-xs text-gray-600 hover:text-accent font-semibold border border-gray-200 rounded px-3 py-1.5 transition-colors">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            X
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('event-modal')!;
+    const modalClose = document.getElementById('modal-close')!;
+
+    function fmtDate(startStr: string, endStr?: string) {
+      const opts: Intl.DateTimeFormatOptions = { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' };
+      const start = new Date(startStr).toLocaleDateString('en-US', opts);
+      if (!endStr) return start;
+      const endDay = new Date(endStr).getUTCDate();
+      const startDay = new Date(startStr).getUTCDate();
+      if (startDay === endDay) return start;
+      return `${start} – ${new Date(endStr).toLocaleDateString('en-US', { day: 'numeric', month: 'long', timeZone: 'UTC' })}`;
+    }
+
+    function fmtTime(startStr: string, endStr?: string) {
+      const fmt = (s: string) => new Date(s).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'UTC' });
+      if (!endStr) return fmt(startStr);
+      return `${fmt(startStr)} – ${fmt(endStr)}`;
+    }
+
+    function makeCalLink(event: any) {
+      const pad = (n: number) => String(n).padStart(2, '0');
+      const dt = (s: string) => {
+        const d = new Date(s);
+        return `${d.getUTCFullYear()}${pad(d.getUTCMonth()+1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}00Z`;
+      };
+      const start = dt(event.startDate);
+      const end = event.endDate ? dt(event.endDate) : start;
+      const title = encodeURIComponent(`${event.performance} – ${event.venueName}`);
+      const loc = encodeURIComponent(`${event.venueName}, ${event.venueCity}, ${event.venueState}`);
+      return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&location=${loc}`;
+    }
+
+    function openModal(event: any) {
+      const isWorkshop = event.workshopIncluded === 'yes' || event.workshopIncluded === 'workshop';
+      document.getElementById('modal-type')!.textContent = isWorkshop ? 'Performance & Workshop' : 'Performance';
+      document.getElementById('modal-title')!.textContent = `${event.performance}${isWorkshop ? ' & Workshop' : ''}: ${event.venueName} - ${event.venueCity}, ${event.venueState}`;
+
+      const subtitle = document.getElementById('modal-subtitle')!;
+      subtitle.textContent = event.eventSubtitle || '';
+      subtitle.style.display = event.eventSubtitle ? '' : 'none';
+
+      const tagsEl = document.getElementById('modal-tags')!;
+      tagsEl.innerHTML = '';
+      if (event.tags && event.tags.length > 0) {
+        event.tags.forEach((tag: string) => {
+          const span = document.createElement('span');
+          span.textContent = tag;
+          span.className = 'text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full';
+          tagsEl.appendChild(span);
+        });
+        tagsEl.style.display = 'flex';
+      } else {
+        tagsEl.style.display = 'none';
+      }
+
+      const desc = document.getElementById('modal-description')!;
+      desc.textContent = event.description || '';
+      desc.style.display = event.description ? '' : 'none';
+
+      document.getElementById('modal-date')!.textContent = fmtDate(event.startDate, event.endDate);
+      document.getElementById('modal-time')!.textContent = fmtTime(event.startDate, event.endDate);
+      document.getElementById('modal-venue')!.textContent = event.venueName;
+
+      const addr = document.getElementById('modal-address')!;
+      addr.textContent = event.venueAddress || `${event.venueCity}, ${event.venueState}`;
+
+      const directions = document.getElementById('modal-directions') as HTMLAnchorElement;
+      const mapsQuery = encodeURIComponent(event.venueAddress || `${event.venueName} ${event.venueCity} ${event.venueState}`);
+      directions.href = `https://www.google.com/maps/dir//${mapsQuery}`;
+
+      const mapFrame = document.getElementById('modal-map') as HTMLIFrameElement;
+      mapFrame.src = `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
+
+      // Share links
+      const pageUrl = encodeURIComponent(window.location.href);
+      const shareTitle = encodeURIComponent(`${event.performance} – ${event.venueName}, ${event.venueCity} ${event.venueState}`);
+      const emailBody = encodeURIComponent(`Check out this event: ${event.performance} at ${event.venueName} in ${event.venueCity}, ${event.venueState}.\n\n${window.location.href}`);
+      (document.getElementById('modal-share-email') as HTMLAnchorElement).href = `mailto:?subject=${shareTitle}&body=${emailBody}`;
+      (document.getElementById('modal-share-facebook') as HTMLAnchorElement).href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+      (document.getElementById('modal-share-x') as HTMLAnchorElement).href = `https://x.com/intent/tweet?text=${shareTitle}&url=${pageUrl}`;
+
+      (document.getElementById('modal-cal-link') as HTMLAnchorElement).href = makeCalLink(event);
+
+      const bookingLink = document.getElementById('modal-booking-link') as HTMLAnchorElement;
+      if (event.bookingUrl) {
+        bookingLink.href = event.bookingUrl;
+        bookingLink.target = '_blank';
+        bookingLink.rel = 'noopener noreferrer';
+        bookingLink.textContent = 'Get Tickets';
+      } else {
+        bookingLink.href = '/contact';
+        bookingLink.removeAttribute('target');
+        bookingLink.textContent = 'Book Jeremy for Your Event';
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-event]').forEach(el => {
+      el.addEventListener('click', () => openModal(JSON.parse((el as HTMLElement).dataset.event!)));
+      el.addEventListener('keydown', (e: Event) => {
+        if ((e as KeyboardEvent).key === 'Enter') openModal(JSON.parse((el as HTMLElement).dataset.event!));
+      });
+    });
+
+    // Share buttons
+    document.getElementById('modal-copy-link')!.addEventListener('click', () => {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const label = document.getElementById('modal-copy-label')!;
+        label.textContent = 'Copied!';
+        setTimeout(() => { label.textContent = 'Copy Link'; }, 2000);
+      });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  </script>
+
   <!-- Book CTA -->
   <section class="py-12 px-4 bg-cream text-center">
     <div class="max-w-2xl mx-auto">
       <h2 class="text-2xl md:text-3xl font-bold text-accent mb-4">Interested in Booking Jeremy?</h2>
       <p class="text-gray-600 mb-6">Contact us to check availability and discuss bringing Scripture Alive to your church, camp, school, or event.</p>
-      <a href="/contact" class="inline-block bg-primary text-black font-semibold px-8 py-3 rounded hover:opacity-90 transition-opacity">
+      <a href="/contact" class="inline-block bg-accent text-white font-semibold px-8 py-3 rounded hover:opacity-90 transition-opacity">
         Get in Touch
       </a>
     </div>
