@@ -51,7 +51,7 @@ const currentPath = Astro.url.pathname;
 <body>
 
   <!-- Navigation -->
-  <header class="sticky top-0 z-50 bg-[#1a1a1a]">
+  <header class="sticky top-0 z-50 bg-transparent">
     <nav class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
       <a href="/"><img src="https://assets.spiritmediapublishing.com/scripture-alive/63c952c12297d31fbe2f64b7-1-rdodoupw5xs3zetmqqhezp7qp7r859r0l2vjuexg4o.webp" alt="Scripture Alive" class="h-12 w-auto" /></a>
       <ul class="hidden md:flex items-center gap-6">
@@ -59,7 +59,7 @@ const currentPath = Astro.url.pathname;
           <li>
             <a
               href={item.href}
-              class={`text-sm font-medium font-sans transition-colors ${currentPath === item.href ? 'text-primary' : 'text-white/80 hover:text-primary'}`}
+              class={`text-sm font-medium font-sans transition-colors ${currentPath === item.href ? 'text-primary' : 'text-[#555] hover:text-primary'}`}
             >
               {item.label}
             </a>
@@ -72,7 +72,7 @@ const currentPath = Astro.url.pathname;
         </li>
       </ul>
       <!-- Mobile menu button -->
-      <button class="md:hidden p-2 text-white/80" aria-label="Menu">
+      <button class="md:hidden p-2 text-[#555]" aria-label="Menu">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>

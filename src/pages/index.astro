@@ -8,181 +8,247 @@ import Layout from '../layouts/Layout.astro';
   ogImage="https://scripturealive.com/wp-content/uploads/2023/11/scripturealive.png"
 >
 
-  <!-- HERO SECTION with video background -->
-  <section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <!-- HERO SECTION — full screen, transparent nav shows over video -->
+  <section class="relative h-screen flex items-center justify-center overflow-hidden" style="margin-top: -72px;">
     <video
       class="absolute inset-0 w-full h-full object-cover z-0"
-      autoplay
-      muted
-      playsinline
-      loop
-      aria-hidden="true"
+      autoplay muted playsinline loop aria-hidden="true"
     >
       <source src="https://scripturealive.com/wp-content/uploads/2023/11/63c9566f010aa46eb2df7c75.mp4" type="video/mp4" />
     </video>
     <div class="absolute inset-0 bg-black/50 z-10"></div>
     <div class="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white drop-shadow-lg" style="font-family: 'Montserrat', sans-serif;">
+      <h1 class="font-sans font-bold text-4xl md:text-5xl lg:text-6xl mb-4 text-white drop-shadow-lg">
         Making Scripture Unforgettable
       </h1>
-      <p class="text-xl md:text-2xl mb-10 text-white drop-shadow-md font-normal" style="font-family: 'Montserrat', sans-serif;">
+      <p class="font-sans text-xl md:text-2xl mb-10 text-white drop-shadow-md">
         Performances | Workshops | Speaking
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a
-          href="/contact"
-          class="bg-primary text-black font-semibold px-8 py-3 rounded text-base transition-all duration-300 hover:opacity-90"
-        >
+        <a href="/contact" class="bg-primary text-black font-semibold font-sans px-8 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
           Invite Jeremy
         </a>
-        <a
-          href="/referjeremy"
-          class="border-2 border-white text-white hover:bg-white hover:text-black font-semibold px-8 py-3 rounded text-base transition-all duration-300"
-        >
+        <a href="/referjeremy" class="border-2 border-white text-white hover:bg-white hover:text-black font-semibold font-sans px-8 py-3 rounded text-base transition-all duration-300">
           Refer Jeremy
         </a>
       </div>
     </div>
   </section>
 
-  <!-- DEDICATED TO PROCLAIMING SECTION -->
+  <!-- DEDICATED TO PROCLAIMING — blue heading -->
   <section class="bg-white pt-16 pb-8 px-4">
     <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight" style="color: #FBC215; font-family: 'Montserrat', sans-serif;">
+      <h2 class="font-sans font-bold text-2xl md:text-3xl lg:text-4xl leading-tight" style="color: #3472B7;">
         Dedicated to Proclaiming the Word with Creativity and Conviction
       </h2>
     </div>
   </section>
 
-  <!-- FOUR FEATURES SECTION -->
+  <!-- FOUR FEATURES -->
   <section class="bg-white py-8 px-4 pb-16">
     <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Pure Scripture -->
+
       <div class="flex flex-col items-center text-center p-6 border border-gray-200 rounded-lg shadow-sm">
         <div class="w-14 h-14 mb-4 flex items-center justify-center">
-          <svg class="w-10 h-10" style="color: #FBC215;" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 14H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V6h8v2z"/>
-          </svg>
+          <svg class="w-10 h-10" style="color:#FBC215;" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 14H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V6h8v2z"/></svg>
         </div>
-        <h3 class="text-base font-bold mb-2" style="color: #FBC215; font-family: 'Montserrat', sans-serif;">Pure Scripture</h3>
+        <h3 class="font-sans font-bold text-base mb-2" style="color:#FBC215;">Pure Scripture</h3>
         <p class="text-gray-600 text-sm leading-relaxed">Every performance is quoted word for word from the Bible.</p>
       </div>
 
-      <!-- Skillfully Dramatized -->
       <div class="flex flex-col items-center text-center p-6 border border-gray-200 rounded-lg shadow-sm">
         <div class="w-14 h-14 mb-4 flex items-center justify-center">
-          <svg class="w-10 h-10" style="color: #FBC215;" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
-          </svg>
+          <svg class="w-10 h-10" style="color:#FBC215;" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg>
         </div>
-        <h3 class="text-base font-bold mb-2" style="color: #FBC215; font-family: 'Montserrat', sans-serif;">Skillfully Dramatized</h3>
+        <h3 class="font-sans font-bold text-base mb-2" style="color:#FBC215;">Skillfully Dramatized</h3>
         <p class="text-gray-600 text-sm leading-relaxed">A high-quality theatrical production makes Scripture leap off of the page.</p>
       </div>
 
-      <!-- Impacting Lives -->
       <div class="flex flex-col items-center text-center p-6 border border-gray-200 rounded-lg shadow-sm">
         <div class="w-14 h-14 mb-4 flex items-center justify-center">
-          <svg class="w-10 h-10" style="color: #FBC215;" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-          </svg>
+          <svg class="w-10 h-10" style="color:#FBC215;" fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
         </div>
-        <h3 class="text-base font-bold mb-2" style="color: #FBC215; font-family: 'Montserrat', sans-serif;">Impacting Lives</h3>
+        <h3 class="font-sans font-bold text-base mb-2" style="color:#FBC215;">Impacting Lives</h3>
         <p class="text-gray-600 text-sm leading-relaxed">People regularly say how moved they are and how it helps them better understand the Bible.</p>
       </div>
 
-      <!-- Unique and Memorable -->
       <div class="flex flex-col items-center text-center p-6 border border-gray-200 rounded-lg shadow-sm">
         <div class="w-14 h-14 mb-4 flex items-center justify-center">
-          <svg class="w-10 h-10" style="color: #FBC215;" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2zm0 12c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z"/>
-          </svg>
+          <svg class="w-10 h-10" style="color:#FBC215;" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
         </div>
-        <h3 class="text-base font-bold mb-2" style="color: #FBC215; font-family: 'Montserrat', sans-serif;">Unique and Memorable</h3>
+        <h3 class="font-sans font-bold text-base mb-2" style="color:#FBC215;">Unique and Memorable</h3>
         <p class="text-gray-600 text-sm leading-relaxed">Your audience will never forget when Scripture is dramatically presented!</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SERVICE TILES -->
+  <section class="bg-white px-4 pb-16">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+      <a href="/performances" class="relative rounded overflow-hidden shadow group block h-48">
+        <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
+          style="background-image:url('https://assets.spiritmediapublishing.com/scripture-alive/2107248e6e6621d6b4fe5c38c18c8cd5_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp');"></div>
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="font-display text-white text-xl font-semibold italic drop-shadow-lg">Scripture Performances</span>
+        </div>
+      </a>
+
+      <a href="/workshops" class="relative rounded overflow-hidden shadow group block h-48">
+        <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
+          style="background-image:url('https://assets.spiritmediapublishing.com/scripture-alive/7dea0315c3929177440f5d9a90340ce8_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp');"></div>
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="font-display text-white text-xl font-semibold italic drop-shadow-lg">Scripture Memory Workshops</span>
+        </div>
+      </a>
+
+      <a href="/guestpreaching" class="relative rounded overflow-hidden shadow group block h-48">
+        <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
+          style="background-image:url('https://assets.spiritmediapublishing.com/scripture-alive/f851f13fa9d3e0e5887f74730556c3d0_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp');"></div>
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="font-display text-white text-xl font-semibold italic drop-shadow-lg">Guest Preaching</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS CAROUSEL — 9 slides, auto-advance every 5s -->
+  <section class="bg-white py-16 px-4" id="testimonials">
+    <div class="max-w-3xl mx-auto">
+      <div class="overflow-hidden" id="tCarouselWrap">
+        <div class="flex transition-transform duration-500 ease-in-out" id="tTrack">
+
+          <!-- 1 -->
+          <div class="min-w-full text-center px-6">
+            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+              "Jeremy has strong performance skills, conviction, and a deep passion to bring God's Word to life for others. I encourage you to invite him to your conference or event to inspire and engage those you serve to follow Christ more deeply."
+            </blockquote>
+            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Peter Mayberry, Vice President</p>
+            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Awana Clubs International</p>
+          </div>
+
+          <!-- 2 -->
+          <div class="min-w-full text-center px-6">
+            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+              "Jeremy transports you back in time and into the pages of Scripture. He has uncanny ability to embody all the characters in a story and keep you highly engaged. I highly recommend him when you seek to have people connect to God's Word in an entirely new way."
+            </blockquote>
+            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Tami Heim, President and CEO</p>
+            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Christian Leadership Alliance</p>
+          </div>
+
+          <!-- 3 -->
+          <div class="min-w-full text-center px-6">
+            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+              "I strongly encourage pastors and ministry leaders to utilize the ministry gifts of Jeremy Kluth. There's nothing like hearing God's Word memorized and expressed with passion. Your people will be inspired."
+            </blockquote>
+            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Roy Patterson, Community Relationship Director</p>
+            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Moody Bible Institute, Chicago IL</p>
+          </div>
+
+          <!-- 4 -->
+          <div class="min-w-full text-center px-6">
+            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+              "Jeremy has been gifted by God. Blending passion and strong contextual attention to detail, Jeremy immerses listeners' senses and emotions through his gifts of interpretive speaking. The experience brings the Word of God to life in a most memorable way."
+            </blockquote>
+            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Chris Preuss, Executive Director</p>
+            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Maranatha Bible &amp; Missionary Conference, Muskegon MI</p>
+          </div>
+
+          <!-- 5 -->
+          <div class="min-w-full text-center px-6">
+            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+              "Scripture Alive certainly lives up to its name. Our church has walked away from Jeremy's dramatizations and workshops both in awe of the power of God's Word, and encouraged in our own walk with the Lord."
+            </blockquote>
+            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Matt Vogel, Senior Pastor</p>
+            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Grace Evangelical Free Church, Davenport IA</p>
+          </div>
+
+          <!-- 6 -->
+          <div class="min-w-full text-center px-6">
+            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+              "Jeremy Kluth is the real deal! His workshops are incredibly practical and inspiring. We loved when Jeremy did a dramatic recitation from Ezekiel in our worship service. It helped make an obscure passage click for people. It was a highlight of our series on that book."
+            </blockquote>
+            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Clayton Keenon, Lead Teaching Pastor</p>
+            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Christ Community Church, South Elgin IL</p>
+          </div>
+
+          <!-- 7 -->
+          <div class="min-w-full text-center px-6">
+            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+              "Presenting the life of the Apostle Paul entirely from the words of the Bible itself gave us all a perspective unlike anything you can experience in a sermon or topical talk. It really came alive, especially the zeal and passion within the text that are sometimes lost in our typical ways of reading them."
+            </blockquote>
+            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Bob Wolniak, Senior Pastor</p>
+            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Fulton Church, Edgerton WI</p>
+          </div>
+
+          <!-- 8 -->
+          <div class="min-w-full text-center px-6">
+            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+              "In a world lacking biblical knowledge and thirsty for truth, Scripture Alive offers an opportunity to learn and be refreshed. Jeremy Kluth is more than entertainment. He brings Scripture to life."
+            </blockquote>
+            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Rick Miller, Executive Director</p>
+            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Brethren Retreat at Shipshewana Lake, Shipshewana IN</p>
+          </div>
+
+          <!-- 9 -->
+          <div class="min-w-full text-center px-6">
+            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+              "Jeremy's high view of God and commitment to His Word have blessed and inspired our congregation to greater worship on numerous occasions through a clear expression of and careful attention to the Scriptures."
+            </blockquote>
+            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Josh Beakley, Teaching Pastor</p>
+            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Bethany Baptist Church, Edwards IL</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Dot navigation -->
+      <div class="flex justify-center gap-2 mt-8" id="tDots">
+        {[0,1,2,3,4,5,6,7,8].map(i => (
+          <button
+            data-slide={i}
+            class={`w-2.5 h-2.5 rounded-full transition-colors ${i === 0 ? 'bg-primary' : 'bg-gray-300'}`}
+            aria-label={`Testimonial ${i + 1}`}
+          ></button>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- SERVICE TILES SECTION -->
-  <section class="bg-white px-4 pb-16">
-    <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <!-- Scripture Performances -->
-      <a href="/performances" class="relative rounded overflow-hidden shadow group block h-48">
-        <div
-          class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
-          style="background-image: url('https://assets.spiritmediapublishing.com/scripture-alive/2107248e6e6621d6b4fe5c38c18c8cd5_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp');"
-        ></div>
-        <div class="absolute inset-0 bg-black/40"></div>
-        <div class="absolute inset-0 flex items-center justify-center">
-          <span class="text-white text-xl font-semibold italic drop-shadow-lg" style="font-family: 'Dancing Script', cursive;">Scripture Performances</span>
-        </div>
-      </a>
+  <script>
+    const track = document.getElementById('tTrack');
+    const dots = document.querySelectorAll('#tDots button');
+    const total = 9;
+    let current = 0;
+    let timer: ReturnType<typeof setInterval>;
 
-      <!-- Scripture Memory Workshops -->
-      <a href="/workshops" class="relative rounded overflow-hidden shadow group block h-48">
-        <div
-          class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
-          style="background-image: url('https://assets.spiritmediapublishing.com/scripture-alive/7dea0315c3929177440f5d9a90340ce8_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp');"
-        ></div>
-        <div class="absolute inset-0 bg-black/40"></div>
-        <div class="absolute inset-0 flex items-center justify-center">
-          <span class="text-white text-xl font-semibold italic drop-shadow-lg" style="font-family: 'Dancing Script', cursive;">Scripture Memory Workshops</span>
-        </div>
-      </a>
+    function goTo(n: number) {
+      current = (n + total) % total;
+      (track as HTMLElement).style.transform = `translateX(-${current * 100}%)`;
+      dots.forEach((d, i) => {
+        d.classList.toggle('bg-primary', i === current);
+        d.classList.toggle('bg-gray-300', i !== current);
+      });
+    }
 
-      <!-- Guest Preaching -->
-      <a href="/guestpreaching" class="relative rounded overflow-hidden shadow group block h-48">
-        <div
-          class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
-          style="background-image: url('https://assets.spiritmediapublishing.com/scripture-alive/f851f13fa9d3e0e5887f74730556c3d0_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp');"
-        ></div>
-        <div class="absolute inset-0 bg-black/40"></div>
-        <div class="absolute inset-0 flex items-center justify-center">
-          <span class="text-white text-xl font-semibold italic drop-shadow-lg" style="font-family: 'Dancing Script', cursive;">Guest Preaching</span>
-        </div>
-      </a>
-    </div>
-  </section>
+    function start() {
+      timer = setInterval(() => goTo(current + 1), 5000);
+    }
 
-  <!-- TESTIMONIALS SECTION -->
-  <section class="bg-white py-16 px-4">
-    <div class="max-w-3xl mx-auto relative">
-      <div class="testimonial-wrapper overflow-hidden">
-        <div class="testimonial-track flex transition-transform duration-500" id="testimonialTrack">
+    dots.forEach(btn => {
+      btn.addEventListener('click', () => {
+        clearInterval(timer);
+        goTo(parseInt((btn as HTMLElement).dataset.slide || '0'));
+        start();
+      });
+    });
 
-          <!-- Slide 1 -->
-          <div class="testimonial-slide min-w-full text-center px-8">
-            <blockquote class="text-gray-700 text-base italic leading-relaxed mb-8" style="font-family: 'Montserrat', sans-serif;">
-              "Jeremy transports you back in time and into the pages of Scripture. He has uncanny ability to embody all the characters in a story and keep you highly engaged. I highly recommend him when you seek to have people connect to God's Word in an entirely new way."
-            </blockquote>
-            <div>
-              <p class="font-bold text-base" style="color: #1a3a5c;">Tami Heim, President and CEO</p>
-              <p class="font-medium text-sm" style="color: #FBC215;">Christian Leadership Alliance</p>
-            </div>
-          </div>
+    start();
+  </script>
 
-          <!-- Slide 2 -->
-          <div class="testimonial-slide min-w-full text-center px-8">
-            <blockquote class="text-gray-700 text-base italic leading-relaxed mb-8" style="font-family: 'Montserrat', sans-serif;">
-              "I strongly encourage pastors and ministry leaders to utilize the ministry gifts of Jeremy Kluth. There's nothing like hearing God's Word memorized and expressed with passion. Your people will be inspired."
-            </blockquote>
-            <div>
-              <p class="font-bold text-base" style="color: #1a3a5c;">Roy Patterson, Community Relationship Director</p>
-              <p class="font-medium text-sm" style="color: #FBC215;">Moody Bible Institute, Chicago IL</p>
-            </div>
-          </div>
-
-          <!-- Slide 3 -->
-          <div class="testimonial-slide min-w-full text-center px-8">
-            <blockquote class="text-gray-700 text-base italic leading-relaxed mb-8" style="font-family: 'Montserrat', sans-serif;">
-              "Jeremy Kluth is a gifted communicator who brings Scripture to life in a way that is both powerful and memorable. His performances have deeply impacted our congregation."
-            </blockquote>
-            <div>
-              <p class="font-bold text-base" style="color: #1a3a5c;">Pastor David Williams</p>
-              <p class="font-medium text-sm" style="color: #FBC215;">Grace Community Church</p>
-            </div>
-          </div>
-
-          <!-- Slide 4 -->
-          <div class="testimonial-slide min-w-full text-center px-8">
-            <blockquote class="text-gray-700 text-base italic leading-relaxed mb-8" style="font-family: 'Montserrat
+</Layout>
