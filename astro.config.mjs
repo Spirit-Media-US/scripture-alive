@@ -1,10 +1,12 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sanity from '@sanity/astro';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://scripturealive.com',
   integrations: [
+    sitemap(),
     sanity({
       projectId: 'vxczpihg',
       dataset: 'production',
