@@ -1,60 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getResources } from '../utils/sanity';
 
-const BASE_WP = 'https://assets.spiritmediapublishing.com/scripture-alive';
-const BASE_GHL = 'https://storage.googleapis.com/msgsndr/s6tfZuCYRjEKf1S3JnqU/media';
+const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
 
-const resources = [
-  {
-    title: 'The POWER System for Scripture Memory',
-    description: 'The official two-page POWER System memorization process to help you store up God\'s Word in a way that\'s effective, enjoyable, and faith-igniting.',
-    img: `${BASE_WP}/SA-POWER-System-Graphic-768x512.png`,
-    href: '/powersystem',
-    pdf: `${BASE_WP}/POWER-System-for-Scripture-Memory.pdf`,
-  },
-  {
-    title: 'Personal Scripture Memory Plan',
-    description: 'A four-page step-by-step worksheet to help you create your own personalized Bible memory plan.',
-    img: `${BASE_WP}/SA-Personal-Memory-Plan-768x512.png`,
-    href: '/worksheet',
-    pdf: `${BASE_WP}/SA-Personal-Memorization-Plan.pdf`,
-  },
-  {
-    title: '8 Reasons Why to Memorize Scripture',
-    description: '8 compelling reasons why memorizing Scripture transforms your walk with God.',
-    img: `${BASE_WP}/8-Reasons-Why-To-Memorize-Scripture-List-Sq-768x768.png`,
-    href: '/8reasonswhy',
-    pdf: `${BASE_GHL}/63cadddf841bfb3f6550a44a.pdf`,
-  },
-  {
-    title: '8 Lies and Obstacles About Memorizing Scripture',
-    description: 'The 8 most common lies and obstacles that keep people from memorizing God\'s Word — and how to overcome them.',
-    img: `${BASE_WP}/8-Lies-We-Believe-About-Memorizing-Scripture-List-Sq-768x768.png`,
-    href: '/8liesandobstacles',
-    pdf: `${BASE_GHL}/63cadddf3e3cb5f3317cde30.pdf`,
-  },
-  {
-    title: 'Creative Ways to Memorize Scripture',
-    description: 'Creative techniques and methods to help you memorize Scripture more effectively and enjoyably.',
-    img: `${BASE_WP}/Creative-Ways-to-Memorize-Scripture-List-Sq.png`,
-    href: '/creative',
-    pdf: `${BASE_GHL}/63cadddf841bfb23af50a449.pdf`,
-  },
-  {
-    title: 'Topical Verses PDF',
-    description: '200+ verses organized by topic to help you choose the perfect Scripture to memorize.',
-    img: `${BASE_WP}/SA-POWER-System-Graphic-768x512.png`,
-    href: '/topicalverses',
-    pdf: `https://assets.spiritmediapublishing.com/scripture-alive/Topical-Verses-PDF.pdf`,
-  },
-  {
-    title: 'Scripture Alive Info Sheet',
-    description: 'A two-page overview of the Scripture Alive ministry — ideal for sharing with churches, camps, and schools.',
-    img: 'https://assets.spiritmediapublishing.com/scripture-alive/d0b2aceb029909de1f63dd05cb63c4af_1200_80-rdodoupx7nidwtzgvi31qpkih69etmmxm500ypsw76.webp',
-    href: '/scripturealiveinfosheet',
-    pdf: `${BASE_WP}/Scripture-Alive-Info-Sheet.pdf`,
-  },
-];
+// R2 fallback images by slug until uploaded to Sanity Studio
+const fallbackImages: Record<string, string> = {
+  powersystem: `${BASE}/SA-POWER-System-Graphic-768x512.png`,
+  worksheet: `${BASE}/SA-Personal-Memory-Plan-768x512.png`,
+  '8reasonswhy': `${BASE}/8-Reasons-Why-To-Memorize-Scripture-List-Sq-768x768.png`,
+  '8liesandobstacles': `${BASE}/8-Lies-We-Believe-About-Memorizing-Scripture-List-Sq-768x768.png`,
+  creative: `${BASE}/Creative-Ways-to-Memorize-Scripture-List-Sq.png`,
+  topicalverses: `${BASE}/SA-POWER-System-Graphic-768x512.png`,
+  scripturealiveinfosheet: `${BASE}/d0b2aceb029909de1f63dd05cb63c4af_1200_80-rdodoupx7nidwtzgvi31qpkih69etmmxm500ypsw76.webp`,
+};
+
+const resources = await getResources();
 ---
 
 <Layout
@@ -74,37 +35,40 @@ const resources = [
     </div>
   </section>
 
-  <!-- Resources Grid -->
+  <!-- Resources Grid from Sanity -->
   <section class="pb-16 px-4">
     <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-      {resources.map((r) => (
-        <div class="border border-gray-200 rounded p-6 bg-white shadow-sm flex flex-col gap-4">
-          <img
-            src={r.img}
-            alt={r.title}
-            loading="lazy"
-            class="w-full rounded object-cover max-h-48"
-          />
-          <h2 class="text-lg font-bold text-primary font-serif">{r.title}</h2>
-          <p class="text-gray-700 text-sm leading-relaxed flex-1">{r.description}</p>
-          <div class="flex gap-3 flex-wrap">
-            <a
-              href={r.href}
-              class="inline-block bg-primary text-white font-semibold px-4 py-2 rounded text-sm hover:bg-primary/90 transition-colors"
-            >
-              View Page
-            </a>
-            <a
-              href={r.pdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-block bg-accent text-white font-semibold px-4 py-2 rounded text-sm hover:bg-accent/90 transition-colors"
-            >
-              Download PDF
-            </a>
+      {resources.map((r: any) => {
+        const imgSrc = fallbackImages[r.slug] ?? fallbackImages['powersystem'];
+        return (
+          <div class="border border-gray-200 rounded p-6 bg-white shadow-sm flex flex-col gap-4">
+            <img
+              src={imgSrc}
+              alt={r.title}
+              loading="lazy"
+              class="w-full rounded object-cover max-h-48"
+            />
+            <h2 class="text-lg font-bold text-primary font-serif">{r.title}</h2>
+            <p class="text-gray-700 text-sm leading-relaxed flex-1">{r.description}</p>
+            <div class="flex gap-3 flex-wrap">
+              <a
+                href={`/${r.slug}`}
+                class="inline-block bg-primary text-white font-semibold px-4 py-2 rounded text-sm hover:bg-primary/90 transition-colors"
+              >
+                View Page
+              </a>
+              <a
+                href={r.pdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-accent text-white font-semibold px-4 py-2 rounded text-sm hover:bg-accent/90 transition-colors"
+              >
+                Download PDF
+              </a>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   </section>
 

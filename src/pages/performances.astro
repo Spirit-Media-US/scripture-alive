@@ -1,11 +1,29 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getPerformances } from '../utils/sanity';
+
+const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
+
+// R2 fallback images by order until images are uploaded in Sanity Studio
+const fallbackImages: Record<number, string> = {
+  1: `${BASE}/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp`,
+  2: `${BASE}/SA-JOHNS-GOSPEL-Poster-1024x682.png`,
+  3: `${BASE}/aa09e2c799252fc9bc31e28dbf2ad8f0_1200_80-1024x682.webp`,
+  4: `${BASE}/c846fecab2ea5edb95ee06f4cbc9fc90_1200_80-1024x682.webp`,
+  5: `${BASE}/81b4f657e2a792c6a297eae6187ee672_1200_80-1024x682.webp`,
+  6: `${BASE}/SA-OMPP-Poster-2025-1024x682.png`,
+  7: `${BASE}/2d27b0511651d62f940f163837ef2462_1200_80-1024x682.webp`,
+  8: `${BASE}/5c4b5845c73b4a53dd05c0b1d184e79a_1200_80-1024x682.webp`,
+  9: `${BASE}/d8e12fbef9166fcb2ff030c7a53fe03a_1200_80.webp`,
+};
+
+const performances = await getPerformances();
 ---
 
 <Layout
   title="Dramatic Scripture Performances | The Word Proclaimed"
   description="Experience the Bible like never before with our dramatized Scripture performances."
-  ogImage="https://assets.spiritmediapublishing.com/scripture-alive/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp"
+  ogImage={`${BASE}/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp`}
 >
 
   <!-- Hero Section -->
@@ -21,339 +39,53 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Performance 1: Daniel -->
-  <section class="py-10 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-start">
-        <div class="w-full md:w-5/12">
-          <a href="https://youtu.be/LzF0Aym-APM" target="_blank" rel="noopener">
-            <img
-              fetchpriority="high"
-              decoding="async"
-              width="800"
-              height="533"
-              src="https://assets.spiritmediapublishing.com/scripture-alive/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp"
-              srcset="
-                https://assets.spiritmediapublishing.com/scripture-alive/cd6ddbacacca4c638c3d698af0406f33_1200_80-300x200.webp 300w,
-                https://assets.spiritmediapublishing.com/scripture-alive/cd6ddbacacca4c638c3d698af0406f33_1200_80-768x511.webp 768w,
-                https://assets.spiritmediapublishing.com/scripture-alive/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp 1024w,
-                https://assets.spiritmediapublishing.com/scripture-alive/cd6ddbacacca4c638c3d698af0406f33_1200_80.webp 1200w
-              "
-              sizes="(max-width: 800px) 100vw, 800px"
-              alt="Daniel Performance"
-              class="w-full h-auto"
-            />
-          </a>
-        </div>
-        <div class="w-full md:w-7/12 flex flex-col justify-start gap-4">
-          <p class="text-gray-700 text-sm md:text-base leading-relaxed">
-            Mad kings, golden statues, a blazing furnace, malicious supervisors, and a lion's den--Daniel and his friends were truly tested in the pagan society of Babylon, but their character and trust in God shined through the darkness. Experience their powerful stories in this 40-minute presentation. Recited using the NET and NIV translations. (Can also select any chapter of Daniel 1-6, 5-10 minutes.)
-          </p>
-          <div>
-            <a
-              href="https://youtu.be/LzF0Aym-APM"
-              target="_blank"
-              rel="noopener"
-              class="inline-block bg-primary text-white font-semibold px-5 py-2 rounded hover:bg-accent hover:text-white transition-colors text-sm"
-            >
-              Watch
-            </a>
+  <!-- Performance List from Sanity -->
+  {performances.map((perf: any) => {
+    const imgSrc = fallbackImages[perf.order] ?? fallbackImages[1];
+    const watchUrl = `https://youtu.be/${perf.youtubeId}`;
+    return (
+      <section class="py-10 px-4 bg-white">
+        <div class="max-w-5xl mx-auto">
+          <div class="flex flex-col md:flex-row gap-8 items-start">
+            <div class="w-full md:w-5/12">
+              <a href={watchUrl} target="_blank" rel="noopener">
+                <img
+                  src={imgSrc}
+                  alt={`${perf.title} Performance`}
+                  class="w-full h-auto"
+                  loading={perf.order === 1 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </a>
+            </div>
+            <div class="w-full md:w-7/12 flex flex-col justify-start gap-4">
+              <h2 class="text-xl font-bold text-primary font-serif">{perf.title}</h2>
+              <p class="text-gray-700 text-sm md:text-base leading-relaxed">{perf.description}</p>
+              {perf.duration && (
+                <p class="text-xs text-gray-500">Duration: {perf.duration}{perf.translations ? ` · ${perf.translations}` : ''}</p>
+              )}
+              <div>
+                <a
+                  href={watchUrl}
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-block bg-primary text-white font-semibold px-5 py-2 rounded hover:bg-accent hover:text-white transition-colors text-sm"
+                >
+                  Watch
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Performance 2: John's Gospel -->
-  <section class="py-10 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-start">
-        <div class="w-full md:w-5/12">
-          <a href="https://youtu.be/e7eIcmnoVjw" target="_blank" rel="noopener">
-            <img
-              decoding="async"
-              width="800"
-              height="533"
-              src="https://assets.spiritmediapublishing.com/scripture-alive/SA-JOHNS-GOSPEL-Poster-1024x682.png"
-              srcset="
-                https://assets.spiritmediapublishing.com/scripture-alive/SA-JOHNS-GOSPEL-Poster-300x200.png 300w,
-                https://assets.spiritmediapublishing.com/scripture-alive/SA-JOHNS-GOSPEL-Poster-768x512.png 768w,
-                https://assets.spiritmediapublishing.com/scripture-alive/SA-JOHNS-GOSPEL-Poster-1024x682.png 1024w,
-                https://assets.spiritmediapublishing.com/scripture-alive/SA-JOHNS-GOSPEL-Poster-1536x1024.png 1536w,
-                https://assets.spiritmediapublishing.com/scripture-alive/SA-JOHNS-GOSPEL-Poster.png 2000w
-              "
-              sizes="(max-width: 800px) 100vw, 800px"
-              alt="John's Gospel Performance"
-              class="w-full h-auto"
-            />
-          </a>
-        </div>
-        <div class="w-full md:w-7/12 flex flex-col justify-start gap-4">
-          <p class="text-gray-700 text-sm md:text-base leading-relaxed">
-            The purpose of John's Gospel is clear: "<em>that you may believe that Jesus is the Christ, the Son of God, and that by believing you may have life in his name</em>" (John 20:31). And in this 40-minute presentation of John, you will see how Jesus reveals His glory through His miracles, teachings, death, and resurrection. Recited using the NET and BSB translations. (Full passages also available, John 1-3, 6, 9, 11, 13, 18-20)
-          </p>
-          <div>
-            <a
-              href="https://youtu.be/e7eIcmnoVjw"
-              target="_blank"
-              rel="noopener"
-              class="inline-block bg-primary text-white font-semibold px-5 py-2 rounded hover:bg-accent hover:text-white transition-colors text-sm"
-            >
-              Watch
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Performance 3: Paul -->
-  <section class="py-10 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-start">
-        <div class="w-full md:w-5/12">
-          <a href="https://youtu.be/ItawjGmNR-Q" target="_blank" rel="noopener">
-            <img
-              decoding="async"
-              width="800"
-              height="533"
-              src="https://assets.spiritmediapublishing.com/scripture-alive/aa09e2c799252fc9bc31e28dbf2ad8f0_1200_80-1024x682.webp"
-              srcset="
-                https://assets.spiritmediapublishing.com/scripture-alive/aa09e2c799252fc9bc31e28dbf2ad8f0_1200_80-300x200.webp 300w,
-                https://assets.spiritmediapublishing.com/scripture-alive/aa09e2c799252fc9bc31e28dbf2ad8f0_1200_80-768x511.webp 768w,
-                https://assets.spiritmediapublishing.com/scripture-alive/aa09e2c799252fc9bc31e28dbf2ad8f0_1200_80-1024x682.webp 1024w,
-                https://assets.spiritmediapublishing.com/scripture-alive/aa09e2c799252fc9bc31e28dbf2ad8f0_1200_80.webp 1200w
-              "
-              sizes="(max-width: 800px) 100vw, 800px"
-              alt="Paul Performance"
-              class="w-full h-auto"
-            />
-          </a>
-        </div>
-        <div class="w-full md:w-7/12 flex flex-col justify-start gap-4">
-          <p class="text-gray-700 text-sm md:text-base leading-relaxed">
-            Witness the total transformation of Saul, a violent persecutor of the first century church, into the man known as Paul, the bold apostle willing to die for the sake of Christ. Including memorable stories like Paul's conversion in Damascus and Paul and Silas in prison, along with some of Paul's most well-known passages to the churches, this 40-minute presentation combining the book of Acts and six of the Pauline epistles will both encourage and challenge. Recited using the NET and NIV translations.
-          </p>
-          <div>
-            <a
-              href="https://youtu.be/ItawjGmNR-Q"
-              target="_blank"
-              rel="noopener"
-              class="inline-block bg-primary text-white font-semibold px-5 py-2 rounded hover:bg-accent hover:text-white transition-colors text-sm"
-            >
-              Watch
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Performance 4: Elijah -->
-  <section class="py-10 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-start">
-        <div class="w-full md:w-5/12">
-          <a href="https://youtu.be/t5OJBSIXxBQ" target="_blank" rel="noopener">
-            <img
-              loading="lazy"
-              decoding="async"
-              width="800"
-              height="533"
-              src="https://assets.spiritmediapublishing.com/scripture-alive/c846fecab2ea5edb95ee06f4cbc9fc90_1200_80-1024x682.webp"
-              srcset="
-                https://assets.spiritmediapublishing.com/scripture-alive/c846fecab2ea5edb95ee06f4cbc9fc90_1200_80-300x200.webp 300w,
-                https://assets.spiritmediapublishing.com/scripture-alive/c846fecab2ea5edb95ee06f4cbc9fc90_1200_80-768x511.webp 768w,
-                https://assets.spiritmediapublishing.com/scripture-alive/c846fecab2ea5edb95ee06f4cbc9fc90_1200_80-1024x682.webp 1024w,
-                https://assets.spiritmediapublishing.com/scripture-alive/c846fecab2ea5edb95ee06f4cbc9fc90_1200_80.webp 1200w
-              "
-              sizes="(max-width: 800px) 100vw, 800px"
-              alt="Elijah Performance"
-              class="w-full h-auto"
-            />
-          </a>
-        </div>
-        <div class="w-full md:w-7/12 flex flex-col justify-start gap-4">
-          <p class="text-gray-700 text-sm md:text-base leading-relaxed">
-            Often considered one of the greatest men of faith in all of Scripture, Elijah went through incredible highs and incredible lows as a prophet of the Lord. In this 40-minute presentation, watch as this "man with a nature like ours" performs incredible acts of courage and obedience while also struggling with doubt, depression, and fear. Recited using the NET and NIV translations. (Full chapters also available, 1 Kg. 17-19 and 2 Kgs. 1-2)
-          </p>
-          <div>
-            <a
-              href="https://youtu.be/t5OJBSIXxBQ"
-              target="_blank"
-              rel="noopener"
-              class="inline-block bg-primary text-white font-semibold px-5 py-2 rounded hover:bg-accent hover:text-white transition-colors text-sm"
-            >
-              Watch
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Performance 5: Peter -->
-  <section class="py-10 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-start">
-        <div class="w-full md:w-5/12">
-          <a href="https://youtu.be/JeUa0G8d7HA" target="_blank" rel="noopener">
-            <img
-              loading="lazy"
-              decoding="async"
-              width="800"
-              height="533"
-              src="https://assets.spiritmediapublishing.com/scripture-alive/81b4f657e2a792c6a297eae6187ee672_1200_80-1024x682.webp"
-              srcset="
-                https://assets.spiritmediapublishing.com/scripture-alive/81b4f657e2a792c6a297eae6187ee672_1200_80-300x200.webp 300w,
-                https://assets.spiritmediapublishing.com/scripture-alive/81b4f657e2a792c6a297eae6187ee672_1200_80-768x511.webp 768w,
-                https://assets.spiritmediapublishing.com/scripture-alive/81b4f657e2a792c6a297eae6187ee672_1200_80-1024x682.webp 1024w,
-                https://assets.spiritmediapublishing.com/scripture-alive/81b4f657e2a792c6a297eae6187ee672_1200_80.webp 1200w
-              "
-              sizes="(max-width: 800px) 100vw, 800px"
-              alt="Peter Performance"
-              class="w-full h-auto"
-            />
-          </a>
-        </div>
-        <div class="w-full md:w-7/12 flex flex-col justify-start gap-4">
-          <p class="text-gray-700 text-sm md:text-base leading-relaxed">
-            Journey through the incredible life of Simon Peter. Beginning with his choosing in Luke 5 to his bold stance against the religious leaders in Acts 4, this 40-minute presentation combines key scenes from Peter's life from all four Gospel accounts, Acts, and key passages from the two Petrine epistles. Recited using the NET, ESV, and NIV translations. (Also available in a 25-minute version, which works great for chapels or church events.)
-          </p>
-          <div>
-            <a
-              href="https://youtu.be/JeUa0G8d7HA"
-              target="_blank"
-              rel="noopener"
-              class="inline-block bg-primary text-white font-semibold px-5 py-2 rounded hover:bg-accent hover:text-white transition-colors text-sm"
-            >
-              Watch
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Performance 6: One Man Passion Play -->
-  <section class="py-10 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-start">
-        <div class="w-full md:w-5/12">
-          <a href="https://youtu.be/jAFQh-JlIvs" target="_blank" rel="noopener">
-            <img loading="lazy" decoding="async" width="800" height="533"
-              src="https://assets.spiritmediapublishing.com/scripture-alive/SA-OMPP-Poster-2025-1024x682.png"
-              alt="One Man Passion Play Performance" class="w-full h-auto" />
-          </a>
-        </div>
-        <div class="w-full md:w-7/12 flex flex-col justify-start gap-4">
-          <p class="text-gray-700 text-sm md:text-base leading-relaxed">
-            This 30-minute dramatic presentation covers the Last Supper, Jesus' Arrest, Trial, and Crucifixion. Scriptures are from Matthew, Mark, Luke, and John to give a holistic view of the Passion which reveals Jesus' incredible love and humility in sacrificing Himself for the world. Recited using the NET, ESV, and NIV translations. (Up to 40 minutes when including the Triumphal Entry and Resurrection.)
-          </p>
-          <div>
-            <a href="https://youtu.be/jAFQh-JlIvs" target="_blank" rel="noopener"
-              class="inline-block bg-primary text-white font-semibold px-5 py-2 rounded hover:bg-accent hover:text-white transition-colors text-sm">
-              Watch
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Performance 7: The Advent Story -->
-  <section class="py-10 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-start">
-        <div class="w-full md:w-5/12">
-          <a href="https://youtu.be/b0oMG6iTkdg" target="_blank" rel="noopener">
-            <img loading="lazy" decoding="async" width="800" height="533"
-              src="https://assets.spiritmediapublishing.com/scripture-alive/2d27b0511651d62f940f163837ef2462_1200_80-1024x682.webp"
-              srcset="https://assets.spiritmediapublishing.com/scripture-alive/2d27b0511651d62f940f163837ef2462_1200_80-300x200.webp 300w, https://assets.spiritmediapublishing.com/scripture-alive/2d27b0511651d62f940f163837ef2462_1200_80-768x511.webp 768w, https://assets.spiritmediapublishing.com/scripture-alive/2d27b0511651d62f940f163837ef2462_1200_80-1024x682.webp 1024w, https://assets.spiritmediapublishing.com/scripture-alive/2d27b0511651d62f940f163837ef2462_1200_80.webp 1200w"
-              sizes="(max-width: 800px) 100vw, 800px" alt="The Advent Story Performance" class="w-full h-auto" />
-          </a>
-        </div>
-        <div class="w-full md:w-7/12 flex flex-col justify-start gap-4">
-          <p class="text-gray-700 text-sm md:text-base leading-relaxed">
-            See, hear, and experience the inspiring, hope-filled and joy-filled story of Christ's birth and arrival straight from Scripture. This 25-minute presentation combines the traditional Christmas narrative (Luke 1-2) along with passages from Matthew, John, &amp; Isaiah. Recited using the NET, BSB, and NIV translations.
-          </p>
-          <div>
-            <a href="https://youtu.be/b0oMG6iTkdg" target="_blank" rel="noopener"
-              class="inline-block bg-primary text-white font-semibold px-5 py-2 rounded hover:bg-accent hover:text-white transition-colors text-sm">
-              Watch
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Performance 8: The Bible – A Story of Jesus -->
-  <section class="py-10 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-start">
-        <div class="w-full md:w-5/12">
-          <a href="https://youtu.be/pqejEHmxIrQ" target="_blank" rel="noopener">
-            <img loading="lazy" decoding="async" width="800" height="533"
-              src="https://assets.spiritmediapublishing.com/scripture-alive/5c4b5845c73b4a53dd05c0b1d184e79a_1200_80-1024x682.webp"
-              srcset="https://assets.spiritmediapublishing.com/scripture-alive/5c4b5845c73b4a53dd05c0b1d184e79a_1200_80-300x200.webp 300w, https://assets.spiritmediapublishing.com/scripture-alive/5c4b5845c73b4a53dd05c0b1d184e79a_1200_80-768x511.webp 768w, https://assets.spiritmediapublishing.com/scripture-alive/5c4b5845c73b4a53dd05c0b1d184e79a_1200_80-1024x682.webp 1024w, https://assets.spiritmediapublishing.com/scripture-alive/5c4b5845c73b4a53dd05c0b1d184e79a_1200_80.webp 1200w"
-              sizes="(max-width: 800px) 100vw, 800px" alt="The Bible – A Story of Jesus Performance" class="w-full h-auto" />
-          </a>
-        </div>
-        <div class="w-full md:w-7/12 flex flex-col justify-start gap-4">
-          <p class="text-gray-700 text-sm md:text-base leading-relaxed">
-            From the very first words of Scripture to the very last, there is only one constant: that is the person of Jesus Christ. Taking selected passages from Genesis to Revelation and recited using the NIV and NLT translation, the wonder and splendor of God's redemptive plan through His Son Jesus is brought to life in this 40-minute presentation. Passages cover Creation, the Fall, Noah, Abraham, Moses, Jesus, and the new Creation.
-          </p>
-          <div>
-            <a href="https://youtu.be/pqejEHmxIrQ" target="_blank" rel="noopener"
-              class="inline-block bg-primary text-white font-semibold px-5 py-2 rounded hover:bg-accent hover:text-white transition-colors text-sm">
-              Watch
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Performance 9: Shorter Custom Selections -->
-  <section class="py-10 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-start">
-        <div class="w-full md:w-5/12">
-          <a href="https://youtu.be/Q_ZrMaZdYwM" target="_blank" rel="noopener">
-            <img loading="lazy" decoding="async" width="800" height="533"
-              src="https://assets.spiritmediapublishing.com/scripture-alive/d8e12fbef9166fcb2ff030c7a53fe03a_1200_80.webp"
-              alt="Shorter Custom Selections" class="w-full h-auto" />
-          </a>
-        </div>
-        <div class="w-full md:w-7/12 flex flex-col justify-start gap-4">
-          <p class="text-gray-700 text-sm md:text-base leading-relaxed">
-            Specific stories/passages from the presentations above can be presented separately. Other stories/passages available:
-          </p>
-          <ul class="text-gray-700 text-sm md:text-base leading-relaxed list-disc list-inside space-y-1">
-            <li>David and Goliath in 1 Samuel 17 (8 minutes)</li>
-            <li>Elijah and the Prophets of Baal in 1 Kings 18 (9 minutes)</li>
-            <li>Peter and John's Bold Acts in Acts 3-5 (15 minutes)</li>
-            <li>Paul and Silas in Prison in Acts 16 (5 minutes)</li>
-          </ul>
-          <p class="text-gray-700 text-sm md:text-base leading-relaxed">
-            Other passages, chapters, or verses on specific topics can be memorized and presented upon request.
-          </p>
-          <div>
-            <a href="https://youtu.be/Q_ZrMaZdYwM" target="_blank" rel="noopener"
-              class="inline-block bg-primary text-white font-semibold px-5 py-2 rounded hover:bg-accent hover:text-white transition-colors text-sm">
-              Watch
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      </section>
+    );
+  })}
 
   <!-- Book A Performance CTA -->
-  <section class="py-12 px-4 bg-[#f5f0e8] text-center">
+  <section class="py-12 px-4 bg-cream text-center">
     <div class="max-w-2xl mx-auto">
-      <h2 class="text-2xl md:text-3xl font-bold mb-4" style="color:#3472b7;">Book A Performance</h2>
-      <a href="/contact" class="inline-block bg-primary text-black font-semibold px-8 py-3 rounded hover:opacity-90 transition-opacity">
+      <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">Book A Performance</h2>
+      <a href="/contact" class="inline-block bg-primary text-white font-semibold px-8 py-3 rounded hover:opacity-90 transition-opacity">
         Contact Jeremy
       </a>
     </div>

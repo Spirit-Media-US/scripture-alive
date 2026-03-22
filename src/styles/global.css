@@ -3,8 +3,11 @@
 @theme {
   --color-primary: #FBC215;
   --color-accent:  #3472B7;
-  --font-sans: 'Montserrat', 'Roboto', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Dancing Script', cursive;
+  --color-gold:    #c8a951;
+  --color-cream:   #f5f0e8;
+  --font-sans:     'Montserrat', 'Roboto', ui-sans-serif, system-ui, sans-serif;
+  --font-serif:    'Lora', Georgia, ui-serif, serif;
+  --font-display:  'Dancing Script', cursive;
 }
 
 @layer base {

@@ -6,7 +6,7 @@ Migrated by Spirit Media Publishing. Built with Astro 5 + Tailwind CSS v4.
 
 ```bash
 npm install
-npm run dev     # localhost:4321
+npm run dev     # localhost:4329
 npm run build   # production build
 ```
 
@@ -16,8 +16,8 @@ npm run build   # production build
 - /performances
 - /workshops
 - /guestpreaching
-- /videos
 - /events
+- /videos
 - /contact
 
 ## Stack
