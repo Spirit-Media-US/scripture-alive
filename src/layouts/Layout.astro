@@ -19,13 +19,6 @@ const navItems = [
     { href: '/contact', label: 'Contact' },
 ];
 
-const footerItems = [
-    { href: '/about', label: "Founder's Journey" },
-    { href: '/endorsements', label: 'Testimonials & Reviews' },
-    { href: '/interviews', label: 'Exclusive Interviews' },
-    { href: '/store', label: 'Scripture Alive Store' },
-    { href: '/referjeremy', label: 'Refer Jeremy' }
-];
 
 const currentPath = Astro.url.pathname;
 ---
@@ -86,53 +79,41 @@ const currentPath = Astro.url.pathname;
   </main>
 
   <!-- Footer -->
-  <footer class="bg-[#1a1a2e] text-white pt-12 pb-6">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="flex flex-col md:flex-row justify-between gap-10 mb-10">
-        <!-- Logo + contact -->
-        <div class="flex flex-col gap-3">
-          <img src="https://assets.spiritmediapublishing.com/scripture-alive/63c952c12297d31fbe2f64b7-1-rdodoupw5xs3zetmqqhezp7qp7r859r0l2vjuexg4o.webp" alt="Scripture Alive" class="h-12 w-auto mb-2" />
-          <a href="mailto:jeremy@scripturealive.com" class="text-white/80 hover:text-white text-sm flex items-center gap-2">
+  <footer class="bg-[#1c1c1c] text-white py-6">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <!-- Left: logo + contact -->
+      <div class="flex flex-col items-start gap-1">
+        <img src="https://assets.spiritmediapublishing.com/scripture-alive/63c952c12297d31fbe2f64b7-1-rdodoupw5xs3zetmqqhezp7qp7r859r0l2vjuexg4o.webp" alt="Scripture Alive" class="h-10 w-auto mb-2" />
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-1 text-sm text-white/80">
+          <a href="mailto:jeremy@scripturealive.com" class="hover:text-primary flex items-center gap-1.5">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
             jeremy@scripturealive.com
           </a>
-          <a href="tel:+13126000765" class="text-white/80 hover:text-white text-sm flex items-center gap-2">
+          <a href="tel:+13126000765" class="hover:text-primary flex items-center gap-1.5">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
             (312) 600-0765
           </a>
-          <span class="text-white/80 text-sm flex items-center gap-2">
+          <span class="flex items-center gap-1.5">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
             South Bend, IN
           </span>
-          <!-- Social icons -->
-          <div class="flex gap-4 mt-2">
-            <a href="https://facebook.com/ScriptureAliveOfficial" class="text-white/70 hover:text-white" aria-label="Facebook">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-            </a>
-            <a href="https://www.instagram.com/ScriptureAlive/" class="text-white/70 hover:text-white" aria-label="Instagram">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path fill="none" stroke="white" stroke-width="2" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line fill="none" stroke="white" stroke-width="2" x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            </a>
-            <a href="https://www.youtube.com/channel/UC3GRn5EWEwxD9eu3kRvJ4lQ" class="text-white/70 hover:text-white" aria-label="YouTube">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
-            </a>
-          </div>
         </div>
-        <!-- Footer nav -->
-        <nav aria-label="Footer navigation">
-          <ul class="flex flex-col gap-2">
-            {footerItems.map(item => (
-              <li>
-                <a href={item.href} class="text-white/70 hover:text-white text-sm transition-colors">
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </div>
-      <div class="border-t border-white/20 pt-6 text-center text-white/40 text-xs">
-        <p>&copy; {new Date().getFullYear()} Scripture Alive. Created by <a href="https://spiritmediapublishing.com" class="hover:text-white transition-colors">Spirit Media</a>.</p>
+      <!-- Right: social icons -->
+      <div class="flex items-center gap-4">
+        <a href="https://facebook.com/ScriptureAliveOfficial" class="text-white/70 hover:text-primary" aria-label="Facebook">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/ScriptureAlive/" class="text-white/70 hover:text-primary" aria-label="Instagram">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path fill="none" stroke="currentColor" stroke-width="2" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line fill="none" stroke="currentColor" stroke-width="2" x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.youtube.com/channel/UC3GRn5EWEwxD9eu3kRvJ4lQ" class="text-white/70 hover:text-primary" aria-label="YouTube">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        </a>
       </div>
+    </div>
+    <div class="text-center text-white/40 text-xs mt-4">
+      &copy; {new Date().getFullYear()} Scripture Alive. Created by <a href="https://spiritmediapublishing.com" class="hover:text-white transition-colors">Spirit Media</a>.
     </div>
   </footer>
 
