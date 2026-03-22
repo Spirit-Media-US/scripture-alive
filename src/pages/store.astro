@@ -9,65 +9,57 @@ const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
 
 const products = [
   {
-    image: `${BASE}/2107248e6e6621d6b4fe5c38c18c8cd5_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp`,
-    title: "Power Pack - 52",
-    subtitle: "MEMORY VERSE CARDS",
+    image: `${BASE}/dd62f7369bcde9f6588eeddd8137695b_1200_80-rdodoupwjyz0ovcd8day09jlq35efnron1w2c5o2bq.webp`,
+    title: "Power Pack - 52\nMEMORY VERSE CARDS",
     price: "$10.00",
     href: "https://store.scripturealive.com/card-deck",
     comingSoon: false,
   },
   {
-    image: `${BASE}/7dea0315c3929177440f5d9a90340ce8_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp`,
-    title: "Power to Remember -",
-    subtitle: "HARDBACK",
+    image: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
+    title: "Power to Remember -\nHARDBACK",
     price: "$20.00",
     href: "https://store.scripturealive.com/hardback",
     comingSoon: false,
   },
   {
-    image: `${BASE}/7dea0315c3929177440f5d9a90340ce8_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp`,
-    title: "Power to Remember -",
-    subtitle: "PAPERBACK",
+    image: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
+    title: "Power to Remember -\nPAPERBACK",
     price: "$15.00",
     href: "https://store.scripturealive.com/paperback",
     comingSoon: false,
   },
   {
-    image: `${BASE}/7dea0315c3929177440f5d9a90340ce8_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp`,
-    title: "Power to Remember -",
-    subtitle: "eBOOK",
+    image: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
+    title: "Power to Remember -\neBOOK",
     price: "$12.00",
     href: "https://store.scripturealive.com/ebookcopy-page",
     comingSoon: false,
   },
   {
-    image: `${BASE}/f851f13fa9d3e0e5887f74730556c3d0_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp`,
-    title: "Power to Remember - WORK BOOKLET",
-    subtitle: "(Physical)",
+    image: `${BASE}/PTR-Work-Booklet-FINAL-1167-x-1646-px-1200-x-1914-px-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.png`,
+    title: "Power to Remember - WORK BOOKLET\n(Physical)",
     price: "$5.00",
     href: "https://store.scripturealive.com/ppwork-booklet-physical",
     comingSoon: false,
   },
   {
-    image: `${BASE}/f851f13fa9d3e0e5887f74730556c3d0_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp`,
-    title: "Power to Remember - WORK BOOKLET",
-    subtitle: "(Digital)",
+    image: `${BASE}/PTR-Work-Booklet-FINAL-1167-x-1646-px-1200-x-1914-px-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.png`,
+    title: "Power to Remember - WORK BOOKLET\n(Digital)",
     price: "$5.00",
     href: "https://store.scripturealive.com/ppwork-booklet-digital",
     comingSoon: false,
   },
   {
-    image: `${BASE}/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp`,
-    title: "Power to Remember -",
-    subtitle: "AUDIO BOOK (COMING SOON IN 2025)",
+    image: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
+    title: "Power to Remember -\nAUDIO BOOK (COMING SOON IN 2025)",
     price: "",
     href: "",
     comingSoon: true,
   },
   {
-    image: `${BASE}/81b4f657e2a792c6a297eae6187ee672_1200_80-1024x682.webp`,
-    title: "Bible Memory Video Course",
-    subtitle: "App (COMING SOON IN 2025)",
+    image: `${BASE}/Power-Toolkit-APP-8.0-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrq.png`,
+    title: "Bible Memory Video Course\nApp (COMING SOON IN 2025)",
     price: "",
     href: "",
     comingSoon: true,
@@ -91,34 +83,38 @@ const products = [
   <section class="bg-white py-12">
     <div class="max-w-5xl mx-auto px-6">
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-        {products.map((product) => (
-          <div class="flex flex-col items-center text-center">
-            <div class="w-full overflow-hidden mb-4">
-              <img
-                src={product.image}
-                alt={`${product.title} ${product.subtitle}`}
-                class="w-full h-auto object-cover"
-                loading="lazy"
-              />
+        {products.map((product) => {
+          const lines = product.title.split('\n');
+          return (
+            <div class="flex flex-col items-center text-center">
+              <div class="w-full overflow-hidden mb-4">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  class="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <h3 class="text-sm font-bold text-gray-900 leading-snug mb-1">
+                {lines[0]}{lines.length > 1 && <><br />{lines[1]}</>}
+              </h3>
+              {product.price && (
+                <p class="text-sm text-gray-800 mb-3">{product.price}</p>
+              )}
+              {!product.price && <div class="mb-3"></div>}
+              {product.href ? (
+                <a
+                  href={product.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-block bg-[#c8a951] text-white font-semibold px-5 py-2 rounded text-sm hover:bg-[#b5963e] transition-colors mt-auto"
+                >
+                  View Product
+                </a>
+              ) : null}
             </div>
-            <h3 class="text-sm font-bold text-gray-900 leading-snug mb-1">
-              {product.title}<br />{product.subtitle}
-            </h3>
-            {product.price && (
-              <p class="text-sm text-gray-800 mb-3">{product.price}</p>
-            )}
-            {product.href && (
-              <a
-                href={product.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-block bg-[#c8a951] text-white font-semibold px-5 py-2 rounded text-sm hover:bg-[#b5963e] transition-colors mt-auto"
-              >
-                View Product
-              </a>
-            )}
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   </section>

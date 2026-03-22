@@ -76,22 +76,20 @@ const testimonials = [
   ogImage="https://scripturealive.com/wp-content/uploads/2023/11/scripturealive.png"
 >
 
-  <!-- Page Title -->
-  <section class="pt-16 pb-8 px-4 text-center bg-white">
+  <section class="pt-16 pb-4 px-4 text-center bg-white">
     <div class="max-w-4xl mx-auto">
-      <h1 class="text-4xl md:text-5xl font-bold text-[#4A90D9] tracking-wide">
+      <h1 class="text-4xl md:text-5xl font-bold text-[#4A90D9] tracking-wide mb-10">
         Endorsements
       </h1>
     </div>
   </section>
 
-  <!-- Testimonials -->
   <section class="pb-16 px-4 bg-white">
     <div class="max-w-4xl mx-auto">
 
       {testimonials.map((t) => (
-        <article class="text-center mb-12">
-          <p class="text-gray-800 text-sm leading-relaxed mb-4">
+        <article class="text-center mb-14">
+          <p class="text-gray-800 text-sm leading-relaxed mb-4 mx-auto">
             {t.quote}
           </p>
           <p class="font-bold text-gray-900 text-sm">{t.name}</p>

@@ -25,7 +25,7 @@ import Layout from '../layouts/Layout.astro';
         Performances | Workshops | Speaking
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/contact" class="bg-primary text-black font-semibold font-sans px-8 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
+        <a href="/contact" class="border-2 border-white text-white font-semibold font-sans px-8 py-3 rounded text-base transition-all duration-300 hover:bg-white hover:text-black">
           Invite Jeremy
         </a>
         <a href="/referjeremy" class="border-2 border-white text-white hover:bg-white hover:text-black font-semibold font-sans px-8 py-3 rounded text-base transition-all duration-300">
@@ -87,17 +87,17 @@ import Layout from '../layouts/Layout.astro';
   <section class="bg-white px-4 pb-16">
     <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-      <a href="/performances" class="relative overflow-hidden group block h-48">
+      <a href="/performances" class="relative overflow-hidden group block h-48 rounded">
         <img src="https://assets.spiritmediapublishing.com/scripture-alive/2107248e6e6621d6b4fe5c38c18c8cd5_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp"
           alt="Scripture Performances" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
       </a>
 
-      <a href="/workshops" class="relative overflow-hidden group block h-48">
+      <a href="/workshops" class="relative overflow-hidden group block h-48 rounded">
         <img src="https://assets.spiritmediapublishing.com/scripture-alive/7dea0315c3929177440f5d9a90340ce8_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp"
           alt="Scripture Memory Workshops" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
       </a>
 
-      <a href="/guestpreaching" class="relative overflow-hidden group block h-48">
+      <a href="/guest-preaching" class="relative overflow-hidden group block h-48 rounded">
         <img src="https://assets.spiritmediapublishing.com/scripture-alive/f851f13fa9d3e0e5887f74730556c3d0_1200_80-rdodoupy1h2rw6xw4mrrs0ezpy6gn7vm8zl0kghkru.webp"
           alt="Guest Preaching" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
       </a>
@@ -105,101 +105,101 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- TESTIMONIALS CAROUSEL — 9 slides, auto-advance every 5s -->
-  <section class="bg-white py-16 px-4" id="testimonials">
-    <div class="max-w-3xl mx-auto">
-      <div class="overflow-hidden" id="tCarouselWrap">
-        <div class="flex transition-transform duration-500 ease-in-out" id="tTrack">
+  <!-- TESTIMONIALS CAROUSEL -->
+  <section class="bg-[#f5f0e8] py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="relative overflow-hidden" id="testimonial-track-wrapper">
+        <div id="testimonial-track" class="flex transition-transform duration-500 ease-in-out">
 
-          <!-- 1 -->
-          <div class="min-w-full text-center px-6">
-            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
-              "Jeremy has strong performance skills, conviction, and a deep passion to bring God's Word to life for others. I encourage you to invite him to your conference or event to inspire and engage those you serve to follow Christ more deeply."
-            </blockquote>
-            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Peter Mayberry, Vice President</p>
-            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Awana Clubs International</p>
-          </div>
-
-          <!-- 2 -->
-          <div class="min-w-full text-center px-6">
-            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+          <!-- Slide 1 -->
+          <div class="min-w-full px-4 text-center">
+            <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
               "Jeremy transports you back in time and into the pages of Scripture. He has uncanny ability to embody all the characters in a story and keep you highly engaged. I highly recommend him when you seek to have people connect to God's Word in an entirely new way."
-            </blockquote>
-            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Tami Heim, President and CEO</p>
-            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Christian Leadership Alliance</p>
+            </p>
+            <p class="font-semibold text-gray-900">Tami Heim</p>
+            <p class="text-sm text-gray-500">President and CEO, Christian Leadership Alliance</p>
           </div>
 
-          <!-- 3 -->
-          <div class="min-w-full text-center px-6">
-            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+          <!-- Slide 2 -->
+          <div class="min-w-full px-4 text-center">
+            <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
               "I strongly encourage pastors and ministry leaders to utilize the ministry gifts of Jeremy Kluth. There's nothing like hearing God's Word memorized and expressed with passion. Your people will be inspired."
-            </blockquote>
-            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Roy Patterson, Community Relationship Director</p>
-            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Moody Bible Institute, Chicago IL</p>
+            </p>
+            <p class="font-semibold text-gray-900">Roy Patterson</p>
+            <p class="text-sm text-gray-500">Community Relationship Director, Moody Bible Institute, Chicago IL</p>
           </div>
 
-          <!-- 4 -->
-          <div class="min-w-full text-center px-6">
-            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+          <!-- Slide 3 -->
+          <div class="min-w-full px-4 text-center">
+            <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
               "Jeremy has been gifted by God. Blending passion and strong contextual attention to detail, Jeremy immerses listeners' senses and emotions through his gifts of interpretive speaking. The experience brings the Word of God to life in a most memorable way."
-            </blockquote>
-            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Chris Preuss, Executive Director</p>
-            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Maranatha Bible &amp; Missionary Conference, Muskegon MI</p>
+            </p>
+            <p class="font-semibold text-gray-900">Chris Preuss</p>
+            <p class="text-sm text-gray-500">Executive Director, Maranatha Bible &amp; Missionary Conference, Muskegon MI</p>
           </div>
 
-          <!-- 5 -->
-          <div class="min-w-full text-center px-6">
-            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+          <!-- Slide 4 -->
+          <div class="min-w-full px-4 text-center">
+            <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
               "Scripture Alive certainly lives up to its name. Our church has walked away from Jeremy's dramatizations and workshops both in awe of the power of God's Word, and encouraged in our own walk with the Lord."
-            </blockquote>
-            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Matt Vogel, Senior Pastor</p>
-            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Grace Evangelical Free Church, Davenport IA</p>
+            </p>
+            <p class="font-semibold text-gray-900">Matt Vogel</p>
+            <p class="text-sm text-gray-500">Senior Pastor, Grace Evangelical Free Church, Davenport IA</p>
           </div>
 
-          <!-- 6 -->
-          <div class="min-w-full text-center px-6">
-            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+          <!-- Slide 5 -->
+          <div class="min-w-full px-4 text-center">
+            <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
               "Jeremy Kluth is the real deal! His workshops are incredibly practical and inspiring. We loved when Jeremy did a dramatic recitation from Ezekiel in our worship service. It helped make an obscure passage click for people. It was a highlight of our series on that book."
-            </blockquote>
-            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Clayton Keenon, Lead Teaching Pastor</p>
-            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Christ Community Church, South Elgin IL</p>
+            </p>
+            <p class="font-semibold text-gray-900">Clayton Keenon</p>
+            <p class="text-sm text-gray-500">Lead Teaching Pastor, Christ Community Church, South Elgin IL</p>
           </div>
 
-          <!-- 7 -->
-          <div class="min-w-full text-center px-6">
-            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+          <!-- Slide 6 -->
+          <div class="min-w-full px-4 text-center">
+            <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
               "Presenting the life of the Apostle Paul entirely from the words of the Bible itself gave us all a perspective unlike anything you can experience in a sermon or topical talk. It really came alive, especially the zeal and passion within the text that are sometimes lost in our typical ways of reading them."
-            </blockquote>
-            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Bob Wolniak, Senior Pastor</p>
-            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Fulton Church, Edgerton WI</p>
+            </p>
+            <p class="font-semibold text-gray-900">Bob Wolniak</p>
+            <p class="text-sm text-gray-500">Senior Pastor, Fulton Church, Edgerton WI</p>
           </div>
 
-          <!-- 8 -->
-          <div class="min-w-full text-center px-6">
-            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+          <!-- Slide 7 -->
+          <div class="min-w-full px-4 text-center">
+            <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
               "In a world lacking biblical knowledge and thirsty for truth, Scripture Alive offers an opportunity to learn and be refreshed. Jeremy Kluth is more than entertainment. He brings Scripture to life."
-            </blockquote>
-            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Rick Miller, Executive Director</p>
-            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Brethren Retreat at Shipshewana Lake, Shipshewana IN</p>
+            </p>
+            <p class="font-semibold text-gray-900">Rick Miller</p>
+            <p class="text-sm text-gray-500">Executive Director, Brethren Retreat at Shipshewana Lake, Shipshewana IN</p>
           </div>
 
-          <!-- 9 -->
-          <div class="min-w-full text-center px-6">
-            <blockquote class="font-sans text-gray-700 text-base italic leading-relaxed mb-8">
+          <!-- Slide 8 -->
+          <div class="min-w-full px-4 text-center">
+            <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
               "Jeremy's high view of God and commitment to His Word have blessed and inspired our congregation to greater worship on numerous occasions through a clear expression of and careful attention to the Scriptures."
-            </blockquote>
-            <p class="font-sans font-bold text-base" style="color:#1a3a5c;">Josh Beakley, Teaching Pastor</p>
-            <p class="font-sans font-medium text-sm" style="color:#FBC215;">Bethany Baptist Church, Edwards IL</p>
+            </p>
+            <p class="font-semibold text-gray-900">Josh Beakley</p>
+            <p class="text-sm text-gray-500">Teaching Pastor, Bethany Baptist Church, Edwards IL</p>
+          </div>
+
+          <!-- Slide 9 -->
+          <div class="min-w-full px-4 text-center">
+            <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
+              "Jeremy has strong performance skills, conviction, and a deep passion to bring God's Word to life for others. I encourage you to invite him to your conference or event to inspire and engage those you serve to follow Christ more deeply."
+            </p>
+            <p class="font-semibold text-gray-900">Peter Mayberry</p>
+            <p class="text-sm text-gray-500">Vice President, Awana Clubs International</p>
           </div>
 
         </div>
       </div>
 
-      <!-- Dot navigation -->
-      <div class="flex justify-center gap-2 mt-8" id="tDots">
+      <!-- Dots -->
+      <div id="testimonial-dots" class="flex justify-center gap-2 mt-8">
         {[0,1,2,3,4,5,6,7,8].map(i => (
           <button
-            data-slide={i}
+            data-index={i}
             class={`w-2.5 h-2.5 rounded-full transition-colors ${i === 0 ? 'bg-primary' : 'bg-gray-300'}`}
             aria-label={`Testimonial ${i + 1}`}
           ></button>
@@ -209,34 +209,22 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <script>
-    const track = document.getElementById('tTrack');
-    const dots = document.querySelectorAll('#tDots button');
-    const total = 9;
+    const track = document.getElementById('testimonial-track');
+    const dots = document.querySelectorAll('#testimonial-dots button');
     let current = 0;
-    let timer: ReturnType<typeof setInterval>;
+    const total = 9;
 
-    function goTo(n: number) {
+    function goTo(n) {
       current = (n + total) % total;
-      (track as HTMLElement).style.transform = `translateX(-${current * 100}%)`;
+      track.style.transform = `translateX(-${current * 100}%)`;
       dots.forEach((d, i) => {
         d.classList.toggle('bg-primary', i === current);
         d.classList.toggle('bg-gray-300', i !== current);
       });
     }
 
-    function start() {
-      timer = setInterval(() => goTo(current + 1), 5000);
-    }
-
-    dots.forEach(btn => {
-      btn.addEventListener('click', () => {
-        clearInterval(timer);
-        goTo(parseInt((btn as HTMLElement).dataset.slide || '0'));
-        start();
-      });
-    });
-
-    start();
+    dots.forEach(d => d.addEventListener('click', () => goTo(Number(d.dataset.index))));
+    setInterval(() => goTo(current + 1), 5000);
   </script>
 
 </Layout>
