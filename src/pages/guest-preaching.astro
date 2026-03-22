@@ -7,12 +7,75 @@ import Layout from '../layouts/Layout.astro';
   description=""
   ogImage="https://scripturealive.com/wp-content/uploads/2023/11/scripturealive.png"
 >
+  <main class="min-h-screen flex flex-col items-center justify-center py-24 px-4 font-[Lora,serif]">
+    <div class="max-w-2xl w-full text-center">
+      <div class="mb-8">
+        <img
+          src="https://assets.spiritmediapublishing.com/scripture-alive/63c952c12297d31fbe2f64b7-1-rdodoupw5xs3zetmqqhezp7qp7r859r0l2vjuexg4o.webp"
+          alt="Scripture Alive"
+          class="mx-auto h-20 w-auto"
+          loading="lazy"
+        />
+      </div>
 
+      <h1 class="text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight" style="font-family: 'Dancing Script', cursive;">
+        The page can't be found.
+      </h1>
 
-  <article class="max-w-4xl mx-auto px-6 py-12">
-    <h1 class="text-4xl font-bold mb-6 text-primary">The page can&rsquo;t be found.</h1>
-<p class="mb-4 leading-relaxed">It looks like nothing was found at this location.</p>
-    
-  </article>
+      <p class="text-lg text-gray-600 mb-10">
+        It looks like nothing was found at this location.
+      </p>
 
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/"
+          class="inline-block bg-primary text-white font-semibold px-8 py-3 rounded hover:opacity-90 transition-opacity"
+        >
+          Go Home
+        </a>
+        <a
+          href="/contact"
+          class="inline-block border-2 border-primary text-primary font-semibold px-8 py-3 rounded hover:bg-primary hover:text-white transition-colors"
+        >
+          Contact Us
+        </a>
+      </div>
+
+      <nav class="mt-16">
+        <p class="text-sm text-gray-500 mb-4 uppercase tracking-widest font-semibold">Quick Links</p>
+        <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-base">
+          <li>
+            <a href="/" class="text-primary hover:text-accent transition-colors">Home</a>
+          </li>
+          <li>
+            <a href="/about" class="text-primary hover:text-accent transition-colors">About</a>
+          </li>
+          <li>
+            <a href="/endorsements" class="text-primary hover:text-accent transition-colors">Endorsements</a>
+          </li>
+          <li>
+            <a href="/events" class="text-primary hover:text-accent transition-colors">Events</a>
+          </li>
+          <li>
+            <a href="/videos" class="text-primary hover:text-accent transition-colors">Videos</a>
+          </li>
+          <li>
+            <a href="/interviews" class="text-primary hover:text-accent transition-colors">Interviews</a>
+          </li>
+          <li>
+            <a href="/performances" class="text-primary hover:text-accent transition-colors">Performances</a>
+          </li>
+          <li>
+            <a href="/workshops" class="text-primary hover:text-accent transition-colors">Workshops</a>
+          </li>
+          <li>
+            <a href="/guestpreaching" class="text-primary hover:text-accent transition-colors">Guest Speaking</a>
+          </li>
+          <li>
+            <a href="/contact" class="text-primary hover:text-accent transition-colors">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </main>
 </Layout>

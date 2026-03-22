@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #7B2D8B;
-  --color-accent:  #D4AF37;
-  --font-sans: 'Cinzel', ui-sans-serif, system-ui, sans-serif;
+  --color-primary: #FBC215;
+  --color-accent:  #3472B7;
+  --font-sans: 'Montserrat', 'Roboto', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Dancing Script', cursive;
 }
 
 @layer base {
   html { scroll-behavior: smooth; }
-  body { @apply font-sans text-gray-800 bg-white; }
-  h1, h2, h3, h4 { @apply font-bold tracking-tight; }
+  body { @apply font-sans text-[#333333] bg-white; }
+  h1, h2, h3, h4 { font-family: 'Dancing Script', cursive; font-weight: 500; }
   a { @apply transition-colors; }
 }

@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 interface Props {
   title: string;
   description?: string;
@@ -8,18 +10,18 @@ const { title, description = '', ogImage = '' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 
 const navItems = [
-    { href: '/', label: 'Performances' },
-    { href: '/performances', label: 'Dramatic Scripture Performance' },
-    { href: '/workshops', label: 'Master Bible Memorization' },
-    { href: '/guestpreaching', label: 'Guest Preaching &amp; Pulpit F' },
-    { href: '/videos', label: 'Dramatic Scripture Videos' },
-    { href: '/events', label: 'Upcoming Events' },
-    { href: '/contact', label: 'Contact Us' }
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/performances', label: 'Performances' },
+    { href: '/events', label: 'Events' },
+    { href: '/videos', label: 'Media' },
+    { href: '/workshops', label: 'Services' },
+    { href: '/contact', label: 'Contact' },
 ];
 
 const footerItems = [
-    { href: '/about', label: 'Founder&#039;s Journey' },
-    { href: '/endorsements', label: 'Testimonials &amp; Reviews' },
+    { href: '/about', label: "Founder's Journey" },
+    { href: '/endorsements', label: 'Testimonials & Reviews' },
     { href: '/interviews', label: 'Exclusive Interviews' },
     { href: '/store', label: 'Scripture Alive Store' },
     { href: '/referjeremy', label: 'Refer Jeremy' }
@@ -44,28 +46,33 @@ const currentPath = Astro.url.pathname;
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
 
   <!-- Navigation -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm">
-    <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="/" class="font-bold text-xl text-primary">Scripture Alive</a>
+  <header class="sticky top-0 z-50 bg-[#1a1a1a]">
+    <nav class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a href="/"><img src="https://assets.spiritmediapublishing.com/scripture-alive/63c952c12297d31fbe2f64b7-1-rdodoupw5xs3zetmqqhezp7qp7r859r0l2vjuexg4o.webp" alt="Scripture Alive" class="h-12 w-auto" /></a>
       <ul class="hidden md:flex items-center gap-6">
         {navItems.map(item => (
           <li>
             <a
               href={item.href}
-              class={`text-sm font-medium transition-colors ${currentPath === item.href ? 'text-primary' : 'text-gray-600 hover:text-primary'}`}
+              class={`text-sm font-medium font-sans transition-colors ${currentPath === item.href ? 'text-primary' : 'text-white/80 hover:text-primary'}`}
             >
               {item.label}
             </a>
           </li>
         ))}
+        <li>
+          <a href="/store" class="bg-primary text-black text-sm font-semibold font-sans px-4 py-2 rounded transition-opacity hover:opacity-90">
+            Store
+          </a>
+        </li>
       </ul>
-      <!-- Mobile menu button (wire up with JS as needed) -->
-      <button class="md:hidden p-2 text-gray-600" aria-label="Menu">
+      <!-- Mobile menu button -->
+      <button class="md:hidden p-2 text-white/80" aria-label="Menu">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -79,18 +86,43 @@ const currentPath = Astro.url.pathname;
   </main>
 
   <!-- Footer -->
-  <footer class="bg-primary text-white mt-20">
-    <div class="max-w-6xl mx-auto px-6 py-12">
-      <div class="flex flex-col md:flex-row justify-between gap-8">
-        <div>
-          <p class="font-bold text-xl mb-2">Scripture Alive</p>
-          <p class="text-white/70 text-sm max-w-xs">Built by Spirit Media Publishing</p>
+  <footer class="bg-[#1a1a2e] text-white pt-12 pb-6">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between gap-10 mb-10">
+        <!-- Logo + contact -->
+        <div class="flex flex-col gap-3">
+          <img src="https://assets.spiritmediapublishing.com/scripture-alive/63c952c12297d31fbe2f64b7-1-rdodoupw5xs3zetmqqhezp7qp7r859r0l2vjuexg4o.webp" alt="Scripture Alive" class="h-12 w-auto mb-2" />
+          <a href="mailto:jeremy@scripturealive.com" class="text-white/80 hover:text-white text-sm flex items-center gap-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+            jeremy@scripturealive.com
+          </a>
+          <a href="tel:+13126000765" class="text-white/80 hover:text-white text-sm flex items-center gap-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+            (312) 600-0765
+          </a>
+          <span class="text-white/80 text-sm flex items-center gap-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+            South Bend, IN
+          </span>
+          <!-- Social icons -->
+          <div class="flex gap-4 mt-2">
+            <a href="https://facebook.com/ScriptureAliveOfficial" class="text-white/70 hover:text-white" aria-label="Facebook">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/ScriptureAlive/" class="text-white/70 hover:text-white" aria-label="Instagram">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path fill="none" stroke="white" stroke-width="2" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line fill="none" stroke="white" stroke-width="2" x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://www.youtube.com/channel/UC3GRn5EWEwxD9eu3kRvJ4lQ" class="text-white/70 hover:text-white" aria-label="YouTube">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+            </a>
+          </div>
         </div>
+        <!-- Footer nav -->
         <nav aria-label="Footer navigation">
-          <ul class="flex flex-wrap gap-x-6 gap-y-2">
+          <ul class="flex flex-col gap-2">
             {footerItems.map(item => (
               <li>
-                <a href={item.href} class="text-white/80 hover:text-white text-sm transition-colors">
+                <a href={item.href} class="text-white/70 hover:text-white text-sm transition-colors">
                   {item.label}
                 </a>
               </li>
@@ -98,9 +130,8 @@ const currentPath = Astro.url.pathname;
           </ul>
         </nav>
       </div>
-      <div class="border-t border-white/20 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-white/50 text-xs">
-        <p>&copy; {new Date().getFullYear()} Scripture Alive. All rights reserved.</p>
-        <p>Powered by <a href="https://spiritmediapublishing.com" class="hover:text-white transition-colors">Spirit Media Publishing</a></p>
+      <div class="border-t border-white/20 pt-6 text-center text-white/40 text-xs">
+        <p>&copy; {new Date().getFullYear()} Scripture Alive. Created by <a href="https://spiritmediapublishing.com" class="hover:text-white transition-colors">Spirit Media</a>.</p>
       </div>
     </div>
   </footer>
