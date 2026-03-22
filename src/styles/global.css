@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #7B2D8B;
+  --color-accent:  #D4AF37;
+  --font-sans: 'Cinzel', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply font-sans text-gray-800 bg-white; }
+  h1, h2, h3, h4 { @apply font-bold tracking-tight; }
+  a { @apply transition-colors; }
+}

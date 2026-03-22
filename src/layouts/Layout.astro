@@ -1,0 +1,109 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+const { title, description = '', ogImage = '' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+
+const navItems = [
+    { href: '/', label: 'Performances' },
+    { href: '/performances', label: 'Dramatic Scripture Performance' },
+    { href: '/workshops', label: 'Master Bible Memorization' },
+    { href: '/guestpreaching', label: 'Guest Preaching &amp; Pulpit F' },
+    { href: '/videos', label: 'Dramatic Scripture Videos' },
+    { href: '/events', label: 'Upcoming Events' },
+    { href: '/contact', label: 'Contact Us' }
+];
+
+const footerItems = [
+    { href: '/about', label: 'Founder&#039;s Journey' },
+    { href: '/endorsements', label: 'Testimonials &amp; Reviews' },
+    { href: '/interviews', label: 'Exclusive Interviews' },
+    { href: '/store', label: 'Scripture Alive Store' },
+    { href: '/referjeremy', label: 'Refer Jeremy' }
+];
+
+const currentPath = Astro.url.pathname;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  {description && <meta name="description" content={description} />}
+  <link rel="canonical" href={canonical} />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+  <meta property="og:title"       content={title} />
+  {description && <meta property="og:description" content={description} />}
+  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:title"      content={title} />
+  {description && <meta name="twitter:description" content={description} />}
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm">
+    <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="/" class="font-bold text-xl text-primary">Scripture Alive</a>
+      <ul class="hidden md:flex items-center gap-6">
+        {navItems.map(item => (
+          <li>
+            <a
+              href={item.href}
+              class={`text-sm font-medium transition-colors ${currentPath === item.href ? 'text-primary' : 'text-gray-600 hover:text-primary'}`}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <!-- Mobile menu button (wire up with JS as needed) -->
+      <button class="md:hidden p-2 text-gray-600" aria-label="Menu">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Main content -->
+  <main>
+    <slot />
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-primary text-white mt-20">
+    <div class="max-w-6xl mx-auto px-6 py-12">
+      <div class="flex flex-col md:flex-row justify-between gap-8">
+        <div>
+          <p class="font-bold text-xl mb-2">Scripture Alive</p>
+          <p class="text-white/70 text-sm max-w-xs">Built by Spirit Media Publishing</p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <ul class="flex flex-wrap gap-x-6 gap-y-2">
+            {footerItems.map(item => (
+              <li>
+                <a href={item.href} class="text-white/80 hover:text-white text-sm transition-colors">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+      <div class="border-t border-white/20 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-white/50 text-xs">
+        <p>&copy; {new Date().getFullYear()} Scripture Alive. All rights reserved.</p>
+        <p>Powered by <a href="https://spiritmediapublishing.com" class="hover:text-white transition-colors">Spirit Media Publishing</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
