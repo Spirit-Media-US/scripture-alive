@@ -1,0 +1,112 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ShareBar from '../../components/ShareBar.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+import { getBlogPosts, getBlogPost } from '../../utils/sanity';
+
+export async function getStaticPaths() {
+  const posts = await getBlogPosts();
+  return posts.map((p: any) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const post = await getBlogPost(slug!);
+
+if (!post) {
+  return Astro.redirect('/blog');
+}
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+function formatDate(dateString: string) {
+  const d = new Date(dateString + (dateString.length === 10 ? 'T12:00:00Z' : ''));
+  return MONTHS[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear();
+}
+
+function renderPortableText(blocks: any[]): string {
+  if (!Array.isArray(blocks)) return '';
+  return blocks.map((block: any) => {
+    if (!block || block._type !== 'block') return '';
+    const children = Array.isArray(block.children) ? block.children : [];
+    const textContent = children.map((child: any) => {
+      if (!child) return '';
+      let text = child.text || '';
+      const marks = Array.isArray(child.marks) ? child.marks : [];
+      if (marks.includes('strong')) text = `<strong>${text}</strong>`;
+      if (marks.includes('em')) text = `<em>${text}</em>`;
+      const linkMark = marks.find((m: any) => m && typeof m === 'object' && m._type === 'link');
+      if (linkMark?.href) {
+        text = `<a href="${linkMark.href}" class="text-accent hover:underline" target="_blank" rel="noopener noreferrer">${text}</a>`;
+      }
+      return text;
+    }).join('');
+
+    const style = block.style || 'normal';
+    if (style === 'h2') return `<h2 class="font-serif text-2xl font-bold text-gray-800 mt-12 mb-4">${textContent}</h2>`;
+    if (style === 'h3') return `<h3 class="font-serif text-xl font-bold text-gray-800 mt-8 mb-3">${textContent}</h3>`;
+    if (style === 'blockquote') return `<blockquote class="border-l-4 border-primary pl-6 my-6 italic text-gray-600">${textContent}</blockquote>`;
+    return `<p class="text-gray-700 leading-relaxed mb-4">${textContent}</p>`;
+  }).join('');
+}
+
+const publishDate = post.publishedAt ? formatDate(post.publishedAt) : '';
+const heroImage = post.featuredImageUrl
+  ? post.featuredImageUrl + '?w=1200&auto=format'
+  : 'https://assets.spiritmediapublishing.com/scripture-alive/scripturealive-og.png';
+const author = post.author || 'Jeremy Kluth';
+const tags = post.tags || [];
+const postUrl = `https://scripturealive.com/blog/${post.slug}`;
+const bodyHtml = renderPortableText(post.body || []);
+---
+
+<Layout
+  title={`${post.title} | Scripture Alive`}
+  description={post.excerpt || 'Read this article on the Scripture Alive blog'}
+  ogImage={heroImage}
+>
+  <!-- HERO IMAGE -->
+  <div class="w-full">
+    <img src={heroImage} alt={post.title} class="w-full h-64 lg:h-[480px] object-cover" />
+  </div>
+
+  <!-- POST HEADER -->
+  <section class="bg-white px-6 pt-10 pb-2 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <a href="/blog" class="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline transition-colors mb-5">← Back to Blog</a>
+      <h1 class="text-3xl md:text-4xl font-bold text-accent font-serif leading-tight">{post.title}</h1>
+      {post.excerpt && <p class="mt-3 text-gray-600 leading-relaxed max-w-2xl">{post.excerpt}</p>}
+      <div class="flex items-center gap-3 mt-4 pb-8 text-sm text-gray-500 border-b border-gray-200">
+        <span>By <span class="font-semibold text-gray-700">{author}</span></span>
+        <span>·</span>
+        <span>{publishDate}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAGS -->
+  {tags.length > 0 && (
+    <section class="bg-white px-6 pb-6 lg:px-8 border-b border-gray-200">
+      <div class="mx-auto max-w-3xl">
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag: string) => (
+            <a href={`/blog?tag=${encodeURIComponent(tag)}`} class="text-xs font-semibold text-accent bg-blue-50 hover:bg-accent hover:text-white rounded-full px-3 py-1 transition-colors">
+              {tag}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- POST CONTENT -->
+  <section class="bg-white px-6 py-10 lg:px-8 lg:py-16">
+    <div class="mx-auto max-w-3xl">
+      <div set:html={bodyHtml} class="space-y-4" />
+    </div>
+  </section>
+
+  <!-- SHARE BAR -->
+  <ShareBar title={post.title} url={postUrl} />
+
+  <!-- RELATED POSTS -->
+  <RelatedPosts currentSlug={post.slug} currentTags={tags} />
+</Layout>

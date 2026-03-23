@@ -117,7 +117,9 @@ export const BLOG_POSTS_QUERY = defineQuery(`
     "slug": slug.current,
     publishedAt,
     excerpt,
-    featuredImage
+    "featuredImageUrl": featuredImage.asset->url,
+    "author": coalesce(author, "Jeremy Kluth"),
+    tags
   }
 `)
 
@@ -128,7 +130,9 @@ export const BLOG_POST_QUERY = defineQuery(`
     "slug": slug.current,
     publishedAt,
     excerpt,
-    featuredImage,
+    "featuredImageUrl": featuredImage.asset->url,
+    "author": coalesce(author, "Jeremy Kluth"),
+    tags,
     body
   }
 `)

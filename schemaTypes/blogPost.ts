@@ -41,6 +41,30 @@ export const blogPost = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'string',
+      initialValue: 'Jeremy Kluth',
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        layout: 'tags',
+        list: [
+          { title: 'Scripture Memory', value: 'Scripture Memory' },
+          { title: 'POWER System', value: 'POWER System' },
+          { title: 'Bible Study', value: 'Bible Study' },
+          { title: 'Workshops', value: 'Workshops' },
+          { title: 'Ministry', value: 'Ministry' },
+          { title: 'Faith', value: 'Faith' },
+          { title: 'Encouragement', value: 'Encouragement' },
+        ],
+      },
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'array',
