@@ -13,6 +13,8 @@
 @layer base {
   html { scroll-behavior: smooth; }
   body { @apply font-sans text-[#7A7A7A] bg-white; font-size: 18px; }
+  p { font-size: 18px; font-family: var(--font-sans); line-height: 1.75; }
+  li { font-size: 18px; font-family: var(--font-sans); line-height: 1.75; }
   h1, h2, h3, h4 { @apply font-sans; }
   a { @apply transition-colors; }
 }
