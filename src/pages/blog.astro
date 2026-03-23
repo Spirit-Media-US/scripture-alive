@@ -217,5 +217,8 @@ document.querySelectorAll('.tag-chip').forEach(btn => {
   });
 });
 
+// Initial render on page load
+renderPosts();
+// Re-render on Astro client-side navigation
 document.addEventListener('astro:page-load', () => renderPosts());
 </script>
