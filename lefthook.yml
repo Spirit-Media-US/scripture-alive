@@ -1,0 +1,34 @@
+pre-push:
+  commands:
+    block-main-push:
+      run: |
+        BRANCH=$(git rev-parse --abbrev-ref HEAD)
+        if [ "$BRANCH" = "main" ]; then
+          echo "❌ BLOCKED: Direct pushes to main are not allowed."
+          echo "   Team: open a PR from dev → main for Kevin to approve."
+          echo "   Kevin: Claude will use gh pr create + gh pr merge --admin to deploy instantly."
+          exit 1
+        fi
+      skip:
+        - merge
+        - rebase
+
+pre-commit:
+  commands:
+    behind-remote:
+      run: |
+        git fetch --quiet
+        LOCAL=$(git rev-parse @)
+        REMOTE=$(git rev-parse @{u} 2>/dev/null || echo "")
+        if [ -n "$REMOTE" ] && [ "$LOCAL" != "$REMOTE" ]; then
+          BASE=$(git merge-base @ @{u})
+          if [ "$LOCAL" = "$BASE" ]; then
+            echo "❌ BLOCKED: Your branch is behind the remote. Run 'git pull' before committing."
+            echo "   This prevents overwriting work from other sessions."
+            exit 1
+          fi
+        fi
+    biome:
+      glob: "*.{js,ts,jsx,tsx,json,css,astro}"
+      run: bunx biome check --write --no-errors-on-unmatched {staged_files}
+      stage_fixed: true
