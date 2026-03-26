@@ -23,6 +23,18 @@ const performances = await getPerformances();
 <Layout
   title="Dramatic Scripture Performances | The Word Proclaimed"
   description="Experience the Bible like never before with our dramatized Scripture performances."
+  jsonld={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Dramatic Scripture Performances | The Word Proclaimed",
+    "url": "https://scripturealive.com/performances",
+    "description": "Experience the Bible like never before with our dramatized Scripture performances.",
+    "about": {
+      "@type": "Organization",
+      "name": "Scripture Alive",
+      "url": "https://scripturealive.com"
+    }
+  }}
   ogImage={`${BASE}/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp`}
 >
 

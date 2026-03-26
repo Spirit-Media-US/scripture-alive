@@ -54,6 +54,18 @@ function fmtTime(startStr: string, endStr?: string) {
   description={description}
   ogImage={ogImage}
   type="events"
+  jsonld={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Upcoming Events | Scripture Alive Ministry",
+    "url": "https://scripturealive.com/events",
+    "description": "Stay updated with the latest events, sessions, and gatherings by Scripture Alive.",
+    "about": {
+      "@type": "Organization",
+      "name": "Scripture Alive",
+      "url": "https://scripturealive.com"
+    }
+  }}
 >
 
   <!-- Page Hero -->

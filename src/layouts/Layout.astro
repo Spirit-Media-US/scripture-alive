@@ -5,8 +5,9 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  jsonld?: Record<string, unknown>;
 }
-const { title, description = '', ogImage = 'https://assets.spiritmediapublishing.com/scripture-alive/scripturealive-og.png' } = Astro.props;
+const { title, description = '', ogImage = 'https://assets.spiritmediapublishing.com/scripture-alive/scripturealive-og.png', jsonld } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 
 const navItems = [
@@ -46,6 +47,7 @@ const currentPath = Astro.url.pathname;
   <meta name="twitter:card"       content="summary_large_image" />
   <meta name="twitter:title"      content={title} />
   {description && <meta name="twitter:description" content={description} />}
+  {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

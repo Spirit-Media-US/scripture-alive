@@ -21,6 +21,18 @@ const resources = await getResources();
 <Layout
   title="Resources | Scripture Alive"
   description="Bible study and memory resources to help you take your next steps in your walk with Christ."
+  jsonld={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Resources | Scripture Alive",
+    "url": "https://scripturealive.com/resources",
+    "description": "Bible study and memory resources to help you take your next steps in your walk with Christ.",
+    "about": {
+      "@type": "Organization",
+      "name": "Scripture Alive",
+      "url": "https://scripturealive.com"
+    }
+  }}
 >
 
   <!-- Page Heading -->

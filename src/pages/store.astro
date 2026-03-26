@@ -4,6 +4,18 @@ import { getProducts } from '../utils/sanity';
 
 const title = "Scripture Alive Store | Memorization Tools";
 const description = "Browse our store for curated tools and aids designed to help you memorize the Bible.";
+const jsonld = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Scripture Alive Store | Memorization Tools",
+  "url": "https://scripturealive.com/store",
+  "description": "Browse our store for curated tools and aids designed to help you memorize the Bible.",
+  "about": {
+    "@type": "Organization",
+    "name": "Scripture Alive",
+    "url": "https://scripturealive.com"
+  }
+};
 const ogImage = "https://assets.spiritmediapublishing.com/scripture-alive/scripturealive-og.png";
 
 const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
@@ -23,7 +35,7 @@ const fallbackImages: Record<number, string> = {
 const products = await getProducts();
 ---
 
-<Layout title={title} description={description} ogImage={ogImage}>
+<Layout title={title} description={description} ogImage={ogImage} jsonld={jsonld}>
 
   <h1 class="sr-only">Scripture Alive Store — Scripture Memory Tools</h1>
 
