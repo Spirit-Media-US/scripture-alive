@@ -1,18 +1,23 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getResources } from '../utils/sanity';
-
-const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
+import Layout from "../layouts/Layout.astro";
+import { getResources } from "../utils/sanity";
 
 // R2 fallback images by slug until uploaded to Sanity Studio
 const fallbackImages: Record<string, string> = {
-  powersystem: `${BASE}/SA-POWER-System-Graphic-768x512.png`,
-  worksheet: `${BASE}/SA-Personal-Memory-Plan-768x512.png`,
-  '8reasonswhy': `${BASE}/8-Reasons-Why-To-Memorize-Scripture-List-Sq-768x768.png`,
-  '8liesandobstacles': `${BASE}/8-Lies-We-Believe-About-Memorizing-Scripture-List-Sq-768x768.png`,
-  creative: `${BASE}/Creative-Ways-to-Memorize-Scripture-List-Sq.png`,
-  topicalverses: `${BASE}/SA-POWER-System-Graphic-768x512.png`,
-  scripturealiveinfosheet: `${BASE}/d0b2aceb029909de1f63dd05cb63c4af_1200_80-rdodoupx7nidwtzgvi31qpkih69etmmxm500ypsw76.webp`,
+	powersystem:
+		"https://cdn.sanity.io/images/vxczpihg/production/b64aaa1abc071deb93aac9181dbbe2a0994736bc-768x512.png",
+	worksheet:
+		"https://cdn.sanity.io/images/vxczpihg/production/6be4c582604d2aac4a19c30393effb34cefde179-768x512.png",
+	"8reasonswhy":
+		"https://cdn.sanity.io/images/vxczpihg/production/79342581e717546843031fd779561216c80f71f6-768x768.png",
+	"8liesandobstacles":
+		"https://cdn.sanity.io/images/vxczpihg/production/b1b9146f5720875ece6346aaec97a980ca191f14-768x768.png",
+	creative:
+		"https://cdn.sanity.io/images/vxczpihg/production/b51eac64bfe484a1630a117d5de6440bdfc3b182-1080x1080.png",
+	topicalverses:
+		"https://cdn.sanity.io/images/vxczpihg/production/b64aaa1abc071deb93aac9181dbbe2a0994736bc-768x512.png",
+	scripturealiveinfosheet:
+		"https://cdn.sanity.io/images/vxczpihg/production/ff662f2e455548bebc940040a43656e153954c86-286x397.webp",
 };
 
 const resources = await getResources();

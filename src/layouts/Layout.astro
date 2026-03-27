@@ -10,7 +10,7 @@ interface Props {
 const {
 	title,
 	description = "",
-	ogImage = "https://assets.spiritmediapublishing.com/scripture-alive/scripturealive-og.png",
+	ogImage = "https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png",
 	jsonld,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
@@ -75,7 +75,7 @@ const currentPath = Astro.url.pathname;
   <!-- Navigation: transparent on homepage hero, solid white on all other pages -->
   <header id="site-header" class={`sticky top-0 z-50 transition-colors duration-300 ${currentPath === '/' ? 'bg-transparent' : 'bg-white shadow-sm'}`}>
     <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="/"><img src="https://assets.spiritmediapublishing.com/scripture-alive/63c952c12297d31fbe2f64b7-1-rdodoupw5xs3zetmqqhezp7qp7r859r0l2vjuexg4o.webp" alt="Scripture Alive" class="h-[108px] w-auto" /></a>
+      <a href="/"><img src="https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp" alt="Scripture Alive" class="h-[108px] w-auto" /></a>
       <ul class="hidden md:flex items-center gap-8">
         {navItems.map(item => (
           <li class="relative group">
@@ -191,7 +191,7 @@ const currentPath = Astro.url.pathname;
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
       <!-- Logo + contact info side by side -->
       <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-        <img src="https://assets.spiritmediapublishing.com/scripture-alive/63c952c12297d31fbe2f64b7-1-rdodoupw5xs3zetmqqhezp7qp7r859r0l2vjuexg4o.webp" alt="Scripture Alive" class="h-20 w-auto" />
+        <img src="https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp" alt="Scripture Alive" class="h-20 w-auto" />
         <div class="flex flex-col gap-2 text-sm text-white/80">
           <button onclick="window.location='mailto:jeremy@scripturealive.com'" class="hover:text-primary flex items-center gap-1.5 text-left cursor-pointer bg-transparent border-0 p-0 text-white/80">
             <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
