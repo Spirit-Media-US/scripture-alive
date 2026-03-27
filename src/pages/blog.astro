@@ -1,23 +1,44 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getBlogPosts } from '../utils/sanity';
+import Layout from "../layouts/Layout.astro";
+import { getBlogPosts } from "../utils/sanity";
 
 const rawPosts = await getBlogPosts();
 
-const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MONTHS = [
+	"January",
+	"February",
+	"March",
+	"April",
+	"May",
+	"June",
+	"July",
+	"August",
+	"September",
+	"October",
+	"November",
+	"December",
+];
 const posts = rawPosts.map((p: any) => ({
-  ...p,
-  date: p.publishedAt
-    ? (() => {
-        const d = new Date(p.publishedAt + (p.publishedAt.length === 10 ? 'T12:00:00Z' : ''));
-        return MONTHS[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear();
-      })()
-    : '',
-  tags: p.tags || [],
-  author: p.author || 'Jeremy Kluth',
-  image: p.featuredImageUrl
-    ? p.featuredImageUrl + '?w=800&auto=format'
-    : 'https://assets.spiritmediapublishing.com/scripture-alive/scripturealive-og.png',
+	...p,
+	date: p.publishedAt
+		? (() => {
+				const d = new Date(
+					p.publishedAt + (p.publishedAt.length === 10 ? "T12:00:00Z" : ""),
+				);
+				return (
+					MONTHS[d.getUTCMonth()] +
+					" " +
+					d.getUTCDate() +
+					", " +
+					d.getUTCFullYear()
+				);
+			})()
+		: "",
+	tags: p.tags || [],
+	author: p.author || "Jeremy Kluth",
+	image: p.featuredImageUrl
+		? p.featuredImageUrl + "?w=800&auto=format"
+		: "https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png",
 }));
 
 const POSTS_JSON = JSON.stringify(posts);

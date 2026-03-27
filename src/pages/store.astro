@@ -1,35 +1,36 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getProducts } from '../utils/sanity';
+import Layout from "../layouts/Layout.astro";
+import { getProducts } from "../utils/sanity";
 
 const title = "Scripture Alive Store | Memorization Tools";
-const description = "Browse our store for curated tools and aids designed to help you memorize the Bible.";
+const description =
+	"Browse our store for curated tools and aids designed to help you memorize the Bible.";
 const jsonld = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Scripture Alive Store | Memorization Tools",
-  "url": "https://scripturealive.com/store",
-  "description": "Browse our store for curated tools and aids designed to help you memorize the Bible.",
-  "about": {
-    "@type": "Organization",
-    "name": "Scripture Alive",
-    "url": "https://scripturealive.com"
-  }
+	"@context": "https://schema.org",
+	"@type": "WebPage",
+	name: "Scripture Alive Store | Memorization Tools",
+	url: "https://scripturealive.com/store",
+	description:
+		"Browse our store for curated tools and aids designed to help you memorize the Bible.",
+	about: {
+		"@type": "Organization",
+		name: "Scripture Alive",
+		url: "https://scripturealive.com",
+	},
 };
-const ogImage = "https://assets.spiritmediapublishing.com/scripture-alive/scripturealive-og.png";
-
-const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
+const ogImage =
+	"https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png";
 
 // Fallback images by order (until uploaded to Sanity)
 const fallbackImages: Record<number, string> = {
-  1: `${BASE}/dd62f7369bcde9f6588eeddd8137695b_1200_80-rdodoupwjyz0ovcd8day09jlq35efnron1w2c5o2bq.webp`,
-  2: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
-  3: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
-  4: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
-  5: `${BASE}/PTR-Work-Booklet-FINAL-1167-x-1646-px-1200-x-1914-px-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.png`,
-  6: `${BASE}/PTR-Work-Booklet-FINAL-1167-x-1646-px-1200-x-1914-px-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.png`,
-  7: `${BASE}/265afdcfbaeab3fe5e3d18f1df843d18_1200_80-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrg.webp`,
-  8: `${BASE}/Power-Toolkit-APP-8.0-rdodoupwabn4mykaey0tthokdpvrlywabfag8asrrq.png`,
+	1: "https://cdn.sanity.io/images/vxczpihg/production/b13f77817d2b1138fa335c10696ebc0f1e1e1cbe-232x327.webp",
+	2: "https://cdn.sanity.io/images/vxczpihg/production/5f106f9f819f5b5a049a486b74d188b552eb48e8-210x334.webp",
+	3: "https://cdn.sanity.io/images/vxczpihg/production/5f106f9f819f5b5a049a486b74d188b552eb48e8-210x334.webp",
+	4: "https://cdn.sanity.io/images/vxczpihg/production/5f106f9f819f5b5a049a486b74d188b552eb48e8-210x334.webp",
+	5: "https://cdn.sanity.io/images/vxczpihg/production/63b8fe9eb83a87aeed2e5588dab95142b530695c-210x334.png",
+	6: "https://cdn.sanity.io/images/vxczpihg/production/63b8fe9eb83a87aeed2e5588dab95142b530695c-210x334.png",
+	7: "https://cdn.sanity.io/images/vxczpihg/production/5f106f9f819f5b5a049a486b74d188b552eb48e8-210x334.webp",
+	8: "https://cdn.sanity.io/images/vxczpihg/production/a584ad3148fc1395f8d59392c6226e04d2fda588-210x335.png",
 };
 
 const products = await getProducts();
@@ -42,7 +43,7 @@ const products = await getProducts();
   <!-- Hero Banner -->
   <section class="w-full">
     <img
-      src={`${BASE}/b935343b78a571e3a47c0bcf57790708_1200_80.webp`}
+      src={"https://cdn.sanity.io/images/vxczpihg/production/fd352a38d45e1fa44f0c23683b447b45698950ee-1200x675.webp"}
       alt="Jeremy Kluth's No More Excuses - Power Tools for Scripture Memory"
       class="w-full object-cover"
       loading="eager"

@@ -1,10 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getInterviews } from '../utils/sanity';
+import Layout from "../layouts/Layout.astro";
+import { getInterviews } from "../utils/sanity";
 
-const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
-const genericThumb = `${BASE}/b935343b78a571e3a47c0bcf57790708_1200_80-1024x576.webp`;
-const bioPhoto = `${BASE}/d0b2aceb029909de1f63dd05cb63c4af_1200_80-rdodoupx7nidwtzgvi31qpkih69etmmxm500ypsw76.webp`;
+const genericThumb =
+	"https://cdn.sanity.io/images/vxczpihg/production/da0764f78c42eac49abd6c968a0ac4e505546fc0-1024x576.webp";
+const bioPhoto =
+	"https://cdn.sanity.io/images/vxczpihg/production/ff662f2e455548bebc940040a43656e153954c86-286x397.webp";
 
 const interviews = await getInterviews();
 ---
