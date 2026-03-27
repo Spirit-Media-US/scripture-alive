@@ -2,138 +2,149 @@
 import Layout from "../layouts/Layout.astro";
 
 const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
+
+const categories = [
+	{
+		name: "Books",
+		href: "/performances/books",
+		tiles: [
+			{
+				label: "Daniel",
+				image: null,
+			},
+			{
+				label: "John's Gospel",
+				image: `${BASE}/SA-JOHNS-GOSPEL-Poster-1024x682.png`,
+			},
+			{
+				label: "Sermon Starters",
+				image: `${BASE}/5c4b5845c73b4a53dd05c0b1d184e79a_1200_80-1024x682.webp`,
+			},
+		],
+	},
+	{
+		name: "Characters",
+		href: "/performances/characters",
+		tiles: [
+			{
+				label: "Paul",
+				image: `${BASE}/aa09e2c799252fc9bc31e28dbf2ad8f0_1200_80-1024x682.webp`,
+			},
+			{
+				label: "Elijah",
+				image: null,
+			},
+			{
+				label: "Peter",
+				image: `${BASE}/St-Peter-Picture-V2.png`,
+			},
+		],
+	},
+	{
+		name: "Stories",
+		href: "/performances/stories",
+		tiles: [
+			{
+				label: "One-Man Passion Play",
+				image: `${BASE}/SA-OMPP-Poster-2025-1024x682.png`,
+			},
+			{
+				label: "The Advent Story",
+				image: null,
+			},
+			{
+				label: "The Beginning and the End",
+				image: null,
+			},
+		],
+	},
+];
 ---
 
 <Layout
-  title="Dramatic Scripture Performances | The Word Proclaimed"
-  description="Experience the Bible like never before with our dramatized Scripture performances."
+  title="Live Scripture Performances | Scripture Alive"
+  description="Compelling word-for-word dramatizations taken directly from the Bible — Books, Characters, and Stories performed live."
   jsonld={{
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Dramatic Scripture Performances | The Word Proclaimed",
+    "name": "Live Scripture Performances | Scripture Alive",
     "url": "https://scripturealive.com/performances",
-    "description": "Experience the Bible like never before with our dramatized Scripture performances.",
+    "description": "Compelling word-for-word dramatizations taken directly from the Bible.",
     "about": {
       "@type": "Organization",
       "name": "Scripture Alive",
       "url": "https://scripturealive.com"
     }
   }}
-  ogImage={`${BASE}/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp`}
+  ogImage={`${BASE}/SA-JOHNS-GOSPEL-Poster-1024x682.png`}
 >
 
-  <!-- Hero Section -->
-  <section class="py-10 px-4 bg-white text-center">
+  <!-- Page Heading -->
+  <section class="py-12 px-4 bg-white text-center">
     <div class="max-w-3xl mx-auto">
-      <h1 class="text-3xl md:text-4xl font-bold text-accent font-serif mb-4">
-        Scripture Performances
+      <h1 class="text-3xl md:text-4xl font-bold text-accent mb-4">
+        Live Scripture Performances
       </h1>
-      <p class="text-base md:text-lg text-gray-600 leading-relaxed">
-        Dynamic live dramatizations of entire books, characters, and<br class="hidden md:block" />
-        biblical narratives — performed straight from Scripture.
+      <p class="text-base md:text-lg text-gray-500 leading-relaxed">
+        Compelling word-for-word dramatizations taken directly from the Bible
       </p>
     </div>
   </section>
 
-  <!-- Category Cards -->
-  <section class="py-10 px-4 bg-cream">
-    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+  <!-- Category Sections -->
+  {categories.map((cat) => (
+    <section class="py-10 px-4 bg-cream">
+      <div class="max-w-4xl mx-auto">
 
-      <!-- Books Card -->
-      <a href="/performances/books" class="group bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:shadow-lg transition-shadow">
-        <div class="relative overflow-hidden">
-          <img
-            src={`${BASE}/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp`}
-            alt="Books of the Bible Performances"
-            loading="eager"
-            class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-        </div>
-        <div class="p-6 flex flex-col gap-3 flex-1">
-          <div class="bg-accent text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded w-fit">
-            Books
-          </div>
-          <h2 class="text-xl font-bold text-gray-800 font-serif">Books of the Bible</h2>
-          <p class="text-gray-600 leading-relaxed text-sm flex-1">
-            Full books of the Bible performed word-for-word from memory — an immersive experience that brings Scripture to life.
-          </p>
-          <p class="text-xs text-gray-500">Daniel · John's Gospel · Sermon Starters</p>
-          <div class="mt-2">
-            <span class="inline-block bg-accent text-white font-semibold px-5 py-2 rounded text-sm group-hover:opacity-90 transition-opacity">
-              Learn More
-            </span>
-          </div>
-        </div>
-      </a>
+        <!-- Category name -->
+        <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6">
+          {cat.name}
+        </h2>
 
-      <!-- Characters Card -->
-      <a href="/performances/characters" class="group bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:shadow-lg transition-shadow">
-        <div class="relative overflow-hidden">
-          <img
-            src={`${BASE}/aa09e2c799252fc9bc31e28dbf2ad8f0_1200_80-1024x682.webp`}
-            alt="Biblical Character Performances"
-            loading="lazy"
-            class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
-          />
+        <!-- 3 image tiles -->
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          {cat.tiles.map((tile) => (
+            <a href={cat.href} class="block cursor-pointer rounded overflow-hidden group">
+              {tile.image ? (
+                <img
+                  src={tile.image}
+                  alt={tile.label}
+                  loading="lazy"
+                  class="w-full h-[180px] object-cover rounded group-hover:opacity-90 transition-opacity"
+                />
+              ) : (
+                <div class="w-full h-[180px] bg-gray-800 rounded flex items-center justify-center group-hover:opacity-90 transition-opacity">
+                  <span class="text-white text-sm font-semibold text-center px-3 leading-snug">
+                    {tile.label}
+                  </span>
+                </div>
+              )}
+            </a>
+          ))}
         </div>
-        <div class="p-6 flex flex-col gap-3 flex-1">
-          <div class="bg-accent text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded w-fit">
-            Characters
-          </div>
-          <h2 class="text-xl font-bold text-gray-800 font-serif">Biblical Characters</h2>
-          <p class="text-gray-600 leading-relaxed text-sm flex-1">
-            Biblical characters brought to life — first-person performances that transport audiences into the world of Scripture.
-          </p>
-          <p class="text-xs text-gray-500">Paul · Mary Magdalene · and more</p>
-          <div class="mt-2">
-            <span class="inline-block bg-accent text-white font-semibold px-5 py-2 rounded text-sm group-hover:opacity-90 transition-opacity">
-              Learn More
-            </span>
-          </div>
-        </div>
-      </a>
 
-      <!-- Narratives Card -->
-      <a href="/performances/narratives" class="group bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:shadow-lg transition-shadow">
-        <div class="relative overflow-hidden">
-          <img
-            src={`${BASE}/SA-OMPP-Poster-2025-1024x682.png`}
-            alt="Narrative Scripture Performances"
-            loading="lazy"
-            class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
-          />
+        <!-- Learn More button -->
+        <div class="text-center">
+          <a
+            href={cat.href}
+            class="inline-block bg-accent text-white font-semibold px-8 py-2 rounded hover:opacity-90 transition-opacity"
+          >
+            Learn More
+          </a>
         </div>
-        <div class="p-6 flex flex-col gap-3 flex-1">
-          <div class="bg-accent text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded w-fit">
-            Narratives
-          </div>
-          <h2 class="text-xl font-bold text-gray-800 font-serif">Dramatic Narratives</h2>
-          <p class="text-gray-600 leading-relaxed text-sm flex-1">
-            Dramatic narrative performances weaving multiple voices and perspectives into a single powerful story.
-          </p>
-          <p class="text-xs text-gray-500">One-Man Passion Play · and others</p>
-          <div class="mt-2">
-            <span class="inline-block bg-accent text-white font-semibold px-5 py-2 rounded text-sm group-hover:opacity-90 transition-opacity">
-              Learn More
-            </span>
-          </div>
-        </div>
-      </a>
 
-    </div>
-  </section>
+      </div>
+    </section>
+  ))}
 
-  <!-- Book a Performance CTA -->
+  <!-- Book A Performance -->
   <section class="py-12 px-4 bg-white text-center">
-    <div class="max-w-2xl mx-auto">
-      <h2 class="text-2xl md:text-3xl font-bold text-primary font-serif mb-4">
-        Ready to bring Scripture to life at your event?
-      </h2>
+    <div class="max-w-3xl mx-auto">
       <a
         href="/book-jeremy"
-        class="inline-block bg-primary text-gray-900 font-bold px-8 py-3 rounded hover:opacity-90 transition-opacity"
+        class="inline-block bg-primary text-black font-bold px-12 py-4 rounded text-lg hover:opacity-90 transition-opacity"
       >
-        Book a Performance
+        Book A Performance
       </a>
     </div>
   </section>

@@ -8,7 +8,7 @@ const books = [
 		title: "Daniel",
 		description:
 			"A word-for-word performance of the entire book of Daniel from memory. This powerful performance brings the courage and faith of Daniel to life before a live audience — lions' den, fiery furnace, and all.",
-		image: `${BASE}/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp`,
+		image: null,
 	},
 	{
 		title: "John's Gospel",
@@ -19,7 +19,7 @@ const books = [
 	{
 		title: "Sermon Starters",
 		description:
-			"Short, high-impact Scripture performances perfect as a sermon opener or standalone devotional. These focused segments bring a passage to life and set the tone for worship, teaching, or special events.",
+			"Short, high-impact Scripture performances perfect as a sermon opener or standalone devotional. These focused segments bring a passage to life and set the tone for worship, teaching, or special events. Drawn from Genesis, Job, Acts, and Revelation.",
 		image: `${BASE}/5c4b5845c73b4a53dd05c0b1d184e79a_1200_80-1024x682.webp`,
 	},
 ];
@@ -28,7 +28,7 @@ const books = [
 <Layout
   title="Books of the Bible Performances | Scripture Alive"
   description="Full books of the Bible performed word-for-word from memory — Daniel, John's Gospel, Sermon Starters, and more."
-  ogImage={`${BASE}/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp`}
+  ogImage={`${BASE}/SA-JOHNS-GOSPEL-Poster-1024x682.png`}
 >
 
   <!-- Hero -->
@@ -37,8 +37,8 @@ const books = [
       <p class="text-sm font-bold uppercase tracking-widest text-primary mb-2">
         <a href="/performances" class="hover:underline">Performances</a> / Books
       </p>
-      <h1 class="text-3xl md:text-4xl font-bold text-accent font-serif mb-4">
-        Books of the Bible
+      <h1 class="text-3xl md:text-4xl font-bold text-accent mb-4">
+        Books
       </h1>
       <p class="text-base md:text-lg text-gray-600 leading-relaxed">
         Full books of the Bible performed word-for-word from memory — an immersive experience that brings Scripture to life.
@@ -56,12 +56,18 @@ const books = [
             <span class="text-accent font-bold text-xl transition-transform group-open:rotate-45">+</span>
           </summary>
           <div class="px-6 pb-6 flex flex-col gap-4">
-            <img
-              src={book.image}
-              alt={`${book.title} Performance`}
-              loading="lazy"
-              class="w-full max-h-64 object-cover rounded"
-            />
+            {book.image ? (
+              <img
+                src={book.image}
+                alt={`${book.title} Performance`}
+                loading="lazy"
+                class="w-full max-h-64 object-cover rounded"
+              />
+            ) : (
+              <div class="w-full h-48 bg-gray-800 rounded flex items-center justify-center">
+                <span class="text-white text-lg font-semibold">{book.title}</span>
+              </div>
+            )}
             <p class="text-gray-600 leading-relaxed text-sm">{book.description}</p>
             <div>
               <a

@@ -3,45 +3,45 @@ import Layout from "../../layouts/Layout.astro";
 
 const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
 
-const characters = [
+const stories = [
 	{
-		title: "Paul",
+		title: "One-Man Passion Play",
 		description:
-			"Step into the sandals of the Apostle Paul — a first-person performance drawn from Paul's letters and Acts. Experience the passion, the persecution, and the unshakable faith of one of history's greatest missionaries.",
-		image: `${BASE}/aa09e2c799252fc9bc31e28dbf2ad8f0_1200_80-1024x682.webp`,
+			"A powerful dramatic narrative of the crucifixion and resurrection of Jesus — weaving multiple voices and perspectives into one unforgettable performance. Perfect for Holy Week, Easter services, and large-event settings.",
+		image: `${BASE}/SA-OMPP-Poster-2025-1024x682.png`,
 	},
 	{
-		title: "Elijah",
+		title: "The Advent Story",
 		description:
-			"A dramatic first-person portrayal of the prophet Elijah — from the heights of Mount Carmel to the wilderness of despair and the still small voice of God. A powerful performance for conferences, retreats, and special services.",
+			"A candlelit journey through the birth of Christ — from the prophecies of Isaiah to the manger in Bethlehem. A moving performance perfect for Advent and Christmas services.",
 		image: null,
 	},
 	{
-		title: "Peter",
+		title: "The Beginning and the End",
 		description:
-			"Walk with Simon Peter from his first encounter with Jesus to his restoration after the resurrection. A deeply human and redemptive performance drawn directly from Scripture.",
-		image: `${BASE}/St-Peter-Picture-V2.png`,
+			"A sweeping dramatization spanning Genesis to Revelation — creation, the fall, redemption, and the new creation. An awe-inspiring performance that gives audiences the full arc of God's story.",
+		image: null,
 	},
 ];
 ---
 
 <Layout
-  title="Biblical Character Performances | Scripture Alive"
-  description="Biblical characters brought to life — first-person performances featuring Paul, Elijah, Peter, and more."
-  ogImage={`${BASE}/aa09e2c799252fc9bc31e28dbf2ad8f0_1200_80-1024x682.webp`}
+  title="Dramatic Story Performances | Scripture Alive"
+  description="Dramatic story performances — the One-Man Passion Play, The Advent Story, The Beginning and the End, and more."
+  ogImage={`${BASE}/SA-OMPP-Poster-2025-1024x682.png`}
 >
 
   <!-- Hero -->
   <section class="py-10 px-4 bg-white text-center">
     <div class="max-w-3xl mx-auto">
       <p class="text-sm font-bold uppercase tracking-widest text-primary mb-2">
-        <a href="/performances" class="hover:underline">Performances</a> / Characters
+        <a href="/performances" class="hover:underline">Performances</a> / Stories
       </p>
       <h1 class="text-3xl md:text-4xl font-bold text-accent mb-4">
-        Characters
+        Stories
       </h1>
       <p class="text-base md:text-lg text-gray-600 leading-relaxed">
-        Biblical characters brought to life — first-person performances that transport audiences into the world of Scripture.
+        Dramatic Scripture performances weaving multiple voices and perspectives into a single powerful story.
       </p>
     </div>
   </section>
@@ -49,26 +49,26 @@ const characters = [
   <!-- Accordion Items -->
   <section class="py-10 px-4 bg-cream">
     <div class="max-w-3xl mx-auto flex flex-col gap-4">
-      {characters.map((character) => (
+      {stories.map((story) => (
         <details class="bg-white rounded-lg shadow-sm overflow-hidden group">
           <summary class="flex items-center justify-between px-6 py-5 cursor-pointer list-none select-none">
-            <h2 class="text-lg font-bold text-gray-800 font-serif">{character.title}</h2>
+            <h2 class="text-lg font-bold text-gray-800 font-serif">{story.title}</h2>
             <span class="text-accent font-bold text-xl transition-transform group-open:rotate-45">+</span>
           </summary>
           <div class="px-6 pb-6 flex flex-col gap-4">
-            {character.image ? (
+            {story.image ? (
               <img
-                src={character.image}
-                alt={`${character.title} Performance`}
+                src={story.image}
+                alt={`${story.title} Performance`}
                 loading="lazy"
                 class="w-full max-h-64 object-cover rounded"
               />
             ) : (
               <div class="w-full h-48 bg-gray-800 rounded flex items-center justify-center">
-                <span class="text-white text-lg font-semibold">{character.title}</span>
+                <span class="text-white text-lg font-semibold text-center px-4">{story.title}</span>
               </div>
             )}
-            <p class="text-gray-600 leading-relaxed text-sm">{character.description}</p>
+            <p class="text-gray-600 leading-relaxed text-sm">{story.description}</p>
             <div>
               <a
                 href="/book-jeremy"
