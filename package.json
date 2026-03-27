@@ -1,21 +1,22 @@
 {
-  "name": "scripture-alive",
-  "type": "module",
-  "scripts": {
-    "dev": "astro dev --port 4329",
-    "build": "astro check && astro build",
-    "preview": "astro preview"
-  },
-  "dependencies": {
-    "@astrojs/sitemap": "^3.7.1",
-    "@sanity/astro": "^3.3.1",
-    "@sanity/client": "^7.20.0",
-    "@tailwindcss/vite": "^4.0.0",
-    "astro": "^5.0.0",
-    "groq": "^5.17.1",
-    "tailwindcss": "^4.0.0"
-  },
-  "devDependencies": {
-    "lefthook": "^2.1.4"
-  }
+	"name": "scripture-alive",
+	"type": "module",
+	"scripts": {
+		"dev": "astro dev --port 4329",
+		"build": "astro check && astro build",
+		"preview": "astro preview"
+	},
+	"dependencies": {
+		"@astrojs/sitemap": "^3.7.1",
+		"@sanity/astro": "^3.3.1",
+		"@sanity/client": "^7.20.0",
+		"@tailwindcss/vite": "^4.0.0",
+		"astro": "^5.0.0",
+		"groq": "^5.17.1",
+		"tailwindcss": "^4.0.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.9",
+		"lefthook": "^2.1.4"
+	}
 }

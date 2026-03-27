@@ -30,7 +30,7 @@ pre-commit:
         fi
     biome:
       glob: "*.{js,ts,jsx,tsx,json,css,astro}"
-      run: npx biome check --write --no-errors-on-unmatched {staged_files}
+      run: npx biome check --write --no-errors-on-unmatched --diagnostic-level=error {staged_files}
       stage_fixed: true
     large-files:
       run: |

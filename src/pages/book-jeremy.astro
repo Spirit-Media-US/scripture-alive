@@ -1,0 +1,212 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Book Jeremy Kluth | Scripture Alive"
+  description="Book Jeremy Kluth for a Scripture performance, workshop, or speaking engagement at your church, conference, or event."
+  ogImage="https://assets.spiritmediapublishing.com/scripture-alive/scripturealive-og.png"
+>
+
+  <!-- Hero Section -->
+  <section class="py-14 px-4 bg-white text-center">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-3xl md:text-4xl font-bold text-accent font-serif mb-4">
+        Book Jeremy Kluth
+      </h1>
+      <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+        Bringing God's Word to life — for your congregation, event, or audience.
+      </p>
+    </div>
+  </section>
+
+  <!-- Booking Option Cards -->
+  <section class="py-8 px-4 bg-cream">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-center text-2xl font-bold text-accent font-serif mb-8">What type of booking are you looking for?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Performance Card -->
+        <div class="bg-white rounded-lg shadow-md p-6 flex flex-col gap-3">
+          <div class="bg-accent text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded w-fit">
+            Performance
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 font-serif">Scripture Performance</h3>
+          <p class="text-gray-600 leading-relaxed text-sm flex-1">
+            A word-for-word Scripture performance: Daniel, John's Gospel, One-Man Passion Play, and more. Ideal for Sunday services, conferences, and special events.
+          </p>
+          <div class="text-xs text-gray-500 mt-2">
+            <strong>Includes:</strong> Daniel, John's Gospel, One-Man Passion Play, Sermon Starters
+          </div>
+        </div>
+
+        <!-- Workshop Card -->
+        <div class="bg-white rounded-lg shadow-md p-6 flex flex-col gap-3">
+          <div class="bg-accent text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded w-fit">
+            Workshop
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 font-serif">Scripture Memory Workshop</h3>
+          <p class="text-gray-600 leading-relaxed text-sm flex-1">
+            Interactive Scripture memory workshops for all ages. Equip your congregation with tools that make God's Word unforgettable.
+          </p>
+          <div class="text-xs text-gray-500 mt-2">
+            <strong>Ideal for:</strong> Congregations, youth groups, schools, camps
+          </div>
+        </div>
+
+        <!-- Speaking Card -->
+        <div class="bg-white rounded-lg shadow-md p-6 flex flex-col gap-3">
+          <div class="bg-accent text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded w-fit">
+            Speaking
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 font-serif">Guest Speaking & Interviews</h3>
+          <p class="text-gray-600 leading-relaxed text-sm flex-1">
+            Guest speaking, radio/podcast interviews, coaching, and more. Available in person and remotely.
+          </p>
+          <div class="text-xs text-gray-500 mt-2">
+            <strong>Available:</strong> In person &amp; remote
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Inquiry Form -->
+  <section class="py-14 px-4 bg-white">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold text-accent font-serif mb-2 text-center">
+        Send a Booking Inquiry
+      </h2>
+      <p class="text-center text-gray-600 mb-8 text-sm">
+        Fill out the form below and we'll get back to you shortly.
+      </p>
+
+      <form method="POST" action="/contact" class="flex flex-col gap-5">
+
+        <!-- Name -->
+        <div class="flex flex-col gap-1">
+          <label for="name" class="text-sm font-semibold text-gray-700">Name <span class="text-red-500">*</span></label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="border border-gray-300 rounded px-4 py-3 text-base focus:outline-none focus:border-accent"
+            placeholder="Your full name"
+          />
+        </div>
+
+        <!-- Organization -->
+        <div class="flex flex-col gap-1">
+          <label for="organization" class="text-sm font-semibold text-gray-700">Organization / Church / Venue <span class="text-red-500">*</span></label>
+          <input
+            type="text"
+            id="organization"
+            name="organization"
+            required
+            class="border border-gray-300 rounded px-4 py-3 text-base focus:outline-none focus:border-accent"
+            placeholder="Church name, venue, or organization"
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="flex flex-col gap-1">
+          <label for="email" class="text-sm font-semibold text-gray-700">Email <span class="text-red-500">*</span></label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="border border-gray-300 rounded px-4 py-3 text-base focus:outline-none focus:border-accent"
+            placeholder="you@example.com"
+          />
+        </div>
+
+        <!-- Phone -->
+        <div class="flex flex-col gap-1">
+          <label for="phone" class="text-sm font-semibold text-gray-700">Phone</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            class="border border-gray-300 rounded px-4 py-3 text-base focus:outline-none focus:border-accent"
+            placeholder="(000) 000-0000"
+          />
+        </div>
+
+        <!-- Booking Type -->
+        <div class="flex flex-col gap-1">
+          <label for="booking_type" class="text-sm font-semibold text-gray-700">Which booking type?</label>
+          <select
+            id="booking_type"
+            name="booking_type"
+            class="border border-gray-300 rounded px-4 py-3 text-base focus:outline-none focus:border-accent bg-white"
+          >
+            <option value="">Select one...</option>
+            <option value="Performance">Performance</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Speaking">Speaking</option>
+            <option value="Not Sure Yet">Not Sure Yet</option>
+          </select>
+        </div>
+
+        <!-- Audience Size -->
+        <div class="flex flex-col gap-1">
+          <label for="audience_size" class="text-sm font-semibold text-gray-700">Estimated audience size</label>
+          <select
+            id="audience_size"
+            name="audience_size"
+            class="border border-gray-300 rounded px-4 py-3 text-base focus:outline-none focus:border-accent bg-white"
+          >
+            <option value="">Select one...</option>
+            <option value="Under 50">Under 50</option>
+            <option value="50–200">50–200</option>
+            <option value="200–500">200–500</option>
+            <option value="500+">500+</option>
+          </select>
+        </div>
+
+        <!-- Preferred Date -->
+        <div class="flex flex-col gap-1">
+          <label for="preferred_date" class="text-sm font-semibold text-gray-700">Preferred date(s) or timeframe</label>
+          <input
+            type="text"
+            id="preferred_date"
+            name="preferred_date"
+            class="border border-gray-300 rounded px-4 py-3 text-base focus:outline-none focus:border-accent"
+            placeholder="e.g. March 2026, Easter weekend, flexible..."
+          />
+        </div>
+
+        <!-- Event Description -->
+        <div class="flex flex-col gap-1">
+          <label for="event_description" class="text-sm font-semibold text-gray-700">Tell us about your event / what you're looking for</label>
+          <textarea
+            id="event_description"
+            name="event_description"
+            rows="5"
+            class="border border-gray-300 rounded px-4 py-3 text-base focus:outline-none focus:border-accent resize-vertical"
+            placeholder="Share any details about your event, goals, audience, or questions..."
+          ></textarea>
+        </div>
+
+        <!-- Submit -->
+        <div class="pt-2">
+          <button
+            type="submit"
+            class="w-full bg-primary text-gray-900 font-bold text-base px-8 py-4 rounded hover:opacity-90 transition-opacity"
+          >
+            Send Booking Inquiry
+          </button>
+        </div>
+
+      </form>
+
+      <p class="text-center text-sm text-gray-500 mt-4">
+        We typically respond within 1–2 business days.
+      </p>
+    </div>
+  </section>
+
+</Layout>

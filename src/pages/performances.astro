@@ -1,23 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getPerformances } from '../utils/sanity';
+import Layout from "../layouts/Layout.astro";
 
 const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
-
-// R2 fallback images by order until images are uploaded in Sanity Studio
-const fallbackImages: Record<number, string> = {
-  1: `${BASE}/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp`,
-  2: `${BASE}/SA-JOHNS-GOSPEL-Poster-1024x682.png`,
-  3: `${BASE}/aa09e2c799252fc9bc31e28dbf2ad8f0_1200_80-1024x682.webp`,
-  4: `${BASE}/c846fecab2ea5edb95ee06f4cbc9fc90_1200_80-1024x682.webp`,
-  5: `${BASE}/81b4f657e2a792c6a297eae6187ee672_1200_80-1024x682.webp`,
-  6: `${BASE}/SA-OMPP-Poster-2025-1024x682.png`,
-  7: `${BASE}/2d27b0511651d62f940f163837ef2462_1200_80-1024x682.webp`,
-  8: `${BASE}/5c4b5845c73b4a53dd05c0b1d184e79a_1200_80-1024x682.webp`,
-  9: `${BASE}/d8e12fbef9166fcb2ff030c7a53fe03a_1200_80.webp`,
-};
-
-const performances = await getPerformances();
 ---
 
 <Layout
@@ -42,7 +26,7 @@ const performances = await getPerformances();
   <section class="py-10 px-4 bg-white text-center">
     <div class="max-w-3xl mx-auto">
       <h1 class="text-3xl md:text-4xl font-bold text-accent font-serif mb-4">
-        Word-for-Word Scripture Performances
+        Scripture Performances
       </h1>
       <p class="text-base md:text-lg text-gray-600 leading-relaxed">
         Dynamic live dramatizations of entire books, characters, and<br class="hidden md:block" />
@@ -51,54 +35,105 @@ const performances = await getPerformances();
     </div>
   </section>
 
-  <!-- Performance List from Sanity -->
-  {performances.map((perf: any) => {
-    const imgSrc = fallbackImages[perf.order] ?? fallbackImages[1];
-    const watchUrl = `https://youtu.be/${perf.youtubeId}`;
-    return (
-      <section class="py-10 px-4 bg-white">
-        <div class="max-w-5xl mx-auto">
-          <div class="flex flex-col md:flex-row gap-8 items-start">
-            <div class="w-full md:w-5/12">
-              <a href={watchUrl} target="_blank" rel="noopener">
-                <img
-                  src={imgSrc}
-                  alt={`${perf.title} Performance`}
-                  class="w-full h-auto"
-                  loading={perf.order === 1 ? 'eager' : 'lazy'}
-                  decoding="async"
-                />
-              </a>
-            </div>
-            <div class="w-full md:w-7/12 flex flex-col justify-start gap-4">
-              <h2 class="text-xl font-bold text-primary font-serif">{perf.title}</h2>
-              <p class="text-gray-700 leading-relaxed">{perf.description}</p>
-              {perf.duration && (
-                <p class="text-xs text-gray-500">Duration: {perf.duration}{perf.translations ? ` · ${perf.translations}` : ''}</p>
-              )}
-              <div>
-                <a
-                  href={watchUrl}
-                  target="_blank"
-                  rel="noopener"
-                  class="inline-block bg-accent text-white font-semibold px-5 py-2 rounded hover:opacity-90 transition-opacity text-sm"
-                >
-                  Watch
-                </a>
-              </div>
-            </div>
+  <!-- Category Cards -->
+  <section class="py-10 px-4 bg-cream">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <!-- Books Card -->
+      <a href="/performances/books" class="group bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:shadow-lg transition-shadow">
+        <div class="relative overflow-hidden">
+          <img
+            src={`${BASE}/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp`}
+            alt="Books of the Bible Performances"
+            loading="eager"
+            class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="p-6 flex flex-col gap-3 flex-1">
+          <div class="bg-accent text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded w-fit">
+            Books
+          </div>
+          <h2 class="text-xl font-bold text-gray-800 font-serif">Books of the Bible</h2>
+          <p class="text-gray-600 leading-relaxed text-sm flex-1">
+            Full books of the Bible performed word-for-word from memory — an immersive experience that brings Scripture to life.
+          </p>
+          <p class="text-xs text-gray-500">Daniel · John's Gospel · Sermon Starters</p>
+          <div class="mt-2">
+            <span class="inline-block bg-accent text-white font-semibold px-5 py-2 rounded text-sm group-hover:opacity-90 transition-opacity">
+              Learn More
+            </span>
           </div>
         </div>
-      </section>
-    );
-  })}
+      </a>
 
-  <!-- Book A Performance CTA -->
-  <section class="py-12 px-4 bg-cream text-center">
+      <!-- Characters Card -->
+      <a href="/performances/characters" class="group bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:shadow-lg transition-shadow">
+        <div class="relative overflow-hidden">
+          <img
+            src={`${BASE}/aa09e2c799252fc9bc31e28dbf2ad8f0_1200_80-1024x682.webp`}
+            alt="Biblical Character Performances"
+            loading="lazy"
+            class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="p-6 flex flex-col gap-3 flex-1">
+          <div class="bg-accent text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded w-fit">
+            Characters
+          </div>
+          <h2 class="text-xl font-bold text-gray-800 font-serif">Biblical Characters</h2>
+          <p class="text-gray-600 leading-relaxed text-sm flex-1">
+            Biblical characters brought to life — first-person performances that transport audiences into the world of Scripture.
+          </p>
+          <p class="text-xs text-gray-500">Paul · Mary Magdalene · and more</p>
+          <div class="mt-2">
+            <span class="inline-block bg-accent text-white font-semibold px-5 py-2 rounded text-sm group-hover:opacity-90 transition-opacity">
+              Learn More
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Narratives Card -->
+      <a href="/performances/narratives" class="group bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:shadow-lg transition-shadow">
+        <div class="relative overflow-hidden">
+          <img
+            src={`${BASE}/SA-OMPP-Poster-2025-1024x682.png`}
+            alt="Narrative Scripture Performances"
+            loading="lazy"
+            class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div class="p-6 flex flex-col gap-3 flex-1">
+          <div class="bg-accent text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded w-fit">
+            Narratives
+          </div>
+          <h2 class="text-xl font-bold text-gray-800 font-serif">Dramatic Narratives</h2>
+          <p class="text-gray-600 leading-relaxed text-sm flex-1">
+            Dramatic narrative performances weaving multiple voices and perspectives into a single powerful story.
+          </p>
+          <p class="text-xs text-gray-500">One-Man Passion Play · and others</p>
+          <div class="mt-2">
+            <span class="inline-block bg-accent text-white font-semibold px-5 py-2 rounded text-sm group-hover:opacity-90 transition-opacity">
+              Learn More
+            </span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Book a Performance CTA -->
+  <section class="py-12 px-4 bg-white text-center">
     <div class="max-w-2xl mx-auto">
-      <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">Book A Performance</h2>
-      <a href="/contact" class="inline-block bg-accent text-white font-semibold px-8 py-3 rounded hover:opacity-90 transition-opacity">
-        Contact Jeremy
+      <h2 class="text-2xl md:text-3xl font-bold text-primary font-serif mb-4">
+        Ready to bring Scripture to life at your event?
+      </h2>
+      <a
+        href="/book-jeremy"
+        class="inline-block bg-primary text-gray-900 font-bold px-8 py-3 rounded hover:opacity-90 transition-opacity"
+      >
+        Book a Performance
       </a>
     </div>
   </section>

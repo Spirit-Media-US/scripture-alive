@@ -1,0 +1,95 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
+
+const books = [
+	{
+		title: "Daniel",
+		description:
+			"A word-for-word performance of the entire book of Daniel from memory. This powerful performance brings the courage and faith of Daniel to life before a live audience — lions' den, fiery furnace, and all.",
+		image: `${BASE}/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp`,
+	},
+	{
+		title: "John's Gospel",
+		description:
+			"The complete Gospel of John performed from memory — 21 chapters of the life of Christ. A deeply moving experience that draws audiences into the presence of Jesus from the opening words to the resurrection.",
+		image: `${BASE}/SA-JOHNS-GOSPEL-Poster-1024x682.png`,
+	},
+	{
+		title: "Sermon Starters",
+		description:
+			"Short, high-impact Scripture performances perfect as a sermon opener or standalone devotional. These focused segments bring a passage to life and set the tone for worship, teaching, or special events.",
+		image: `${BASE}/5c4b5845c73b4a53dd05c0b1d184e79a_1200_80-1024x682.webp`,
+	},
+];
+---
+
+<Layout
+  title="Books of the Bible Performances | Scripture Alive"
+  description="Full books of the Bible performed word-for-word from memory — Daniel, John's Gospel, Sermon Starters, and more."
+  ogImage={`${BASE}/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp`}
+>
+
+  <!-- Hero -->
+  <section class="py-10 px-4 bg-white text-center">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-sm font-bold uppercase tracking-widest text-primary mb-2">
+        <a href="/performances" class="hover:underline">Performances</a> / Books
+      </p>
+      <h1 class="text-3xl md:text-4xl font-bold text-accent font-serif mb-4">
+        Books of the Bible
+      </h1>
+      <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+        Full books of the Bible performed word-for-word from memory — an immersive experience that brings Scripture to life.
+      </p>
+    </div>
+  </section>
+
+  <!-- Accordion Items -->
+  <section class="py-10 px-4 bg-cream">
+    <div class="max-w-3xl mx-auto flex flex-col gap-4">
+      {books.map((book) => (
+        <details class="bg-white rounded-lg shadow-sm overflow-hidden group">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer list-none select-none">
+            <h2 class="text-lg font-bold text-gray-800 font-serif">{book.title}</h2>
+            <span class="text-accent font-bold text-xl transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-6 flex flex-col gap-4">
+            <img
+              src={book.image}
+              alt={`${book.title} Performance`}
+              loading="lazy"
+              class="w-full max-h-64 object-cover rounded"
+            />
+            <p class="text-gray-600 leading-relaxed text-sm">{book.description}</p>
+            <div>
+              <a
+                href="/book-jeremy"
+                class="inline-block bg-primary text-gray-900 font-bold px-6 py-3 rounded hover:opacity-90 transition-opacity text-sm"
+              >
+                Book This
+              </a>
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12 px-4 bg-white text-center">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-2xl font-bold text-primary font-serif mb-4">
+        Ready to bring Scripture to life at your event?
+      </h2>
+      <a
+        href="/book-jeremy"
+        class="inline-block bg-primary text-gray-900 font-bold px-8 py-3 rounded hover:opacity-90 transition-opacity"
+      >
+        Book a Performance
+      </a>
+    </div>
+  </section>
+
+</Layout>
