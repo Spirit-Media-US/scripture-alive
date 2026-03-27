@@ -1,5 +1,5 @@
-import { sanityClient } from 'sanity:client'
-import { defineQuery } from 'groq'
+import { sanityClient } from "sanity:client";
+import { defineQuery } from "groq";
 
 // ── Events ────────────────────────────────────────────────────
 export const EVENTS_QUERY = defineQuery(`
@@ -18,10 +18,10 @@ export const EVENTS_QUERY = defineQuery(`
     tags,
     description
   }
-`)
+`);
 
 export async function getEvents() {
-  return sanityClient.fetch(EVENTS_QUERY)
+	return sanityClient.fetch(EVENTS_QUERY);
 }
 
 // ── Testimonials ──────────────────────────────────────────────
@@ -35,7 +35,7 @@ export const TESTIMONIALS_QUERY = defineQuery(`
     featured,
     order
   }
-`)
+`);
 
 export const FEATURED_TESTIMONIALS_QUERY = defineQuery(`
   *[_type == "testimonial" && featured == true] | order(order asc) {
@@ -45,14 +45,14 @@ export const FEATURED_TESTIMONIALS_QUERY = defineQuery(`
     authorTitle,
     authorOrganization
   }
-`)
+`);
 
 export async function getTestimonials() {
-  return sanityClient.fetch(TESTIMONIALS_QUERY)
+	return sanityClient.fetch(TESTIMONIALS_QUERY);
 }
 
 export async function getFeaturedTestimonials() {
-  return sanityClient.fetch(FEATURED_TESTIMONIALS_QUERY)
+	return sanityClient.fetch(FEATURED_TESTIMONIALS_QUERY);
 }
 
 // ── Performances ──────────────────────────────────────────────
@@ -64,13 +64,13 @@ export const PERFORMANCES_QUERY = defineQuery(`
     duration,
     translations,
     youtubeId,
-    image,
+    "imageUrl": image.asset->url,
     order
   }
-`)
+`);
 
 export async function getPerformances() {
-  return sanityClient.fetch(PERFORMANCES_QUERY)
+	return sanityClient.fetch(PERFORMANCES_QUERY);
 }
 
 // ── Interviews ────────────────────────────────────────────────
@@ -86,10 +86,10 @@ export const INTERVIEWS_QUERY = defineQuery(`
     thumbnail,
     order
   }
-`)
+`);
 
 export async function getInterviews() {
-  return sanityClient.fetch(INTERVIEWS_QUERY)
+	return sanityClient.fetch(INTERVIEWS_QUERY);
 }
 
 // ── Products ──────────────────────────────────────────────────
@@ -103,10 +103,10 @@ export const PRODUCTS_QUERY = defineQuery(`
     storeUrl,
     order
   }
-`)
+`);
 
 export async function getProducts() {
-  return sanityClient.fetch(PRODUCTS_QUERY)
+	return sanityClient.fetch(PRODUCTS_QUERY);
 }
 
 // ── Blog Posts ────────────────────────────────────────────────
@@ -121,7 +121,7 @@ export const BLOG_POSTS_QUERY = defineQuery(`
     "author": coalesce(author, "Jeremy Kluth"),
     tags
   }
-`)
+`);
 
 export const BLOG_POST_QUERY = defineQuery(`
   *[_type == "blogPost" && slug.current == $slug][0] {
@@ -135,14 +135,14 @@ export const BLOG_POST_QUERY = defineQuery(`
     tags,
     body
   }
-`)
+`);
 
 export async function getBlogPosts() {
-  return sanityClient.fetch(BLOG_POSTS_QUERY)
+	return sanityClient.fetch(BLOG_POSTS_QUERY);
 }
 
 export async function getBlogPost(slug: string) {
-  return sanityClient.fetch(BLOG_POST_QUERY, { slug })
+	return sanityClient.fetch(BLOG_POST_QUERY, { slug });
 }
 
 // ── Resources ─────────────────────────────────────────────────
@@ -156,8 +156,8 @@ export const RESOURCES_QUERY = defineQuery(`
     pdfUrl,
     order
   }
-`)
+`);
 
 export async function getResources() {
-  return sanityClient.fetch(RESOURCES_QUERY)
+	return sanityClient.fetch(RESOURCES_QUERY);
 }
