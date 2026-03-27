@@ -10,6 +10,23 @@ const ogImage = "https://assets.spiritmediapublishing.com/scripture-alive/d0b2ac
   title={title}
   description={description}
   ogImage={ogImage}
+  jsonld={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Founder's Journey | Scripture Alive Ministry",
+    "url": "https://scripturealive.com/about",
+    "description": "Discover the story behind the birth of the Scripture Alive ministry. Witness a passion for the Word.",
+    "about": {
+      "@type": "Person",
+      "name": "Jeremy Kluth",
+      "jobTitle": "Founder",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Scripture Alive",
+        "url": "https://scripturealive.com"
+      }
+    }
+  }}
 >
 
   <!-- Bio Section -->

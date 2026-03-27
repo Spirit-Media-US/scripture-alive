@@ -1,0 +1,101 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
+
+const stories = [
+	{
+		title: "One-Man Passion Play",
+		description:
+			"A powerful dramatic narrative of the crucifixion and resurrection of Jesus — weaving multiple voices and perspectives into one unforgettable performance. Perfect for Holy Week, Easter services, and large-event settings.",
+		image: `${BASE}/SA-OMPP-Poster-2025-1024x682.png`,
+	},
+	{
+		title: "The Advent Story",
+		description:
+			"A candlelit journey through the birth of Christ — from the prophecies of Isaiah to the manger in Bethlehem. A moving performance perfect for Advent and Christmas services.",
+		image: null,
+	},
+	{
+		title: "The Beginning and the End",
+		description:
+			"A sweeping dramatization spanning Genesis to Revelation — creation, the fall, redemption, and the new creation. An awe-inspiring performance that gives audiences the full arc of God's story.",
+		image: null,
+	},
+];
+---
+
+<Layout
+  title="Dramatic Story Performances | Scripture Alive"
+  description="Dramatic story performances — the One-Man Passion Play, The Advent Story, The Beginning and the End, and more."
+  ogImage={`${BASE}/SA-OMPP-Poster-2025-1024x682.png`}
+>
+
+  <!-- Hero -->
+  <section class="py-10 px-4 bg-white text-center">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-sm font-bold uppercase tracking-widest text-primary mb-2">
+        <a href="/performances" class="hover:underline">Performances</a> / Stories
+      </p>
+      <h1 class="text-3xl md:text-4xl font-bold text-accent mb-4">
+        Stories
+      </h1>
+      <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+        Dramatic Scripture performances weaving multiple voices and perspectives into a single powerful story.
+      </p>
+    </div>
+  </section>
+
+  <!-- Accordion Items -->
+  <section class="py-10 px-4 bg-cream">
+    <div class="max-w-3xl mx-auto flex flex-col gap-4">
+      {stories.map((story) => (
+        <details class="bg-white rounded-lg shadow-sm overflow-hidden group">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer list-none select-none">
+            <h2 class="text-lg font-bold text-gray-800 font-serif">{story.title}</h2>
+            <span class="text-accent font-bold text-xl transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-6 flex flex-col gap-4">
+            {story.image ? (
+              <img
+                src={story.image}
+                alt={`${story.title} Performance`}
+                loading="lazy"
+                class="w-full max-h-64 object-cover rounded"
+              />
+            ) : (
+              <div class="w-full h-48 bg-gray-800 rounded flex items-center justify-center">
+                <span class="text-white text-lg font-semibold text-center px-4">{story.title}</span>
+              </div>
+            )}
+            <p class="text-gray-600 leading-relaxed text-sm">{story.description}</p>
+            <div>
+              <a
+                href="/book-jeremy"
+                class="inline-block bg-primary text-gray-900 font-bold px-6 py-3 rounded hover:opacity-90 transition-opacity text-sm"
+              >
+                Book This
+              </a>
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12 px-4 bg-white text-center">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-2xl font-bold text-primary font-serif mb-4">
+        Ready to bring Scripture to life at your event?
+      </h2>
+      <a
+        href="/book-jeremy"
+        class="inline-block bg-primary text-gray-900 font-bold px-8 py-3 rounded hover:opacity-90 transition-opacity"
+      >
+        Book a Performance
+      </a>
+    </div>
+  </section>
+
+</Layout>

@@ -1,51 +1,67 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getEvents } from '../utils/sanity';
+import Layout from "../layouts/Layout.astro";
+import { getEvents } from "../utils/sanity";
 
 const title = "Upcoming Events | Scripture Alive Ministry";
-const description = "Stay updated with the latest events, sessions, and gatherings by Scripture Alive.";
-const ogImage = "https://assets.spiritmediapublishing.com/scripture-alive/scripturealive-og.png";
+const description =
+	"Stay updated with the latest events, sessions, and gatherings by Scripture Alive.";
+const ogImage =
+	"https://assets.spiritmediapublishing.com/scripture-alive/scripturealive-og.png";
 
 const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
 
 const allEvents = await getEvents();
 const now = new Date();
-const upcomingEvents = allEvents.filter((e: any) => new Date(e.startDate) >= now);
+const upcomingEvents = allEvents.filter(
+	(e: any) => new Date(e.startDate) >= now,
+);
 const pastEvents = allEvents.filter((e: any) => new Date(e.startDate) < now);
 
 // Group upcoming events by month/year
 function groupByMonth(events: any[]) {
-  const groups: Record<string, any[]> = {};
-  for (const e of events) {
-    const d = new Date(e.startDate);
-    const key = d.toLocaleString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
-    if (!groups[key]) groups[key] = [];
-    groups[key].push(e);
-  }
-  return groups;
+	const groups: Record<string, any[]> = {};
+	for (const e of events) {
+		const d = new Date(e.startDate);
+		const key = d.toLocaleString("en-US", {
+			month: "long",
+			year: "numeric",
+			timeZone: "UTC",
+		});
+		if (!groups[key]) groups[key] = [];
+		groups[key].push(e);
+	}
+	return groups;
 }
 
 const upcomingGroups = groupByMonth(upcomingEvents);
 
 function fmtDay(dateStr: string, endDateStr?: string) {
-  const start = new Date(dateStr);
-  const startDay = start.getUTCDate();
-  if (endDateStr) {
-    const end = new Date(endDateStr);
-    const endDay = end.getUTCDate();
-    if (startDay !== endDay) return `${startDay}–${endDay}`;
-  }
-  return String(startDay);
+	const start = new Date(dateStr);
+	const startDay = start.getUTCDate();
+	if (endDateStr) {
+		const end = new Date(endDateStr);
+		const endDay = end.getUTCDate();
+		if (startDay !== endDay) return `${startDay}–${endDay}`;
+	}
+	return String(startDay);
 }
 
 function fmtMonth(dateStr: string) {
-  return new Date(dateStr).toLocaleString('en-US', { month: 'short', timeZone: 'UTC' }).toUpperCase();
+	return new Date(dateStr)
+		.toLocaleString("en-US", { month: "short", timeZone: "UTC" })
+		.toUpperCase();
 }
 
 function fmtTime(startStr: string, endStr?: string) {
-  const fmt = (s: string) => new Date(s).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'UTC' });
-  if (!endStr) return fmt(startStr);
-  return `${fmt(startStr)} – ${fmt(endStr)}`;
+	const fmt = (s: string) =>
+		new Date(s).toLocaleTimeString("en-US", {
+			hour: "numeric",
+			minute: "2-digit",
+			hour12: true,
+			timeZone: "UTC",
+		});
+	if (!endStr) return fmt(startStr);
+	return `${fmt(startStr)} – ${fmt(endStr)}`;
 }
 ---
 
@@ -54,6 +70,18 @@ function fmtTime(startStr: string, endStr?: string) {
   description={description}
   ogImage={ogImage}
   type="events"
+  jsonld={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Upcoming Events | Scripture Alive Ministry",
+    "url": "https://scripturealive.com/events",
+    "description": "Stay updated with the latest events, sessions, and gatherings by Scripture Alive.",
+    "about": {
+      "@type": "Organization",
+      "name": "Scripture Alive",
+      "url": "https://scripturealive.com"
+    }
+  }}
 >
 
   <!-- Page Hero -->
@@ -63,6 +91,91 @@ function fmtTime(startStr: string, endStr?: string) {
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
         Stay updated with the latest events, sessions, and gatherings by Scripture Alive.
       </p>
+    </div>
+  </section>
+
+  <!-- Upcoming Events from Sanity -->
+  <section class="py-14 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+
+      {Object.keys(upcomingGroups).length === 0 && (
+        <p class="text-center text-gray-500 py-8">No upcoming events at this time. Check back soon!</p>
+      )}
+
+      {Object.entries(upcomingGroups).map(([month, events]) => (
+        <div>
+          <h2 class="text-2xl font-bold text-gray-800 font-serif mb-4 mt-8 pb-2 border-b border-gray-200">{month}</h2>
+          {events.map((event: any) => (
+            <div
+              class="flex gap-4 md:gap-6 py-5 border-b border-gray-100 items-start cursor-pointer hover:bg-gray-50 rounded-lg px-2 transition-colors"
+              data-event={JSON.stringify({
+                performance: event.performance,
+                workshopIncluded: event.workshopIncluded,
+                venueName: event.venueName,
+                venueCity: event.venueCity,
+                venueState: event.venueState,
+                venueAddress: event.venueAddress ?? '',
+                startDate: event.startDate,
+                endDate: event.endDate,
+                bookingUrl: event.bookingUrl ?? '',
+                eventSubtitle: event.eventSubtitle ?? '',
+                tags: event.tags ?? [],
+                description: event.description ?? ''
+              })}
+              role="button"
+              tabindex="0"
+            >
+              <div class="flex-shrink-0 w-14 text-center">
+                <div class="text-xs font-bold text-gray-500 uppercase">{fmtMonth(event.startDate)}</div>
+                <div class="text-3xl font-bold text-primary leading-none">{fmtDay(event.startDate, event.endDate)}</div>
+              </div>
+              <div class="flex-1">
+                <div class="text-xs font-bold uppercase tracking-wider text-accent mb-1">
+                  {event.workshopIncluded === 'yes' ? `${event.performance} & Workshop` : 'Performance'}
+                </div>
+                <h3 class="text-base md:text-lg font-bold text-gray-900 mb-1">
+                  {event.performance}{event.workshopIncluded === 'yes' ? ' & Workshop' : ''}: {event.venueName} - {event.venueCity}, {event.venueState}
+                </h3>
+                <div class="flex flex-wrap gap-4 text-xs text-gray-500">
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    {fmtTime(event.startDate, event.endDate)}
+                  </span>
+                  <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    {event.venueName}
+                  </span>
+                  <span class="text-accent font-semibold">View Details →</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+
+      {pastEvents.length > 0 && (
+        <div>
+          <h2 class="text-2xl font-bold text-gray-800 font-serif mb-4 mt-10 pb-2 border-b border-gray-200">Past Events</h2>
+          {pastEvents.slice(0, 5).map((event: any) => (
+            <div class="flex gap-4 md:gap-6 py-5 border-b border-gray-100 items-start opacity-60">
+              <div class="flex-shrink-0 w-14 text-center">
+                <div class="text-xs font-bold text-gray-500 uppercase">{fmtMonth(event.startDate)}</div>
+                <div class="text-3xl font-bold text-gray-400 leading-none">{fmtDay(event.startDate, event.endDate)}</div>
+              </div>
+              <div class="flex-1">
+                <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">
+                  {event.workshopIncluded === 'yes' ? 'Performance & Workshop' : 'Performance'}
+                </div>
+                <h3 class="text-base md:text-lg font-bold text-gray-700 mb-1">
+                  {event.performance}{event.workshopIncluded === 'yes' ? ' & Workshop' : ''}: {event.venueName} - {event.venueCity}, {event.venueState}
+                </h3>
+                <div class="text-xs text-gray-400">{fmtTime(event.startDate, event.endDate)} · {event.venueName}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
     </div>
   </section>
 
@@ -97,7 +210,7 @@ function fmtTime(startStr: string, endStr?: string) {
     </div>
   </section>
 
-  <!-- Event Calendar Section -->
+  <!-- Event Calendar Section (Booking Type Cards) -->
   <section class="py-14 px-4 bg-white">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-12">
@@ -156,104 +269,22 @@ function fmtTime(startStr: string, endStr?: string) {
           <div class="relative overflow-hidden">
             <img
               src={`${BASE}/672f0ecbb7fdae63f0f38d8a68af1122_1200_80-1024x759.webp`}
-              alt="Scripture Alive"
+              alt="Scripture Alive Speaking"
               class="w-full h-52 object-cover"
               loading="lazy"
             />
+            <span class="absolute top-3 left-3 bg-gold text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Speaking</span>
           </div>
           <div class="p-6 flex flex-col flex-1">
-            <h3 class="text-xl font-bold text-gray-900 font-serif mb-2">Scripture Alive</h3>
+            <h3 class="text-xl font-bold text-gray-900 font-serif mb-2">Speaking</h3>
             <p class="text-gray-600 flex-1 mb-4">
-              Scripture Alive brings the living Word of God to life through dramatic performance and Scripture memorization training for churches, camps, schools, and mainstage venues.
+              Guest speaking, radio/podcast interviews, coaching, and more.
             </p>
             <a href="/contact" class="mt-auto inline-block text-center bg-accent text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-accent/90 transition-colors">
               Book This Event
             </a>
           </div>
         </div>
-
-      </div>
-
-      <!-- Upcoming Events from Sanity -->
-      <div class="mt-4">
-
-        {Object.keys(upcomingGroups).length === 0 && (
-          <p class="text-center text-gray-500 py-8">No upcoming events at this time. Check back soon!</p>
-        )}
-
-        {Object.entries(upcomingGroups).map(([month, events]) => (
-          <div>
-            <h2 class="text-2xl font-bold text-gray-800 font-serif mb-4 mt-8 pb-2 border-b border-gray-200">{month}</h2>
-            {events.map((event: any) => (
-              <div
-                class="flex gap-4 md:gap-6 py-5 border-b border-gray-100 items-start cursor-pointer hover:bg-gray-50 rounded-lg px-2 transition-colors"
-                data-event={JSON.stringify({
-                  performance: event.performance,
-                  workshopIncluded: event.workshopIncluded,
-                  venueName: event.venueName,
-                  venueCity: event.venueCity,
-                  venueState: event.venueState,
-                  venueAddress: event.venueAddress ?? '',
-                  startDate: event.startDate,
-                  endDate: event.endDate,
-                  bookingUrl: event.bookingUrl ?? '',
-                  eventSubtitle: event.eventSubtitle ?? '',
-                  tags: event.tags ?? [],
-                  description: event.description ?? ''
-                })}
-                role="button"
-                tabindex="0"
-              >
-                <div class="flex-shrink-0 w-14 text-center">
-                  <div class="text-xs font-bold text-gray-500 uppercase">{fmtMonth(event.startDate)}</div>
-                  <div class="text-3xl font-bold text-primary leading-none">{fmtDay(event.startDate, event.endDate)}</div>
-                </div>
-                <div class="flex-1">
-                  <div class="text-xs font-bold uppercase tracking-wider text-accent mb-1">
-                    {event.workshopIncluded === 'yes' ? `${event.performance} & Workshop` : 'Performance'}
-                  </div>
-                  <h3 class="text-base md:text-lg font-bold text-gray-900 mb-1">
-                    {event.performance}{event.workshopIncluded === 'yes' ? ' & Workshop' : ''}: {event.venueName} - {event.venueCity}, {event.venueState}
-                  </h3>
-                  <div class="flex flex-wrap gap-4 text-xs text-gray-500">
-                    <span class="flex items-center gap-1">
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                      {fmtTime(event.startDate, event.endDate)}
-                    </span>
-                    <span class="flex items-center gap-1">
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                      {event.venueName}
-                    </span>
-                    <span class="text-accent font-semibold">View Details →</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ))}
-
-        {pastEvents.length > 0 && (
-          <div>
-            <h2 class="text-2xl font-bold text-gray-800 font-serif mb-4 mt-10 pb-2 border-b border-gray-200">Past Events</h2>
-            {pastEvents.slice(0, 5).map((event: any) => (
-              <div class="flex gap-4 md:gap-6 py-5 border-b border-gray-100 items-start opacity-60">
-                <div class="flex-shrink-0 w-14 text-center">
-                  <div class="text-xs font-bold text-gray-500 uppercase">{fmtMonth(event.startDate)}</div>
-                  <div class="text-3xl font-bold text-gray-400 leading-none">{fmtDay(event.startDate, event.endDate)}</div>
-                </div>
-                <div class="flex-1">
-                  <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">
-                    {event.workshopIncluded === 'yes' ? 'Performance & Workshop' : 'Performance'}
-                  </div>
-                  <h3 class="text-base md:text-lg font-bold text-gray-700 mb-1">
-                    {event.performance}{event.workshopIncluded === 'yes' ? ' & Workshop' : ''}: {event.venueName} - {event.venueCity}, {event.venueState}
-                  </h3>
-                  <div class="text-xs text-gray-400">{fmtTime(event.startDate, event.endDate)} · {event.venueName}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
 
       </div>
     </div>

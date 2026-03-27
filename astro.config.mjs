@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://scripturealive.com',
+  server: { port: 4329, host: true },
   integrations: [
     sitemap(),
     sanity({

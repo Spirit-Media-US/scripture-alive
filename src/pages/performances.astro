@@ -1,92 +1,150 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getPerformances } from '../utils/sanity';
+import Layout from "../layouts/Layout.astro";
 
 const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
 
-// R2 fallback images by order until images are uploaded in Sanity Studio
-const fallbackImages: Record<number, string> = {
-  1: `${BASE}/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp`,
-  2: `${BASE}/SA-JOHNS-GOSPEL-Poster-1024x682.png`,
-  3: `${BASE}/aa09e2c799252fc9bc31e28dbf2ad8f0_1200_80-1024x682.webp`,
-  4: `${BASE}/c846fecab2ea5edb95ee06f4cbc9fc90_1200_80-1024x682.webp`,
-  5: `${BASE}/81b4f657e2a792c6a297eae6187ee672_1200_80-1024x682.webp`,
-  6: `${BASE}/SA-OMPP-Poster-2025-1024x682.png`,
-  7: `${BASE}/2d27b0511651d62f940f163837ef2462_1200_80-1024x682.webp`,
-  8: `${BASE}/5c4b5845c73b4a53dd05c0b1d184e79a_1200_80-1024x682.webp`,
-  9: `${BASE}/d8e12fbef9166fcb2ff030c7a53fe03a_1200_80.webp`,
-};
-
-const performances = await getPerformances();
+const categories = [
+	{
+		name: "Books",
+		href: "/performances/books",
+		tiles: [
+			{
+				label: "Daniel",
+				image: null,
+			},
+			{
+				label: "John's Gospel",
+				image: `${BASE}/SA-JOHNS-GOSPEL-Poster-1024x682.png`,
+			},
+			{
+				label: "Sermon Starters",
+				image: `${BASE}/5c4b5845c73b4a53dd05c0b1d184e79a_1200_80-1024x682.webp`,
+			},
+		],
+	},
+	{
+		name: "Characters",
+		href: "/performances/characters",
+		tiles: [
+			{
+				label: "Paul",
+				image: `${BASE}/aa09e2c799252fc9bc31e28dbf2ad8f0_1200_80-1024x682.webp`,
+			},
+			{
+				label: "Elijah",
+				image: null,
+			},
+			{
+				label: "Peter",
+				image: `${BASE}/St-Peter-Picture-V2.png`,
+			},
+		],
+	},
+	{
+		name: "Stories",
+		href: "/performances/stories",
+		tiles: [
+			{
+				label: "One-Man Passion Play",
+				image: `${BASE}/SA-OMPP-Poster-2025-1024x682.png`,
+			},
+			{
+				label: "The Advent Story",
+				image: null,
+			},
+			{
+				label: "The Beginning and the End",
+				image: null,
+			},
+		],
+	},
+];
 ---
 
 <Layout
-  title="Dramatic Scripture Performances | The Word Proclaimed"
-  description="Experience the Bible like never before with our dramatized Scripture performances."
-  ogImage={`${BASE}/cd6ddbacacca4c638c3d698af0406f33_1200_80-1024x682.webp`}
+  title="Live Scripture Performances | Scripture Alive"
+  description="Compelling word-for-word dramatizations taken directly from the Bible — Books, Characters, and Stories performed live."
+  jsonld={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Live Scripture Performances | Scripture Alive",
+    "url": "https://scripturealive.com/performances",
+    "description": "Compelling word-for-word dramatizations taken directly from the Bible.",
+    "about": {
+      "@type": "Organization",
+      "name": "Scripture Alive",
+      "url": "https://scripturealive.com"
+    }
+  }}
+  ogImage={`${BASE}/SA-JOHNS-GOSPEL-Poster-1024x682.png`}
 >
 
-  <!-- Hero Section -->
-  <section class="py-10 px-4 bg-white text-center">
+  <!-- Page Heading -->
+  <section class="py-12 px-4 bg-white text-center">
     <div class="max-w-3xl mx-auto">
-      <h1 class="text-3xl md:text-4xl font-bold text-accent font-serif mb-4">
-        Word-for-Word Scripture Performances
+      <h1 class="text-3xl md:text-4xl font-bold text-accent mb-4">
+        Live Scripture Performances
       </h1>
-      <p class="text-base md:text-lg text-gray-600 leading-relaxed">
-        Dynamic live dramatizations of entire books, characters, and<br class="hidden md:block" />
-        biblical narratives — performed straight from Scripture.
+      <p class="text-base md:text-lg text-gray-500 leading-relaxed">
+        Compelling word-for-word dramatizations taken directly from the Bible
       </p>
     </div>
   </section>
 
-  <!-- Performance List from Sanity -->
-  {performances.map((perf: any) => {
-    const imgSrc = fallbackImages[perf.order] ?? fallbackImages[1];
-    const watchUrl = `https://youtu.be/${perf.youtubeId}`;
-    return (
-      <section class="py-10 px-4 bg-white">
-        <div class="max-w-5xl mx-auto">
-          <div class="flex flex-col md:flex-row gap-8 items-start">
-            <div class="w-full md:w-5/12">
-              <a href={watchUrl} target="_blank" rel="noopener">
-                <img
-                  src={imgSrc}
-                  alt={`${perf.title} Performance`}
-                  class="w-full h-auto"
-                  loading={perf.order === 1 ? 'eager' : 'lazy'}
-                  decoding="async"
-                />
-              </a>
-            </div>
-            <div class="w-full md:w-7/12 flex flex-col justify-start gap-4">
-              <h2 class="text-xl font-bold text-primary font-serif">{perf.title}</h2>
-              <p class="text-gray-700 leading-relaxed">{perf.description}</p>
-              {perf.duration && (
-                <p class="text-xs text-gray-500">Duration: {perf.duration}{perf.translations ? ` · ${perf.translations}` : ''}</p>
-              )}
-              <div>
-                <a
-                  href={watchUrl}
-                  target="_blank"
-                  rel="noopener"
-                  class="inline-block bg-accent text-white font-semibold px-5 py-2 rounded hover:opacity-90 transition-opacity text-sm"
-                >
-                  Watch
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  })}
+  <!-- Category Sections -->
+  {categories.map((cat) => (
+    <section class="py-10 px-4 bg-cream">
+      <div class="max-w-4xl mx-auto">
 
-  <!-- Book A Performance CTA -->
-  <section class="py-12 px-4 bg-cream text-center">
-    <div class="max-w-2xl mx-auto">
-      <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">Book A Performance</h2>
-      <a href="/contact" class="inline-block bg-accent text-white font-semibold px-8 py-3 rounded hover:opacity-90 transition-opacity">
-        Contact Jeremy
+        <!-- Category name -->
+        <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6">
+          {cat.name}
+        </h2>
+
+        <!-- 3 image tiles -->
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          {cat.tiles.map((tile) => (
+            <a href={cat.href} class="block cursor-pointer rounded overflow-hidden group">
+              {tile.image ? (
+                <img
+                  src={tile.image}
+                  alt={tile.label}
+                  loading="lazy"
+                  class="w-full h-[180px] object-cover rounded group-hover:opacity-90 transition-opacity"
+                />
+              ) : (
+                <div class="w-full h-[180px] bg-gray-800 rounded flex items-center justify-center group-hover:opacity-90 transition-opacity">
+                  <span class="text-white text-sm font-semibold text-center px-3 leading-snug">
+                    {tile.label}
+                  </span>
+                </div>
+              )}
+            </a>
+          ))}
+        </div>
+
+        <!-- Learn More button -->
+        <div class="text-center">
+          <a
+            href={cat.href}
+            class="inline-block bg-accent text-white font-semibold px-8 py-2 rounded hover:opacity-90 transition-opacity"
+          >
+            Learn More
+          </a>
+        </div>
+
+      </div>
+    </section>
+  ))}
+
+  <!-- Book A Performance -->
+  <section class="py-12 px-4 bg-white text-center">
+    <div class="max-w-3xl mx-auto">
+      <a
+        href="/book-jeremy"
+        class="inline-block bg-primary text-black font-bold px-12 py-4 rounded text-lg hover:opacity-90 transition-opacity"
+      >
+        Book A Performance
       </a>
     </div>
   </section>

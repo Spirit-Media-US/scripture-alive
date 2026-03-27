@@ -1,34 +1,52 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
 interface Props {
-  title: string;
-  description?: string;
-  ogImage?: string;
+	title: string;
+	description?: string;
+	ogImage?: string;
+	jsonld?: Record<string, unknown>;
 }
-const { title, description = '', ogImage = 'https://assets.spiritmediapublishing.com/scripture-alive/scripturealive-og.png' } = Astro.props;
+const {
+	title,
+	description = "",
+	ogImage = "https://assets.spiritmediapublishing.com/scripture-alive/scripturealive-og.png",
+	jsonld,
+} = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 
 const navItems = [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'About', dropdown: [
-        { href: '/about', label: 'About Jeremy' },
-        { href: '/endorsements', label: 'Endorsements' },
-    ]},
-    { href: '/events', label: 'Events' },
-    { href: '/workshops', label: 'Bookings', dropdown: [
-        { href: '/performances', label: 'Performances' },
-        { href: '/workshops', label: 'Bible Memory Workshops' },
-        { href: '/guestpreaching', label: 'Guest Speaking' },
-    ]},
-    { href: '/resources', label: 'Resources', dropdown: [
-        { href: '/store', label: 'Store' },
-        { href: '/videos', label: 'Media' },
-        { href: '/blog', label: 'Blog' },
-    ]},
-    { href: '/contact', label: 'Contact' },
+	{ href: "/", label: "Home" },
+	{
+		href: "/about",
+		label: "About",
+		dropdown: [
+			{ href: "/about", label: "About Jeremy" },
+			{ href: "/endorsements", label: "Endorsements" },
+		],
+	},
+	{ href: "/events", label: "Events" },
+	{
+		href: "/workshops",
+		label: "Bookings",
+		dropdown: [
+			{ href: "/performances", label: "Performances" },
+			{ href: "/workshops", label: "Bible Memory Workshops" },
+			{ href: "/guestpreaching", label: "Guest Speaking" },
+		],
+	},
+	{
+		href: "/resources",
+		label: "Resources",
+		dropdown: [
+			{ href: "/store", label: "Store" },
+			{ href: "/videos", label: "Videos" },
+			{ href: "/interviews", label: "Interviews" },
+			{ href: "/blog", label: "Blog" },
+		],
+	},
+	{ href: "/contact", label: "Contact" },
 ];
-
 
 const currentPath = Astro.url.pathname;
 ---
@@ -46,10 +64,11 @@ const currentPath = Astro.url.pathname;
   <meta name="twitter:card"       content="summary_large_image" />
   <meta name="twitter:title"      content={title} />
   {description && <meta name="twitter:description" content={description} />}
+  {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
 
@@ -83,8 +102,8 @@ const currentPath = Astro.url.pathname;
           </li>
         ))}
         <li>
-          <a href="/store" class="bg-primary text-black text-[20px] font-semibold font-sans px-5 py-3 rounded transition-opacity hover:opacity-90">
-            Store
+          <a href="/book-jeremy" class="bg-primary text-black text-[20px] font-semibold font-sans px-5 py-3 rounded transition-opacity hover:opacity-90">
+            Book Jeremy
           </a>
         </li>
       </ul>
@@ -128,8 +147,8 @@ const currentPath = Astro.url.pathname;
           )
         ))}
         <li class="py-3">
-          <a href="/store" class="inline-block bg-primary text-black text-sm font-semibold font-sans px-4 py-2 rounded">
-            Store
+          <a href="/book-jeremy" class="inline-block bg-primary text-black text-sm font-semibold font-sans px-4 py-2 rounded">
+            Book Jeremy
           </a>
         </li>
       </ul>
