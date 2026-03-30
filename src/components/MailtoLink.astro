@@ -1,0 +1,23 @@
+---
+interface Props {
+	email: string;
+	class?: string;
+}
+
+const { email, class: className } = Astro.props;
+const [user, domain] = email.split('@');
+---
+
+<a href="#" data-mu={user} data-md={domain} class={className}>
+	<slot />
+</a>
+
+<script>
+	document.addEventListener('astro:page-load', () => {
+		document.querySelectorAll<HTMLAnchorElement>('a[data-mu][data-md]').forEach((el) => {
+			const u = el.dataset.mu;
+			const d = el.dataset.md;
+			if (u && d) el.href = `mailto:${u}@${d}`;
+		});
+	});
+</script>

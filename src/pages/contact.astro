@@ -1,4 +1,5 @@
 ---
+import MailtoLink from "../components/MailtoLink.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -57,9 +58,9 @@ import Layout from "../layouts/Layout.astro";
             <a href="tel:+13126000765" class="text-primary hover:underline text-base">
               (312) 600-0765
             </a>
-            <a href="mailto:jeremy@scripturealive.com" class="text-primary hover:underline text-base">
+            <MailtoLink email="jeremy@scripturealive.com" class="text-primary hover:underline text-base">
               jeremy@scripturealive.com
-            </a>
+            </MailtoLink>
           </div>
         </div>
 
