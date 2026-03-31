@@ -15,20 +15,22 @@ const stories = [
 		title: "The Advent Story",
 		description:
 			"A candlelit journey through the birth of Christ — from the prophecies of Isaiah to the manger in Bethlehem. A moving performance perfect for Advent and Christmas services.",
-		image: null,
+		image:
+			"https://cdn.sanity.io/images/vxczpihg/production/764d21372720ef6071ce1eb266d0cd271e296b48-1024x682.webp",
 	},
 	{
 		title: "The Beginning and the End",
 		description:
 			"A sweeping dramatization spanning Genesis to Revelation — creation, the fall, redemption, and the new creation. An awe-inspiring performance that gives audiences the full arc of God's story.",
-		image: null,
+		image:
+			"https://cdn.sanity.io/images/vxczpihg/production/46ac44a2b33668bdb4755644d913d0036a718f60-1024x682.webp",
 	},
 ];
 ---
 
 <Layout
-  title="Dramatic Story Performances | Scripture Alive"
-  description="Dramatic story performances — the One-Man Passion Play, The Advent Story, The Beginning and the End, and more."
+  title="Dramatic Narrative Performances | Scripture Alive"
+  description="Dramatic narrative performances — the One-Man Passion Play, The Advent Story, The Beginning and the End, and more."
   ogImage={"https://cdn.sanity.io/images/vxczpihg/production/80d50746c21de9f688034d67ed88bae2efe55536-1024x682.png"}
 >
 
@@ -36,10 +38,10 @@ const stories = [
   <section class="py-10 px-4 bg-white text-center">
     <div class="max-w-3xl mx-auto">
       <p class="text-sm font-bold uppercase tracking-widest text-primary mb-2">
-        <a href="/performances" class="hover:underline">Performances</a> / Stories
+        <a href="/performances" class="hover:underline">Performances</a> / Narratives
       </p>
       <h1 class="text-3xl md:text-4xl font-bold text-accent mb-4">
-        Stories
+        Narratives
       </h1>
       <p class="text-base md:text-lg text-gray-600 leading-relaxed">
         Dramatic Scripture performances weaving multiple voices and perspectives into a single powerful story.
@@ -62,7 +64,7 @@ const stories = [
                 src={story.image}
                 alt={`${story.title} Performance`}
                 loading="lazy"
-                class="w-full max-h-64 object-cover rounded"
+                class="w-full rounded"
               />
             ) : (
               <div class="w-full h-48 bg-gray-800 rounded flex items-center justify-center">

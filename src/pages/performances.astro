@@ -11,16 +11,16 @@ const categoryMap: Record<number, string> = {
 	3: "Characters",
 	4: "Characters",
 	5: "Characters",
-	6: "Stories",
-	7: "Stories",
-	8: "Stories",
+	6: "Narratives",
+	7: "Narratives",
+	8: "Narratives",
 	9: "Books",
 };
 
 const categoryHref: Record<string, string> = {
 	Books: "/performances/books",
 	Characters: "/performances/characters",
-	Stories: "/performances/stories",
+	Narratives: "/performances/stories",
 };
 
 type Performance = {
@@ -30,7 +30,7 @@ type Performance = {
 	order: number;
 };
 
-const categories = ["Books", "Characters", "Stories"].map((name) => ({
+const categories = ["Books", "Characters", "Narratives"].map((name) => ({
 	name,
 	href: categoryHref[name],
 	tiles: performances
@@ -80,7 +80,7 @@ const categories = ["Books", "Characters", "Stories"].map((name) => ({
         </h2>
 
         <!-- 3 image tiles -->
-        <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-6">
           {cat.tiles.map((tile: Performance) => (
             <a href={cat.href} class="block cursor-pointer rounded overflow-hidden group">
               {tile.imageUrl ? (
@@ -88,10 +88,10 @@ const categories = ["Books", "Characters", "Stories"].map((name) => ({
                   src={tile.imageUrl}
                   alt={tile.title}
                   loading="lazy"
-                  class="w-full h-[180px] object-cover rounded group-hover:opacity-90 transition-opacity"
+                  class="w-full aspect-[2/3] object-contain rounded group-hover:opacity-90 transition-opacity"
                 />
               ) : (
-                <div class="w-full h-[180px] bg-gray-800 rounded flex items-center justify-center group-hover:opacity-90 transition-opacity">
+                <div class="w-full aspect-[2/3] bg-gray-800 rounded flex items-center justify-center group-hover:opacity-90 transition-opacity">
                   <span class="text-white text-sm font-semibold text-center px-3 leading-snug">
                     {tile.title}
                   </span>

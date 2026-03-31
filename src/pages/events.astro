@@ -2,9 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import { getEvents } from "../utils/sanity";
 
-const title = "Upcoming Events | Scripture Alive Ministry";
+const title = "Events Calendar | Scripture Alive Ministry";
 const description =
-	"Stay updated with the latest events, sessions, and gatherings by Scripture Alive.";
+	"Join us at one of our upcoming performances, workshops, or guest speaking engagements. Scripture Alive brings the Word to life in churches, camps, schools, and mainstage venues across the country.";
 const ogImage =
 	"https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png";
 
@@ -61,7 +61,17 @@ function fmtTime(startStr: string, endStr?: string) {
 			timeZone: "UTC",
 		});
 	if (!endStr) return fmt(startStr);
-	return `${fmt(startStr)} – ${fmt(endStr)}`;
+	return `${fmt(startStr)} - ${fmt(endStr)}`;
+}
+
+function fmtFullDate(startStr: string, endStr?: string) {
+	const opts: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric', timeZone: 'UTC' };
+	const start = new Date(startStr).toLocaleDateString('en-US', opts);
+	if (!endStr) return start;
+	const startDay = new Date(startStr).getUTCDate();
+	const endDay = new Date(endStr).getUTCDate();
+	if (startDay === endDay) return start;
+	return `${start} - ${new Date(endStr).toLocaleDateString('en-US', opts)}`;
 }
 ---
 
@@ -73,9 +83,9 @@ function fmtTime(startStr: string, endStr?: string) {
   jsonld={{
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Upcoming Events | Scripture Alive Ministry",
+    "name": "Events Calendar | Scripture Alive Ministry",
     "url": "https://scripturealive.com/events",
-    "description": "Stay updated with the latest events, sessions, and gatherings by Scripture Alive.",
+    "description": "Join us at one of our upcoming performances, workshops, or guest speaking engagements.",
     "about": {
       "@type": "Organization",
       "name": "Scripture Alive",
@@ -84,19 +94,50 @@ function fmtTime(startStr: string, endStr?: string) {
   }}
 >
 
-  <!-- Page Hero -->
+  <!-- 1) Events Calendar Heading -->
   <section class="bg-white py-16 px-4 text-center">
     <div class="max-w-4xl mx-auto">
-      <h1 class="text-4xl md:text-5xl font-bold text-accent font-display mb-4">Upcoming Events</h1>
+      <h1 class="text-4xl md:text-5xl font-bold text-accent font-display mb-4">Events Calendar</h1>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Stay updated with the latest events, sessions, and gatherings by Scripture Alive.
+        Join us at one of our upcoming performances, workshops, or guest speaking engagements. Scripture Alive brings the Word to life in churches, camps, schools, and mainstage venues across the country.
       </p>
     </div>
   </section>
 
-  <!-- Upcoming Events from Sanity -->
+  <!-- 2) Download Booking Info -->
+  <section class="bg-cream border-y border-gray-200 py-8 px-4">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-6 text-center">
+      <p class="text-gray-700 font-semibold text-lg">Download our booking information sheets:</p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a
+          href="https://assets.spiritmediapublishing.com/scripture-alive/Scripture-Alive-One-Sheet-Churches-Camps-Schools.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-full font-semibold hover:bg-accent/90 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Churches, Camps &amp; Schools
+        </a>
+        <a
+          href="https://assets.spiritmediapublishing.com/scripture-alive/Scripture-Alive-One-Sheet-Mainstage.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-full font-semibold hover:bg-accent/90 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Mainstage Productions
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3) Month/Event Listings with Descriptions -->
   <section class="py-14 px-4 bg-white">
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-4xl mx-auto">
 
       {Object.keys(upcomingGroups).length === 0 && (
         <p class="text-center text-gray-500 py-8">No upcoming events at this time. Check back soon!</p>
@@ -104,10 +145,10 @@ function fmtTime(startStr: string, endStr?: string) {
 
       {Object.entries(upcomingGroups).map(([month, events]) => (
         <div>
-          <h2 class="text-2xl font-bold text-gray-800 font-serif mb-4 mt-8 pb-2 border-b border-gray-200">{month}</h2>
+          <h2 class="text-2xl font-bold text-gray-800 font-serif mb-6 mt-8 pb-2 border-b border-gray-200">{month}</h2>
           {events.map((event: any) => (
             <div
-              class="flex gap-4 md:gap-6 py-5 border-b border-gray-100 items-start cursor-pointer hover:bg-gray-50 rounded-lg px-2 transition-colors"
+              class="mb-8 pb-8 border-b border-gray-100 cursor-pointer hover:bg-gray-50 rounded-lg px-4 py-4 transition-colors"
               data-event={JSON.stringify({
                 performance: event.performance,
                 workshopIncluded: event.workshopIncluded,
@@ -125,27 +166,69 @@ function fmtTime(startStr: string, endStr?: string) {
               role="button"
               tabindex="0"
             >
-              <div class="flex-shrink-0 w-14 text-center">
-                <div class="text-xs font-bold text-gray-500 uppercase">{fmtMonth(event.startDate)}</div>
-                <div class="text-3xl font-bold text-primary leading-none">{fmtDay(event.startDate, event.endDate)}</div>
+              <!-- Event Type Label -->
+              <div class="text-xs font-bold uppercase tracking-wider text-accent mb-2">
+                {event.workshopIncluded === 'yes' ? `Performance & Workshop` : 'Performance'}
               </div>
-              <div class="flex-1">
-                <div class="text-xs font-bold uppercase tracking-wider text-accent mb-1">
-                  {event.workshopIncluded === 'yes' ? `${event.performance} & Workshop` : 'Performance'}
+
+              <!-- Event Title -->
+              <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3">
+                {event.performance}{event.workshopIncluded === 'yes' ? ' & Workshop' : ''}: {event.venueName} - {event.venueCity}, {event.venueState}
+              </h3>
+
+              <!-- Tags -->
+              {event.tags && event.tags.length > 0 && (
+                <div class="flex flex-wrap gap-2 mb-3">
+                  {event.tags.map((tag: string) => (
+                    <span class="text-xs text-gray-500">{tag}</span>
+                  ))}
                 </div>
-                <h3 class="text-base md:text-lg font-bold text-gray-900 mb-1">
-                  {event.performance}{event.workshopIncluded === 'yes' ? ' & Workshop' : ''}: {event.venueName} - {event.venueCity}, {event.venueState}
-                </h3>
-                <div class="flex flex-wrap gap-4 text-xs text-gray-500">
-                  <span class="flex items-center gap-1">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    {fmtTime(event.startDate, event.endDate)}
-                  </span>
-                  <span class="flex items-center gap-1">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              )}
+
+              <!-- Description -->
+              {event.description && (
+                <p class="text-gray-600 leading-relaxed mb-4">{event.description}</p>
+              )}
+
+              <!-- When & Where -->
+              <div class="flex flex-col sm:flex-row gap-6 text-sm">
+                <div>
+                  <div class="font-bold text-gray-800 flex items-center gap-2 mb-1">
+                    <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    WHEN
+                  </div>
+                  <div class="text-gray-700">{fmtFullDate(event.startDate, event.endDate)} {fmtTime(event.startDate, event.endDate)}</div>
+                  <a
+                    href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.performance + ' – ' + event.venueName)}&dates=${new Date(event.startDate).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}/${event.endDate ? new Date(event.endDate).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '') : new Date(event.startDate).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}&location=${encodeURIComponent((event.venueAddress || '') + ' ' + event.venueCity + ', ' + event.venueState)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-accent text-xs hover:underline font-semibold"
+                  >
+                    Add to Calendar
+                  </a>
+                </div>
+                <div>
+                  <div class="font-bold text-gray-800 flex items-center gap-2 mb-1">
+                    <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    WHERE
+                  </div>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((event.venueAddress || '') + ' ' + event.venueName + ' ' + event.venueCity + ', ' + event.venueState)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-accent hover:underline"
+                  >
                     {event.venueName}
-                  </span>
-                  <span class="text-accent font-semibold">View Details →</span>
+                  </a>
+                  <div class="text-gray-500">{event.venueAddress ? `${event.venueAddress}, ` : ''}{event.venueCity}, {event.venueState}</div>
+                  <a
+                    href={`https://www.google.com/maps/dir//${encodeURIComponent((event.venueAddress || '') + ' ' + event.venueName + ' ' + event.venueCity + ', ' + event.venueState)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-accent text-xs hover:underline font-semibold"
+                  >
+                    Get Directions
+                  </a>
                 </div>
               </div>
             </div>
@@ -179,48 +262,9 @@ function fmtTime(startStr: string, endStr?: string) {
     </div>
   </section>
 
-  <!-- Booking Info Strip -->
-  <section class="bg-cream border-y border-gray-200 py-8 px-4">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-6 text-center">
-      <p class="text-gray-700 font-semibold text-lg">Download our booking information sheets:</p>
-      <div class="flex flex-col sm:flex-row gap-4">
-        <a
-          href="https://assets.spiritmediapublishing.com/scripture-alive/Scripture-Alive-One-Sheet-Churches-Camps-Schools.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-full font-semibold hover:bg-accent/90 transition-colors"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          Churches, Camps &amp; Schools
-        </a>
-        <a
-          href="https://assets.spiritmediapublishing.com/scripture-alive/Scripture-Alive-One-Sheet-Mainstage.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-full font-semibold hover:bg-accent/90 transition-colors"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          Mainstage Productions
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Event Calendar Section (Booking Type Cards) -->
+  <!-- 4) Performance / Workshop / Speaking CTA Cards -->
   <section class="py-14 px-4 bg-white">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-primary font-serif mb-3">Event Calendar</h2>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-          Join us at one of our upcoming performances, workshops, or guest speaking engagements. Scripture Alive brings the Word to life in churches, camps, schools, and mainstage venues across the country.
-        </p>
-      </div>
-
-      <!-- Event Cards (static marketing) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
 
         <div class="rounded-2xl overflow-hidden shadow-md border border-gray-100 flex flex-col">
@@ -257,7 +301,7 @@ function fmtTime(startStr: string, endStr?: string) {
           <div class="p-6 flex flex-col flex-1">
             <h3 class="text-xl font-bold text-gray-900 font-serif mb-2">Scripture Memorization Workshop</h3>
             <p class="text-gray-600 flex-1 mb-4">
-              Learn the art and discipline of Scripture memorization. Jeremy Walker shares practical techniques for memorizing and presenting God's Word with passion and accuracy.
+              Learn the art and discipline of Scripture memorization. Jeremy shares practical techniques for memorizing and presenting God's Word with passion and accuracy.
             </p>
             <a href="/contact" class="mt-auto inline-block text-center bg-accent text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-accent/90 transition-colors">
               Book This Event
@@ -276,7 +320,7 @@ function fmtTime(startStr: string, endStr?: string) {
             <span class="absolute top-3 left-3 bg-gold text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Speaking</span>
           </div>
           <div class="p-6 flex flex-col flex-1">
-            <h3 class="text-xl font-bold text-gray-900 font-serif mb-2">Speaking</h3>
+            <h3 class="text-xl font-bold text-gray-900 font-serif mb-2">Guest Speaking</h3>
             <p class="text-gray-600 flex-1 mb-4">
               Guest speaking, radio/podcast interviews, coaching, and more.
             </p>
@@ -493,7 +537,7 @@ function fmtTime(startStr: string, endStr?: string) {
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
   </script>
 
-  <!-- Book CTA -->
+  <!-- 5) Interested in Booking Jeremy? -->
   <section class="py-12 px-4 bg-cream text-center">
     <div class="max-w-2xl mx-auto">
       <h2 class="text-2xl md:text-3xl font-bold text-accent mb-4">Interested in Booking Jeremy?</h2>
