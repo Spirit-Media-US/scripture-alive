@@ -60,7 +60,7 @@ const categories = ["Books", "Characters", "Narratives"].map((name) => ({
   <!-- Page Heading -->
   <section class="py-12 px-4 bg-white text-center">
     <div class="max-w-3xl mx-auto">
-      <h1 class="text-3xl md:text-4xl font-bold text-accent font-display mb-4">
+      <h1 class="text-4xl md:text-5xl font-bold text-accent font-display mb-4">
         Live Scripture Performances
       </h1>
       <p class="text-base md:text-lg text-gray-500 leading-relaxed">
@@ -80,7 +80,7 @@ const categories = ["Books", "Characters", "Narratives"].map((name) => ({
         </h2>
 
         <!-- 3 image tiles -->
-        <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
           {cat.tiles.map((tile: Performance) => (
             <a href={cat.href} class="block cursor-pointer rounded overflow-hidden group">
               {tile.imageUrl ? (

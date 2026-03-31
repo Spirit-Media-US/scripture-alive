@@ -334,16 +334,19 @@ function fmtFullDate(startStr: string, endStr?: string) {
     <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 relative max-h-[90vh] overflow-y-auto">
       <button id="modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl leading-none" aria-label="Close">&times;</button>
 
-      <div id="modal-type" class="text-xs font-bold uppercase tracking-wider text-accent mb-1"></div>
-      <h2 id="modal-title" class="text-xl font-bold text-gray-900 font-serif mb-2"></h2>
-      <div id="modal-subtitle" class="text-sm text-gray-500 mb-1"></div>
-      <div id="modal-tags" class="flex flex-wrap gap-1.5 mb-3"></div>
-      <p id="modal-description" class="text-gray-600 leading-relaxed mb-4 text-sm"></p>
+      <div id="modal-type" class="text-xs font-bold uppercase tracking-wider text-accent mb-3"></div>
+      <h2 id="modal-title" class="text-xl font-bold text-gray-900 font-serif mb-4"></h2>
+      <div id="modal-subtitle" class="text-sm text-gray-500 mb-2"></div>
+      <div id="modal-tags" class="flex flex-wrap gap-1.5 mb-4"></div>
+      <div class="mb-4">
+        <p id="modal-description" class="text-gray-600 leading-relaxed text-sm overflow-hidden transition-all duration-300" style="max-height: 4.5em;"></p>
+        <button id="modal-show-more" class="text-accent text-xs font-semibold mt-1 hover:underline hidden">Show more</button>
+      </div>
 
-      <div class="space-y-3 text-sm mb-4">
+      <div class="space-y-6 text-sm">
         <!-- When -->
         <div>
-          <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">When</div>
+          <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">When</div>
           <div class="flex items-start gap-2 text-gray-700">
             <svg class="w-4 h-4 mt-0.5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
             <div>
@@ -358,7 +361,7 @@ function fmtFullDate(startStr: string, endStr?: string) {
 
         <!-- Where -->
         <div>
-          <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Where</div>
+          <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Where</div>
           <div class="flex items-start gap-2 text-gray-700">
             <svg class="w-4 h-4 mt-0.5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             <div>
@@ -366,21 +369,21 @@ function fmtFullDate(startStr: string, endStr?: string) {
               <div id="modal-address" class="text-gray-500"></div>
             </div>
           </div>
-          <div class="mt-2">
+          <div class="mt-4">
             <a id="modal-directions" href="#" target="_blank" rel="noopener noreferrer" class="text-xs text-accent hover:underline font-semibold">Get Directions</a>
           </div>
-          <div class="mt-2 rounded overflow-hidden" style="height:160px;">
-            <iframe id="modal-map" src="" width="100%" height="160" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Event location map"></iframe>
+          <div class="mt-4 rounded overflow-hidden" style="height:200px;">
+            <iframe id="modal-map" src="" width="100%" height="200" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Event location map"></iframe>
           </div>
         </div>
       </div>
 
-      <div class="flex flex-col sm:flex-row gap-3 mb-4">
-        <a id="modal-booking-link" href="/contact" class="flex-1 text-center bg-accent text-white font-semibold px-6 py-3 rounded hover:opacity-90 transition-opacity">Book Jeremy for Your Event</a>
+      <div class="flex flex-col sm:flex-row gap-3 mb-6">
+        <a id="modal-booking-link" href="/contact" class="flex-1 text-center bg-accent text-white font-semibold px-6 py-4 rounded hover:opacity-90 transition-opacity">Book Jeremy for Your Event</a>
       </div>
 
       <!-- Share options -->
-      <div class="border-t border-gray-100 pt-4">
+      <div class="border-t border-gray-100 pt-6">
         <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Share</div>
         <div class="flex flex-wrap gap-3">
           <button id="modal-copy-link" class="flex items-center gap-1.5 text-xs text-gray-600 hover:text-accent font-semibold border border-gray-200 rounded px-3 py-1.5 transition-colors">
@@ -461,8 +464,19 @@ function fmtFullDate(startStr: string, endStr?: string) {
       }
 
       const desc = document.getElementById('modal-description')!;
+      const showMoreBtn = document.getElementById('modal-show-more')!;
       desc.textContent = event.description || '';
-      desc.style.display = event.description ? '' : 'none';
+      desc.parentElement!.style.display = event.description ? '' : 'none';
+      desc.style.maxHeight = '4.5em';
+      showMoreBtn.textContent = 'Show more';
+      // Show button only if text overflows
+      requestAnimationFrame(() => {
+        if (desc.scrollHeight > desc.clientHeight + 2) {
+          showMoreBtn.classList.remove('hidden');
+        } else {
+          showMoreBtn.classList.add('hidden');
+        }
+      });
 
       document.getElementById('modal-date')!.textContent = fmtDate(event.startDate, event.endDate);
       document.getElementById('modal-time')!.textContent = fmtTime(event.startDate, event.endDate);
@@ -525,6 +539,19 @@ function fmtFullDate(startStr: string, endStr?: string) {
         label.textContent = 'Copied!';
         setTimeout(() => { label.textContent = 'Copy Link'; }, 2000);
       });
+    });
+
+    // Show more / less toggle
+    document.getElementById('modal-show-more')!.addEventListener('click', () => {
+      const desc = document.getElementById('modal-description')!;
+      const btn = document.getElementById('modal-show-more')!;
+      if (desc.style.maxHeight === '4.5em') {
+        desc.style.maxHeight = 'none';
+        btn.textContent = 'Show less';
+      } else {
+        desc.style.maxHeight = '4.5em';
+        btn.textContent = 'Show more';
+      }
     });
 
     modalClose.addEventListener('click', closeModal);
