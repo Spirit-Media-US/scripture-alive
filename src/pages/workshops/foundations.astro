@@ -1,0 +1,95 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const workshops = [
+	{
+		title: "How to Memorize Scripture for Life",
+		description:
+			"Learn the five-step POWER System that anyone can use to effectively memorize Scripture. This foundational workshop equips participants with practical tools and proven techniques to commit God's Word to memory — and keep it there for a lifetime.",
+		image:
+			"https://cdn.sanity.io/images/vxczpihg/production/0d09808dd1e4a9bff945b742d454abf57c0a65f3-1200x900.webp",
+	},
+	{
+		title: "Speaking God's Word with Confidence",
+		description:
+			"Helping people to engage and read Scripture publicly (or privately) with clarity and confidence. This workshop trains participants in vocal delivery, pacing, emphasis, and presence — transforming how they communicate the Bible out loud.",
+		image:
+			"https://cdn.sanity.io/images/vxczpihg/production/95f6eca3784e25f56fab50d2b06c8245915244ac-1024x759.webp",
+	},
+	{
+		title: "How to Study the Bible for Yourself",
+		description:
+			"Learning different methods to effectively study and understand Scripture for yourself. From observation to interpretation to application, this workshop gives participants a framework for going deeper in God's Word on their own.",
+		image:
+			"https://cdn.sanity.io/images/vxczpihg/production/da0764f78c42eac49abd6c968a0ac4e505546fc0-1024x576.webp",
+	},
+];
+---
+
+<Layout
+  title="Foundations Track Workshops | Scripture Alive"
+  description="Foundational Bible memory workshops — learn the POWER System, speak God's Word with confidence, and study the Bible for yourself."
+>
+
+  <!-- Hero -->
+  <section class="py-10 px-4 bg-white text-center">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-sm font-bold uppercase tracking-widest text-primary mb-2">
+        <a href="/workshops" class="hover:underline">Workshops</a> / Foundations Track
+      </p>
+      <h1 class="text-3xl md:text-4xl font-bold text-accent font-display mb-4">
+        Foundations Track
+      </h1>
+      <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+        Core workshops that build a strong foundation for Scripture memorization, public reading, and personal Bible study.
+      </p>
+    </div>
+  </section>
+
+  <!-- Accordion Items -->
+  <section class="py-10 px-4 bg-cream">
+    <div class="max-w-3xl mx-auto flex flex-col gap-4">
+      {workshops.map((workshop) => (
+        <details class="bg-white rounded-lg shadow-sm overflow-hidden group">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer list-none select-none">
+            <h2 class="text-lg font-bold text-gray-800 font-serif">{workshop.title}</h2>
+            <span class="text-accent font-bold text-xl transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-6 flex flex-col gap-4">
+            <img
+              src={workshop.image}
+              alt={`${workshop.title} Workshop`}
+              loading="lazy"
+              class="w-full rounded"
+            />
+            <p class="text-gray-600 leading-relaxed text-sm">{workshop.description}</p>
+            <div>
+              <a
+                href="/book-jeremy"
+                class="inline-block bg-primary text-gray-900 font-bold px-6 py-3 rounded hover:opacity-90 transition-opacity text-sm"
+              >
+                Book This Workshop
+              </a>
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12 px-4 bg-white text-center">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-2xl font-bold text-primary font-serif mb-4">
+        Ready to equip your group with Scripture memory tools?
+      </h2>
+      <a
+        href="/book-jeremy"
+        class="inline-block bg-primary text-gray-900 font-bold px-8 py-3 rounded hover:opacity-90 transition-opacity"
+      >
+        Book a Workshop
+      </a>
+    </div>
+  </section>
+
+</Layout>

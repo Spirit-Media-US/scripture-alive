@@ -1,10 +1,52 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const vimeoSamples = [
+  {
+    title: "Daniel 3 – Image of Gold & the Blazing Furnace",
+    vimeoId: "1082916797",
+    description: "A 2-minute sample of Jeremy dramatically presenting The Image of Gold and the Blazing Furnace from Daniel 3.",
+    fullLink: "https://youtu.be/94DuyD5tHOg",
+  },
+  {
+    title: "Acts 9 – Paul on the Road to Damascus",
+    vimeoId: "1082959146",
+    description: "Jeremy portrays Paul the Apostle (formerly Saul) on the road to Damascus in this 3-minute scene from Acts 9.",
+    fullLink: "https://youtu.be/T9sS8yFVu0M",
+  },
+  {
+    title: "John 11 – Jesus Raising Lazarus",
+    vimeoId: "1083962636",
+    description: "A 2-minute scene from Jeremy's performance of Jesus Raising Lazarus from John 11.",
+    fullLink: "https://youtu.be/YHn8Mn9A8kw",
+  },
+  {
+    title: "One-Man Passion Play – Peter's Denial",
+    vimeoId: "1084255629",
+    description: "An original blended harmony of the passion account covering the Last Supper through Jesus' crucifixion. This sample includes Peter's denial.",
+    fullLink: "https://youtu.be/xnvOmK8ah1g",
+  },
+  {
+    title: "Elijah & the Widow – 1 Kings 17",
+    vimeoId: "1084273212",
+    description: "An impactful 2-minute scene from Jeremy's performance of Elijah & the Widow from 1 Kings 17.",
+    fullLink: "https://youtu.be/_hJFok97gvk",
+  },
+];
+
+const youtubeVideos = [
+  { id: "wh_znWMYXiI", title: "1 Samuel 17: David & Goliath" },
+  { id: "xvtG5wu4jtA", title: "Job 1-2: The Testing of Job" },
+  { id: "YG4_BiWNuUE", title: "Luke 1: The Birth of John the Baptist Foretold" },
+  { id: "LalOVoKPbVE", title: "Daniel Chapter 1" },
+  { id: "ysLcsUJVM80", title: "John 18 & 19: The Passion" },
+  { id: "qP34vpnBPhE", title: "1 Kings 17: Elijah & the Widow" },
+];
 ---
 
 <Layout
   title="Dramatic Scripture Videos | Scripture Alive"
-  description="Witness Scripture come alive through dramatic performances."
+  description="Witness Scripture come alive through dramatic performances — video samples and full performances from Jeremy Kluth."
   type="media"
   ogImage="https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png"
 >
@@ -15,223 +57,86 @@ import Layout from "../layouts/Layout.astro";
       <h1 class="text-3xl md:text-4xl font-bold text-accent font-display">
         Check Out Jeremy Kluth's Scripture Performances
       </h1>
+      <p class="text-gray-600 mt-3 max-w-2xl mx-auto">
+        Watch samples and full performances of Scripture brought to life through dramatic presentation.
+      </p>
     </div>
   </section>
 
-  <!-- Video 1: Daniel 3 – Image of Gold and the Blazing Furnace -->
-  <section class="py-8 px-4 bg-white">
+  <!-- Featured Video Samples (Vimeo) -->
+  <section class="py-10 px-4 bg-white">
     <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-center">
-        <div class="w-full md:w-1/2">
-          <div class="relative w-full aspect-video">
-            <iframe
-              class="absolute inset-0 w-full h-full rounded shadow-lg"
-              src="https://player.vimeo.com/video/1082916797?color&autopause=0&loop=0&muted=0&title=0&portrait=0&byline=0"
-              allowfullscreen
-              allow="clipboard-write"
-              title="vimeo Video Player"
-            ></iframe>
+      <h2 class="text-2xl font-bold text-gray-800 font-serif mb-6">Performance Samples</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {vimeoSamples.map((video) => (
+          <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+            <div class="relative w-full aspect-video">
+              <iframe
+                class="absolute inset-0 w-full h-full"
+                src={`https://player.vimeo.com/video/${video.vimeoId}?color&autopause=0&loop=0&muted=0&title=0&portrait=0&byline=0`}
+                allowfullscreen
+                allow="clipboard-write"
+                title={video.title}
+                loading="lazy"
+              ></iframe>
+            </div>
+            <div class="p-4">
+              <h3 class="font-bold text-gray-900 text-sm mb-1">{video.title}</h3>
+              <p class="text-gray-500 text-xs mb-2">{video.description}</p>
+              <a
+                href={video.fullLink}
+                target="_blank"
+                rel="noopener"
+                class="text-accent text-xs font-semibold hover:underline"
+              >
+                Watch Full Performance →
+              </a>
+            </div>
           </div>
-        </div>
-        <div class="w-full md:w-1/2 flex flex-col gap-4">
-          <p class="text-gray-600 leading-relaxed">
-            Watch a 2-minute sample of Jeremy dramatically presenting The Image of Gold and the Blazing Furnace from Daniel 3.
-          </p>
-          <p class="font-bold font-sans">
-            <a
-              href="https://youtu.be/94DuyD5tHOg"
-              target="_blank"
-              rel="noopener"
-              class="text-accent hover:underline uppercase"
-            >
-              CLICK HERE FOR THE FULL PERFORMANCE
-            </a>
-          </p>
-        </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- Video 2: Acts 9 – Paul on the Road to Damascus -->
-  <section class="py-8 px-4 bg-gray-50">
+  <!-- YouTube Full Performances -->
+  <section class="py-10 px-4 bg-cream">
     <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-center">
-        <div class="w-full md:w-1/2">
-          <div class="relative w-full aspect-video">
-            <iframe
-              class="absolute inset-0 w-full h-full rounded shadow-lg"
-              src="https://player.vimeo.com/video/1082959146?color&autopause=0&loop=0&muted=0&title=0&portrait=0&byline=0"
-              allowfullscreen
-              allow="clipboard-write"
-              title="vimeo Video Player"
-            ></iframe>
+      <h2 class="text-2xl font-bold text-gray-800 font-serif mb-2">Full Performances on YouTube</h2>
+      <p class="text-gray-600 mb-6">
+        See our YouTube channel for even more videos and full performances.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {youtubeVideos.map((video) => (
+          <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+            <div class="relative w-full aspect-video">
+              <iframe
+                class="absolute inset-0 w-full h-full"
+                src={`https://www.youtube.com/embed/${video.id}`}
+                title={video.title}
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            </div>
+            <div class="p-4">
+              <h3 class="font-bold text-gray-900 text-sm">{video.title}</h3>
+            </div>
           </div>
-        </div>
-        <div class="w-full md:w-1/2 flex flex-col gap-4">
-          <p class="text-gray-600 leading-relaxed">
-            Jeremy portrays Paul the Apostle (formerly Saul) on the road to Damascus in this 3-minute scene from Acts 9.
-          </p>
-          <p class="font-bold font-sans">
-            <a
-              href="https://youtu.be/T9sS8yFVu0M"
-              target="_blank"
-              rel="noopener"
-              class="text-accent hover:underline uppercase"
-            >
-              CLICK HERE FOR THE FULL PERFORMANCE
-            </a>
-          </p>
-        </div>
+        ))}
       </div>
-    </div>
-  </section>
 
-  <!-- Video 3: John 11 – Jesus Raising Lazarus -->
-  <section class="py-8 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-center">
-        <div class="w-full md:w-1/2">
-          <div class="relative w-full aspect-video">
-            <iframe
-              class="absolute inset-0 w-full h-full rounded shadow-lg"
-              src="https://player.vimeo.com/video/1083962636?color&autopause=0&loop=0&muted=0&title=0&portrait=0&byline=0"
-              allowfullscreen
-              allow="clipboard-write"
-              title="vimeo Video Player"
-            ></iframe>
-          </div>
-        </div>
-        <div class="w-full md:w-1/2 flex flex-col gap-4">
-          <p class="text-gray-600 leading-relaxed">
-            Check out this 2-minute scene from Jeremy's performance of Jesus Raising Lazarus from John 11.
-          </p>
-          <p class="font-bold font-sans">
-            <a
-              href="https://youtu.be/YHn8Mn9A8kw"
-              target="_blank"
-              rel="noopener"
-              class="text-accent hover:underline uppercase"
-            >
-              CLICK HERE FOR THE FULL PERFORMANCE
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Video 4: One-Man Passion Play – Peter's Denial -->
-  <section class="py-8 px-4 bg-gray-50">
-    <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-center">
-        <div class="w-full md:w-1/2">
-          <div class="relative w-full aspect-video">
-            <iframe
-              class="absolute inset-0 w-full h-full rounded shadow-lg"
-              src="https://player.vimeo.com/video/1084255629?color&autopause=0&loop=0&muted=0&title=0&portrait=0&byline=0"
-              allowfullscreen
-              allow="clipboard-write"
-              title="vimeo Video Player"
-            ></iframe>
-          </div>
-        </div>
-        <div class="w-full md:w-1/2 flex flex-col gap-4">
-          <p class="text-gray-600 leading-relaxed">
-            Jeremy presents his One-Man Passion Play, an original blended harmony of the passion account in the Gospels covering the Last Supper through Jesus' crucifixion. This sample includes Peter's denial after Jesus is arrested.
-          </p>
-          <p class="font-bold font-sans">
-            <a
-              href="https://youtu.be/xnvOmK8ah1g"
-              target="_blank"
-              rel="noopener"
-              class="text-accent hover:underline uppercase"
-            >
-              CLICK HERE FOR THE FULL PERFORMANCE
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Video 5: Elijah & the Widow (Vimeo 1084273212) -->
-  <section class="py-8 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-center">
-        <div class="w-full md:w-1/2">
-          <div class="relative w-full aspect-video">
-            <iframe
-              class="absolute inset-0 w-full h-full rounded shadow-lg"
-              src="https://player.vimeo.com/video/1084273212?color&autopause=0&loop=0&muted=0&title=0&portrait=0&byline=0"
-              allowfullscreen
-              allow="clipboard-write"
-              title="vimeo Video Player"
-            ></iframe>
-          </div>
-        </div>
-        <div class="w-full md:w-1/2 flex flex-col gap-4">
-          <p class="text-gray-600 leading-relaxed">
-            Experience this impactful 2-minute scene from Jeremy's performance of Elijah &amp; the Widow from 1 Kings 17.
-          </p>
-          <p class="font-bold font-sans">
-            <a
-              href="https://youtu.be/_hJFok97gvk"
-              target="_blank"
-              rel="noopener"
-              class="text-accent hover:underline uppercase"
-            >
-              CLICK HERE FOR THE FULL PERFORMANCE
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Video 6: YouTube – 1 Samuel 17: David & Goliath -->
-  <section class="py-8 px-4 bg-gray-50">
-    <div class="max-w-5xl mx-auto">
-      <div class="relative w-full aspect-video">
-        <iframe
-          class="absolute inset-0 w-full h-full rounded shadow-lg"
-          src="https://www.youtube.com/embed/wh_znWMYXiI"
-          title="1 Samuel 17: David &amp; Goliath - Jeremy Kluth | Scripture Alive"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- Video 7: YouTube – Job 1-2: The Testing of Job -->
-  <section class="py-8 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      <div class="relative w-full aspect-video">
-        <iframe
-          class="absolute inset-0 w-full h-full rounded shadow-lg"
-          src="https://www.youtube.com/embed/xvtG5wu4jtA"
-          title="Job 1-2: The Testing of Job - Jeremy Kluth | Scripture Alive"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- Video 8: YouTube – Luke 1: The Birth of John the Baptist Foretold -->
-  <section class="py-8 px-4 bg-gray-50">
-    <div class="max-w-5xl mx-auto">
-      <div class="relative w-full aspect-video">
-        <iframe
-          class="absolute inset-0 w-full h-full rounded shadow-lg"
-          src="https://www.youtube.com/embed/YG4_BiWNuUE"
-          title="Luke 1: The Birth of John the Baptist Foretold - Jeremy Kluth | Scripture Alive"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+      <!-- YouTube Channel CTA -->
+      <div class="text-center mt-8">
+        <a
+          href="https://www.youtube.com/@ScriptureAlive"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-[#FF0000] text-white font-semibold px-8 py-3 rounded hover:opacity-90 transition-opacity"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          See YouTube Channel for More
+        </a>
       </div>
     </div>
   </section>

@@ -38,15 +38,15 @@ const totalSlides = featuredTestimonials.length;
       <h1 class="font-display font-light text-4xl md:text-5xl lg:text-6xl mb-4 text-white drop-shadow-lg">
         Making Scripture Unforgettable
       </h1>
-      <p class="font-sans text-xl md:text-2xl mb-10 text-white drop-shadow-md">
+      <p class="font-sans text-xl md:text-2xl mb-2 text-white drop-shadow-md">
         Performances | Workshops | Speaking
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/contact" class="border-2 border-primary text-white font-semibold font-sans px-8 py-3 rounded text-base transition-all duration-300 hover:bg-primary">
-          Invite Jeremy
-        </a>
-        <a href="/referjeremy" class="border-2 border-accent text-white font-semibold font-sans px-8 py-3 rounded text-base transition-all duration-300 hover:bg-accent">
-          Refer Jeremy
+      <p class="font-sans text-sm md:text-base mb-10 text-white/80 drop-shadow-md">
+        Available for churches, conferences, camps, schools, and special events
+      </p>
+      <div class="flex justify-center">
+        <a href="/book-jeremy" class="bg-primary text-black font-semibold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
+          Book Jeremy
         </a>
       </div>
     </div>
@@ -100,8 +100,24 @@ const totalSlides = featuredTestimonials.length;
     </div>
   </section>
 
+  <!-- SOCIAL PROOF -->
+  <section class="bg-cream py-10 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-gray-700 text-base md:text-lg leading-relaxed italic mb-4">
+        "{featuredTestimonials[0]?.quote}"
+      </p>
+      <p class="font-semibold text-accent text-sm">{featuredTestimonials[0]?.authorName}{featuredTestimonials[0]?.authorTitle ? `, ${featuredTestimonials[0].authorTitle}` : ''}</p>
+      {featuredTestimonials[0]?.authorOrganization && (
+        <p class="text-xs text-primary">{featuredTestimonials[0].authorOrganization}</p>
+      )}
+      <a href="/endorsements" class="inline-block mt-4 text-accent text-sm font-semibold hover:underline">
+        Read More Endorsements →
+      </a>
+    </div>
+  </section>
+
   <!-- SERVICE TILES -->
-  <section class="bg-white px-4 pb-16">
+  <section class="bg-white px-4 py-10">
     <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
 
       <a href="/performances" class="relative overflow-hidden group block h-48 rounded">

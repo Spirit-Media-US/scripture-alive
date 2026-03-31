@@ -18,26 +18,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 
 const navItems = [
 	{ href: "/", label: "Home" },
+	{ href: "/performances", label: "Performances" },
+	{ href: "/workshops", label: "Workshops" },
+	{ href: "/guestpreaching", label: "Speaking" },
+	{ href: "/endorsements", label: "Endorsements" },
 	{
-		href: "/about",
-		label: "About",
-		dropdown: [
-			{ href: "/about", label: "About Jeremy" },
-			{ href: "/endorsements", label: "Endorsements" },
-		],
-	},
-	{ href: "/events", label: "Events" },
-	{
-		href: "/workshops",
-		label: "Bookings",
-		dropdown: [
-			{ href: "/performances", label: "Performances" },
-			{ href: "/workshops", label: "Bible Memory Workshops" },
-			{ href: "/guestpreaching", label: "Guest Speaking" },
-		],
-	},
-	{
-		href: "/resources",
+		href: "#",
 		label: "Resources",
 		dropdown: [
 			{ href: "/store", label: "Store" },
@@ -46,7 +32,7 @@ const navItems = [
 			{ href: "/blog", label: "Blog" },
 		],
 	},
-	{ href: "/contact", label: "Contact" },
+	{ href: "/events", label: "Events" },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -86,12 +72,12 @@ const currentPath = Astro.url.pathname;
   <header id="site-header" class={`sticky top-0 z-50 transition-colors duration-300 ${currentPath === '/' ? 'bg-transparent' : 'bg-white shadow-sm'}`}>
     <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
       <a href="/"><img src="https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp" alt="Scripture Alive" class="h-[108px] w-auto" /></a>
-      <ul class="hidden md:flex items-center gap-8">
+      <ul class="hidden lg:flex items-center gap-4 xl:gap-6">
         {navItems.map(item => (
           <li class="relative group">
             <a
               href={item.href}
-              class={`text-[20px] font-medium font-sans transition-colors ${currentPath === item.href || (item.dropdown && item.dropdown.some((d: any) => currentPath === d.href)) ? 'text-primary' : 'text-gray-600 hover:text-primary'}`}
+              class={`text-sm xl:text-base font-medium font-sans transition-colors whitespace-nowrap ${currentPath === item.href || (item.dropdown && item.dropdown.some((d: any) => currentPath === d.href)) ? 'text-primary' : 'text-gray-600 hover:text-primary'}`}
             >
               {item.label}{item.dropdown && <span class="ml-1 text-sm">▾</span>}
             </a>
@@ -112,13 +98,13 @@ const currentPath = Astro.url.pathname;
           </li>
         ))}
         <li>
-          <a href="/book-jeremy" class="bg-primary text-black text-[20px] font-semibold font-sans px-5 py-3 rounded transition-opacity hover:opacity-90">
+          <a href="/book-jeremy" class="bg-primary text-black text-sm lg:text-base font-semibold font-sans px-4 py-2 lg:px-5 lg:py-3 rounded transition-opacity hover:opacity-90 whitespace-nowrap">
             Book Jeremy
           </a>
         </li>
       </ul>
       <!-- Mobile menu button -->
-      <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600" aria-label="Menu" aria-expanded="false">
+      <button id="mobile-menu-btn" class="lg:hidden p-2 text-gray-600" aria-label="Menu" aria-expanded="false">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -126,7 +112,7 @@ const currentPath = Astro.url.pathname;
     </nav>
 
     <!-- Mobile menu panel -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 shadow-md">
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 shadow-md">
       <ul class="flex flex-col px-6 py-2">
         {navItems.map(item => (
           item.dropdown ? (
