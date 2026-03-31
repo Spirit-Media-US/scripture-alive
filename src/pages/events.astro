@@ -185,11 +185,6 @@ function fmtFullDate(startStr: string, endStr?: string) {
                 </div>
               )}
 
-              <!-- Description -->
-              {event.description && (
-                <p class="text-gray-600 leading-relaxed mb-4">{event.description}</p>
-              )}
-
               <!-- When & Where -->
               <div class="flex flex-col sm:flex-row gap-6 text-sm">
                 <div>
@@ -343,7 +338,7 @@ function fmtFullDate(startStr: string, endStr?: string) {
       <h2 id="modal-title" class="text-xl font-bold text-gray-900 font-serif mb-2"></h2>
       <div id="modal-subtitle" class="text-sm text-gray-500 mb-1"></div>
       <div id="modal-tags" class="flex flex-wrap gap-1.5 mb-3"></div>
-      <p id="modal-description" class="text-gray-600 leading-relaxed mb-4"></p>
+      <p id="modal-description" class="text-gray-600 leading-relaxed mb-4 text-sm"></p>
 
       <div class="space-y-3 text-sm mb-4">
         <!-- When -->
