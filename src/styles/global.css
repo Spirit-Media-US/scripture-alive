@@ -16,17 +16,17 @@
 	}
 	body {
 		@apply font-sans text-[#7A7A7A] bg-white;
-		font-size: 18px;
+		font-size: 16px;
 	}
 	p {
-		font-size: 18px;
+		font-size: 16px;
 		font-family: var(--font-sans);
-		line-height: 1.75;
+		line-height: 1.7;
 	}
 	li {
-		font-size: 18px;
+		font-size: 16px;
 		font-family: var(--font-sans);
-		line-height: 1.75;
+		line-height: 1.7;
 	}
 	h1,
 	h2,

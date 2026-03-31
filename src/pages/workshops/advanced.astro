@@ -1,0 +1,81 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const workshops = [
+	{
+		title: "Acting the Word",
+		description:
+			"Training others to perform Scripture as a dramatic text. This advanced workshop goes beyond memorization into the art of dramatic presentation — teaching vocal technique, character embodiment, staging, and the unique craft of bringing the Bible to life through performance.",
+		image:
+			"https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png",
+	},
+];
+---
+
+<Layout
+  title="Advanced Track Workshops | Scripture Alive"
+  description="Advanced workshop — Acting the Word: training others to perform Scripture as a dramatic text."
+>
+
+  <!-- Hero -->
+  <section class="py-10 px-4 bg-white text-center">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-sm font-bold uppercase tracking-widest text-primary mb-2">
+        <a href="/workshops" class="hover:underline">Workshops</a> / Advanced Track
+      </p>
+      <h1 class="text-4xl md:text-5xl font-bold text-accent font-display mb-4">
+        Advanced Track
+      </h1>
+      <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+        For those ready to take the next step — training in the dramatic performance of Scripture.
+      </p>
+    </div>
+  </section>
+
+  <!-- Accordion Items -->
+  <section class="py-10 px-4 bg-cream">
+    <div class="max-w-5xl mx-auto flex flex-col gap-4">
+      {workshops.map((workshop) => (
+        <details class="bg-white rounded-lg shadow-sm overflow-hidden group" open>
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer list-none select-none">
+            <h2 class="text-lg font-bold text-gray-800 font-serif">{workshop.title}</h2>
+            <span class="text-accent font-bold text-xl transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-6 flex flex-col gap-4">
+            <img
+              src={workshop.image}
+              alt={`${workshop.title} Workshop`}
+              loading="lazy"
+              class="w-full rounded"
+            />
+            <p class="text-gray-600 leading-relaxed text-sm">{workshop.description}</p>
+            <div>
+              <a
+                href="/book-jeremy"
+                class="inline-block bg-primary text-gray-900 font-bold px-6 py-3 rounded hover:opacity-90 transition-opacity text-sm"
+              >
+                Book This Workshop
+              </a>
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12 px-4 bg-white text-center">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-2xl font-bold text-primary font-serif mb-4">
+        Ready to train your team in dramatic Scripture performance?
+      </h2>
+      <a
+        href="/book-jeremy"
+        class="inline-block bg-primary text-gray-900 font-bold px-8 py-3 rounded hover:opacity-90 transition-opacity"
+      >
+        Book a Workshop
+      </a>
+    </div>
+  </section>
+
+</Layout>

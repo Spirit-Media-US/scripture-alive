@@ -1,18 +1,69 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const tracks = [
+	{
+		name: "Foundations Track",
+		href: "/workshops/foundations",
+		description: "Build a strong foundation for Scripture memorization, public reading, and personal Bible study.",
+		workshops: [
+			{
+				title: "How to Memorize Scripture for Life",
+				image: "https://cdn.sanity.io/images/vxczpihg/production/0d09808dd1e4a9bff945b742d454abf57c0a65f3-1200x900.webp",
+			},
+			{
+				title: "Speaking God's Word with Confidence",
+				image: "https://cdn.sanity.io/images/vxczpihg/production/95f6eca3784e25f56fab50d2b06c8245915244ac-1024x759.webp",
+			},
+			{
+				title: "How to Study the Bible for Yourself",
+				image: "https://cdn.sanity.io/images/vxczpihg/production/da0764f78c42eac49abd6c968a0ac4e505546fc0-1024x576.webp",
+			},
+		],
+	},
+	{
+		name: "Discipleship Track",
+		href: "/workshops/discipleship",
+		description: "Apply Scripture memory to prayer, evangelism, and perseverance through life's toughest seasons.",
+		workshops: [
+			{
+				title: "Praying the Word",
+				image: "https://cdn.sanity.io/images/vxczpihg/production/2f794fd31d202babdc31b4c7caea239a0cd6d45e-1024x682.png",
+			},
+			{
+				title: "Witnessing with the Word",
+				image: "https://cdn.sanity.io/images/vxczpihg/production/5b5f24412ee24413a1313218d7f147eee363b941-1024x682.webp",
+			},
+			{
+				title: "Holding Fast to God's Word",
+				image: "https://cdn.sanity.io/images/vxczpihg/production/80d50746c21de9f688034d67ed88bae2efe55536-1024x682.png",
+			},
+		],
+	},
+	{
+		name: "Advanced Track",
+		href: "/workshops/advanced",
+		description: "Training in the dramatic performance of Scripture.",
+		workshops: [
+			{
+				title: "Acting the Word",
+				image: "https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png",
+			},
+		],
+	},
+];
 ---
 
 <Layout
-  title="Master Bible Memorization | Workshop Guide"
-  description="Learn effective techniques & strategies to memorize Scripture at our specialized workshops."
+  title="Interactive Bible Memory Workshops | Scripture Alive"
+  description="Hands-on, topic-based workshops that equip people to memorize Scripture and live it out — Foundations, Discipleship, and Advanced tracks."
   ogImage="https://cdn.sanity.io/images/vxczpihg/production/0d09808dd1e4a9bff945b742d454abf57c0a65f3-1200x900.webp"
-  type="general"
   jsonld={{
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Master Bible Memorization | Workshop Guide",
+    "name": "Interactive Bible Memory Workshops | Scripture Alive",
     "url": "https://scripturealive.com/workshops",
-    "description": "Learn effective techniques & strategies to memorize Scripture at our specialized workshops.",
+    "description": "Hands-on, topic-based workshops that equip people to memorize Scripture and live it out.",
     "about": {
       "@type": "Organization",
       "name": "Scripture Alive",
@@ -21,126 +72,76 @@ import Layout from "../layouts/Layout.astro";
   }}
 >
 
-  <!-- Hero / Intro Section -->
-  <section class="py-14 px-4 bg-white">
-    <div class="max-w-5xl mx-auto text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-accent font-serif mb-6">
+  <!-- Page Heading -->
+  <section class="py-12 px-4 bg-white text-center">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold text-accent font-display mb-4">
         Interactive Bible Memory Workshops
       </h1>
-      <p class="text-gray-700 leading-relaxed max-w-3xl mx-auto">
-        Hands-on, topic-based sessions that equip people to memorize Scripture and live it out
-        — with practical tools, group engagement, and biblical depth.
+      <p class="text-base md:text-lg text-gray-500 leading-relaxed">
+        Hands-on, topic-based sessions that equip people to memorize Scripture and live it out — with practical tools, group engagement, and biblical depth.
       </p>
     </div>
   </section>
 
-  <!-- Three Workshop Topics Section -->
-  <section class="py-6 px-4 bg-white">
-    <div class="max-w-6xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+  <!-- Track Sections -->
+  {tracks.map((track) => (
+    <section class="py-10 px-4 bg-cream">
+      <div class="max-w-6xl mx-auto">
 
-        <!-- Card 1: Reasons Why -->
-        <div class="flex flex-col items-center text-center">
-          <h2 class="text-2xl font-bold text-accent font-serif mb-4">Reasons Why</h2>
-          <div class="w-full overflow-hidden rounded-lg border border-gray-200">
-            <img
-              src="https://cdn.sanity.io/images/vxczpihg/production/0d09808dd1e4a9bff945b742d454abf57c0a65f3-1200x900.webp"
-              alt="Reasons Why workshop"
-              fetchpriority="high"
-              decoding="async"
-              width="800"
-              height="600"
-              srcset="
-                https://cdn.sanity.io/images/vxczpihg/production/0d09808dd1e4a9bff945b742d454abf57c0a65f3-1200x900.webp 300w,
-                https://cdn.sanity.io/images/vxczpihg/production/0d09808dd1e4a9bff945b742d454abf57c0a65f3-1200x900.webp 768w,
-                https://cdn.sanity.io/images/vxczpihg/production/0d09808dd1e4a9bff945b742d454abf57c0a65f3-1200x900.webp 1024w,
-                https://cdn.sanity.io/images/vxczpihg/production/0d09808dd1e4a9bff945b742d454abf57c0a65f3-1200x900.webp 1200w
-              "
-              sizes="(max-width: 800px) 100vw, 800px"
-              class="w-full h-auto object-cover"
-            />
-          </div>
+        <!-- Track name -->
+        <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6 font-sans">
+          {track.name}
+        </h2>
+
+        <!-- Workshop image tiles -->
+        <div class={`grid gap-4 mb-6 ${track.workshops.length === 1 ? 'grid-cols-1 max-w-sm mx-auto' : 'grid-cols-1 sm:grid-cols-3'}`}>
+          {track.workshops.map((workshop) => (
+            <a href={track.href} class="block cursor-pointer rounded overflow-hidden group">
+              <img
+                src={workshop.image}
+                alt={workshop.title}
+                loading="lazy"
+                class="w-full h-[250px] object-cover rounded group-hover:opacity-90 transition-opacity"
+              />
+            </a>
+          ))}
         </div>
 
-        <!-- Card 2: Lies We Believe -->
-        <div class="flex flex-col items-center text-center">
-          <h2 class="text-2xl font-bold text-accent font-serif mb-4">Lies We Believe</h2>
-          <div class="w-full overflow-hidden rounded-lg border border-gray-200">
-            <img
-              src="https://cdn.sanity.io/images/vxczpihg/production/3c4608a19deee451886e5889dafa4c23037c76e6-500x500.webp"
-              alt="Lies We Believe workshop"
-              decoding="async"
-              width="500"
-              height="500"
-              srcset="
-                https://cdn.sanity.io/images/vxczpihg/production/3c4608a19deee451886e5889dafa4c23037c76e6-500x500.webp 150w,
-                https://cdn.sanity.io/images/vxczpihg/production/3c4608a19deee451886e5889dafa4c23037c76e6-500x500.webp 300w,
-                https://cdn.sanity.io/images/vxczpihg/production/3c4608a19deee451886e5889dafa4c23037c76e6-500x500.webp 500w
-              "
-              sizes="(max-width: 500px) 100vw, 500px"
-              class="w-full h-auto object-cover"
-            />
-          </div>
-        </div>
-
-        <!-- Card 3: POWER System -->
-        <div class="flex flex-col items-center text-center">
-          <h2 class="text-2xl font-bold text-accent font-serif mb-4">POWER System</h2>
-          <div class="w-full overflow-hidden rounded-lg border border-gray-200">
-            <img
-              src="https://cdn.sanity.io/images/vxczpihg/production/95f6eca3784e25f56fab50d2b06c8245915244ac-1024x759.webp"
-              alt="POWER System workshop"
-              decoding="async"
-              width="800"
-              height="593"
-              srcset="
-                https://cdn.sanity.io/images/vxczpihg/production/95f6eca3784e25f56fab50d2b06c8245915244ac-1024x759.webp 300w,
-                https://cdn.sanity.io/images/vxczpihg/production/95f6eca3784e25f56fab50d2b06c8245915244ac-1024x759.webp 768w,
-                https://cdn.sanity.io/images/vxczpihg/production/95f6eca3784e25f56fab50d2b06c8245915244ac-1024x759.webp 1024w,
-                https://cdn.sanity.io/images/vxczpihg/production/95f6eca3784e25f56fab50d2b06c8245915244ac-1024x759.webp 1200w
-              "
-              sizes="(max-width: 800px) 100vw, 800px"
-              class="w-full h-auto object-cover"
-            />
-          </div>
+        <!-- Learn More button -->
+        <div class="text-center">
+          <a
+            href={track.href}
+            class="inline-block bg-accent text-white font-semibold px-8 py-2 rounded hover:opacity-90 transition-opacity"
+          >
+            Learn More
+          </a>
         </div>
 
       </div>
+    </section>
+  ))}
+
+  <!-- Testimonial -->
+  <section class="py-14 px-4 bg-white">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-gray-700 leading-relaxed italic mb-4">
+        "Jeremy's workshop far exceeded my expectations! Extremely resourceful, immediately effective, and filled with fun and laughter. My 14 year-old son came away inspired to memorize God's Word for the transformation of his heart!"
+      </p>
+      <p class="font-bold text-gray-800 font-serif">Ty Spenst, Senior Pastor</p>
+      <p class="text-gray-600 text-sm">Trinity EFC, Plainview MN</p>
     </div>
   </section>
 
-  <!-- Testimonial + Description Section -->
-  <section class="py-14 px-4 bg-white">
-    <div class="max-w-6xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-
-        <!-- Testimonial -->
-        <div class="border border-gray-200 rounded-lg p-8 flex flex-col gap-4">
-          <p class="text-gray-700 leading-relaxed text-center italic">
-            "Jeremy's workshop far exceeded my expectations! Extremely resourceful, immediately effective, and filled with fun and laughter. My 14 year-old son came away inspired to memorize God's Word for the transformation of his heart!"
-          </p>
-          <div class="text-center">
-            <h3 class="text-xl font-bold text-gray-800 font-serif">Ty Spenst, Senior Pastor</h3>
-            <p class="text-gray-600">Trinity EFC, Plainview MN</p>
-          </div>
-        </div>
-
-        <!-- Description + Button -->
-        <div class="flex flex-col justify-start gap-6">
-          <p class="text-gray-700 leading-relaxed">
-            Jeremy is passionate about inspiring and empowering people to store up God's Word in their hearts and to live it out. In this interactive and engaging workshop (45, 60, or 90 minutes based on your event/needs), Jeremy will help you to <strong>Discover Your Why,</strong> to <strong>Overcome Common Obstacles</strong>, and show you his proven, practical five-step <strong>POWER System</strong> that anyone can use to more effectively memorize Scripture. Contact Jeremy for info on how you can book him for your church or ministry.
-          </p>
-          <div>
-            <a
-              href="/contact"
-              class="inline-block bg-accent text-white font-semibold font-serif text-base px-8 py-4 rounded hover:opacity-90 transition-opacity duration-200"
-            >
-              Contact Jeremy
-            </a>
-          </div>
-        </div>
-
-      </div>
+  <!-- Book A Workshop -->
+  <section class="py-12 px-4 bg-cream text-center">
+    <div class="max-w-3xl mx-auto">
+      <a
+        href="/book-jeremy"
+        class="inline-block bg-primary text-black font-bold px-12 py-4 rounded text-lg hover:opacity-90 transition-opacity"
+      >
+        Book A Workshop
+      </a>
     </div>
   </section>
 

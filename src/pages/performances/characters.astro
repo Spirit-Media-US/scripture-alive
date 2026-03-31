@@ -15,14 +15,15 @@ const characters = [
 		title: "Elijah",
 		description:
 			"A dramatic first-person portrayal of the prophet Elijah — from the heights of Mount Carmel to the wilderness of despair and the still small voice of God. A powerful performance for conferences, retreats, and special services.",
-		image: null,
+		image:
+			"https://cdn.sanity.io/images/vxczpihg/production/38324834d0ffccdfaf850977f387480d77821cdb-1024x682.webp",
 	},
 	{
 		title: "Peter",
 		description:
 			"Walk with Simon Peter from his first encounter with Jesus to his restoration after the resurrection. A deeply human and redemptive performance drawn directly from Scripture.",
 		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/81a2bbd4fdfd1128d3d0c0232dea10390528caf7-600x300.png",
+			"https://cdn.sanity.io/images/vxczpihg/production/942aa7d8126971cf426041b33e23c0a016d850cc-1024x682.webp",
 	},
 ];
 ---
@@ -35,7 +36,7 @@ const characters = [
 
   <!-- Hero -->
   <section class="py-10 px-4 bg-white text-center">
-    <div class="max-w-3xl mx-auto">
+    <div class="max-w-5xl mx-auto">
       <p class="text-sm font-bold uppercase tracking-widest text-primary mb-2">
         <a href="/performances" class="hover:underline">Performances</a> / Characters
       </p>
@@ -50,7 +51,7 @@ const characters = [
 
   <!-- Accordion Items -->
   <section class="py-10 px-4 bg-cream">
-    <div class="max-w-3xl mx-auto flex flex-col gap-4">
+    <div class="max-w-5xl mx-auto flex flex-col gap-4">
       {characters.map((character) => (
         <details class="bg-white rounded-lg shadow-sm overflow-hidden group">
           <summary class="flex items-center justify-between px-6 py-5 cursor-pointer list-none select-none">
@@ -63,7 +64,7 @@ const characters = [
                 src={character.image}
                 alt={`${character.title} Performance`}
                 loading="lazy"
-                class="w-full max-h-64 object-cover rounded"
+                class="w-full rounded"
               />
             ) : (
               <div class="w-full h-48 bg-gray-800 rounded flex items-center justify-center">
@@ -87,7 +88,7 @@ const characters = [
 
   <!-- CTA -->
   <section class="py-12 px-4 bg-white text-center">
-    <div class="max-w-2xl mx-auto">
+    <div class="max-w-5xl mx-auto">
       <h2 class="text-2xl font-bold text-primary font-serif mb-4">
         Ready to bring Scripture to life at your event?
       </h2>

@@ -20,7 +20,7 @@ const interviews = await getInterviews();
   <!-- Page Heading -->
   <section class="py-10 px-4">
     <div class="max-w-5xl mx-auto text-center">
-      <h1 class="text-3xl md:text-4xl font-bold text-primary font-serif">
+      <h1 class="text-4xl md:text-5xl font-bold text-primary font-display">
         Check Out Jeremy Kluth's Podcast/Radio Interviews
       </h1>
     </div>
@@ -31,14 +31,13 @@ const interviews = await getInterviews();
     <div class="max-w-5xl mx-auto">
       <div class="border border-gray-200 rounded p-6 bg-white shadow-sm">
         <div class="flex flex-col md:flex-row gap-6 items-start">
-          <div class="flex-shrink-0">
+          <div class="w-full md:w-80 flex-shrink-0">
             <img
               src={bioPhoto}
               alt="Jeremy Kluth"
               title="Jeremy Kluth"
               loading="lazy"
-              class="rounded shadow-md"
-              style="width: 160px;"
+              class="w-full rounded shadow-md"
             />
           </div>
           <div class="space-y-4">
