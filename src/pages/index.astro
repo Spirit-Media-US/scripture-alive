@@ -35,18 +35,21 @@ const totalSlides = featuredTestimonials.length;
     </video>
     <div class="absolute inset-0 z-10"></div>
     <div class="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
-      <h1 class="font-display font-light text-4xl md:text-5xl lg:text-6xl mb-4 text-white drop-shadow-lg">
+      <h1 class="font-display font-light text-5xl md:text-6xl lg:text-7xl mb-6 text-white drop-shadow-lg">
         Making Scripture Unforgettable
       </h1>
-      <p class="font-sans text-xl md:text-2xl mb-2 text-white drop-shadow-md">
+      <p class="font-sans text-base sm:text-xl md:text-2xl mb-4 text-white drop-shadow-md">
         Performances | Workshops | Speaking
       </p>
       <p class="font-sans text-sm md:text-base mb-10 text-white/80 drop-shadow-md">
         Available for churches, conferences, camps, schools, and special events
       </p>
-      <div class="flex justify-center">
+      <div class="flex flex-col items-center gap-3">
         <a href="/book-jeremy" class="bg-primary text-black font-semibold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
           Book Jeremy
+        </a>
+        <a href="/referjeremy" class="text-white/70 text-sm hover:text-white transition-colors">
+          Know someone who should hear about Jeremy? <span class="underline">Refer him here</span>
         </a>
       </div>
     </div>
@@ -100,50 +103,12 @@ const totalSlides = featuredTestimonials.length;
     </div>
   </section>
 
-  <!-- SOCIAL PROOF -->
-  <section class="bg-cream py-10 px-4">
-    <div class="max-w-4xl mx-auto text-center">
-      <p class="text-gray-700 text-base md:text-lg leading-relaxed italic mb-4">
-        "{featuredTestimonials[0]?.quote}"
-      </p>
-      <p class="font-semibold text-accent text-sm">{featuredTestimonials[0]?.authorName}{featuredTestimonials[0]?.authorTitle ? `, ${featuredTestimonials[0].authorTitle}` : ''}</p>
-      {featuredTestimonials[0]?.authorOrganization && (
-        <p class="text-xs text-primary">{featuredTestimonials[0].authorOrganization}</p>
-      )}
-      <a href="/endorsements" class="inline-block mt-4 text-accent text-sm font-semibold hover:underline">
-        Read More Endorsements →
-      </a>
-    </div>
-  </section>
-
-  <!-- SERVICE TILES -->
-  <section class="bg-white px-4 py-10">
-    <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
-
-      <a href="/performances" class="relative overflow-hidden group block h-48 rounded">
-        <img src="https://cdn.sanity.io/images/vxczpihg/production/77e01b90ecf67d8a98bd7b81065106b062648bf3-354x177.webp"
-          alt="Scripture Performances" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-      </a>
-
-      <a href="/workshops" class="relative overflow-hidden group block h-48 rounded">
-        <img src="https://cdn.sanity.io/images/vxczpihg/production/adab64545b5f89913fecdfea364d41c884f063cc-354x177.webp"
-          alt="Scripture Memory Workshops" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-      </a>
-
-      <a href="/guestpreaching" class="relative overflow-hidden group block h-48 rounded">
-        <img src="https://cdn.sanity.io/images/vxczpihg/production/8e31433446554b2eb54ea4a475dec26aa0af6dcd-354x177.webp"
-          alt="Guest Preaching" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-      </a>
-
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS CAROUSEL -->
-  <section class="bg-cream py-16 px-4">
+  <!-- ENDORSEMENTS CAROUSEL -->
+  <section class="bg-cream py-14 px-4">
     <div class="max-w-4xl mx-auto">
-      <div class="relative overflow-hidden" id="testimonial-track-wrapper">
-        <div id="testimonial-track" class="flex transition-transform duration-500 ease-in-out">
-          {featuredTestimonials.map((t: any) => (
+      <div class="relative overflow-hidden" id="endorsement-track-wrapper">
+        <div id="endorsement-track" class="flex transition-transform duration-500 ease-in-out">
+          {featuredTestimonials.slice(0, 4).map((t: any) => (
             <div class="min-w-full px-4 text-center">
               <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
                 "{t.quote}"
@@ -154,23 +119,66 @@ const totalSlides = featuredTestimonials.length;
           ))}
         </div>
       </div>
-
-      <!-- Dots -->
-      <div id="testimonial-dots" class="flex justify-center gap-2 mt-8" data-total={totalSlides}>
-        {featuredTestimonials.map((_: any, i: number) => (
+      <div id="endorsement-dots" class="flex justify-center gap-2 mt-6" data-total={Math.min(featuredTestimonials.length, 4)}>
+        {featuredTestimonials.slice(0, 4).map((_: any, i: number) => (
           <button
             data-index={i}
             class={`w-2.5 h-2.5 rounded-full transition-colors ${i === 0 ? 'bg-primary' : 'bg-gray-300'}`}
-            aria-label={`Testimonial ${i + 1}`}
+            aria-label={`Endorsement ${i + 1}`}
           ></button>
         ))}
+      </div>
+      <div class="text-center mt-6">
+        <a href="/endorsements" class="text-accent font-semibold hover:underline">
+          Read More Endorsements →
+        </a>
       </div>
     </div>
   </section>
 
+  <!-- SERVICE TILES -->
+  <section class="bg-white px-4 py-10">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+
+      <a href="/performances" class="relative overflow-hidden group block rounded">
+        <div class="h-48 overflow-hidden">
+          <img src="https://cdn.sanity.io/images/vxczpihg/production/7081029ba4ca5fe7d6c3cc12b886a460ecc98d1e-1024x682.webp"
+            alt="Scripture Performances" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="font-bold text-lg text-accent font-sans mb-1">Performances</h3>
+          <p class="text-gray-600 text-sm">Full books of the Bible performed word-for-word from memory.</p>
+        </div>
+      </a>
+
+      <a href="/workshops" class="relative overflow-hidden group block rounded">
+        <div class="h-48 overflow-hidden">
+          <img src="https://cdn.sanity.io/images/vxczpihg/production/0d09808dd1e4a9bff945b742d454abf57c0a65f3-1200x900.webp"
+            alt="Scripture Memory Workshops" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="font-bold text-lg text-accent font-sans mb-1">Workshops</h3>
+          <p class="text-gray-600 text-sm">Hands-on sessions that equip people to memorize Scripture and live it out.</p>
+        </div>
+      </a>
+
+      <a href="/speaking" class="relative overflow-hidden group block rounded">
+        <div class="h-48 overflow-hidden">
+          <img src="https://cdn.sanity.io/images/vxczpihg/production/95f6eca3784e25f56fab50d2b06c8245915244ac-1024x759.webp"
+            alt="Guest Speaking" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="font-bold text-lg text-accent font-sans mb-1">Speaking</h3>
+          <p class="text-gray-600 text-sm">Powerful spoken messages for churches, camps, podcasts, and events.</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
   <script>
-    const track = document.getElementById('testimonial-track');
-    const dotsContainer = document.getElementById('testimonial-dots');
+    const track = document.getElementById('endorsement-track');
+    const dotsContainer = document.getElementById('endorsement-dots');
     const dots = dotsContainer?.querySelectorAll('button') ?? [];
     let current = 0;
     const total = Number(dotsContainer?.dataset.total ?? dots.length);

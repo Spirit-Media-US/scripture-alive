@@ -12,6 +12,11 @@
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://mail.spiritmediaone.com https://api.leadconnectorhq.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://cdn.sanity.io https://assets.spiritmediapublishing.com https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://vxczpihg.api.sanity.io https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://mail.spiritmediaone.com https://api.leadconnectorhq.com; frame-src https://www.youtube.com https://player.vimeo.com https://www.google.com https://mail.spiritmediaone.com; media-src 'self' https://assets.spiritmediapublishing.com; object-src 'none'; base-uri 'self'; form-action 'self' https://mail.spiritmediaone.com https://api.leadconnectorhq.com"
 
 [[redirects]]
+  from = "/guestpreaching"
+  to = "/speaking"
+  status = 301
+
+[[redirects]]
   from = "https://www.scripturealive.com/*"
   to = "https://scripturealive.com/:splat"
   status = 301

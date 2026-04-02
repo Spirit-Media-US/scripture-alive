@@ -148,7 +148,7 @@ function fmtFullDate(startStr: string, endStr?: string) {
           <h2 class="text-2xl font-bold text-gray-800 mb-6 mt-8 pb-2 border-b border-gray-200" style="font-family: 'Roboto Slab', Georgia, serif;">{month}</h2>
           {events.map((event: any) => (
             <div
-              class="mb-8 pb-8 border-b border-gray-100 cursor-pointer hover:bg-gray-50 rounded-lg px-4 py-4 transition-colors"
+              class="mb-8 pb-8 border-b border-gray-100 cursor-pointer hover:bg-gray-50 rounded-lg px-4 py-4 transition-colors flex gap-4 md:gap-6"
               data-event={JSON.stringify({
                 performance: event.performance,
                 workshopIncluded: event.workshopIncluded,
@@ -166,6 +166,13 @@ function fmtFullDate(startStr: string, endStr?: string) {
               role="button"
               tabindex="0"
             >
+              <!-- Big Date Numbers -->
+              <div class="flex-shrink-0 w-16 text-center pt-1">
+                <div class="text-xs font-bold text-accent uppercase">{fmtMonth(event.startDate)}</div>
+                <div class="text-4xl font-bold text-accent leading-none">{fmtDay(event.startDate, event.endDate)}</div>
+              </div>
+
+              <div class="flex-1">
               <!-- Event Type Label -->
               <div class="text-xs font-bold uppercase tracking-wider text-accent mb-2">
                 {event.workshopIncluded === 'yes' ? `Performance & Workshop` : 'Performance'}
@@ -225,6 +232,7 @@ function fmtFullDate(startStr: string, endStr?: string) {
                     Get Directions
                   </a>
                 </div>
+              </div>
               </div>
             </div>
           ))}

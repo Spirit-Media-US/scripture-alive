@@ -1,0 +1,103 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const items = [
+	{
+		title: "Scripture Memory & the Christian Life",
+		description:
+			"Jeremy shares the transformative power of memorizing Scripture and how it shapes every area of the Christian life — from prayer to evangelism to enduring trials. A compelling conversation for any audience passionate about God's Word. [Placeholder — Jeremy to provide final content]",
+		image:
+			"https://cdn.sanity.io/images/vxczpihg/production/da0764f78c42eac49abd6c968a0ac4e505546fc0-1024x576.webp",
+	},
+	{
+		title: "The Art of Biblical Performance",
+		description:
+			"What does it look like to perform entire books of the Bible from memory? Jeremy shares the journey, the discipline, and the profound impact of dramatic Scripture presentation on audiences around the country. [Placeholder — Jeremy to provide final content]",
+		image:
+			"https://cdn.sanity.io/images/vxczpihg/production/95f6eca3784e25f56fab50d2b06c8245915244ac-1024x759.webp",
+	},
+	{
+		title: "Custom Topic Request",
+		description:
+			"Have a specific topic you'd like Jeremy to speak about on your podcast or radio show? From biblical heroes to practical Scripture application, Jeremy is available to discuss a wide range of Bible-centered topics. [Placeholder — Jeremy to provide final content]",
+		image:
+			"https://cdn.sanity.io/images/vxczpihg/production/0d09808dd1e4a9bff945b742d454abf57c0a65f3-1200x900.webp",
+	},
+];
+---
+
+<Layout
+  title="Podcast & Radio Guest | Scripture Alive"
+  description="Engaging interviews on Scripture memorization and bringing the Bible to life — available for podcasts, radio shows, and interviews."
+>
+
+  <!-- Back Button -->
+  <div class="max-w-5xl mx-auto px-4 pt-6">
+    <a href="/speaking" class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-gray-700 hover:text-accent transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      Back to Speaking
+    </a>
+  </div>
+
+  <!-- Hero -->
+  <section class="py-10 px-4 bg-white text-center">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-sm font-bold uppercase tracking-widest text-primary mb-2">
+        <a href="/speaking" class="hover:underline">Speaking</a> / Podcast & Radio Guest
+      </p>
+      <h1 class="text-3xl md:text-4xl font-bold text-accent font-display mb-4">
+        Podcast & Radio Guest
+      </h1>
+      <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+        Engaging interviews on Scripture memorization and bringing the Bible to life — available for podcasts, radio shows, and interviews.
+      </p>
+    </div>
+  </section>
+
+  <!-- Accordion Items -->
+  <section class="py-10 px-4 bg-cream">
+    <div class="max-w-5xl mx-auto flex flex-col gap-4">
+      {items.map((item) => (
+        <details class="bg-white rounded-lg shadow-sm overflow-hidden group">
+          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer list-none select-none">
+            <h2 class="text-lg font-bold text-gray-800 font-serif">{item.title}</h2>
+            <span class="text-accent font-bold text-xl transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-6 flex flex-col gap-4">
+            <img
+              src={item.image}
+              alt={item.title}
+              loading="lazy"
+              class="w-full rounded"
+            />
+            <p class="text-gray-600 leading-relaxed text-sm">{item.description}</p>
+            <div>
+              <a
+                href="/book-jeremy"
+                class="inline-block bg-primary text-gray-900 font-bold px-6 py-3 rounded hover:opacity-90 transition-opacity text-sm"
+              >
+                Book This
+              </a>
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12 px-4 bg-white text-center">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-bold text-primary font-serif mb-4">
+        Want Jeremy on your show?
+      </h2>
+      <a
+        href="/book-jeremy"
+        class="inline-block bg-primary text-gray-900 font-bold px-8 py-3 rounded hover:opacity-90 transition-opacity"
+      >
+        Book a Speaking Engagement
+      </a>
+    </div>
+  </section>
+
+</Layout>
