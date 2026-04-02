@@ -1,0 +1,184 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const services = [
+	{
+		name: "Church & Event Speaking",
+		href: "/speaking/church-events",
+		description: "Biblical messages for churches, retreats, conferences, camps, and schools.",
+		icon: `<svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
+		bestFor: [
+			{ label: "Churches", icon: "church" },
+			{ label: "Conferences", icon: "plus" },
+			{ label: "Camps", icon: "camp" },
+		],
+		bullets: [
+			"Standing Firm in a Compromising Culture (based on Daniel 1-6)",
+			"Finding Stability in an Anxious World (based on Acts 9-28)",
+			"Trusting God as Your Provider (based on 1 Kings 17)",
+			"Seeing and Believing in Jesus (based on John 1-21)",
+		],
+	},
+	{
+		name: "Podcast & Radio Guest",
+		href: "/speaking/podcast",
+		description: "Engaging interviews on Scripture memorization and bringing the Bible to life.",
+		icon: `<svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zM19 10v2a7 7 0 0 1-14 0v-2H3v2a9 9 0 0 0 8 8.94V23h2v-2.06A9 9 0 0 0 21 12v-2h-2z"/></svg>`,
+		bestFor: [
+			{ label: "Podcasts", icon: "mic" },
+			{ label: "Radio Shows", icon: "plus" },
+			{ label: "Interviews", icon: "check" },
+		],
+		bullets: [
+			"The POWER System to Memorize Scripture Effectively",
+			"Applying Scripture for Life - Focus areas: Prayer, Evangelism, Trials",
+			"Life Lessons from Biblical Heroes",
+			"Bringing the Bible to Life through Oral Interpretation",
+		],
+	},
+	{
+		name: "Leadership & Ministry Training",
+		href: "/speaking/leadership",
+		description: "Training sessions for pastors, teachers, and ministry leaders.",
+		icon: `<svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>`,
+		bestFor: [
+			{ label: "Pastors", icon: "person" },
+			{ label: "Teachers", icon: "plus" },
+			{ label: "Ministry Leaders", icon: "group" },
+		],
+		bullets: [
+			"Develop Memorization Skills as Leaders",
+			"Engage Your People with Scripture",
+			"Lead with Scripture in Ministry",
+		],
+	},
+	{
+		name: "Scripture Coaching",
+		href: "/speaking/coaching",
+		description: "1-on-1 coaching in Scripture memorization and presentation.",
+		icon: `<svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/><path d="M20 9V7h-2v2h-2v2h2v2h2v-2h2V9h-2z"/></svg>`,
+		bestFor: [
+			{ label: "Individuals", icon: "person" },
+			{ label: "Students", icon: "school" },
+			{ label: "Performers", icon: "person" },
+		],
+		bullets: [
+			"Master Scripture with the POWER System",
+			"Present/Read Scripture with Confidence",
+			"Apply Memorized Scripture in Life",
+		],
+	},
+];
+---
+
+<Layout
+  title="Biblically-Rich Guest Speaking | Scripture Alive"
+  description="Powerful spoken messages for churches, chapels, camps, and podcasts — often paired with live Scripture performance and personal storytelling."
+  ogImage="https://scripturealive.com/wp-content/uploads/2023/11/5250fd1d140164a78500f1528b8bf5fb_1200_80.webp"
+  jsonld={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Biblically-Rich Guest Speaking | Scripture Alive",
+    "url": "https://scripturealive.com/speaking",
+    "description": "Powerful spoken messages for churches, chapels, camps, and podcasts — often paired with live Scripture performance and personal storytelling.",
+    "about": {
+      "@type": "Person",
+      "name": "Jeremy Kluth",
+      "jobTitle": "Speaker & Scripture Performer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Scripture Alive",
+        "url": "https://scripturealive.com"
+      }
+    }
+  }}
+>
+
+  <!-- Page Heading -->
+  <section class="py-12 px-4 bg-white text-center">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold text-accent font-display mb-4">
+        Biblically-Rich Guest Speaking
+      </h1>
+      <p class="text-base md:text-lg text-gray-500 leading-relaxed">
+        Powerful spoken messages for churches, chapels, camps, and podcasts —
+        often paired with live Scripture performance and personal storytelling.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section Title -->
+  <section class="pt-10 pb-4 px-4 bg-cream">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-800 font-sans">
+        Ways to Bring God's Word to Your Audiences
+      </h2>
+    </div>
+  </section>
+
+  <!-- 2x2 Service Card Grid -->
+  <section class="pb-10 px-4 bg-cream">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      {services.map((service) => (
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 flex flex-col">
+          <!-- Icon + Name -->
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-accent" set:html={service.icon} />
+            <h3 class="text-xl font-bold text-accent font-serif">{service.name}</h3>
+          </div>
+
+          <!-- Description -->
+          <p class="text-gray-600 italic mb-4">{service.description}</p>
+
+          <!-- Best For badges -->
+          <div class="flex flex-wrap items-center gap-2 mb-4 bg-gray-50 rounded-lg px-3 py-2">
+            <span class="text-sm font-bold text-gray-700">Best For:</span>
+            {service.bestFor.map((tag) => (
+              <span class="text-sm text-gray-600 flex items-center gap-1">
+                <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                {tag.label}
+              </span>
+            ))}
+          </div>
+
+          <!-- Bullet points -->
+          <ul class="flex-1 space-y-2 mb-5">
+            {service.bullets.map((bullet) => (
+              <li class="flex items-start gap-2 text-sm text-gray-700">
+                <svg class="w-4 h-4 text-accent mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                {bullet}
+              </li>
+            ))}
+          </ul>
+
+          <!-- Learn More button -->
+          <div class="text-center">
+            <a
+              href={service.href}
+              class="inline-block bg-primary text-gray-900 font-bold px-8 py-3 rounded text-lg hover:opacity-90 transition-opacity"
+            >
+              Learn More
+            </a>
+          </div>
+        </div>
+      ))}
+
+    </div>
+  </section>
+
+  <!-- Book a Speaking Engagement -->
+  <section class="py-12 px-4 bg-cream text-center">
+    <div class="max-w-3xl mx-auto">
+      <a
+        href="/book-jeremy"
+        class="inline-block bg-primary text-black font-bold px-12 py-4 rounded text-lg hover:opacity-90 transition-opacity"
+      >
+        Book a Speaking Engagement
+      </a>
+    </div>
+  </section>
+
+</Layout>
