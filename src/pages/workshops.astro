@@ -102,8 +102,11 @@ const tracks = [
                 src={workshop.image}
                 alt={workshop.title}
                 loading="lazy"
-                class="w-full h-[250px] object-cover rounded group-hover:opacity-90 transition-opacity"
+                class="w-full h-[250px] object-cover rounded-t group-hover:opacity-90 transition-opacity"
               />
+              <div class="bg-white px-3 py-2 text-center rounded-b">
+                <p class="text-sm font-bold text-gray-800 font-sans">{workshop.title}</p>
+              </div>
             </a>
           ))}
         </div>

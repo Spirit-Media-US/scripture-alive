@@ -88,15 +88,18 @@ const categories = ["Books", "Characters", "Narratives"].map((name) => ({
                   src={tile.imageUrl}
                   alt={tile.title}
                   loading="lazy"
-                  class="w-full h-[250px] object-cover rounded group-hover:opacity-90 transition-opacity"
+                  class="w-full h-[250px] object-cover rounded-t group-hover:opacity-90 transition-opacity"
                 />
               ) : (
-                <div class="w-full h-[250px] bg-gray-800 rounded flex items-center justify-center group-hover:opacity-90 transition-opacity">
+                <div class="w-full h-[250px] bg-gray-800 rounded-t flex items-center justify-center group-hover:opacity-90 transition-opacity">
                   <span class="text-white text-sm font-semibold text-center px-3 leading-snug">
                     {tile.title}
                   </span>
                 </div>
               )}
+              <div class="bg-white px-3 py-2 text-center rounded-b">
+                <p class="text-sm font-bold text-gray-800 font-sans">{tile.title}</p>
+              </div>
             </a>
           ))}
         </div>
