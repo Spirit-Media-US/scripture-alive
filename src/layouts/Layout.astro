@@ -18,10 +18,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 
 const navItems = [
 	{ href: "/", label: "Home" },
+	{
+		href: "/about",
+		label: "About",
+		dropdown: [{ href: "/endorsements", label: "Endorsements" }],
+	},
 	{ href: "/performances", label: "Performances" },
 	{ href: "/workshops", label: "Workshops" },
 	{ href: "/speaking", label: "Speaking" },
-	{ href: "/endorsements", label: "Endorsements" },
 	{
 		href: "#",
 		label: "Resources",
