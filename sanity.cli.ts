@@ -5,4 +5,5 @@ export default defineCliConfig({
     projectId: 'vxczpihg',
     dataset: 'production',
   },
+  studioHost: 'scripturealive',
 })
