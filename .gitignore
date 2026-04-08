@@ -12,6 +12,7 @@ node_modules/
 *.jpg
 *.jpeg
 *.png
+!public/favicon.png
 *.gif
 *.webp
 *.svg
