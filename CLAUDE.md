@@ -3,6 +3,9 @@
 **Client:** Jeremy Kluth | scripturealive.com
 **Sanity Project ID:** `vxczpihg`
 **Stack:** Astro 5 + Tailwind CSS v4 + Sanity CMS + Netlify + Cloudflare R2
+**Migration protocol:** /home/deploy/bin/tools-api/pipelines/migration/CLAUDE.md
+**Sanity Studio:** Embedded at scripturealive.com/studio/ (static build)
+**Infrastructure:** Deploy webhook wired, CORS origins configured, studio deployed, 404 page added
 
 ---
 
@@ -126,11 +129,14 @@ Public URL: `https://assets.spiritmediapublishing.com/scripture-alive/[filename]
 See the Transformation Layer Report for approved improvements:
 https://docs.google.com/document/d/1t5dkqAiB5HhRtYgkZpnv25LJA9w7lOCCw_TaGTM0G28/edit
 
-Pending before launch:
+Status as of 2026-04-08:
+- [x] Netlify deploy webhook (Sanity → Netlify build hook) — wired
+- [x] CORS origins configured
+- [x] Sanity Studio live at scripturealive.com/studio/
+- [x] 404 page added
 - [ ] Recommended improvements Kevin approves from CAR report
 - [ ] Design polish & QA pass
 - [ ] Mobile + desktop visual review
-- [ ] Netlify deploy webhook (Sanity → Netlify build hook)
 - [ ] Kevin approves merge to main → goes live at scripturealive.com
 
 ---
