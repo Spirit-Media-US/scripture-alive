@@ -56,7 +56,7 @@ const currentPath = Astro.url.pathname;
   <meta name="twitter:title"      content={title} />
   {description && <meta name="twitter:description" content={description} />}
   {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=block" as="style" />
@@ -124,7 +124,12 @@ const currentPath = Astro.url.pathname;
           item.dropdown ? (
             <>
               <li>
-                <span class="block py-3 text-sm font-semibold font-sans border-b border-gray-100 text-gray-500 uppercase tracking-wide">{item.label}</span>
+                <a
+                  href={item.href}
+                  class={`block py-3 text-sm font-semibold font-sans border-b border-gray-100 ${currentPath === item.href ? 'text-primary' : 'text-gray-700 hover:text-primary'} ${item.href === '#' ? 'pointer-events-none text-gray-500 uppercase tracking-wide' : ''}`}
+                >
+                  {item.label}
+                </a>
               </li>
               {item.dropdown.map((sub: any) => (
                 <li>
