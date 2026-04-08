@@ -21,3 +21,4 @@ node_modules/
 *.pdf
 *.bak
 .mcp.json
+public/studio/
