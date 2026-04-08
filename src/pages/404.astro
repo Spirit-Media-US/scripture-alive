@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="404 — Page Not Found | Scripture Alive">
+	<Fragment slot="head">
+		<meta name="robots" content="noindex, nofollow" />
+	</Fragment>
+	<main class="min-h-screen flex items-center justify-center bg-cream pt-20">
+		<div class="text-center px-6">
+			<h1 class="text-5xl md:text-7xl lg:text-9xl font-display font-light text-[#7A7A7A]/40 mb-4">404</h1>
+			<p class="text-xl font-sans text-[#7A7A7A] mb-8">This page doesn't exist.</p>
+			<a
+				href="/"
+				class="inline-block px-8 py-3.5 text-sm font-semibold tracking-[0.1em] uppercase font-sans bg-primary text-white rounded hover:bg-primary/90 transition-colors no-underline"
+			>
+				Go Home
+			</a>
+		</div>
+	</main>
+</Layout>
