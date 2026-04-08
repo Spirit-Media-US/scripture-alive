@@ -124,7 +124,12 @@ const currentPath = Astro.url.pathname;
           item.dropdown ? (
             <>
               <li>
-                <span class="block py-3 text-sm font-semibold font-sans border-b border-gray-100 text-gray-500 uppercase tracking-wide">{item.label}</span>
+                <a
+                  href={item.href}
+                  class={`block py-3 text-sm font-semibold font-sans border-b border-gray-100 ${currentPath === item.href ? 'text-primary' : 'text-gray-700 hover:text-primary'} ${item.href === '#' ? 'pointer-events-none text-gray-500 uppercase tracking-wide' : ''}`}
+                >
+                  {item.label}
+                </a>
               </li>
               {item.dropdown.map((sub: any) => (
                 <li>
