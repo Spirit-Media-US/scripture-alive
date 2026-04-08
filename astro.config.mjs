@@ -12,7 +12,6 @@ export default defineConfig({
       projectId: 'vxczpihg',
       dataset: 'production',
       useCdn: false,
-      studioBasePath: '/studio',
     }),
   ],
   vite: {
