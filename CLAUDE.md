@@ -97,12 +97,7 @@ Current nav (Layout.astro): Home → About → Performances → Events → Media
 
 ## Sanity — How to Write to This Project
 
-The global `SANITY_API_TOKEN` on Bethel is locked to the SMP project (`pmowd8uo`) and **cannot write to Scripture Alive (`vxczpihg`)**. Use the project-specific token:
-
-```bash
-source /home/deploy/bin/.env
-# Use $SANITY_SA_TOKEN for all REST API calls to vxczpihg
-```
+The global `SANITY_TOKEN` on Bethel covers ALL Spirit Media Sanity projects including Scripture Alive (`vxczpihg`). Just use `$SANITY_TOKEN` (sourced automatically from `/home/deploy/.secrets`).
 
 REST API base: `https://vxczpihg.api.sanity.io/v2021-06-07`
 
