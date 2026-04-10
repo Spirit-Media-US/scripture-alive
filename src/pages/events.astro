@@ -65,13 +65,17 @@ function fmtTime(startStr: string, endStr?: string) {
 }
 
 function fmtFullDate(startStr: string, endStr?: string) {
-	const opts: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric', timeZone: 'UTC' };
-	const start = new Date(startStr).toLocaleDateString('en-US', opts);
+	const opts: Intl.DateTimeFormatOptions = {
+		month: "long",
+		day: "numeric",
+		timeZone: "UTC",
+	};
+	const start = new Date(startStr).toLocaleDateString("en-US", opts);
 	if (!endStr) return start;
 	const startDay = new Date(startStr).getUTCDate();
 	const endDay = new Date(endStr).getUTCDate();
 	if (startDay === endDay) return start;
-	return `${start} - ${new Date(endStr).toLocaleDateString('en-US', opts)}`;
+	return `${start} - ${new Date(endStr).toLocaleDateString("en-US", opts)}`;
 }
 ---
 
@@ -151,7 +155,7 @@ function fmtFullDate(startStr: string, endStr?: string) {
               class="mb-8 pb-8 border-b border-gray-100 cursor-pointer hover:bg-gray-50 rounded-lg px-4 py-4 transition-colors flex gap-4 md:gap-6"
               data-event={JSON.stringify({
                 performance: event.performance,
-                workshopIncluded: event.workshopIncluded,
+                eventTypes: event.eventTypes ?? [],
                 venueName: event.venueName,
                 venueCity: event.venueCity,
                 venueState: event.venueState,
@@ -174,13 +178,13 @@ function fmtFullDate(startStr: string, endStr?: string) {
 
               <div class="flex-1">
               <!-- Event Type Label -->
-              <div class="text-xs font-bold uppercase tracking-wider text-accent mb-2">
-                {event.workshopIncluded === 'yes' ? `Performance & Workshop` : 'Performance'}
+              <div class="text-xs font-bold uppercase tracking-wider text-primary mb-2">
+                {(event.eventTypes ?? ['performance']).map((t: string) => t.charAt(0).toUpperCase() + t.slice(1)).join(' & ')}
               </div>
 
               <!-- Event Title -->
               <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-3 font-sans">
-                {event.performance}{event.workshopIncluded === 'yes' ? ' & Workshop' : ''}: {event.venueName} - {event.venueCity}, {event.venueState}
+                {event.performance}: {event.venueName} - {event.venueCity}, {event.venueState}
               </h3>
 
               <!-- Tags -->
@@ -250,10 +254,10 @@ function fmtFullDate(startStr: string, endStr?: string) {
               </div>
               <div class="flex-1">
                 <div class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">
-                  {event.workshopIncluded === 'yes' ? 'Performance & Workshop' : 'Performance'}
+                  {(event.eventTypes ?? ['performance']).map((t: string) => t.charAt(0).toUpperCase() + t.slice(1)).join(' & ')}
                 </div>
                 <h3 class="text-base md:text-lg font-bold text-gray-700 mb-1 font-sans">
-                  {event.performance}{event.workshopIncluded === 'yes' ? ' & Workshop' : ''}: {event.venueName} - {event.venueCity}, {event.venueState}
+                  {event.performance}: {event.venueName} - {event.venueCity}, {event.venueState}
                 </h3>
                 <div class="text-xs text-gray-400">{fmtTime(event.startDate, event.endDate)} · {event.venueName}</div>
               </div>
@@ -342,7 +346,7 @@ function fmtFullDate(startStr: string, endStr?: string) {
     <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 relative max-h-[90vh] overflow-y-auto">
       <button id="modal-close" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl leading-none" aria-label="Close">&times;</button>
 
-      <div id="modal-type" class="text-xs font-bold uppercase tracking-wider text-accent mb-3"></div>
+      <div id="modal-type" class="text-xs font-bold uppercase tracking-wider text-primary mb-3"></div>
       <h2 id="modal-title" class="text-xl font-bold text-gray-900 font-serif mb-4"></h2>
       <div id="modal-subtitle" class="text-sm text-gray-500 mb-2"></div>
       <div id="modal-tags" class="flex flex-wrap gap-1.5 mb-4"></div>
@@ -449,9 +453,10 @@ function fmtFullDate(startStr: string, endStr?: string) {
     }
 
     function openModal(event: any) {
-      const isWorkshop = event.workshopIncluded === 'yes' || event.workshopIncluded === 'workshop';
-      document.getElementById('modal-type')!.textContent = isWorkshop ? 'Performance & Workshop' : 'Performance';
-      document.getElementById('modal-title')!.textContent = `${event.performance}${isWorkshop ? ' & Workshop' : ''}: ${event.venueName} - ${event.venueCity}, ${event.venueState}`;
+      const types = event.eventTypes && event.eventTypes.length > 0 ? event.eventTypes : ['performance'];
+      const typeLabel = types.map((t: string) => t.charAt(0).toUpperCase() + t.slice(1)).join(' & ');
+      document.getElementById('modal-type')!.textContent = typeLabel;
+      document.getElementById('modal-title')!.textContent = `${event.performance}: ${event.venueName} - ${event.venueCity}, ${event.venueState}`;
 
       const subtitle = document.getElementById('modal-subtitle')!;
       subtitle.textContent = event.eventSubtitle || '';

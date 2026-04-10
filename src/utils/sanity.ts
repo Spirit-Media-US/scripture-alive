@@ -6,7 +6,7 @@ export const EVENTS_QUERY = defineQuery(`
   *[_type == "event"] | order(startDate asc) {
     _id,
     performance,
-    workshopIncluded,
+    eventTypes,
     venueName,
     venueCity,
     venueState,
