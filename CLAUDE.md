@@ -2,7 +2,7 @@
 
 **Client:** Jeremy Kluth | scripturealive.com
 **Sanity Project ID:** `vxczpihg`
-**Stack:** Astro 5 + Tailwind CSS v4 + Sanity CMS + Netlify + Cloudflare R2
+**Stack:** Astro 5 + Tailwind CSS v4 + Sanity CMS + Cloudflare Pages + Cloudflare R2
 **Migration protocol:** /home/deploy/bin/tools-api/pipelines/migration/CLAUDE.md
 **Sanity Studio:** Embedded at scripturealive.com/studio/ (static build)
 **Infrastructure:** Deploy webhook wired, CORS origins configured, studio deployed, 404 page added
@@ -32,7 +32,7 @@ committed work unless Kevin explicitly requests it.
 ## Completed Work — DO NOT REDO OR OVERWRITE
 
 ### Phase 1–3: Infrastructure, Structure, Content
-- GitHub repo, Netlify, Cloudflare, R2 bucket all configured
+- GitHub repo, Cloudflare Pages, Cloudflare DNS, R2 bucket all configured
 - All 28 pages migrated from WordPress to Astro
 - All WordPress assets moved to R2 at `assets.spiritmediapublishing.com/scripture-alive/`
 - 301 redirects preserved: booking→contact, all-events→events, performers→performances, event-types→events
@@ -125,7 +125,7 @@ See the Transformation Layer Report for approved improvements:
 https://docs.google.com/document/d/1t5dkqAiB5HhRtYgkZpnv25LJA9w7lOCCw_TaGTM0G28/edit
 
 Status as of 2026-04-08:
-- [x] Netlify deploy webhook (Sanity → Netlify build hook) — wired
+- [x] Cloudflare Pages deploy configured (auto-deploys on push to main)
 - [x] CORS origins configured
 - [x] Sanity Studio live at scripturealive.com/studio/
 - [x] 404 page added
