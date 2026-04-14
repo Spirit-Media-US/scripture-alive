@@ -178,3 +178,25 @@ export const RESOURCES_QUERY = defineQuery(`
 export async function getResources() {
 	return sanityClient.fetch(RESOURCES_QUERY);
 }
+
+// ── Site Settings (singleton) ────────────────────────────────
+export const SITE_SETTINGS_QUERY = defineQuery(`
+  *[_type == "siteSettings"][0] {
+    "homePerformancesImage": homePerformancesImage.asset->url,
+    "homePerformancesAlt": homePerformancesImage.alt,
+    "homeWorkshopsImage": homeWorkshopsImage.asset->url,
+    "homeWorkshopsAlt": homeWorkshopsImage.alt,
+    "homeSpeakingImage": homeSpeakingImage.asset->url,
+    "homeSpeakingAlt": homeSpeakingImage.alt,
+    "aboutHeadshot": aboutHeadshot.asset->url,
+    "aboutHeadshotAlt": aboutHeadshot.alt,
+    "interviewsBioPhoto": interviewsBioPhoto.asset->url,
+    "interviewsBioPhotoAlt": interviewsBioPhoto.alt,
+    "interviewsGenericThumb": interviewsGenericThumb.asset->url,
+    "interviewsGenericThumbAlt": interviewsGenericThumb.alt
+  }
+`);
+
+export async function getSiteSettings() {
+	return sanityClient.fetch(SITE_SETTINGS_QUERY);
+}

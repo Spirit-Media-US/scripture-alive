@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getSiteSettings } from "../utils/sanity";
 
+const settings = await getSiteSettings();
 const title = "Founder's Journey | Scripture Alive Ministry";
 const description =
 	"Discover the story behind the birth of the Scripture Alive ministry. Witness a passion for the Word.";
@@ -43,8 +45,8 @@ const ogImage =
       <!-- Portrait -->
       <div class="w-full md:w-2/5 flex-shrink-0">
         <img
-          src="https://cdn.sanity.io/images/vxczpihg/production/91ab12b64a4cc24e190757cacab907bdb361c502-446x594.webp"
-          alt="Jeremy Kluth"
+          src={settings?.aboutHeadshot || "https://cdn.sanity.io/images/vxczpihg/production/91ab12b64a4cc24e190757cacab907bdb361c502-446x594.webp"}
+          alt={settings?.aboutHeadshotAlt || "Jeremy Kluth"}
           loading="lazy"
           class="w-full object-cover"
         />

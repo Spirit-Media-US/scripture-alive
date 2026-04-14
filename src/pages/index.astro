@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getFeaturedTestimonials } from "../utils/sanity";
+import { getFeaturedTestimonials, getSiteSettings } from "../utils/sanity";
 
 const featuredTestimonials = await getFeaturedTestimonials();
+const settings = await getSiteSettings();
 const totalSlides = featuredTestimonials.length;
 ---
 
@@ -142,8 +143,8 @@ const totalSlides = featuredTestimonials.length;
 
       <a href="/performances" class="block group text-center">
         <div class="relative overflow-hidden rounded h-48">
-          <img src="https://cdn.sanity.io/images/vxczpihg/production/77e01b90ecf67d8a98bd7b81065106b062648bf3-354x177.webp"
-            alt="Scripture Performances" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <img src={settings?.homePerformancesImage || "https://cdn.sanity.io/images/vxczpihg/production/77e01b90ecf67d8a98bd7b81065106b062648bf3-354x177.webp"}
+            alt={settings?.homePerformancesAlt || "Scripture Performances"} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
         </div>
         <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Performances</h3>
         <p class="text-gray-600 text-sm">Full books of the Bible performed word-for-word from memory.</p>
@@ -151,8 +152,8 @@ const totalSlides = featuredTestimonials.length;
 
       <a href="/workshops" class="block group text-center">
         <div class="relative overflow-hidden rounded h-48">
-          <img src="https://cdn.sanity.io/images/vxczpihg/production/adab64545b5f89913fecdfea364d41c884f063cc-354x177.webp"
-            alt="Scripture Memory Workshops" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <img src={settings?.homeWorkshopsImage || "https://cdn.sanity.io/images/vxczpihg/production/adab64545b5f89913fecdfea364d41c884f063cc-354x177.webp"}
+            alt={settings?.homeWorkshopsAlt || "Scripture Memory Workshops"} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
         </div>
         <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Workshops</h3>
         <p class="text-gray-600 text-sm">Hands-on sessions that equip people to memorize Scripture and live it out.</p>
@@ -160,8 +161,8 @@ const totalSlides = featuredTestimonials.length;
 
       <a href="/speaking" class="block group text-center">
         <div class="relative overflow-hidden rounded h-48">
-          <img src="https://cdn.sanity.io/images/vxczpihg/production/8e31433446554b2eb54ea4a475dec26aa0af6dcd-354x177.webp"
-            alt="Guest Speaking" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <img src={settings?.homeSpeakingImage || "https://cdn.sanity.io/images/vxczpihg/production/8e31433446554b2eb54ea4a475dec26aa0af6dcd-354x177.webp"}
+            alt={settings?.homeSpeakingAlt || "Guest Speaking"} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
         </div>
         <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Speaking</h3>
         <p class="text-gray-600 text-sm">Powerful spoken messages for churches, camps, podcasts, and events.</p>
