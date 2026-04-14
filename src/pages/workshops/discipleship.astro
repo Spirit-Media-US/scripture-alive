@@ -1,29 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getServiceItems } from "../../utils/sanity";
 
-const workshops = [
-	{
-		title: "Praying the Word",
-		description:
-			"How to use Scripture memory for greater depth and confidence in your prayer life. This workshop teaches participants to weave memorized passages into their prayers — enriching conversations with God through His own words.",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/2f794fd31d202babdc31b4c7caea239a0cd6d45e-1024x682.png",
-	},
-	{
-		title: "Witnessing with the Word",
-		description:
-			"How to use Scripture memory to share the Gospel with others. Learn to draw on memorized verses naturally in evangelistic conversations — equipping you to share your faith with clarity and confidence.",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/5b5f24412ee24413a1313218d7f147eee363b941-1024x682.webp",
-	},
-	{
-		title: "Holding Fast to God's Word",
-		description:
-			"How Scripture memory can help you in seasons of trials and temptations. When the storms of life hit, having God's Word stored in your heart becomes an anchor. This workshop shows you how to lean on memorized Scripture in your hardest moments.",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/80d50746c21de9f688034d67ed88bae2efe55536-1024x682.png",
-	},
-];
+const workshops = await getServiceItems("workshops-discipleship");
 ---
 
 <Layout
@@ -65,7 +44,7 @@ const workshops = [
           </summary>
           <div class="px-6 pb-6 flex flex-col gap-4">
             <img
-              src={workshop.image}
+              src={workshop.imageUrl}
               alt={`${workshop.title} Workshop`}
               loading="lazy"
               class="w-full rounded"

@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__sanity__get_project_studios",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_install",
+      "mcp__netlify__netlify-project-services-reader",
+      "mcp__netlify__netlify-deploy-services-updater",
+      "mcp__netlify__netlify-deploy-services-reader"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "stitch",
+    "sanity",
+    "netlify",
+    "cloudflare",
+    "playwright",
+    "prod-ghl-mcp",
+    "google-docs"
+  ]
+}

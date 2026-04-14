@@ -1,31 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getServiceItems } from "../../utils/sanity";
 
-const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
-
-const characters = [
-	{
-		title: "Paul",
-		description:
-			"Step into the sandals of the Apostle Paul — a first-person performance drawn from Paul's letters and Acts. Experience the passion, the persecution, and the unshakable faith of one of history's greatest missionaries.",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/5b5f24412ee24413a1313218d7f147eee363b941-1024x682.webp",
-	},
-	{
-		title: "Elijah",
-		description:
-			"A dramatic first-person portrayal of the prophet Elijah — from the heights of Mount Carmel to the wilderness of despair and the still small voice of God. A powerful performance for conferences, retreats, and special services.",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/38324834d0ffccdfaf850977f387480d77821cdb-1024x682.webp",
-	},
-	{
-		title: "Peter",
-		description:
-			"Walk with Simon Peter from his first encounter with Jesus to his restoration after the resurrection. A deeply human and redemptive performance drawn directly from Scripture.",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/942aa7d8126971cf426041b33e23c0a016d850cc-1024x682.webp",
-	},
-];
+const characters = await getServiceItems("performances-characters");
 ---
 
 <Layout
@@ -67,9 +44,9 @@ const characters = [
             <span class="text-accent font-bold text-xl transition-transform group-open:rotate-45">+</span>
           </summary>
           <div class="px-6 pb-6 flex flex-col gap-4">
-            {character.image ? (
+            {character.imageUrl ? (
               <img
-                src={character.image}
+                src={character.imageUrl}
                 alt={`${character.title} Performance`}
                 loading="lazy"
                 class="w-full rounded"

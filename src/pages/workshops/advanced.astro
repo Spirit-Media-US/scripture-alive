@@ -1,15 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getServiceItems } from "../../utils/sanity";
 
-const workshops = [
-	{
-		title: "Acting the Word",
-		description:
-			"Training others to perform Scripture as a dramatic text. This advanced workshop goes beyond memorization into the art of dramatic presentation — teaching vocal technique, character embodiment, staging, and the unique craft of bringing the Bible to life through performance.",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png",
-	},
-];
+const workshops = await getServiceItems("workshops-advanced");
 ---
 
 <Layout
@@ -51,7 +44,7 @@ const workshops = [
           </summary>
           <div class="px-6 pb-6 flex flex-col gap-4">
             <img
-              src={workshop.image}
+              src={workshop.imageUrl}
               alt={`${workshop.title} Workshop`}
               loading="lazy"
               class="w-full rounded"

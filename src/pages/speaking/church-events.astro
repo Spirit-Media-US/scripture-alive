@@ -1,50 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getServiceItems } from "../../utils/sanity";
 
-const items = [
-	{
-		title: "Elijah: God Provides in Tough Times",
-		description:
-			"Elijah's journey is filled with incredible stories of obedience, faith, and provision in the midst of a drought, a depression, and a departure as he is tested to trust in the word of the Lord. Any chapter from 1 Kings 17–2 Kings 2 can be chosen for a sermon, or all can be chosen for a retreat or camp week.",
-		image:
-			"https://assets.spiritmediapublishing.com/scripture-alive/speaking-elijah.webp",
-	},
-	{
-		title: "Daniel: Being Godly in an Ungodly World",
-		description:
-			"From a young teenager to an old man, Daniel sets us an example worthy to be emulated in his speech, in his conduct, in his love, in his faith, and in his purity, all while being forced to live in a culture of the ungodly. Any chapter from 1–6 can be chosen for a sermon, or all can be chosen for a retreat or camp week.",
-		image:
-			"https://assets.spiritmediapublishing.com/scripture-alive/speaking-daniel.webp",
-	},
-	{
-		title: "Paul: Steadfastness & Stability in an Anxious World",
-		description:
-			"No matter the circumstance, whether it be imprisonment, being stoned, or being shipwrecked, Paul was a constant non-anxious presence wherever he went and a steadfast proclaimer of the Gospel to all he came in contact with, which gives us a blueprint for how we ought to act in our own world today. Chapters from Acts 9–28 can be chosen for a sermon, or the whole journey of Paul's life can be chosen for a retreat.",
-		image:
-			"https://assets.spiritmediapublishing.com/scripture-alive/speaking-paul.webp",
-	},
-	{
-		title: "John's Gospel: That You May Believe",
-		description:
-			"In this Gospel account, John recounts many of the miracles and teachings of Jesus in an effort to show His divinity that we may believe He truly is the Christ and that we might have life in His name. This is a five-part series that works well with retreats, but can also be modified as a sermon for a chapter or passage from John's Gospel.",
-		image:
-			"https://assets.spiritmediapublishing.com/scripture-alive/speaking-john-gospel.jpg",
-	},
-	{
-		title: "1 Peter: Suffering for Christ",
-		description:
-			"Peter makes it clear that we should not be surprised at the fiery trial when it comes upon us to test us as though something strange was happening to us, but rather we are to rejoice insofar as we share Christ's sufferings. Christ set the standard for suffering well as a believer, so it's vital for us to learn how to suffer well as sojourners and exiles in this world. Can be any or all five chapters for a retreat or sermon.",
-		image:
-			"https://assets.spiritmediapublishing.com/scripture-alive/speaking-peter.png",
-	},
-	{
-		title: "Custom Programs/Sermons",
-		description:
-			"Doing a topical sermon series or an in-depth study of a narrative book like Genesis or Acts and want to stay on track? You can also request Jeremy to study and memorize a passage, chapter, or verses on a specific topic for his performance and preaching combination.",
-		image:
-			"https://assets.spiritmediapublishing.com/scripture-alive/speaking-custom-programs.webp",
-	},
-];
+const items = await getServiceItems("speaking-church-events");
 ---
 
 <Layout
@@ -86,7 +44,7 @@ const items = [
           </summary>
           <div class="px-6 pb-6 flex flex-col gap-4">
             <img
-              src={item.image}
+              src={item.imageUrl}
               alt={item.title}
               loading="lazy"
               class="w-full rounded"
