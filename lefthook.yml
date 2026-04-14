@@ -13,23 +13,6 @@ pre-push:
         - merge
         - rebase
 
-post-push:
-  commands:
-    wrangler-deploy:
-      run: |
-        BRANCH=$(git rev-parse --abbrev-ref HEAD)
-        if [ "$BRANCH" = "dev" ] || [ "$BRANCH" = "main" ]; then
-          echo "⚡ Uploading dist/ to Cloudflare Pages (branch: $BRANCH)..."
-          source /home/deploy/.secrets
-          CLOUDFLARE_ACCOUNT_ID=193f7a497a37609cd0be366ecbb19122 \
-          CLOUDFLARE_API_TOKEN=$CLOUDFLARE_PAGES_TOKEN \
-          npx wrangler pages deploy dist/ \
-            --project-name=scripture-alive \
-            --branch=$BRANCH \
-            --commit-dirty=true \
-            2>&1 | tail -3
-        fi
-
 pre-commit:
   commands:
     behind-remote:
