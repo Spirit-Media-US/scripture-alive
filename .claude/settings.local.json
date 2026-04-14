@@ -6,7 +6,9 @@
       "mcp__playwright__browser_install",
       "mcp__netlify__netlify-project-services-reader",
       "mcp__netlify__netlify-deploy-services-updater",
-      "mcp__netlify__netlify-deploy-services-reader"
+      "mcp__netlify__netlify-deploy-services-reader",
+      "mcp__sanity__query_documents",
+      "mcp__sanity__create_documents_from_json"
     ]
   },
   "enabledMcpjsonServers": [
