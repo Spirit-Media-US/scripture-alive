@@ -145,6 +145,23 @@ export async function getBlogPost(slug: string) {
 	return sanityClient.fetch(BLOG_POST_QUERY, { slug });
 }
 
+// ── Service Items ────────────────────────────────────────────
+export const SERVICE_ITEMS_QUERY = defineQuery(`
+  *[_type == "serviceItem" && category == $category] | order(order asc) {
+    _id,
+    title,
+    description,
+    "imageUrl": coalesce(image.asset->url, imageUrl),
+    "imageAlt": image.alt,
+    category,
+    order
+  }
+`);
+
+export async function getServiceItems(category: string) {
+	return sanityClient.fetch(SERVICE_ITEMS_QUERY, { category });
+}
+
 // ── Resources ─────────────────────────────────────────────────
 export const RESOURCES_QUERY = defineQuery(`
   *[_type == "resource"] | order(order asc) {

@@ -1,29 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getServiceItems } from "../../utils/sanity";
 
-const items = [
-	{
-		title: "Pastor & Staff Training",
-		description:
-			"Equipping pastors and church staff with practical tools for integrating Scripture memorization into their ministry rhythm. Jeremy shares proven methods that help leaders model and champion Bible engagement in their congregations. [Placeholder — Jeremy to provide final content]",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/2f794fd31d202babdc31b4c7caea239a0cd6d45e-1024x682.png",
-	},
-	{
-		title: "Church Leadership Retreats",
-		description:
-			"A focused retreat experience designed for church leadership teams — combining Scripture memory training with team building and spiritual renewal. Perfect for elder boards, deacon teams, and ministry leaders. [Placeholder — Jeremy to provide final content]",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/5b5f24412ee24413a1313218d7f147eee363b941-1024x682.webp",
-	},
-	{
-		title: "Ministry Team Development",
-		description:
-			"Training ministry teams to effectively use Scripture in their areas of service — from youth ministry to worship teams to small group leaders. Jeremy provides practical frameworks for building Scripture-centered ministry culture. [Placeholder — Jeremy to provide final content]",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/80d50746c21de9f688034d67ed88bae2efe55536-1024x682.png",
-	},
-];
+const items = await getServiceItems("speaking-leadership");
 ---
 
 <Layout
@@ -65,7 +44,7 @@ const items = [
           </summary>
           <div class="px-6 pb-6 flex flex-col gap-4">
             <img
-              src={item.image}
+              src={item.imageUrl}
               alt={item.title}
               loading="lazy"
               class="w-full rounded"

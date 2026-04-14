@@ -1,29 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getServiceItems } from "../../utils/sanity";
 
-const items = [
-	{
-		title: "One-on-One Coaching",
-		description:
-			"Personalized coaching sessions tailored to your Scripture memorization goals. Whether you're memorizing your first chapter or preparing to perform an entire book, Jeremy provides expert guidance every step of the way. [Placeholder — Jeremy to provide final content]",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/38324834d0ffccdfaf850977f387480d77821cdb-1024x682.webp",
-	},
-	{
-		title: "Group Coaching Sessions",
-		description:
-			"Small group coaching for teams, families, or ministry groups working through Scripture memorization together. Jeremy leads interactive sessions that build accountability, confidence, and lasting habits. [Placeholder — Jeremy to provide final content]",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/942aa7d8126971cf426041b33e23c0a016d850cc-1024x682.webp",
-	},
-	{
-		title: "Custom Coaching Program",
-		description:
-			"A tailored coaching program designed around your specific needs — whether it's Scripture memorization, public reading, or dramatic performance preparation. Jeremy works with you to create a plan that fits your goals and timeline. [Placeholder — Jeremy to provide final content]",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/764d21372720ef6071ce1eb266d0cd271e296b48-1024x682.webp",
-	},
-];
+const items = await getServiceItems("speaking-coaching");
 ---
 
 <Layout
@@ -65,7 +44,7 @@ const items = [
           </summary>
           <div class="px-6 pb-6 flex flex-col gap-4">
             <img
-              src={item.image}
+              src={item.imageUrl}
               alt={item.title}
               loading="lazy"
               class="w-full rounded"

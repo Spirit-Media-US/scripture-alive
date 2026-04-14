@@ -1,31 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getServiceItems } from "../../utils/sanity";
 
-const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
-
-const stories = [
-	{
-		title: "One-Man Passion Play",
-		description:
-			"A powerful dramatic narrative of the crucifixion and resurrection of Jesus — weaving multiple voices and perspectives into one unforgettable performance. Perfect for Holy Week, Easter services, and large-event settings.",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/80d50746c21de9f688034d67ed88bae2efe55536-1024x682.png",
-	},
-	{
-		title: "The Advent Story",
-		description:
-			"A candlelit journey through the birth of Christ — from the prophecies of Isaiah to the manger in Bethlehem. A moving performance perfect for Advent and Christmas services.",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/764d21372720ef6071ce1eb266d0cd271e296b48-1024x682.webp",
-	},
-	{
-		title: "The Beginning and the End",
-		description:
-			"A sweeping dramatization spanning Genesis to Revelation — creation, the fall, redemption, and the new creation. An awe-inspiring performance that gives audiences the full arc of God's story.",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/46ac44a2b33668bdb4755644d913d0036a718f60-1024x682.webp",
-	},
-];
+const stories = await getServiceItems("performances-narratives");
 ---
 
 <Layout
@@ -67,9 +44,9 @@ const stories = [
             <span class="text-accent font-bold text-xl transition-transform group-open:rotate-45">+</span>
           </summary>
           <div class="px-6 pb-6 flex flex-col gap-4">
-            {story.image ? (
+            {story.imageUrl ? (
               <img
-                src={story.image}
+                src={story.imageUrl}
                 alt={`${story.title} Performance`}
                 loading="lazy"
                 class="w-full rounded"

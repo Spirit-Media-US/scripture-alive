@@ -1,29 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getServiceItems } from "../../utils/sanity";
 
-const items = [
-	{
-		title: "Scripture Memory & the Christian Life",
-		description:
-			"Jeremy shares the transformative power of memorizing Scripture and how it shapes every area of the Christian life — from prayer to evangelism to enduring trials. A compelling conversation for any audience passionate about God's Word. [Placeholder — Jeremy to provide final content]",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/da0764f78c42eac49abd6c968a0ac4e505546fc0-1024x576.webp",
-	},
-	{
-		title: "The Art of Biblical Performance",
-		description:
-			"What does it look like to perform entire books of the Bible from memory? Jeremy shares the journey, the discipline, and the profound impact of dramatic Scripture presentation on audiences around the country. [Placeholder — Jeremy to provide final content]",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/95f6eca3784e25f56fab50d2b06c8245915244ac-1024x759.webp",
-	},
-	{
-		title: "Custom Topic Request",
-		description:
-			"Have a specific topic you'd like Jeremy to speak about on your podcast or radio show? From biblical heroes to practical Scripture application, Jeremy is available to discuss a wide range of Bible-centered topics. [Placeholder — Jeremy to provide final content]",
-		image:
-			"https://cdn.sanity.io/images/vxczpihg/production/0d09808dd1e4a9bff945b742d454abf57c0a65f3-1200x900.webp",
-	},
-];
+const items = await getServiceItems("speaking-podcast");
 ---
 
 <Layout
@@ -65,7 +44,7 @@ const items = [
           </summary>
           <div class="px-6 pb-6 flex flex-col gap-4">
             <img
-              src={item.image}
+              src={item.imageUrl}
               alt={item.title}
               loading="lazy"
               class="w-full rounded"
