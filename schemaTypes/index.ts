@@ -5,6 +5,7 @@ import { performance } from "./performance";
 import { product } from "./product";
 import { resource } from "./resource";
 import { serviceItem } from "./serviceItem";
+import { siteSettings } from "./siteSettings";
 import { testimonial } from "./testimonial";
 
 export const schemaTypes = [
@@ -16,4 +17,5 @@ export const schemaTypes = [
 	blogPost,
 	resource,
 	serviceItem,
+	siteSettings,
 ];

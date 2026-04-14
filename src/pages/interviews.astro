@@ -1,10 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getInterviews } from "../utils/sanity";
+import { getInterviews, getSiteSettings } from "../utils/sanity";
 
+const settings = await getSiteSettings();
 const genericThumb =
+	settings?.interviewsGenericThumb ||
 	"https://cdn.sanity.io/images/vxczpihg/production/da0764f78c42eac49abd6c968a0ac4e505546fc0-1024x576.webp";
 const bioPhoto =
+	settings?.interviewsBioPhoto ||
 	"https://cdn.sanity.io/images/vxczpihg/production/ff662f2e455548bebc940040a43656e153954c86-286x397.webp";
 
 const interviews = await getInterviews();
