@@ -60,11 +60,10 @@ const currentPath = Astro.url.pathname;
   {description && <meta name="twitter:description" content={description} />}
   {jsonld && <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />}
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
+  <link rel="preconnect" href="https://assets.spiritmediapublishing.com" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-500.woff2" crossorigin />
   <slot name="head" />
   <!-- Google tag (GA4) — deferred until after window load to free main thread for LCP -->
   <script>
