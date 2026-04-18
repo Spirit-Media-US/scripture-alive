@@ -26,11 +26,30 @@ const totalSlides = featuredTestimonials.length;
   }}
 >
 
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=1200&fm=webp&q=75" fetchpriority="high" />
+  </Fragment>
+
   <!-- HERO SECTION — full screen, transparent nav shows over video -->
   <section class="relative h-screen flex items-center justify-center overflow-hidden" style="margin-top: -140px;">
-    <video
+    <img
+      src="https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=1200&fm=webp&q=75"
+      srcset="https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=640&fm=webp&q=75 640w, https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=1200&fm=webp&q=75 1200w, https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=1920&fm=webp&q=80 1920w"
+      sizes="100vw"
+      width="1920"
+      height="968"
+      alt=""
+      aria-hidden="true"
+      fetchpriority="high"
+      loading="eager"
+      decoding="async"
       class="absolute inset-0 w-full h-full object-cover z-0"
-      autoplay muted playsinline loop aria-hidden="true"
+      id="hero-poster"
+    />
+    <video
+      class="absolute inset-0 w-full h-full object-cover z-0 opacity-0 transition-opacity duration-500"
+      autoplay muted playsinline loop preload="none" aria-hidden="true"
+      id="hero-video"
     >
       <source src="https://assets.spiritmediapublishing.com/scripture-alive/scripture-alive-hero.mp4" type="video/mp4" />
     </video>
@@ -144,7 +163,7 @@ const totalSlides = featuredTestimonials.length;
       <a href="/performances" class="block group text-center">
         <div class="relative overflow-hidden rounded h-48">
           <img src={settings?.homePerformancesImage || "https://cdn.sanity.io/images/vxczpihg/production/77e01b90ecf67d8a98bd7b81065106b062648bf3-354x177.webp"}
-            alt={settings?.homePerformancesAlt || "Scripture Performances"} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            alt={settings?.homePerformancesAlt || "Scripture Performances"} width="354" height="177" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
         </div>
         <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Performances</h3>
         <p class="text-gray-600 text-sm">Full books of the Bible performed word-for-word from memory.</p>
@@ -153,7 +172,7 @@ const totalSlides = featuredTestimonials.length;
       <a href="/workshops" class="block group text-center">
         <div class="relative overflow-hidden rounded h-48">
           <img src={settings?.homeWorkshopsImage || "https://cdn.sanity.io/images/vxczpihg/production/adab64545b5f89913fecdfea364d41c884f063cc-354x177.webp"}
-            alt={settings?.homeWorkshopsAlt || "Scripture Memory Workshops"} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            alt={settings?.homeWorkshopsAlt || "Scripture Memory Workshops"} width="354" height="177" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
         </div>
         <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Workshops</h3>
         <p class="text-gray-600 text-sm">Hands-on sessions that equip people to memorize Scripture and live it out.</p>
@@ -162,7 +181,7 @@ const totalSlides = featuredTestimonials.length;
       <a href="/speaking" class="block group text-center">
         <div class="relative overflow-hidden rounded h-48">
           <img src={settings?.homeSpeakingImage || "https://cdn.sanity.io/images/vxczpihg/production/8e31433446554b2eb54ea4a475dec26aa0af6dcd-354x177.webp"}
-            alt={settings?.homeSpeakingAlt || "Guest Speaking"} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            alt={settings?.homeSpeakingAlt || "Guest Speaking"} width="354" height="177" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
         </div>
         <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Speaking</h3>
         <p class="text-gray-600 text-sm">Powerful spoken messages for churches, camps, podcasts, and events.</p>
@@ -172,6 +191,19 @@ const totalSlides = featuredTestimonials.length;
   </section>
 
   <script>
+    // Defer hero video load until page is interactive — poster image handles LCP
+    window.addEventListener('load', () => {
+      const video = document.getElementById('hero-video') as HTMLVideoElement | null;
+      const poster = document.getElementById('hero-poster');
+      if (!video) return;
+      video.preload = 'auto';
+      video.load();
+      video.addEventListener('playing', () => {
+        video.classList.remove('opacity-0');
+        if (poster) poster.style.opacity = '0';
+      }, { once: true });
+    });
+
     const track = document.getElementById('endorsement-track');
     const dotsContainer = document.getElementById('endorsement-dots');
     const dots = dotsContainer?.querySelectorAll('button') ?? [];

@@ -62,17 +62,23 @@ const currentPath = Astro.url.pathname;
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=block" as="style" />
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=block" rel="stylesheet" />
-  <!-- Google tag (GA4) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W3R21TNHTX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-W3R21TNHTX');
-  </script>
+  <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
   <slot name="head" />
+  <!-- Google tag (GA4) — deferred until after window load to free main thread for LCP -->
+  <script>
+    window.addEventListener('load', () => {
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W3R21TNHTX';
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-W3R21TNHTX');
+    });
+  </script>
 </head>
 <body>
   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded focus:shadow">Skip to main content</a>
@@ -80,7 +86,7 @@ const currentPath = Astro.url.pathname;
   <!-- Navigation: transparent on homepage hero, solid white on all other pages -->
   <header id="site-header" class={`sticky top-0 z-50 transition-colors duration-300 ${currentPath === '/' ? 'bg-transparent' : 'bg-white shadow-sm'}`}>
     <nav class="max-w-6xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
-      <a href="/"><img src="https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp" alt="Scripture Alive" class="h-[60px] md:h-[108px] w-auto" /></a>
+      <a href="/"><img src="https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp?w=220&fm=webp&q=85" alt="Scripture Alive" width="110" height="55" fetchpriority="high" decoding="async" class="h-[60px] md:h-[108px] w-auto" /></a>
       <ul class="hidden lg:flex items-center gap-4 xl:gap-6">
         {navItems.map(item => (
           <li class="relative group">
@@ -201,7 +207,7 @@ const currentPath = Astro.url.pathname;
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
       <!-- Logo + contact info side by side -->
       <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-        <img src="https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp" alt="Scripture Alive" class="h-20 w-auto" />
+        <img src="https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp?w=200&fm=webp&q=85" alt="Scripture Alive" width="160" height="80" loading="lazy" decoding="async" class="h-20 w-auto" />
         <div class="flex flex-col gap-2 text-sm text-white/80">
           <a href="mailto:jeremy@scripturealive.com" class="hover:text-primary flex items-center gap-1.5 text-left cursor-pointer bg-transparent border-0 p-0 text-white/80">
             <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
