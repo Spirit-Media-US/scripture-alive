@@ -46,3 +46,8 @@ pre-commit:
       skip:
         - merge
         - rebase
+    100club-lint:
+      run: /home/deploy/bin/100club-lint.sh
+      skip:
+        - merge
+        - rebase

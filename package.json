@@ -3,7 +3,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "astro dev --port 4329",
-		"build": "rm -rf public/studio && sanity build public/studio --yes && sed -i 's|src=\"/static/|src=\"static/|g' public/studio/index.html && astro build",
+		"build": "rm -rf public/studio && sanity build public/studio --yes && sed -i 's|src=\"/static/|src=\"static/|g' public/studio/index.html && astro build && node scripts/async-css.mjs && node scripts/100club-verify.mjs",
 		"preview": "astro preview"
 	},
 	"dependencies": {
@@ -20,6 +20,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.9",
-		"lefthook": "^2.1.4"
+		"lefthook": "^2.1.4",
+		"playwright-core": "^1.59.1"
 	}
 }
