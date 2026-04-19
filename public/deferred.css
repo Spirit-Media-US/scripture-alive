@@ -1,19 +1,32 @@
 /* Deferred font faces — loaded via non-blocking <link rel="stylesheet"> after critical render */
 /* These weights/families are used below-the-fold or on interior pages. */
+/*
+ * All deferred fonts use font-display: optional for CLS protection.
+ * `optional` means: if the font isn't downloaded within ~100ms of the document
+ * load, never swap during this session. On fast connections + cached fonts,
+ * users see the custom fonts. On slow connections (Lighthouse simulations,
+ * real bad networks), text stays in system fallback with zero layout shift.
+ *
+ * Why not font-display: swap here: the swap moment re-flows every paragraph
+ * using that weight, and our page has enough font-serif / font-bold / font-
+ * semibold text to aggregate a CLS score of 0.25 when three deferred weights
+ * arrive mid-trace. Optional accepts a visual regression on first-load-slow
+ * to protect the Core Web Vital.
+ */
 
 /* Dancing Script: additional weights for decorative headings */
-@font-face{font-family:'Dancing Script';font-style:normal;font-weight:500;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-500.woff2') format('woff2');}
-@font-face{font-family:'Dancing Script';font-style:normal;font-weight:600;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-600.woff2') format('woff2');}
-@font-face{font-family:'Dancing Script';font-style:normal;font-weight:700;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-700.woff2') format('woff2');}
+@font-face{font-family:'Dancing Script';font-style:normal;font-weight:500;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-500.woff2') format('woff2');}
+@font-face{font-family:'Dancing Script';font-style:normal;font-weight:600;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-600.woff2') format('woff2');}
+@font-face{font-family:'Dancing Script';font-style:normal;font-weight:700;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-700.woff2') format('woff2');}
 
 /* Montserrat: non-critical weights. 500/600 used on nav but moved out of critical
    so they stay off the slow-4G LCP dep chain — renders via system-ui fallback first. */
-@font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2') format('woff2');}
-@font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-600.woff2') format('woff2');}
-@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2') format('woff2');}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2') format('woff2');}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-600.woff2') format('woff2');}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2') format('woff2');}
 
 /* Roboto Slab: secondary serif for interior page headings (font-serif utility) */
-@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:400;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/roboto-slab/roboto-slab-400.woff2') format('woff2');}
-@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:500;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/roboto-slab/roboto-slab-500.woff2') format('woff2');}
-@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:600;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/roboto-slab/roboto-slab-600.woff2') format('woff2');}
-@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:700;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/roboto-slab/roboto-slab-700.woff2') format('woff2');}
+@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:400;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/roboto-slab/roboto-slab-400.woff2') format('woff2');}
+@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:500;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/roboto-slab/roboto-slab-500.woff2') format('woff2');}
+@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:600;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/roboto-slab/roboto-slab-600.woff2') format('woff2');}
+@font-face{font-family:'Roboto Slab';font-style:normal;font-weight:700;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/roboto-slab/roboto-slab-700.woff2') format('woff2');}
