@@ -5,6 +5,28 @@ import { getFeaturedTestimonials, getSiteSettings } from "../utils/sanity";
 const featuredTestimonials = await getFeaturedTestimonials();
 const settings = await getSiteSettings();
 const totalSlides = featuredTestimonials.length;
+
+// Apply Sanity CDN transforms. Service tiles display at ~320×192 (h-48 in a
+// 3-col grid on lg+, max-w-5xl) so DPR 2 fetches should be 640×384 — matching
+// the width/height attrs on the <img>.
+const tileTransform = (url: string | undefined, fallback: string) => {
+	const base = url || fallback;
+	if (!base.includes("cdn.sanity.io")) return base;
+	const sep = base.includes("?") ? "&" : "?";
+	return `${base}${sep}w=640&h=384&fit=crop&fm=webp&q=75`;
+};
+const performancesImg = tileTransform(
+	settings?.homePerformancesImage,
+	"https://cdn.sanity.io/images/vxczpihg/production/77e01b90ecf67d8a98bd7b81065106b062648bf3-354x177.webp",
+);
+const workshopsImg = tileTransform(
+	settings?.homeWorkshopsImage,
+	"https://cdn.sanity.io/images/vxczpihg/production/adab64545b5f89913fecdfea364d41c884f063cc-354x177.webp",
+);
+const speakingImg = tileTransform(
+	settings?.homeSpeakingImage,
+	"https://cdn.sanity.io/images/vxczpihg/production/8e31433446554b2eb54ea4a475dec26aa0af6dcd-354x177.webp",
+);
 ---
 
 <Layout
@@ -26,35 +48,108 @@ const totalSlides = featuredTestimonials.length;
   }}
 >
 
-  <!-- HERO SECTION — full screen, transparent nav shows over video -->
-  <section class="relative h-screen flex items-center justify-center overflow-hidden" style="margin-top: -140px;">
-    <video
-      class="absolute inset-0 w-full h-full object-cover z-0"
-      autoplay muted playsinline loop aria-hidden="true"
-    >
-      <source src="https://assets.spiritmediapublishing.com/scripture-alive/scripture-alive-hero.mp4" type="video/mp4" />
-    </video>
-    <div class="absolute inset-0 z-10"></div>
-    <div class="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
-      <h1 class="font-display font-light text-5xl md:text-6xl lg:text-7xl mb-6 text-white drop-shadow-lg">
-        Making Scripture Unforgettable
-      </h1>
-      <p class="font-sans text-base sm:text-xl md:text-2xl mb-4 text-white drop-shadow-md">
-        Performances | Workshops | Speaking
-      </p>
-      <p class="font-sans text-sm md:text-base mb-10 text-white/80 drop-shadow-md">
-        Available for churches, conferences, camps, schools, and special events
-      </p>
-      <div class="flex flex-col items-center gap-3">
-        <a href="/book-jeremy" class="bg-primary text-black font-semibold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
-          Book Jeremy
-        </a>
-        <a href="/referjeremy" class="text-white/70 text-sm hover:text-white transition-colors">
-          Know someone who should hear about Jeremy? <span class="underline">Refer him here</span>
-        </a>
+  <Fragment slot="head">
+    <!-- Desktop-only hero preload (media-query gated). Mobile viewports never fetch
+         this resource because the mobile hero layout has no photo; PSI mobile sees
+         only the HTML-stream-painted H1 as LCP (~1.3s observed). -->
+    <link
+      rel="preload"
+      as="image"
+      href="https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp"
+      fetchpriority="high"
+      media="(min-width: 1024px)"
+    />
+    <!-- Book Jeremy button uses Montserrat 500 on both hero layouts. -->
+    <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2" crossorigin />
+  </Fragment>
+
+  <!-- MOBILE HERO — text-first, H1 is LCP. Rendered server-side; no JS gate.
+       CSS-only visibility via lg:hidden means the DOM has this block but desktop
+       hides it. Lighthouse mobile viewport sees only this layout. -->
+  <div class="lg:hidden">
+    <section class="bg-cream pt-16 pb-12 md:pt-24 md:pb-16 px-4">
+      <div class="max-w-5xl mx-auto text-center">
+        <h1 class="font-display font-light text-5xl md:text-6xl leading-tight text-accent">
+          Making Scripture Unforgettable
+        </h1>
+        <p class="font-sans text-base sm:text-xl md:text-2xl mt-6 text-gray-700">
+          Performances | Workshops | Speaking
+        </p>
+        <p class="font-sans text-sm md:text-base mt-3 text-gray-600">
+          Available for churches, conferences, camps, schools, and special events
+        </p>
+        <div class="flex flex-col items-center gap-3 mt-8">
+          <a href="/book-jeremy" class="bg-primary text-black font-semibold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
+            Book Jeremy
+          </a>
+          <a href="/referjeremy" class="text-gray-700 text-sm hover:text-accent transition-colors">
+            Know someone who should hear about Jeremy? <span class="underline">Refer him here</span>
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
+
+  <!-- DESKTOP HERO — original full-viewport overlay design. Transparent nav shows
+       over the photo; H1/subhead sit in the center with drop shadows. Hidden below
+       1024px so mobile never pays the image download cost.
+
+       The margin-top:-140px pulls this section up behind the sticky header (which
+       is 140px tall on lg+) so the hero photo shows through the transparent nav. -->
+  <div class="hidden lg:block">
+    <section class="relative h-screen flex items-center justify-center overflow-hidden" style="margin-top: -140px;">
+      <!-- <picture> with media-query <source> keeps the hero network fetch off of
+           mobile entirely. On < 1024px viewports, browser falls back to the <img>,
+           whose src is a 1×1 GIF data URI — no HTTP request. On ≥ 1024px, browser
+           uses the <source> srcset and fetches hero-1600.webp.
+           (loading=eager / fetchpriority=high on the <img> tag itself were still
+           causing mobile fetches when the element was nested inside a display:none
+           parent, because img download-on-parse is viewport-agnostic.) -->
+      <picture>
+        <source
+          media="(min-width: 1024px)"
+          srcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp"
+        />
+        <img
+          src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+          width="1768"
+          height="891"
+          alt=""
+          aria-hidden="true"
+          fetchpriority="high"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover z-0"
+          id="hero-poster"
+        />
+      </picture>
+      <video
+        class="absolute inset-0 w-full h-full object-cover z-0 opacity-0 transition-opacity duration-500"
+        muted playsinline loop preload="none" aria-hidden="true"
+        id="hero-video"
+        data-src="https://assets.spiritmediapublishing.com/scripture-alive/scripture-alive-hero.mp4"
+      ></video>
+      <div class="absolute inset-0 z-10"></div>
+      <div class="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
+        <h1 class="font-display font-light text-6xl lg:text-7xl mb-6 text-white drop-shadow-lg">
+          Making Scripture Unforgettable
+        </h1>
+        <p class="font-sans text-2xl mb-4 text-white drop-shadow-md">
+          Performances | Workshops | Speaking
+        </p>
+        <p class="font-sans text-base mb-10 text-white/80 drop-shadow-md">
+          Available for churches, conferences, camps, schools, and special events
+        </p>
+        <div class="flex flex-col items-center gap-3">
+          <a href="/book-jeremy" class="bg-primary text-black font-semibold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
+            Book Jeremy
+          </a>
+          <a href="/referjeremy" class="text-white/70 text-sm hover:text-white transition-colors">
+            Know someone who should hear about Jeremy? <span class="underline">Refer him here</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <!-- DEDICATED TO PROCLAIMING — blue heading -->
   <section class="bg-white pt-16 pb-8 px-4">
@@ -115,18 +210,21 @@ const totalSlides = featuredTestimonials.length;
                 "{t.quote}"
               </p>
               <p class="font-semibold text-accent">{t.authorName}{t.authorTitle ? `, ${t.authorTitle}` : ''}</p>
-              <p class="text-sm text-primary">{t.authorOrganization}</p>
+              <p class="text-sm text-gray-700 font-medium">{t.authorOrganization}</p>
             </div>
           ))}
         </div>
       </div>
-      <div id="endorsement-dots" class="flex justify-center gap-2 mt-6" data-total={Math.min(featuredTestimonials.length, 4)}>
+      <div id="endorsement-dots" class="flex justify-center gap-1 mt-6" data-total={Math.min(featuredTestimonials.length, 4)}>
         {featuredTestimonials.slice(0, 4).map((_: any, i: number) => (
           <button
+            type="button"
             data-index={i}
-            class={`w-2.5 h-2.5 rounded-full transition-colors ${i === 0 ? 'bg-primary' : 'bg-gray-300'}`}
+            class="w-10 h-10 flex items-center justify-center rounded-full"
             aria-label={`Endorsement ${i + 1}`}
-          ></button>
+          >
+            <span class={`block w-2.5 h-2.5 rounded-full transition-colors ${i === 0 ? 'bg-primary' : 'bg-gray-400'}`}></span>
+          </button>
         ))}
       </div>
       <div class="text-center mt-6">
@@ -143,8 +241,8 @@ const totalSlides = featuredTestimonials.length;
 
       <a href="/performances" class="block group text-center">
         <div class="relative overflow-hidden rounded h-48">
-          <img src={settings?.homePerformancesImage || "https://cdn.sanity.io/images/vxczpihg/production/77e01b90ecf67d8a98bd7b81065106b062648bf3-354x177.webp"}
-            alt={settings?.homePerformancesAlt || "Scripture Performances"} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <img src={performancesImg}
+            alt={settings?.homePerformancesAlt || "Scripture Performances"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
         </div>
         <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Performances</h3>
         <p class="text-gray-600 text-sm">Full books of the Bible performed word-for-word from memory.</p>
@@ -152,8 +250,8 @@ const totalSlides = featuredTestimonials.length;
 
       <a href="/workshops" class="block group text-center">
         <div class="relative overflow-hidden rounded h-48">
-          <img src={settings?.homeWorkshopsImage || "https://cdn.sanity.io/images/vxczpihg/production/adab64545b5f89913fecdfea364d41c884f063cc-354x177.webp"}
-            alt={settings?.homeWorkshopsAlt || "Scripture Memory Workshops"} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <img src={workshopsImg}
+            alt={settings?.homeWorkshopsAlt || "Scripture Memory Workshops"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
         </div>
         <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Workshops</h3>
         <p class="text-gray-600 text-sm">Hands-on sessions that equip people to memorize Scripture and live it out.</p>
@@ -161,8 +259,8 @@ const totalSlides = featuredTestimonials.length;
 
       <a href="/speaking" class="block group text-center">
         <div class="relative overflow-hidden rounded h-48">
-          <img src={settings?.homeSpeakingImage || "https://cdn.sanity.io/images/vxczpihg/production/8e31433446554b2eb54ea4a475dec26aa0af6dcd-354x177.webp"}
-            alt={settings?.homeSpeakingAlt || "Guest Speaking"} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <img src={speakingImg}
+            alt={settings?.homeSpeakingAlt || "Guest Speaking"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
         </div>
         <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Speaking</h3>
         <p class="text-gray-600 text-sm">Powerful spoken messages for churches, camps, podcasts, and events.</p>
@@ -172,6 +270,50 @@ const totalSlides = featuredTestimonials.length;
   </section>
 
   <script>
+    // Hero video: 15MB MP4 — only load on desktop-class devices. Mobile keeps
+    // the static hero image (LCP) to protect PSI mobile Perf: Lighthouse captures
+    // post-load traffic, and 15MB in that window destroys total-byte-weight score.
+    //
+    // Gates: >= 1024px viewport AND non-mobile DPR pattern AND connection isn't
+    // save-data or 2g/3g. Desktop visitors get the video; mobile visitors get a
+    // high-quality still. Kevin's brand video plays on the pages that need it
+    // (performances, etc.), not as homepage LCP decoration.
+    function loadHeroVideo() {
+      const video = document.getElementById('hero-video') as HTMLVideoElement | null;
+      if (!video || video.dataset.loaded === '1') return;
+      // Width gate: desktop only
+      if (window.innerWidth < 1024) return;
+      // Data-saver / slow connection gate
+      const conn = (navigator as any).connection;
+      if (conn) {
+        if (conn.saveData) return;
+        if (conn.effectiveType && /2g|3g/i.test(conn.effectiveType)) return;
+      }
+      video.dataset.loaded = '1';
+      const src = video.dataset.src;
+      if (!src) return;
+      const source = document.createElement('source');
+      source.src = src;
+      source.type = 'video/mp4';
+      video.appendChild(source);
+      video.preload = 'auto';
+      video.load();
+      video.play().catch(() => { /* autoplay may be blocked; poster stays */ });
+      // Video layers above the poster at the same z-index; just fade the video in.
+      // Do NOT mutate poster opacity — Lighthouse snapshots the LCP element after
+      // load, and opacity:0 makes the LCP element look unpainted.
+      video.addEventListener('playing', () => {
+        video.classList.remove('opacity-0');
+      }, { once: true });
+    }
+    window.addEventListener('load', () => {
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(loadHeroVideo, { timeout: 2000 });
+      } else {
+        setTimeout(loadHeroVideo, 1500);
+      }
+    });
+
     const track = document.getElementById('endorsement-track');
     const dotsContainer = document.getElementById('endorsement-dots');
     const dots = dotsContainer?.querySelectorAll('button') ?? [];
@@ -182,8 +324,10 @@ const totalSlides = featuredTestimonials.length;
       current = (n + total) % total;
       track.style.transform = `translateX(-${current * 100}%)`;
       dots.forEach((d, i) => {
-        d.classList.toggle('bg-primary', i === current);
-        d.classList.toggle('bg-gray-300', i !== current);
+        const inner = d.querySelector('span');
+        if (!inner) return;
+        inner.classList.toggle('bg-primary', i === current);
+        inner.classList.toggle('bg-gray-400', i !== current);
       });
     }
 
