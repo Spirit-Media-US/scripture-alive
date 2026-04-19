@@ -79,8 +79,9 @@ const currentPath = Astro.url.pathname;
     /* @font-face: CSS spec forbids inside @layer, so top-level only */
     @font-face{font-family:'Dancing Script';font-style:normal;font-weight:400;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2') format('woff2')}
     @font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2') format('woff2')}
-    @font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2') format('woff2')}
-    @font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-600.woff2') format('woff2')}
+    /* Montserrat 500/600 moved to /deferred.css — removes them from the critical
+       network dependency chain (they were 264ms on slow-4G). With font-display:swap,
+       nav renders in system-ui first, then swaps to Montserrat when /deferred.css arrives. */
 
     /* @keyframes: also top-level */
     @keyframes saFadeIn{from{opacity:0}to{opacity:1}}

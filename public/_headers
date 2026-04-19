@@ -9,4 +9,4 @@
   Link: <https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
 
 /
-  Link: <https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp>; rel=preload; as=image; imagesrcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp 800w, https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp 1600w"; imagesizes="(max-width:1023px) 412px, 1440px"
+  Link: <https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp>; rel=preload; as=image; fetchpriority=high; imagesrcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp 800w, https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp 1600w"; imagesizes="(max-width:1023px) 412px, 1440px"

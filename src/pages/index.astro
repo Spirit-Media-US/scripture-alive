@@ -59,6 +59,10 @@ const speakingImg = tileTransform(
       imagesizes="(max-width:1023px) 412px, 1440px"
       fetchpriority="high"
     />
+    <!-- Preload montserrat 500/600 via <link> in the page itself (not in global
+         _headers) so only the homepage upgrades them off the critical dep chain
+         via parallel priority. -->
+    <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2" crossorigin />
   </Fragment>
 
   <!-- HERO SECTION — full screen, transparent nav shows over video -->
@@ -241,9 +245,12 @@ const speakingImg = tileTransform(
       video.preload = 'auto';
       video.load();
       video.play().catch(() => { /* autoplay may be blocked; poster stays */ });
+      // Video layers above the poster at the same z-index; just fade the video in.
+      // Do NOT mutate poster opacity — Lighthouse snapshots the LCP element after
+      // load, and opacity:0 makes the LCP element look unpainted → lcp-discovery-insight
+      // reports priorityHinted:false, score caps.
       video.addEventListener('playing', () => {
         video.classList.remove('opacity-0');
-        if (poster) (poster as HTMLElement).style.opacity = '0';
       }, { once: true });
     }
     window.addEventListener('load', () => {
