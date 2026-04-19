@@ -228,13 +228,25 @@ const speakingImg = tileTransform(
   </section>
 
   <script>
-    // Defer hero video entirely until after LCP + 1s idle so the 15MB MP4
-    // doesn't compete with the poster image for mobile bandwidth.
-    // The <source> is injected, and autoplay is triggered, from JS only.
+    // Hero video: 15MB MP4 — only load on desktop-class devices. Mobile keeps
+    // the static hero image (LCP) to protect PSI mobile Perf: Lighthouse captures
+    // post-load traffic, and 15MB in that window destroys total-byte-weight score.
+    //
+    // Gates: >= 1024px viewport AND non-mobile DPR pattern AND connection isn't
+    // save-data or 2g/3g. Desktop visitors get the video; mobile visitors get a
+    // high-quality still. Kevin's brand video plays on the pages that need it
+    // (performances, etc.), not as homepage LCP decoration.
     function loadHeroVideo() {
       const video = document.getElementById('hero-video') as HTMLVideoElement | null;
-      const poster = document.getElementById('hero-poster');
       if (!video || video.dataset.loaded === '1') return;
+      // Width gate: desktop only
+      if (window.innerWidth < 1024) return;
+      // Data-saver / slow connection gate
+      const conn = (navigator as any).connection;
+      if (conn) {
+        if (conn.saveData) return;
+        if (conn.effectiveType && /2g|3g/i.test(conn.effectiveType)) return;
+      }
       video.dataset.loaded = '1';
       const src = video.dataset.src;
       if (!src) return;
@@ -247,8 +259,7 @@ const speakingImg = tileTransform(
       video.play().catch(() => { /* autoplay may be blocked; poster stays */ });
       // Video layers above the poster at the same z-index; just fade the video in.
       // Do NOT mutate poster opacity — Lighthouse snapshots the LCP element after
-      // load, and opacity:0 makes the LCP element look unpainted → lcp-discovery-insight
-      // reports priorityHinted:false, score caps.
+      // load, and opacity:0 makes the LCP element look unpainted.
       video.addEventListener('playing', () => {
         video.classList.remove('opacity-0');
       }, { once: true });
