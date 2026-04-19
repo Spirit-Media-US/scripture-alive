@@ -8,7 +8,9 @@
       "mcp__netlify__netlify-deploy-services-updater",
       "mcp__netlify__netlify-deploy-services-reader",
       "mcp__sanity__query_documents",
-      "mcp__sanity__create_documents_from_json"
+      "mcp__sanity__create_documents_from_json",
+      "mcp__playwright__browser_resize",
+      "mcp__playwright__browser_evaluate"
     ]
   },
   "enabledMcpjsonServers": [
