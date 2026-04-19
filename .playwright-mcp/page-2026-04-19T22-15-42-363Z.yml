@@ -1,0 +1,135 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - navigation [ref=e4]:
+      - link "Scripture Alive" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Scripture Alive" [ref=e6]
+      - list [ref=e7]:
+        - listitem [ref=e8]:
+          - link "Home" [ref=e9] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e10]:
+          - link "About▾" [ref=e11] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=e12]:
+          - link "Performances" [ref=e13] [cursor=pointer]:
+            - /url: /performances
+        - listitem [ref=e14]:
+          - link "Workshops" [ref=e15] [cursor=pointer]:
+            - /url: /workshops
+        - listitem [ref=e16]:
+          - link "Speaking" [ref=e17] [cursor=pointer]:
+            - /url: /speaking
+        - listitem [ref=e18]:
+          - link "Resources▾" [ref=e19] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=e20]:
+          - link "Events" [ref=e21] [cursor=pointer]:
+            - /url: /events
+        - listitem [ref=e22]:
+          - link "Book Jeremy" [ref=e23] [cursor=pointer]:
+            - /url: /book-jeremy
+  - main [ref=e24]:
+    - generic [ref=e26]:
+      - img [ref=e27]
+      - generic [ref=e30]:
+        - heading "Making Scripture Unforgettable" [level=1] [ref=e31]
+        - paragraph [ref=e32]: Performances | Workshops | Speaking
+        - paragraph [ref=e33]: Available for churches, conferences, camps, schools, and special events
+        - generic [ref=e34]:
+          - link "Book Jeremy" [ref=e35] [cursor=pointer]:
+            - /url: /book-jeremy
+          - link "Know someone who should hear about Jeremy? Refer him here" [ref=e36] [cursor=pointer]:
+            - /url: /referjeremy
+    - heading "Dedicated to Proclaiming the Word with Creativity and Conviction" [level=2] [ref=e39]
+    - generic [ref=e41]:
+      - generic [ref=e42]:
+        - img [ref=e44]
+        - heading "Pure Scripture" [level=2] [ref=e46]
+        - paragraph [ref=e47]: Every performance is quoted word for word from the Bible.
+      - generic [ref=e48]:
+        - img [ref=e50]
+        - heading "Skillfully Dramatized" [level=2] [ref=e52]
+        - paragraph [ref=e53]: A high-quality theatrical production makes Scripture leap off of the page.
+      - generic [ref=e54]:
+        - img [ref=e56]
+        - heading "Impacting Lives" [level=2] [ref=e58]
+        - paragraph [ref=e59]: People regularly say how moved they are and how it helps them better understand the Bible.
+      - generic [ref=e60]:
+        - img [ref=e62]
+        - heading "Unique and Memorable" [level=2] [ref=e64]
+        - paragraph [ref=e65]: Your audience will never forget when Scripture is dramatically presented!
+    - generic [ref=e67]:
+      - generic [ref=e69]:
+        - generic [ref=e70]:
+          - paragraph [ref=e71]: "\"Jeremy transports you back in time and into the pages of Scripture. He has an uncanny ability to embody all the characters in a story and keep you highly engaged. I highly recommend him when you seek to have people connect to God's Word in an entirely new way.\""
+          - paragraph [ref=e72]: Tami Heim, President and CEO
+          - paragraph [ref=e73]: Christian Leadership Alliance
+        - generic [ref=e74]:
+          - paragraph [ref=e75]: "\"I strongly encourage pastors and ministry leaders to utilize the ministry gifts of Jeremy Kluth. There's nothing like hearing God's Word memorized and expressed with passion. Your people will be inspired.\""
+          - paragraph [ref=e76]: Roy Patterson, Community Relations Director
+          - paragraph [ref=e77]: Moody Bible Institute, Chicago IL
+        - generic [ref=e78]:
+          - paragraph [ref=e79]: "\"Jeremy has been gifted by God. Blending passion and strong contextual attention to detail, Jeremy immerses listeners' senses and emotions through his gifts of interpretive speaking. The experience brings the Word of God to life in a most memorable way.\""
+          - paragraph [ref=e80]: Chris Preuss, Executive Director
+          - paragraph [ref=e81]: Maranatha Bible & Missionary Conference, Muskegon MI
+        - generic [ref=e82]:
+          - paragraph [ref=e83]: "\"Jeremy Kluth is the real deal! His workshops are incredibly practical and inspiring. People who were intimidated by Scripture memory are now memorizing verses daily. Jeremy's dramatic recitation from Ezekiel was a highlight of our series on that book which helped make an obscure passage click for people.\""
+          - paragraph [ref=e84]: Clayton Keenon, Lead Teaching Pastor
+          - paragraph [ref=e85]: Christ Community Church, South Elgin IL
+      - generic [ref=e86]:
+        - button "Endorsement 1" [ref=e87] [cursor=pointer]
+        - button "Endorsement 2" [ref=e89] [cursor=pointer]
+        - button "Endorsement 3" [ref=e91] [cursor=pointer]
+        - button "Endorsement 4" [ref=e93] [cursor=pointer]
+      - link "Read More Endorsements →" [ref=e96] [cursor=pointer]:
+        - /url: /endorsements
+    - generic [ref=e98]:
+      - link "Scripture Performances Performances Full books of the Bible performed word-for-word from memory." [ref=e99] [cursor=pointer]:
+        - /url: /performances
+        - img "Scripture Performances" [ref=e101]
+        - heading "Performances" [level=3] [ref=e102]
+        - paragraph [ref=e103]: Full books of the Bible performed word-for-word from memory.
+      - link "Scripture Memory Workshops Workshops Hands-on sessions that equip people to memorize Scripture and live it out." [ref=e104] [cursor=pointer]:
+        - /url: /workshops
+        - img "Scripture Memory Workshops" [ref=e106]
+        - heading "Workshops" [level=3] [ref=e107]
+        - paragraph [ref=e108]: Hands-on sessions that equip people to memorize Scripture and live it out.
+      - link "Guest Speaking Speaking Powerful spoken messages for churches, camps, podcasts, and events." [ref=e109] [cursor=pointer]:
+        - /url: /speaking
+        - img "Guest Speaking" [ref=e111]
+        - heading "Speaking" [level=3] [ref=e112]
+        - paragraph [ref=e113]: Powerful spoken messages for churches, camps, podcasts, and events.
+  - contentinfo [ref=e114]:
+    - generic [ref=e115]:
+      - generic [ref=e116]:
+        - img "Scripture Alive" [ref=e117]
+        - generic [ref=e118]:
+          - link "Email Jeremy" [ref=e119] [cursor=pointer]:
+            - /url: mailto:jeremy@scripturealive.com
+            - img [ref=e120]
+            - text: Email Jeremy
+          - link "(312) 600-0765" [ref=e123] [cursor=pointer]:
+            - /url: tel:+13126000765
+            - img [ref=e124]
+            - text: (312) 600-0765
+          - generic [ref=e126]:
+            - img [ref=e127]
+            - text: South Bend, IN
+      - generic [ref=e129]:
+        - link "Facebook" [ref=e130] [cursor=pointer]:
+          - /url: https://facebook.com/ScriptureAliveOfficial
+          - img [ref=e131]
+        - link "Instagram" [ref=e133] [cursor=pointer]:
+          - /url: https://www.instagram.com/ScriptureAlive/
+          - img [ref=e134]
+        - link "YouTube" [ref=e136] [cursor=pointer]:
+          - /url: https://www.youtube.com/channel/UC3GRn5EWEwxD9eu3kRvJ4lQ
+          - img [ref=e137]
+    - generic [ref=e139]:
+      - text: © 2026 Scripture Alive. Powered by
+      - link "Spirit Media" [ref=e140] [cursor=pointer]:
+        - /url: https://spiritmediapublishing.com
+      - text: .
