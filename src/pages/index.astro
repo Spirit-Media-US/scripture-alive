@@ -47,15 +47,14 @@ const speakingImg = tileTransform(
 >
 
   <Fragment slot="head">
-    <!-- Preload the LCP hero image. Matches the <img> srcset/sizes so the
-         preloader and <img> share a single fetch. Mirrors Thomas McGovern's
-         proven 100-Club pattern: 768w and 1600w breakpoints, imagesizes=100vw. -->
+    <!-- Preload the LCP hero image. Same origin as fonts (R2), stable URL so
+         the edge can promote this to an HTTP/2 103 Early Hint via _headers. -->
     <link
       rel="preload"
       as="image"
-      href="https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=800&fm=webp&q=70"
-      imagesrcset="https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=800&fm=webp&q=70 768w, https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=1600&fm=webp&q=75 1600w"
-      imagesizes="100vw"
+      href="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp"
+      imagesrcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp 800w, https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp 1600w"
+      imagesizes="(max-width:1023px) 412px, 1440px"
       fetchpriority="high"
     />
   </Fragment>
@@ -63,9 +62,9 @@ const speakingImg = tileTransform(
   <!-- HERO SECTION — full screen, transparent nav shows over video -->
   <section class="relative h-screen flex items-center justify-center overflow-hidden" style="margin-top: -140px;">
     <img
-      src="https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=800&fm=webp&q=70"
-      srcset="https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=800&fm=webp&q=70 768w, https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=1600&fm=webp&q=75 1600w"
-      sizes="100vw"
+      src="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp"
+      srcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp 800w, https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp 1600w"
+      sizes="(max-width:1023px) 412px, 1440px"
       width="1768"
       height="891"
       alt=""
