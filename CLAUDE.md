@@ -124,15 +124,42 @@ Public URL: `https://assets.spiritmediapublishing.com/scripture-alive/[filename]
 See the Transformation Layer Report for approved improvements:
 https://docs.google.com/document/d/1t5dkqAiB5HhRtYgkZpnv25LJA9w7lOCCw_TaGTM0G28/edit
 
-Status as of 2026-04-08:
+Status as of 2026-04-19:
 - [x] Cloudflare Pages deploy configured (auto-deploys on push to main)
 - [x] CORS origins configured
 - [x] Sanity Studio live at scripturealive.com/studio/
 - [x] 404 page added
+- [x] 100-Club wave-1 perf + a11y pass on dev (2026-04-19):
+    - Split fonts → critical-only in global.css, rest in public/deferred.css (non-blocking)
+    - Darken --color-accent from #3472B7 to #295a92 for AA contrast on cream/white
+    - Rework endorsement carousel dots to 40x40 button wrapping 10px span (touch target)
+    - Defer hero video entirely via JS (no autoplay attr, source injected post-load)
+    - Shrink hero LCP image: 1200w/q75 (25KB) → 800w/q70 (13KB) with 768/1600 ladder
+    - Logo and guestpreaching first image no longer carry fetchpriority=high
+    - Footer text-white/40 → text-white/70 (+underline on Spirit Media link)
+    - Evaluated Beasties (@playform/inline) — rejected, it strips below-fold utilities
 - [ ] Recommended improvements Kevin approves from CAR report
 - [ ] Design polish & QA pass
 - [ ] Mobile + desktop visual review
 - [ ] Kevin approves merge to main → goes live at scripturealive.com
+
+### PSI snapshot (dev preview, 2026-04-19)
+
+| Category | Mobile | Desktop |
+|---|---|---|
+| Performance | 77-95 (variable; see note) | 99 |
+| Accessibility | 100 | 100 |
+| Best Practices | 100 | 100 |
+| SEO | 69* | 69* |
+
+*SEO 69 on dev preview is the Cloudflare Pages `x-robots-tag: noindex` artifact
+applied to every `*.pages.dev` URL. Production (scripturealive.com) has no such
+header — SEO will be 100 on prod.
+
+Mobile perf variance is driven by PSI's DPR/image-picker swinging between the
+800w (13KB) and 1600w (36KB) hero variants across runs. On 800w runs: ~90-95
+perf; on 1600w runs: ~77. The 15MB hero MP4 is deferred via JS and no longer
+competes with LCP bandwidth. Baseline before this wave: mobile 94.
 
 ---
 
