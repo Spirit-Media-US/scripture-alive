@@ -47,14 +47,15 @@ const speakingImg = tileTransform(
 >
 
   <Fragment slot="head">
-    <!-- Preload the LCP hero image via responsive srcset so the browser can
-         pick the right size ASAP. Mobile (DPR up to 2) picks ~800w (~13KB);
-         desktop picks 1600w. -->
+    <!-- Preload the LCP hero image with matching srcset/sizes so the
+         preloader and <img> share a single fetch. sizes=(max-width:640px)
+         caps mobile at 800w (~13KB); desktop picks 1600w (~14KB) — both
+         much smaller than the previous 1200w/q75 (~25KB) variant. -->
     <link
       rel="preload"
       as="image"
       imagesrcset="https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=400&fm=webp&q=70 400w, https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=800&fm=webp&q=70 800w, https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=1600&fm=webp&q=75 1600w"
-      imagesizes="100vw"
+      imagesizes="(max-width: 640px) 800px, 1600px"
       fetchpriority="high"
     />
   </Fragment>
@@ -64,7 +65,7 @@ const speakingImg = tileTransform(
     <img
       src="https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=800&fm=webp&q=70"
       srcset="https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=400&fm=webp&q=70 400w, https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=800&fm=webp&q=70 800w, https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png?w=1600&fm=webp&q=75 1600w"
-      sizes="100vw"
+      sizes="(max-width: 640px) 800px, 1600px"
       width="1768"
       height="891"
       alt=""
