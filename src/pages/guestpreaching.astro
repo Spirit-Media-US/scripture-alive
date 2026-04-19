@@ -50,7 +50,7 @@ const items = await getServiceItems("speaking-church-events");
           alt={item.title}
           class="w-full object-cover"
           loading={i === 0 ? "eager" : "lazy"}
-          fetchpriority={i === 0 ? "high" : undefined}
+          decoding="async"
         />
       </div>
     );

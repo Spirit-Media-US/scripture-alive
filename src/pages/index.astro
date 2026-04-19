@@ -153,23 +153,26 @@ const speakingImg = tileTransform(
               <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
                 "{t.quote}"
               </p>
-              <p class="font-semibold text-accent">{t.authorName}{t.authorTitle ? `, ${t.authorTitle}` : ''}</p>
-              <p class="text-sm text-primary">{t.authorOrganization}</p>
+              <p class="font-semibold text-accent-ink">{t.authorName}{t.authorTitle ? `, ${t.authorTitle}` : ''}</p>
+              <p class="text-sm text-gray-700 font-medium">{t.authorOrganization}</p>
             </div>
           ))}
         </div>
       </div>
-      <div id="endorsement-dots" class="flex justify-center gap-2 mt-6" data-total={Math.min(featuredTestimonials.length, 4)}>
+      <div id="endorsement-dots" class="flex justify-center gap-1 mt-6" data-total={Math.min(featuredTestimonials.length, 4)}>
         {featuredTestimonials.slice(0, 4).map((_: any, i: number) => (
           <button
+            type="button"
             data-index={i}
-            class={`w-2.5 h-2.5 rounded-full transition-colors ${i === 0 ? 'bg-primary' : 'bg-gray-300'}`}
+            class="w-10 h-10 flex items-center justify-center rounded-full"
             aria-label={`Endorsement ${i + 1}`}
-          ></button>
+          >
+            <span class={`block w-2.5 h-2.5 rounded-full transition-colors ${i === 0 ? 'bg-primary' : 'bg-gray-400'}`}></span>
+          </button>
         ))}
       </div>
       <div class="text-center mt-6">
-        <a href="/endorsements" class="text-accent font-semibold hover:underline">
+        <a href="/endorsements" class="text-accent-ink font-semibold hover:underline">
           Read More Endorsements →
         </a>
       </div>
@@ -234,8 +237,10 @@ const speakingImg = tileTransform(
       current = (n + total) % total;
       track.style.transform = `translateX(-${current * 100}%)`;
       dots.forEach((d, i) => {
-        d.classList.toggle('bg-primary', i === current);
-        d.classList.toggle('bg-gray-300', i !== current);
+        const inner = d.querySelector('span');
+        if (!inner) return;
+        inner.classList.toggle('bg-primary', i === current);
+        inner.classList.toggle('bg-gray-400', i !== current);
       });
     }
 
