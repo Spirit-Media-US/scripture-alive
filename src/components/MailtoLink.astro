@@ -5,7 +5,7 @@ interface Props {
 }
 
 const { email, class: className } = Astro.props;
-const [user, domain] = email.split('@');
+const [user, domain] = email.split("@");
 ---
 
 <a href="#" data-mu={user} data-md={domain} class={className}>
@@ -13,11 +13,13 @@ const [user, domain] = email.split('@');
 </a>
 
 <script>
-	document.addEventListener('astro:page-load', () => {
+	function wireMailto() {
 		document.querySelectorAll<HTMLAnchorElement>('a[data-mu][data-md]').forEach((el) => {
 			const u = el.dataset.mu;
 			const d = el.dataset.md;
 			if (u && d) el.href = `mailto:${u}@${d}`;
 		});
-	});
+	}
+	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wireMailto);
+	else wireMailto();
 </script>

@@ -7,12 +7,11 @@ export default defineConfig({
   site: 'https://scripturealive.com',
   server: { port: 4329, host: true },
   build: {
-    // Inline all stylesheets — eliminates render-blocking CSS round-trip.
-    // Tailwind v4 CSS is ~33KB here; inlining is the fastest strategy.
-    // NOTE: Beasties/@playform/inline was evaluated but pruned below-fold
-    // utility classes (e.g. bg-cream, bg-gray-400, text-white/70), causing
-    // visual regression. Sticking with Astro's native always-inline.
-    inlineStylesheets: 'always',
+    // 100 Club v4: 'auto' lets Astro inline small stylesheets and externalize
+    // larger ones, which scripts/async-css.mjs then rewrites to media=print
+    // swap so they load async. Hand-rolled critical CSS in Layout.astro's
+    // <style is:inline> handles above-fold rendering.
+    inlineStylesheets: 'auto',
   },
   integrations: [
     sitemap(),
