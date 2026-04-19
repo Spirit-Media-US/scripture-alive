@@ -1,0 +1,110 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - navigation [ref=e4]:
+      - link "Scripture Alive" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Scripture Alive" [ref=e6]
+      - button "Menu" [ref=e7] [cursor=pointer]:
+        - img [ref=e8]
+  - main [ref=e10]:
+    - generic [ref=e13]:
+      - heading "Making Scripture Unforgettable" [level=1] [ref=e14]
+      - paragraph [ref=e15]: Performances | Workshops | Speaking
+      - paragraph [ref=e16]: Available for churches, conferences, camps, schools, and special events
+      - generic [ref=e17]:
+        - link "Book Jeremy" [ref=e18] [cursor=pointer]:
+          - /url: /book-jeremy
+        - link "Know someone who should hear about Jeremy? Refer him here" [ref=e19] [cursor=pointer]:
+          - /url: /referjeremy
+    - heading "Dedicated to Proclaiming the Word with Creativity and Conviction" [level=2] [ref=e22]
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - img [ref=e27]
+        - heading "Pure Scripture" [level=2] [ref=e29]
+        - paragraph [ref=e30]: Every performance is quoted word for word from the Bible.
+      - generic [ref=e31]:
+        - img [ref=e33]
+        - heading "Skillfully Dramatized" [level=2] [ref=e35]
+        - paragraph [ref=e36]: A high-quality theatrical production makes Scripture leap off of the page.
+      - generic [ref=e37]:
+        - img [ref=e39]
+        - heading "Impacting Lives" [level=2] [ref=e41]
+        - paragraph [ref=e42]: People regularly say how moved they are and how it helps them better understand the Bible.
+      - generic [ref=e43]:
+        - img [ref=e45]
+        - heading "Unique and Memorable" [level=2] [ref=e47]
+        - paragraph [ref=e48]: Your audience will never forget when Scripture is dramatically presented!
+    - generic [ref=e50]:
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - paragraph [ref=e54]: "\"Jeremy transports you back in time and into the pages of Scripture. He has an uncanny ability to embody all the characters in a story and keep you highly engaged. I highly recommend him when you seek to have people connect to God's Word in an entirely new way.\""
+          - paragraph [ref=e55]: Tami Heim, President and CEO
+          - paragraph [ref=e56]: Christian Leadership Alliance
+        - generic [ref=e57]:
+          - paragraph [ref=e58]: "\"I strongly encourage pastors and ministry leaders to utilize the ministry gifts of Jeremy Kluth. There's nothing like hearing God's Word memorized and expressed with passion. Your people will be inspired.\""
+          - paragraph [ref=e59]: Roy Patterson, Community Relations Director
+          - paragraph [ref=e60]: Moody Bible Institute, Chicago IL
+        - generic [ref=e61]:
+          - paragraph [ref=e62]: "\"Jeremy has been gifted by God. Blending passion and strong contextual attention to detail, Jeremy immerses listeners' senses and emotions through his gifts of interpretive speaking. The experience brings the Word of God to life in a most memorable way.\""
+          - paragraph [ref=e63]: Chris Preuss, Executive Director
+          - paragraph [ref=e64]: Maranatha Bible & Missionary Conference, Muskegon MI
+        - generic [ref=e65]:
+          - paragraph [ref=e66]: "\"Jeremy Kluth is the real deal! His workshops are incredibly practical and inspiring. People who were intimidated by Scripture memory are now memorizing verses daily. Jeremy's dramatic recitation from Ezekiel was a highlight of our series on that book which helped make an obscure passage click for people.\""
+          - paragraph [ref=e67]: Clayton Keenon, Lead Teaching Pastor
+          - paragraph [ref=e68]: Christ Community Church, South Elgin IL
+      - generic [ref=e69]:
+        - button "Endorsement 1" [ref=e70] [cursor=pointer]
+        - button "Endorsement 2" [ref=e72] [cursor=pointer]
+        - button "Endorsement 3" [ref=e74] [cursor=pointer]
+        - button "Endorsement 4" [ref=e76] [cursor=pointer]
+      - link "Read More Endorsements →" [ref=e79] [cursor=pointer]:
+        - /url: /endorsements
+    - generic [ref=e81]:
+      - link "Scripture Performances Performances Full books of the Bible performed word-for-word from memory." [ref=e82] [cursor=pointer]:
+        - /url: /performances
+        - img "Scripture Performances" [ref=e84]
+        - heading "Performances" [level=3] [ref=e85]
+        - paragraph [ref=e86]: Full books of the Bible performed word-for-word from memory.
+      - link "Scripture Memory Workshops Workshops Hands-on sessions that equip people to memorize Scripture and live it out." [ref=e87] [cursor=pointer]:
+        - /url: /workshops
+        - img "Scripture Memory Workshops" [ref=e89]
+        - heading "Workshops" [level=3] [ref=e90]
+        - paragraph [ref=e91]: Hands-on sessions that equip people to memorize Scripture and live it out.
+      - link "Guest Speaking Speaking Powerful spoken messages for churches, camps, podcasts, and events." [ref=e92] [cursor=pointer]:
+        - /url: /speaking
+        - img "Guest Speaking" [ref=e94]
+        - heading "Speaking" [level=3] [ref=e95]
+        - paragraph [ref=e96]: Powerful spoken messages for churches, camps, podcasts, and events.
+  - contentinfo [ref=e97]:
+    - generic [ref=e98]:
+      - generic [ref=e99]:
+        - img "Scripture Alive" [ref=e100]
+        - generic [ref=e101]:
+          - link "Email Jeremy" [ref=e102] [cursor=pointer]:
+            - /url: mailto:jeremy@scripturealive.com
+            - img [ref=e103]
+            - text: Email Jeremy
+          - link "(312) 600-0765" [ref=e106] [cursor=pointer]:
+            - /url: tel:+13126000765
+            - img [ref=e107]
+            - text: (312) 600-0765
+          - generic [ref=e109]:
+            - img [ref=e110]
+            - text: South Bend, IN
+      - generic [ref=e112]:
+        - link "Facebook" [ref=e113] [cursor=pointer]:
+          - /url: https://facebook.com/ScriptureAliveOfficial
+          - img [ref=e114]
+        - link "Instagram" [ref=e116] [cursor=pointer]:
+          - /url: https://www.instagram.com/ScriptureAlive/
+          - img [ref=e117]
+        - link "YouTube" [ref=e119] [cursor=pointer]:
+          - /url: https://www.youtube.com/channel/UC3GRn5EWEwxD9eu3kRvJ4lQ
+          - img [ref=e120]
+    - generic [ref=e122]:
+      - text: © 2026 Scripture Alive. Powered by
+      - link "Spirit Media" [ref=e123] [cursor=pointer]:
+        - /url: https://spiritmediapublishing.com
+      - text: .
