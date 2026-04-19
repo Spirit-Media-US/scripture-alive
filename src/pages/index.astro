@@ -56,8 +56,6 @@ const speakingImg = tileTransform(
       rel="preload"
       as="image"
       href="https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp"
-      imagesrcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp 800w, https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp 1600w"
-      imagesizes="1440px"
       fetchpriority="high"
       media="(min-width: 1024px)"
     />
@@ -100,20 +98,30 @@ const speakingImg = tileTransform(
        is 140px tall on lg+) so the hero photo shows through the transparent nav. -->
   <div class="hidden lg:block">
     <section class="relative h-screen flex items-center justify-center overflow-hidden" style="margin-top: -140px;">
-      <img
-        src="https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp"
-        srcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp 800w, https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp 1600w"
-        sizes="1440px"
-        width="1768"
-        height="891"
-        alt=""
-        aria-hidden="true"
-        fetchpriority="high"
-        loading="eager"
-        decoding="async"
-        class="absolute inset-0 w-full h-full object-cover z-0"
-        id="hero-poster"
-      />
+      <!-- <picture> with media-query <source> keeps the hero network fetch off of
+           mobile entirely. On < 1024px viewports, browser falls back to the <img>,
+           whose src is a 1×1 GIF data URI — no HTTP request. On ≥ 1024px, browser
+           uses the <source> srcset and fetches hero-1600.webp.
+           (loading=eager / fetchpriority=high on the <img> tag itself were still
+           causing mobile fetches when the element was nested inside a display:none
+           parent, because img download-on-parse is viewport-agnostic.) -->
+      <picture>
+        <source
+          media="(min-width: 1024px)"
+          srcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp"
+        />
+        <img
+          src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+          width="1768"
+          height="891"
+          alt=""
+          aria-hidden="true"
+          fetchpriority="high"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover z-0"
+          id="hero-poster"
+        />
+      </picture>
       <video
         class="absolute inset-0 w-full h-full object-cover z-0 opacity-0 transition-opacity duration-500"
         muted playsinline loop preload="none" aria-hidden="true"
