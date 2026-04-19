@@ -116,15 +116,17 @@ const currentPath = Astro.url.pathname;
       .w-5{width:1.25rem}.w-auto{width:auto}.w-full{width:100%}.w-52{width:13rem}
 
       /* Layout caps */
-      .max-w-4xl{max-width:56rem}.max-w-6xl{max-width:72rem}
+      .max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-6xl{max-width:72rem}
+      .max-h-\[280px\]{max-height:280px}
 
       /* Margin / padding */
       .mx-auto{margin-inline:auto}
-      .mt-1{margin-top:.25rem}.mt-4{margin-top:1rem}
+      .mt-1{margin-top:.25rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}
       .mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-10{margin-bottom:2.5rem}
       .p-2{padding:.5rem}
       .px-4{padding-inline:1rem}.px-5{padding-inline:1.25rem}.px-6{padding-inline:1.5rem}.px-10{padding-inline:2.5rem}
       .py-2{padding-block:.5rem}.py-3{padding-block:.75rem}
+      .pt-16{padding-top:4rem}.pb-12{padding-bottom:3rem}
       .pl-4{padding-left:1rem}
 
       /* Borders / radius */
@@ -136,6 +138,7 @@ const currentPath = Astro.url.pathname;
       .bg-transparent{background-color:transparent}
       .bg-white{background-color:#fff}
       .bg-primary{background-color:#FBC215}
+      .bg-cream{background-color:#f5f0e8}
       .bg-gray-400{background-color:#9ca3af}
       .hover\:bg-gray-50:hover{background-color:#f9fafb}
 
@@ -148,6 +151,7 @@ const currentPath = Astro.url.pathname;
       .text-primary{color:#FBC215}
       .text-accent{color:#295a92}
       .hover\:text-primary:hover{color:#FBC215}
+      .hover\:text-accent:hover{color:#295a92}
       .hover\:text-white:hover{color:#fff}
 
       /* Typography */
@@ -203,7 +207,10 @@ const currentPath = Astro.url.pathname;
       @media(min-width:768px){
         .md\:px-6{padding-inline:1.5rem}
         .md\:py-4{padding-block:1rem}
+        .md\:pt-24{padding-top:6rem}
+        .md\:pb-16{padding-bottom:4rem}
         .md\:h-\[108px\]{height:108px}
+        .md\:max-h-\[460px\]{max-height:460px}
         .md\:text-2xl{font-size:1.5rem;line-height:2rem}
         .md\:text-6xl{font-size:3.75rem;line-height:1}
         .md\:text-base{font-size:1rem;line-height:1.5rem}
@@ -212,8 +219,11 @@ const currentPath = Astro.url.pathname;
       @media(min-width:1024px){
         .lg\:flex{display:flex}
         .lg\:hidden{display:none}
+        .lg\:pt-28{padding-top:7rem}
+        .lg\:pb-20{padding-bottom:5rem}
         .lg\:px-5{padding-inline:1.25rem}
         .lg\:py-3{padding-block:.75rem}
+        .lg\:max-h-\[560px\]{max-height:560px}
         .lg\:text-base{font-size:1rem;line-height:1.5rem}
         .lg\:text-7xl{font-size:4.5rem;line-height:1}
       }
@@ -268,8 +278,8 @@ const currentPath = Astro.url.pathname;
 <body>
   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded focus:shadow">Skip to main content</a>
 
-  <!-- Navigation: transparent on homepage hero, solid white on all other pages -->
-  <header id="site-header" class={`sticky top-0 z-50 transition-colors duration-300 ${currentPath === '/' ? 'bg-transparent' : 'bg-white shadow-sm'}`}>
+  <!-- Navigation: always solid white (hero is no longer full-bleed under the nav) -->
+  <header id="site-header" class="sticky top-0 z-50 bg-white shadow-sm">
     <nav class="max-w-6xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
       <a href="/"><img src="https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp?w=240&fm=webp&q=70" srcset="https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp?w=240&fm=webp&q=70 1x, https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp?w=432&fm=webp&q=70 2x" alt="Scripture Alive" width="120" height="60" decoding="async" class="h-[60px] md:h-[108px] w-auto" /></a>
       <ul class="hidden lg:flex items-center gap-4 xl:gap-6">
@@ -365,26 +375,6 @@ const currentPath = Astro.url.pathname;
         menu?.classList.toggle('hidden');
         btn.setAttribute('aria-expanded', String(!isOpen));
       });
-
-      // On homepage only: transparent over hero, white once scrolled past
-      if (window.location.pathname === '/') {
-        const header = document.getElementById('site-header');
-        const onScroll = () => {
-          if (window.scrollY > 80) {
-            header?.classList.add('bg-white', 'shadow-sm');
-            header?.classList.remove('bg-transparent');
-          } else {
-            header?.classList.add('bg-transparent');
-            header?.classList.remove('bg-white', 'shadow-sm');
-          }
-        };
-        window.addEventListener('scroll', onScroll, { passive: true });
-        // Defer the initial read to rAF so the synchronous scrollY access
-        // doesn't force a style+layout flush on mount (92ms reflow per PSI).
-        // Default (scrollY=0) matches the server-rendered class, so the
-        // rAF-scheduled call only triggers if the user lands mid-page.
-        requestAnimationFrame(onScroll);
-      }
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wireHeader);
     else wireHeader();

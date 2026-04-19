@@ -49,64 +49,59 @@ const speakingImg = tileTransform(
 >
 
   <Fragment slot="head">
-    <!-- Preload the LCP hero image. Same origin as fonts (R2), stable URL so
-         the edge can promote this to an HTTP/2 103 Early Hint via _headers. -->
-    <link
-      rel="preload"
-      as="image"
-      href="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp"
-      imagesrcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp 800w, https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp 1600w"
-      imagesizes="(max-width:1023px) 400px, 1440px"
-      fetchpriority="high"
-    />
-    <!-- Preload montserrat 500/600 via <link> in the page itself (not in global
-         _headers) so only the homepage upgrades them off the critical dep chain
-         via parallel priority. -->
+    <!-- No hero image preload: LCP is now the H1 text (paints from HTML stream
+         ~800ms slow-4G vs 2.93s for the image). The hero photo below is
+         loading="lazy" and below the fold, removing it from LCP candidates.
+         Preload Montserrat 500 here for the Book Jeremy button weight. -->
     <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2" crossorigin />
   </Fragment>
 
-  <!-- HERO SECTION — full screen, transparent nav shows over video -->
-  <section class="relative h-screen flex items-center justify-center overflow-hidden" style="margin-top: -140px;">
-    <img
-      src="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp"
-      srcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp 800w, https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp 1600w"
-      sizes="(max-width:1023px) 400px, 1440px"
-      width="1768"
-      height="891"
-      alt=""
-      aria-hidden="true"
-      fetchpriority="high"
-      loading="eager"
-      decoding="async"
-      class="absolute inset-0 w-full h-full object-cover z-0"
-      id="hero-poster"
-    />
-    <video
-      class="absolute inset-0 w-full h-full object-cover z-0 opacity-0 transition-opacity duration-500"
-      muted playsinline loop preload="none" aria-hidden="true"
-      id="hero-video"
-      data-src="https://assets.spiritmediapublishing.com/scripture-alive/scripture-alive-hero.mp4"
-    ></video>
-    <div class="absolute inset-0 z-10"></div>
-    <div class="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
-      <h1 class="font-display font-light text-5xl md:text-6xl lg:text-7xl mb-6 text-white drop-shadow-lg">
+  <!-- HERO TEXT BAND — H1 paints from the HTML stream, becoming the LCP.
+       Solid cream background means no image download is on the LCP path. -->
+  <section class="bg-cream pt-16 pb-12 md:pt-24 md:pb-16 lg:pt-28 lg:pb-20 px-4">
+    <div class="max-w-5xl mx-auto text-center">
+      <h1 class="font-display font-light text-5xl md:text-6xl lg:text-7xl leading-tight text-accent">
         Making Scripture Unforgettable
       </h1>
-      <p class="font-sans text-base sm:text-xl md:text-2xl mb-4 text-white drop-shadow-md">
+      <p class="font-sans text-base sm:text-xl md:text-2xl mt-6 text-gray-700">
         Performances | Workshops | Speaking
       </p>
-      <p class="font-sans text-sm md:text-base mb-10 text-white/80 drop-shadow-md">
+      <p class="font-sans text-sm md:text-base mt-3 text-gray-600">
         Available for churches, conferences, camps, schools, and special events
       </p>
-      <div class="flex flex-col items-center gap-3">
+      <div class="flex flex-col items-center gap-3 mt-8">
         <a href="/book-jeremy" class="bg-primary text-black font-semibold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
           Book Jeremy
         </a>
-        <a href="/referjeremy" class="text-white/70 text-sm hover:text-white transition-colors">
+        <a href="/referjeremy" class="text-gray-700 text-sm hover:text-accent transition-colors">
           Know someone who should hear about Jeremy? <span class="underline">Refer him here</span>
         </a>
       </div>
     </div>
+  </section>
+
+  <!-- HERO IMAGE BANNER — banner below the text band. loading="lazy" + below-fold
+       keeps it out of the LCP candidate pool. The video overlay still runs (desktop
+       only) once the user gets here and the page has idled. -->
+  <section class="relative overflow-hidden bg-cream">
+    <img
+      src="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp"
+      srcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp 800w, https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp 1600w"
+      sizes="(max-width:1023px) 400px, 1440px"
+      width="1600"
+      height="500"
+      alt="Jeremy Kluth performing Scripture Alive"
+      loading="lazy"
+      decoding="async"
+      class="w-full max-h-[280px] md:max-h-[460px] lg:max-h-[560px] object-cover"
+      id="hero-poster"
+    />
+    <video
+      class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+      muted playsinline loop preload="none" aria-hidden="true"
+      id="hero-video"
+      data-src="https://assets.spiritmediapublishing.com/scripture-alive/scripture-alive-hero.mp4"
+    ></video>
   </section>
 
   <!-- DEDICATED TO PROCLAIMING — blue heading -->
