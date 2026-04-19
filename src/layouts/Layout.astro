@@ -271,7 +271,7 @@ const currentPath = Astro.url.pathname;
   <!-- Navigation: transparent on homepage hero, solid white on all other pages -->
   <header id="site-header" class={`sticky top-0 z-50 transition-colors duration-300 ${currentPath === '/' ? 'bg-transparent' : 'bg-white shadow-sm'}`}>
     <nav class="max-w-6xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
-      <a href="/"><img src="https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp?w=220&fm=webp&q=85" alt="Scripture Alive" width="110" height="55" decoding="async" class="h-[60px] md:h-[108px] w-auto" /></a>
+      <a href="/"><img src="https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp?w=240&fm=webp&q=70" srcset="https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp?w=240&fm=webp&q=70 1x, https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp?w=432&fm=webp&q=70 2x" alt="Scripture Alive" width="120" height="60" decoding="async" class="h-[60px] md:h-[108px] w-auto" /></a>
       <ul class="hidden lg:flex items-center gap-4 xl:gap-6">
         {navItems.map(item => (
           <li class="relative group">
@@ -379,7 +379,11 @@ const currentPath = Astro.url.pathname;
           }
         };
         window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
+        // Defer the initial read to rAF so the synchronous scrollY access
+        // doesn't force a style+layout flush on mount (92ms reflow per PSI).
+        // Default (scrollY=0) matches the server-rendered class, so the
+        // rAF-scheduled call only triggers if the user lands mid-page.
+        requestAnimationFrame(onScroll);
       }
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wireHeader);
