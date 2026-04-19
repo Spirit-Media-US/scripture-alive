@@ -221,6 +221,7 @@ const currentPath = Astro.url.pathname;
         .md\:flex-row{flex-direction:row}
       }
       @media(min-width:1024px){
+        .lg\:block{display:block}
         .lg\:flex{display:flex}
         .lg\:hidden{display:none}
         .lg\:pt-28{padding-top:7rem}
@@ -230,6 +231,12 @@ const currentPath = Astro.url.pathname;
         .lg\:max-h-\[560px\]{max-height:560px}
         .lg\:text-base{font-size:1rem;line-height:1.5rem}
         .lg\:text-7xl{font-size:4.5rem;line-height:1}
+        /* Desktop homepage transparent nav over hero — see scroll handler below */
+        .lg\:bg-transparent{background-color:transparent}
+        .lg\:shadow-none{box-shadow:none}
+        .lg\:text-white{color:#fff}
+        .lg\:text-primary{color:#FBC215}
+        .lg\:hover\:text-primary:hover{color:#FBC215}
       }
       @media(min-width:1280px){
         .xl\:gap-6{gap:1.5rem}
@@ -282,8 +289,14 @@ const currentPath = Astro.url.pathname;
 <body>
   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded focus:shadow">Skip to main content</a>
 
-  <!-- Navigation: always solid white (hero is no longer full-bleed under the nav) -->
-  <header id="site-header" class="sticky top-0 z-50 bg-white shadow-sm">
+  <!-- Navigation. On desktop homepage the nav sits transparent over the full-viewport
+       hero photo, flipping to solid white once scrolled past ~80px (JS handler below).
+       Mobile homepage and all non-homepage routes render solid white from the start. -->
+  <header
+    id="site-header"
+    data-transparent-hero={currentPath === '/' ? 'true' : 'false'}
+    class={`sticky top-0 z-50 transition-colors duration-300 ${currentPath === '/' ? 'bg-white shadow-sm lg:bg-transparent lg:shadow-none' : 'bg-white shadow-sm'}`}
+  >
     <nav class="max-w-6xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
       <a href="/"><img src="https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp?w=240&fm=webp&q=70" srcset="https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp?w=240&fm=webp&q=70 1x, https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp?w=432&fm=webp&q=70 2x" alt="Scripture Alive" width="120" height="60" decoding="async" class="h-[60px] md:h-[108px] w-auto" /></a>
       <ul class="hidden lg:flex items-center gap-4 xl:gap-6">
@@ -291,7 +304,7 @@ const currentPath = Astro.url.pathname;
           <li class="relative group">
             <a
               href={item.href}
-              class={`text-sm xl:text-base font-medium font-sans transition-colors whitespace-nowrap ${currentPath === item.href || (item.dropdown && item.dropdown.some((d: any) => currentPath === d.href)) ? 'text-accent' : 'text-gray-600 hover:text-accent'}`}
+              class={`text-sm xl:text-base font-medium font-sans transition-colors whitespace-nowrap ${currentPath === item.href || (item.dropdown && item.dropdown.some((d: any) => currentPath === d.href)) ? (currentPath === '/' ? 'text-accent lg:text-primary' : 'text-accent') : (currentPath === '/' ? 'text-gray-600 hover:text-accent lg:text-white lg:hover:text-primary' : 'text-gray-600 hover:text-accent')}`}
             >
               {item.label}{item.dropdown && <span class="ml-1 text-sm">▾</span>}
             </a>
@@ -379,6 +392,24 @@ const currentPath = Astro.url.pathname;
         menu?.classList.toggle('hidden');
         btn.setAttribute('aria-expanded', String(!isOpen));
       });
+
+      // Desktop homepage only: nav starts transparent over the hero photo, flips
+      // to solid white once scrolled past ~80px. We add/remove the lg:bg-transparent
+      // and lg:shadow-none classes (mobile nav stays bg-white shadow-sm throughout).
+      // The initial call is deferred to requestAnimationFrame so the synchronous
+      // scrollY read doesn't force a style+layout flush on mount.
+      if (window.location.pathname === '/') {
+        const header = document.getElementById('site-header');
+        const onScroll = () => {
+          if (window.scrollY > 80) {
+            header?.classList.remove('lg:bg-transparent', 'lg:shadow-none');
+          } else {
+            header?.classList.add('lg:bg-transparent', 'lg:shadow-none');
+          }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        requestAnimationFrame(onScroll);
+      }
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wireHeader);
     else wireHeader();
