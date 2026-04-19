@@ -287,7 +287,7 @@ const currentPath = Astro.url.pathname;
           <li class="relative group">
             <a
               href={item.href}
-              class={`text-sm xl:text-base font-medium font-sans transition-colors whitespace-nowrap ${currentPath === item.href || (item.dropdown && item.dropdown.some((d: any) => currentPath === d.href)) ? 'text-primary' : 'text-gray-600 hover:text-primary'}`}
+              class={`text-sm xl:text-base font-medium font-sans transition-colors whitespace-nowrap ${currentPath === item.href || (item.dropdown && item.dropdown.some((d: any) => currentPath === d.href)) ? 'text-accent' : 'text-gray-600 hover:text-accent'}`}
             >
               {item.label}{item.dropdown && <span class="ml-1 text-sm">▾</span>}
             </a>
@@ -297,7 +297,7 @@ const currentPath = Astro.url.pathname;
                   <li>
                     <a
                       href={sub.href}
-                      class={`block px-4 py-3 text-sm font-medium font-sans hover:bg-gray-50 hover:text-primary transition-colors ${currentPath === sub.href ? 'text-primary' : 'text-gray-700'}`}
+                      class={`block px-4 py-3 text-sm font-medium font-sans hover:bg-gray-50 hover:text-accent transition-colors ${currentPath === sub.href ? 'text-accent' : 'text-gray-700'}`}
                     >
                       {sub.label}
                     </a>
@@ -330,7 +330,7 @@ const currentPath = Astro.url.pathname;
               <li>
                 <a
                   href={item.href}
-                  class={`block py-3 text-sm font-semibold font-sans border-b border-gray-100 ${currentPath === item.href ? 'text-primary' : 'text-gray-700 hover:text-primary'} ${item.href === '#' ? 'pointer-events-none text-gray-500 uppercase tracking-wide' : ''}`}
+                  class={`block py-3 text-sm font-semibold font-sans border-b border-gray-100 ${currentPath === item.href ? 'text-accent' : 'text-gray-700 hover:text-accent'} ${item.href === '#' ? 'pointer-events-none text-gray-500 uppercase tracking-wide' : ''}`}
                 >
                   {item.label}
                 </a>
@@ -339,7 +339,7 @@ const currentPath = Astro.url.pathname;
                 <li>
                   <a
                     href={sub.href}
-                    class={`block py-2 pl-4 text-sm font-medium font-sans border-b border-gray-100 ${currentPath === sub.href ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}
+                    class={`block py-2 pl-4 text-sm font-medium font-sans border-b border-gray-100 ${currentPath === sub.href ? 'text-accent' : 'text-gray-700 hover:text-accent'}`}
                   >
                     {sub.label}
                   </a>
@@ -350,7 +350,7 @@ const currentPath = Astro.url.pathname;
             <li>
               <a
                 href={item.href}
-                class={`block py-3 text-sm font-medium font-sans border-b border-gray-100 ${currentPath === item.href ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}
+                class={`block py-3 text-sm font-medium font-sans border-b border-gray-100 ${currentPath === item.href ? 'text-accent' : 'text-gray-700 hover:text-accent'}`}
               >
                 {item.label}
               </a>
