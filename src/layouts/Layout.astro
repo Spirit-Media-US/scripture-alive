@@ -77,7 +77,11 @@ const currentPath = Astro.url.pathname;
        ======================================================================== -->
   <style is:inline>
     /* @font-face: CSS spec forbids inside @layer, so top-level only */
-    @font-face{font-family:'Dancing Script';font-style:normal;font-weight:400;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2') format('woff2')}
+    /* Dancing Script 400 is the homepage H1 LCP element. font-display:optional means:
+       if the font isn't ready within ~100ms of nav, never swap (fallback stays for
+       this session). Slow-4G Lighthouse audits never see the swap → LCP = FCP.
+       Real users on fast/cached connections still get Dancing Script. */
+    @font-face{font-family:'Dancing Script';font-style:normal;font-weight:400;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2') format('woff2')}
     @font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2') format('woff2')}
     /* Montserrat 500/600 moved to /deferred.css — removes them from the critical
        network dependency chain (they were 264ms on slow-4G). With font-display:swap,
