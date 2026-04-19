@@ -64,8 +64,9 @@ const currentPath = Astro.url.pathname;
   <link rel="preconnect" href="https://assets.spiritmediapublishing.com" crossorigin />
   <!-- Preload only the LCP font (hero h1 Dancing Script 400). Subheading Montserrat 400 is in critical CSS. -->
   <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2" crossorigin />
-  <!-- Deferred fonts (heavier weights + Roboto Slab) — non-blocking stylesheet load -->
-  <link rel="stylesheet" href="/deferred.css" />
+  <!-- Deferred fonts (heavier weights + Roboto Slab) — non-blocking via media=print swap. -->
+  <link rel="stylesheet" href="/deferred.css" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="/deferred.css" /></noscript>
   <slot name="head" />
   <!-- Google tag (GA4) — deferred until after window load to free main thread for LCP -->
   <script>
