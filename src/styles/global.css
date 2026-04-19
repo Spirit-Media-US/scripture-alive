@@ -9,8 +9,8 @@
 
 @theme {
   --color-primary: #FBC215;
-  --color-accent:  #3472B7;
-  --color-accent-ink: #295a92;
+  /* Accent bumped from #3472B7 to #295a92 to clear 4.5:1 AA contrast on cream/white. */
+  --color-accent:  #295a92;
   --color-gold:    #FBC215;
   --color-cream:   #f5f0e8;
   --font-sans:     'Montserrat', ui-sans-serif, system-ui, sans-serif;
