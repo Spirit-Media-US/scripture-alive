@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import HundredClubBadge from "../components/HundredClubBadge.astro";
 import MailtoLink from "../components/MailtoLink.astro";
 
 interface Props {
@@ -456,6 +457,7 @@ const currentPath = Astro.url.pathname;
     </div>
     <div class="text-center text-white/70 text-xs mt-4">
       &copy; {new Date().getFullYear()} Scripture Alive. Powered by <a href="https://spiritmediapublishing.com" class="text-white/80 hover:text-white underline transition-colors">Spirit Media</a>.
+      <HundredClubBadge />
     </div>
   </footer>
 
