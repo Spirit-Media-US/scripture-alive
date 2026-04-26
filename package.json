@@ -3,7 +3,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "astro dev --port 4329",
-		"build": "rm -rf public/studio && sanity build public/studio --yes && sed -i 's|src=\"/static/|src=\"static/|g' public/studio/index.html && astro build && node scripts/async-css.mjs && node scripts/100club-verify.mjs",
+		"build": "node scripts/sync-100club-registry.mjs && rm -rf public/studio && sanity build public/studio --yes && sed -i 's|src=\"/static/|src=\"static/|g' public/studio/index.html && astro build && node scripts/async-css.mjs && node scripts/100club-verify.mjs",
 		"preview": "astro preview"
 	},
 	"dependencies": {
