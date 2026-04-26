@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://scripturealive.com/sitemap-index.xml
