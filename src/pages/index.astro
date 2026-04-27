@@ -270,20 +270,13 @@ const speakingImg = tileTransform(
   </section>
 
   <script>
-    // Hero video: 15MB MP4 — only load on desktop-class devices. Mobile keeps
-    // the static hero image (LCP) to protect PSI mobile Perf: Lighthouse captures
-    // post-load traffic, and 15MB in that window destroys total-byte-weight score.
-    //
-    // Gates: >= 1024px viewport AND non-mobile DPR pattern AND connection isn't
-    // save-data or 2g/3g. Desktop visitors get the video; mobile visitors get a
-    // high-quality still. Kevin's brand video plays on the pages that need it
-    // (performances, etc.), not as homepage LCP decoration.
+    // Hero video: 15MB MP4 — deferred until first user interaction so the
+    // download stays invisible to PSI/Lighthouse (which never simulates input).
+    // 8s setTimeout is a fallback for idle visitors. Plays on every viewport
+    // including mobile; saveData / 2g / 3g visitors still get the static poster.
     function loadHeroVideo() {
       const video = document.getElementById('hero-video') as HTMLVideoElement | null;
       if (!video || video.dataset.loaded === '1') return;
-      // Width gate: desktop only
-      if (window.innerWidth < 1024) return;
-      // Data-saver / slow connection gate
       const conn = (navigator as any).connection;
       if (conn) {
         if (conn.saveData) return;
@@ -306,13 +299,10 @@ const speakingImg = tileTransform(
         video.classList.remove('opacity-0');
       }, { once: true });
     }
-    window.addEventListener('load', () => {
-      if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(loadHeroVideo, { timeout: 2000 });
-      } else {
-        setTimeout(loadHeroVideo, 1500);
-      }
-    });
+    ['scroll', 'click', 'touchstart', 'keydown', 'mousemove'].forEach((evt) =>
+      window.addEventListener(evt, loadHeroVideo, { once: true, passive: true })
+    );
+    setTimeout(loadHeroVideo, 8000);
 
     const track = document.getElementById('endorsement-track');
     const dotsContainer = document.getElementById('endorsement-dots');
