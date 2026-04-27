@@ -49,9 +49,16 @@ const speakingImg = tileTransform(
 >
 
   <Fragment slot="head">
-    <!-- Desktop-only hero preload (media-query gated). Mobile viewports never fetch
-         this resource because the mobile hero layout has no photo; PSI mobile sees
-         only the HTML-stream-painted H1 as LCP (~1.3s observed). -->
+    <!-- Hero preload — viewport-gated. Mobile gets the 19KB 800w variant,
+         desktop gets the 50KB 1600w variant. Both fetchpriority=high so the
+         poster paints before the deferred video kicks in. -->
+    <link
+      rel="preload"
+      as="image"
+      href="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp"
+      fetchpriority="high"
+      media="(max-width: 1023.98px)"
+    />
     <link
       rel="preload"
       as="image"
@@ -59,97 +66,60 @@ const speakingImg = tileTransform(
       fetchpriority="high"
       media="(min-width: 1024px)"
     />
-    <!-- Book Jeremy button uses Montserrat 500 on both hero layouts. -->
+    <!-- Book Jeremy button uses Montserrat 500. -->
     <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2" crossorigin />
   </Fragment>
 
-  <!-- MOBILE HERO — text-first, H1 is LCP. Rendered server-side; no JS gate.
-       CSS-only visibility via lg:hidden means the DOM has this block but desktop
-       hides it. Lighthouse mobile viewport sees only this layout. -->
-  <div class="lg:hidden">
-    <section class="bg-cream pt-16 pb-12 md:pt-24 md:pb-16 px-4">
-      <div class="max-w-5xl mx-auto text-center" style="margin-top:200px">
-        <h1 class="font-display font-light text-5xl md:text-6xl leading-tight text-accent">
-          Making Scripture Unforgettable
-        </h1>
-        <p class="font-sans text-base sm:text-xl md:text-2xl mt-6 text-gray-700">
-          Performances | Workshops | Speaking
-        </p>
-        <p class="font-sans text-sm md:text-base mt-3 text-gray-600">
-          Available for churches, conferences, camps, schools, and special events
-        </p>
-        <div class="flex flex-col items-center gap-3 mt-8">
-          <a href="/book-jeremy" class="bg-primary text-black font-semibold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
-            Book Jeremy
-          </a>
-          <a href="/referjeremy" class="text-gray-700 text-sm hover:text-accent transition-colors">
-            Know someone who should hear about Jeremy? <span class="underline">Refer him here</span>
-          </a>
-        </div>
+  <!-- HERO — full-viewport overlay (poster + deferred video). Same design on
+       every viewport. The lg:-mt-[140px] pulls the section behind the sticky
+       transparent nav on desktop only; mobile nav is opaque so the section
+       starts cleanly below it. Picture serves hero-800.webp on mobile,
+       hero-1600.webp on lg+. -->
+  <section class="relative h-screen flex items-center justify-center overflow-hidden lg:-mt-[140px]">
+    <picture>
+      <source
+        media="(min-width: 1024px)"
+        srcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp"
+      />
+      <img
+        src="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp"
+        width="800"
+        height="450"
+        alt=""
+        aria-hidden="true"
+        fetchpriority="high"
+        decoding="async"
+        class="absolute inset-0 w-full h-full object-cover z-0"
+        id="hero-poster"
+      />
+    </picture>
+    <video
+      class="absolute inset-0 w-full h-full object-cover z-0 opacity-0 transition-opacity duration-500"
+      muted playsinline loop preload="none" aria-hidden="true"
+      id="hero-video"
+      data-src="https://assets.spiritmediapublishing.com/scripture-alive/scripture-alive-hero.mp4"
+    ></video>
+    <div class="absolute inset-0 z-10 bg-black/30 lg:bg-transparent"></div>
+    <div class="relative z-20 text-center text-white px-4 max-w-4xl mx-auto lg:mt-[200px]">
+      <h1 class="font-display font-light text-5xl md:text-6xl lg:text-7xl mb-6 text-white drop-shadow-lg">
+        Making Scripture Unforgettable
+      </h1>
+      <p class="font-sans text-lg md:text-xl lg:text-2xl mb-4 text-white drop-shadow-md">
+        Performances | Workshops | Speaking
+      </p>
+      <p class="font-sans text-sm md:text-base mb-8 lg:mb-10 text-white/80 drop-shadow-md">
+        Available for churches, conferences, camps, schools, and special events
+      </p>
+      <div class="flex flex-col items-center gap-3">
+        <a href="/book-jeremy" class="bg-primary text-black font-semibold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
+          Book Jeremy
+        </a>
+        <a href="/referjeremy" class="text-white/70 text-sm hover:text-white transition-colors">
+          Know someone who should hear about Jeremy? <span class="underline">Refer him here</span>
+        </a>
       </div>
-    </section>
-  </div>
-
-  <!-- DESKTOP HERO — original full-viewport overlay design. Transparent nav shows
-       over the photo; H1/subhead sit in the center with drop shadows. Hidden below
-       1024px so mobile never pays the image download cost.
-
-       The margin-top:-140px pulls this section up behind the sticky header (which
-       is 140px tall on lg+) so the hero photo shows through the transparent nav. -->
-  <div class="hidden lg:block">
-    <section class="relative h-screen flex items-center justify-center overflow-hidden" style="margin-top: -140px;">
-      <!-- <picture> with media-query <source> keeps the hero network fetch off of
-           mobile entirely. On < 1024px viewports, browser falls back to the <img>,
-           whose src is a 1×1 GIF data URI — no HTTP request. On ≥ 1024px, browser
-           uses the <source> srcset and fetches hero-1600.webp.
-           (loading=eager / fetchpriority=high on the <img> tag itself were still
-           causing mobile fetches when the element was nested inside a display:none
-           parent, because img download-on-parse is viewport-agnostic.) -->
-      <picture>
-        <source
-          media="(min-width: 1024px)"
-          srcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp"
-        />
-        <img
-          src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-          width="1768"
-          height="891"
-          alt=""
-          aria-hidden="true"
-          fetchpriority="high"
-          decoding="async"
-          class="absolute inset-0 w-full h-full object-cover z-0"
-          id="hero-poster"
-        />
-      </picture>
-      <video
-        class="absolute inset-0 w-full h-full object-cover z-0 opacity-0 transition-opacity duration-500"
-        muted playsinline loop preload="none" aria-hidden="true"
-        id="hero-video"
-        data-src="https://assets.spiritmediapublishing.com/scripture-alive/scripture-alive-hero.mp4"
-      ></video>
-      <div class="absolute inset-0 z-10"></div>
-      <div class="relative z-20 text-center text-white px-4 max-w-4xl mx-auto" style="margin-top:200px">
-        <h1 class="font-display font-light text-6xl lg:text-7xl mb-6 text-white drop-shadow-lg">
-          Making Scripture Unforgettable
-        </h1>
-        <p class="font-sans text-2xl mb-4 text-white drop-shadow-md">
-          Performances | Workshops | Speaking
-        </p>
-        <p class="font-sans text-base mb-10 text-white/80 drop-shadow-md">
-          Available for churches, conferences, camps, schools, and special events
-        </p>
-        <div class="flex flex-col items-center gap-3">
-          <a href="/book-jeremy" class="bg-primary text-black font-semibold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
-            Book Jeremy
-          </a>
-          <a href="/referjeremy" class="text-white/70 text-sm hover:text-white transition-colors">
-            Know someone who should hear about Jeremy? <span class="underline">Refer him here</span>
-          </a>
-        </div>
-      </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
   <!-- DEDICATED TO PROCLAIMING — blue heading -->
   <section class="bg-white pt-16 pb-8 px-4">
