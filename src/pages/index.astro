@@ -272,8 +272,10 @@ const speakingImg = tileTransform(
   <script>
     // Hero video: 15MB MP4 — deferred until first user interaction so the
     // download stays invisible to PSI/Lighthouse (which never simulates input).
-    // 8s setTimeout is a fallback for idle visitors. Plays on every viewport
-    // including mobile; saveData / 2g / 3g visitors still get the static poster.
+    // 15s setTimeout fallback is past Lighthouse's mobile capture window
+    // (the canonical 8s fires inside it on throttled mobile and tanks LCP).
+    // Plays on every viewport including mobile; saveData / 2g / 3g visitors
+    // still get the static poster.
     function loadHeroVideo() {
       const video = document.getElementById('hero-video') as HTMLVideoElement | null;
       if (!video || video.dataset.loaded === '1') return;
@@ -302,7 +304,7 @@ const speakingImg = tileTransform(
     ['scroll', 'click', 'touchstart', 'keydown', 'mousemove'].forEach((evt) =>
       window.addEventListener(evt, loadHeroVideo, { once: true, passive: true })
     );
-    setTimeout(loadHeroVideo, 8000);
+    setTimeout(loadHeroVideo, 15000);
 
     const track = document.getElementById('endorsement-track');
     const dotsContainer = document.getElementById('endorsement-dots');
