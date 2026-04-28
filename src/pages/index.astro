@@ -63,8 +63,10 @@ const speakingImg = tileTransform(
 
   <!-- HERO — autoplay video background, no image poster. Solid stone-900
        fills the area until the video paints. Pulled up under the sticky
-       nav so the video shows behind the transparent header at scroll=0. -->
-  <section id="hero-section" class="relative bg-stone-900 flex items-center justify-center overflow-hidden py-24 md:py-32 lg:py-40 px-4">
+       nav so the video shows behind the transparent header at scroll=0.
+       h-screen = full viewport height; padding-top in the head <style>
+       above offsets the content below the sticky nav. -->
+  <section id="hero-section" class="relative bg-stone-900 h-screen flex items-center justify-center overflow-hidden px-4">
     <video
       class="absolute inset-0 w-full h-full object-cover z-0"
       autoplay muted playsinline loop preload="auto" aria-hidden="true"
