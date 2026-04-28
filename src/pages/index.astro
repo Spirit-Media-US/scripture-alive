@@ -49,13 +49,13 @@ const speakingImg = tileTransform(
 >
 
   <Fragment slot="head">
-    <!-- Hero preload — viewport-gated. Mobile gets the 19KB 800w variant,
-         desktop gets the 50KB 1600w variant. Both fetchpriority=high so the
-         poster paints before the deferred video kicks in. -->
+    <!-- Hero LCP preload — viewport-gated so each viewport fetches exactly one
+         variant regardless of DPR. srcset+sizes gets defeated by DPR≥2 (picks
+         the bigger variant for sharpness) — picture+media is byte-deterministic. -->
     <link
       rel="preload"
       as="image"
-      href="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp"
+      href="https://assets.spiritmediapublishing.com/scripture-alive/hero-640.webp"
       fetchpriority="high"
       media="(max-width: 1023.98px)"
     />
@@ -82,9 +82,9 @@ const speakingImg = tileTransform(
         srcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp"
       />
       <img
-        src="https://assets.spiritmediapublishing.com/scripture-alive/hero-800.webp"
-        width="800"
-        height="450"
+        src="https://assets.spiritmediapublishing.com/scripture-alive/hero-640.webp"
+        width="640"
+        height="322"
         alt=""
         aria-hidden="true"
         fetchpriority="high"
