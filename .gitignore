@@ -15,6 +15,7 @@ node_modules/
 !public/favicon.png
 *.gif
 *.webp
+!public/img/hero-480.webp
 *.svg
 *.mp4
 *.mp3
