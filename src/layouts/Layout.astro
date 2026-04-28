@@ -215,19 +215,23 @@ const currentPath = Astro.url.pathname;
          text-{color} utilities ship in @layer utilities — which beats @layer
          base regardless of specificity. !important reverses the layer order
          only for these specific overrides. */
-      #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a,
+      /* NOTE: rules MUST be split into individual selectors (not comma-grouped)
+         because Lightning CSS strips the bare `nav > ul > li > a` selector
+         from comma groups during build optimization, leaving only the
+         #mobile-menu-btn half. Splitting bypasses that. */
+      #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a{color:#fff!important}
       #site-header[data-transparent-hero="true"]:not(.is-scrolled) #mobile-menu-btn{color:#fff!important}
       #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a:hover{color:#FBC215!important}
-      #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a,
+      #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a{color:#4b5563!important}
       #site-header[data-transparent-hero="true"].is-scrolled #mobile-menu-btn{color:#4b5563!important}
       #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a:hover{color:#295a92!important}
       /* Active link (the one matching currentPath) — Astro renders it with
          text-accent (mobile) or lg:text-primary (desktop). Keep that link
          yellow at top and blue when scrolled, regardless of the bulk override
          above. */
-      #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a.text-accent,
+      #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a.text-accent{color:#FBC215!important}
       #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a.lg\:text-primary{color:#FBC215!important}
-      #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a.text-accent,
+      #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a.text-accent{color:#295a92!important}
       #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a.lg\:text-primary{color:#295a92!important}
       /* Keep the Book Jeremy CTA button untouched — it has its own .bg-primary
          and .text-black, the bulk override above doesn't catch it because it
