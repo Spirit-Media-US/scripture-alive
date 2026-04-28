@@ -48,16 +48,24 @@ const speakingImg = tileTransform(
   }}
 >
 
-  <!-- HERO — text-only on solid dark background. No image, no video. -->
+  <!-- HERO — autoplay video background, no image poster. Solid stone-900
+       fills the area until the video paints. -->
   <section id="hero-section" class="relative bg-stone-900 flex items-center justify-center overflow-hidden py-24 md:py-32 lg:py-40 px-4">
-    <div class="relative text-center text-white max-w-4xl mx-auto">
-      <h1 class="font-display font-light text-5xl md:text-6xl lg:text-7xl mb-6 text-white">
+    <video
+      class="absolute inset-0 w-full h-full object-cover z-0"
+      autoplay muted playsinline loop preload="auto" aria-hidden="true"
+    >
+      <source src="https://assets.spiritmediapublishing.com/scripture-alive/scripture-alive-hero.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 z-10 bg-black/40"></div>
+    <div class="relative z-20 text-center text-white max-w-4xl mx-auto">
+      <h1 class="font-display font-light text-5xl md:text-6xl lg:text-7xl mb-6 text-white drop-shadow-lg">
         Making Scripture Unforgettable
       </h1>
-      <p class="font-sans text-lg md:text-xl lg:text-2xl mb-4 text-white">
+      <p class="font-sans text-lg md:text-xl lg:text-2xl mb-4 text-white drop-shadow-md">
         Performances | Workshops | Speaking
       </p>
-      <p class="font-sans text-sm md:text-base mb-8 lg:mb-10 text-white/80">
+      <p class="font-sans text-sm md:text-base mb-8 lg:mb-10 text-white/80 drop-shadow-md">
         Available for churches, conferences, camps, schools, and special events
       </p>
       <div class="flex flex-col items-center gap-3">
