@@ -207,6 +207,16 @@ const currentPath = Astro.url.pathname;
       .group:hover .group-hover\:opacity-100{opacity:1}
       .group:hover .group-hover\:visible{visibility:visible}
 
+      /* Homepage transparent-nav state — overrides Tailwind text-color
+         utilities on nav links so the navigation reads white over the video
+         hero, then flips to dark gray once the JS adds is-scrolled at scrollY>80. */
+      #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a,
+      #site-header[data-transparent-hero="true"]:not(.is-scrolled) #mobile-menu-btn{color:#fff}
+      #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a:hover{color:#FBC215}
+      #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a,
+      #site-header[data-transparent-hero="true"].is-scrolled #mobile-menu-btn{color:#4b5563}
+      #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a:hover{color:#295a92}
+
       /* Responsive — above the fold */
       @media(min-width:640px){
         .sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -311,13 +321,13 @@ const currentPath = Astro.url.pathname;
 <body>
   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded focus:shadow">Skip to main content</a>
 
-  <!-- Navigation. On desktop homepage the nav sits transparent over the full-viewport
-       hero photo, flipping to solid white once scrolled past ~80px (JS handler below).
-       Mobile homepage and all non-homepage routes render solid white from the start. -->
+  <!-- Navigation. On homepage the nav starts transparent over the hero video on
+       every viewport, flipping to solid white with dark text once scrolled past
+       ~80px (JS handler below + critical CSS rules above). -->
   <header
     id="site-header"
     data-transparent-hero={currentPath === '/' ? 'true' : 'false'}
-    class={`sticky top-0 z-50 transition-colors duration-300 ${currentPath === '/' ? 'bg-white shadow-sm lg:bg-transparent lg:shadow-none' : 'bg-white shadow-sm'}`}
+    class={`sticky top-0 z-50 transition-colors duration-300 ${currentPath === '/' ? 'bg-transparent shadow-none' : 'bg-white shadow-sm'}`}
   >
     <nav class="max-w-6xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
       <a href="/"><img src="/img/logo-320.webp" alt="Scripture Alive" width="120" height="60" decoding="async" fetchpriority="low" class="h-[60px] md:h-[108px] w-auto" /></a>
@@ -415,18 +425,21 @@ const currentPath = Astro.url.pathname;
         btn.setAttribute('aria-expanded', String(!isOpen));
       });
 
-      // Desktop homepage only: nav starts transparent over the hero photo, flips
-      // to solid white once scrolled past ~80px. We add/remove the lg:bg-transparent
-      // and lg:shadow-none classes (mobile nav stays bg-white shadow-sm throughout).
-      // The initial call is deferred to requestAnimationFrame so the synchronous
-      // scrollY read doesn't force a style+layout flush on mount.
+      // Homepage only: nav starts transparent over the hero video on every
+      // viewport, flips to solid white once scrolled past ~80px. The
+      // is-scrolled class drives both the bg/shadow change and the nav text
+      // color flip via critical CSS rules tied to data-transparent-hero.
       if (window.location.pathname === '/') {
         const header = document.getElementById('site-header');
         const onScroll = () => {
           if (window.scrollY > 80) {
-            header?.classList.remove('lg:bg-transparent', 'lg:shadow-none');
+            header?.classList.add('is-scrolled');
+            header?.classList.remove('bg-transparent', 'shadow-none');
+            header?.classList.add('bg-white', 'shadow-sm');
           } else {
-            header?.classList.add('lg:bg-transparent', 'lg:shadow-none');
+            header?.classList.remove('is-scrolled');
+            header?.classList.remove('bg-white', 'shadow-sm');
+            header?.classList.add('bg-transparent', 'shadow-none');
           }
         };
         window.addEventListener('scroll', onScroll, { passive: true });
