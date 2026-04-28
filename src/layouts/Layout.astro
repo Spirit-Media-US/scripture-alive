@@ -83,10 +83,13 @@ const currentPath = Astro.url.pathname;
        this session). Slow-4G Lighthouse audits never see the swap → LCP = FCP.
        Real users on fast/cached connections still get Dancing Script. */
     @font-face{font-family:'Dancing Script';font-style:normal;font-weight:400;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2') format('woff2')}
-    @font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2') format('woff2')}
-    /* Montserrat 500/600 moved to /deferred.css — removes them from the critical
-       network dependency chain (they were 264ms on slow-4G). With font-display:swap,
-       nav renders in system-ui first, then swaps to Montserrat when /deferred.css arrives. */
+    @font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2') format('woff2')}
+    /* font-display:optional — if Montserrat isn't ready within ~100ms, the browser
+       commits to the fallback (system-ui) for this nav and never swaps. Prevents
+       the glyph-metric reflow that real users see as 'ghosted/doubled' text on
+       first paint when swap fires mid-render. Cached/fast users still see
+       Montserrat; first-time slow-4G visitors see a subtly different sans (still
+       legible, no shift). */
 
     /* @keyframes: also top-level */
     @keyframes saFadeIn{from{opacity:0}to{opacity:1}}
