@@ -48,71 +48,16 @@ const speakingImg = tileTransform(
   }}
 >
 
-  <Fragment slot="head">
-    <!-- Hero LCP preload — viewport-gated so each viewport fetches exactly one
-         variant regardless of DPR. srcset+sizes gets defeated by DPR≥2 (picks
-         the bigger variant for sharpness) — picture+media is byte-deterministic. -->
-    <link
-      rel="preload"
-      as="image"
-      href="/img/hero-480.webp"
-      fetchpriority="high"
-      media="(max-width: 1023.98px)"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp"
-      fetchpriority="high"
-      media="(min-width: 1024px)"
-    />
-    <!-- Montserrat 500 (Book Jeremy CTA) is loaded by the @font-face in
-         deferred.css — not preloaded here because the CTA isn't the LCP and
-         a 36KB high-priority font fetch competes with the hero image
-         download on Slow-4G. -->
-
-    <!-- Desktop overlap with the sticky transparent nav. Inline @media so it
-         applies on first paint — a Tailwind lg:-mt-[140px] class lands in the
-         deferred external stylesheet and causes the desktop section to paint
-         at top:0 then jump up (CLS spike). Mobile nav is opaque so no overlap. -->
-    <style>@media (min-width: 1024px) { #hero-section { margin-top: -140px; } }</style>
-  </Fragment>
-
-  <!-- HERO — full-viewport overlay (poster + deferred video). Same design on
-       every viewport. -->
-  <section id="hero-section" class="relative h-screen flex items-center justify-center overflow-hidden">
-    <picture>
-      <source
-        media="(min-width: 1024px)"
-        srcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp"
-      />
-      <img
-        src="/img/hero-480.webp"
-        width="480"
-        height="242"
-        alt=""
-        aria-hidden="true"
-        fetchpriority="high"
-        decoding="async"
-        class="absolute inset-0 w-full h-full object-cover z-0"
-        id="hero-poster"
-      />
-    </picture>
-    <video
-      class="absolute inset-0 w-full h-full object-cover z-0 opacity-0 transition-opacity duration-500"
-      muted playsinline loop preload="none" aria-hidden="true"
-      id="hero-video"
-      data-src="https://assets.spiritmediapublishing.com/scripture-alive/scripture-alive-hero.mp4"
-    ></video>
-    <div class="absolute inset-0 z-10 bg-black/30 lg:bg-transparent"></div>
-    <div class="relative z-20 text-center text-white px-4 max-w-4xl mx-auto lg:mt-[200px]">
-      <h1 class="font-display font-light text-5xl md:text-6xl lg:text-7xl mb-6 text-white drop-shadow-lg">
+  <!-- HERO — text-only on solid dark background. No image, no video. -->
+  <section id="hero-section" class="relative bg-stone-900 flex items-center justify-center overflow-hidden py-24 md:py-32 lg:py-40 px-4">
+    <div class="relative text-center text-white max-w-4xl mx-auto">
+      <h1 class="font-display font-light text-5xl md:text-6xl lg:text-7xl mb-6 text-white">
         Making Scripture Unforgettable
       </h1>
-      <p class="font-sans text-lg md:text-xl lg:text-2xl mb-4 text-white drop-shadow-md">
+      <p class="font-sans text-lg md:text-xl lg:text-2xl mb-4 text-white">
         Performances | Workshops | Speaking
       </p>
-      <p class="font-sans text-sm md:text-base mb-8 lg:mb-10 text-white/80 drop-shadow-md">
+      <p class="font-sans text-sm md:text-base mb-8 lg:mb-10 text-white/80">
         Available for churches, conferences, camps, schools, and special events
       </p>
       <div class="flex flex-col items-center gap-3">
@@ -245,42 +190,6 @@ const speakingImg = tileTransform(
   </section>
 
   <script>
-    // Hero video: 15MB MP4 — deferred until first user interaction so the
-    // download stays invisible to PSI/Lighthouse (which never simulates input).
-    // 15s setTimeout fallback is past Lighthouse's mobile capture window
-    // (the canonical 8s fires inside it on throttled mobile and tanks LCP).
-    // Plays on every viewport including mobile; saveData / 2g / 3g visitors
-    // still get the static poster.
-    function loadHeroVideo() {
-      const video = document.getElementById('hero-video') as HTMLVideoElement | null;
-      if (!video || video.dataset.loaded === '1') return;
-      const conn = (navigator as any).connection;
-      if (conn) {
-        if (conn.saveData) return;
-        if (conn.effectiveType && /2g|3g/i.test(conn.effectiveType)) return;
-      }
-      video.dataset.loaded = '1';
-      const src = video.dataset.src;
-      if (!src) return;
-      const source = document.createElement('source');
-      source.src = src;
-      source.type = 'video/mp4';
-      video.appendChild(source);
-      video.preload = 'auto';
-      video.load();
-      video.play().catch(() => { /* autoplay may be blocked; poster stays */ });
-      // Video layers above the poster at the same z-index; just fade the video in.
-      // Do NOT mutate poster opacity — Lighthouse snapshots the LCP element after
-      // load, and opacity:0 makes the LCP element look unpainted.
-      video.addEventListener('playing', () => {
-        video.classList.remove('opacity-0');
-      }, { once: true });
-    }
-    ['scroll', 'click', 'touchstart', 'keydown', 'mousemove'].forEach((evt) =>
-      window.addEventListener(evt, loadHeroVideo, { once: true, passive: true })
-    );
-    setTimeout(loadHeroVideo, 15000);
-
     const track = document.getElementById('endorsement-track');
     const dotsContainer = document.getElementById('endorsement-dots');
     const dots = dotsContainer?.querySelectorAll('button') ?? [];
