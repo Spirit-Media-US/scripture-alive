@@ -49,107 +49,51 @@ const speakingImg = tileTransform(
 >
 
   <Fragment slot="head">
-    <!-- Desktop-only hero preload (media-query gated). Mobile viewports never fetch
-         this resource because the mobile hero layout has no photo; PSI mobile sees
-         only the HTML-stream-painted H1 as LCP (~1.3s observed). -->
-    <link
-      rel="preload"
-      as="image"
-      href="https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp"
-      fetchpriority="high"
-      media="(min-width: 1024px)"
-    />
-    <!-- Book Jeremy button uses Montserrat 500 on both hero layouts. -->
-    <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2" crossorigin />
+    <!-- Pull the hero up under the transparent sticky nav so the video
+         shows through the (otherwise transparent) header at scroll=0.
+         Inline @media so it applies on first paint — a Tailwind
+         lg:-mt-[140px] would land in the deferred external stylesheet and
+         the section would paint at top:0 then jump up (CLS spike). Mobile
+         nav is ~84px tall, desktop nav is ~140px tall. -->
+    <style>
+      #hero-section{margin-top:-84px;padding-top:84px}
+      @media (min-width: 1024px){#hero-section{margin-top:-140px;padding-top:140px}}
+    </style>
   </Fragment>
 
-  <!-- MOBILE HERO — text-first, H1 is LCP. Rendered server-side; no JS gate.
-       CSS-only visibility via lg:hidden means the DOM has this block but desktop
-       hides it. Lighthouse mobile viewport sees only this layout. -->
-  <div class="lg:hidden">
-    <section class="bg-cream pt-16 pb-12 md:pt-24 md:pb-16 px-4">
-      <div class="max-w-5xl mx-auto text-center" style="margin-top:200px">
-        <h1 class="font-display font-light text-5xl md:text-6xl leading-tight text-accent">
-          Making Scripture Unforgettable
-        </h1>
-        <p class="font-sans text-base sm:text-xl md:text-2xl mt-6 text-gray-700">
-          Performances | Workshops | Speaking
-        </p>
-        <p class="font-sans text-sm md:text-base mt-3 text-gray-600">
-          Available for churches, conferences, camps, schools, and special events
-        </p>
-        <div class="flex flex-col items-center gap-3 mt-8">
-          <a href="/book-jeremy" class="bg-primary text-black font-semibold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
-            Book Jeremy
-          </a>
-          <a href="/referjeremy" class="text-gray-700 text-sm hover:text-accent transition-colors">
-            Know someone who should hear about Jeremy? <span class="underline">Refer him here</span>
-          </a>
-        </div>
+  <!-- HERO — autoplay video background, no image poster. Solid stone-900
+       fills the area until the video paints. Pulled up under the sticky
+       nav so the video shows behind the transparent header at scroll=0.
+       h-screen = full viewport height; padding-top in the head <style>
+       above offsets the content below the sticky nav. -->
+  <section id="hero-section" class="relative bg-stone-900 h-screen flex items-center justify-center overflow-hidden px-4">
+    <video
+      class="absolute inset-0 w-full h-full object-cover z-0"
+      autoplay muted playsinline loop preload="auto" aria-hidden="true"
+    >
+      <source src="https://assets.spiritmediapublishing.com/scripture-alive/scripture-alive-hero.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 z-10 bg-black/40"></div>
+    <div class="relative z-20 text-center text-white max-w-4xl mx-auto">
+      <h1 class="font-display font-light text-5xl md:text-6xl lg:text-7xl mb-6 text-white drop-shadow-lg">
+        Making Scripture Unforgettable
+      </h1>
+      <p class="font-sans text-lg md:text-xl lg:text-2xl mb-4 text-white drop-shadow-md">
+        Performances | Workshops | Speaking
+      </p>
+      <p class="font-sans text-sm md:text-base mb-8 lg:mb-10 text-white/80 drop-shadow-md">
+        Available for churches, conferences, camps, schools, and special events
+      </p>
+      <div class="flex flex-col items-center gap-3">
+        <a href="/book-jeremy" class="bg-primary text-black font-semibold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
+          Book Jeremy
+        </a>
+        <a href="/referjeremy" class="text-white/70 text-sm hover:text-white transition-colors">
+          Know someone who should hear about Jeremy? <span class="underline">Refer him here</span>
+        </a>
       </div>
-    </section>
-  </div>
-
-  <!-- DESKTOP HERO — original full-viewport overlay design. Transparent nav shows
-       over the photo; H1/subhead sit in the center with drop shadows. Hidden below
-       1024px so mobile never pays the image download cost.
-
-       The margin-top:-140px pulls this section up behind the sticky header (which
-       is 140px tall on lg+) so the hero photo shows through the transparent nav. -->
-  <div class="hidden lg:block">
-    <section class="relative h-screen flex items-center justify-center overflow-hidden" style="margin-top: -140px;">
-      <!-- <picture> with media-query <source> keeps the hero network fetch off of
-           mobile entirely. On < 1024px viewports, browser falls back to the <img>,
-           whose src is a 1×1 GIF data URI — no HTTP request. On ≥ 1024px, browser
-           uses the <source> srcset and fetches hero-1600.webp.
-           (loading=eager / fetchpriority=high on the <img> tag itself were still
-           causing mobile fetches when the element was nested inside a display:none
-           parent, because img download-on-parse is viewport-agnostic.) -->
-      <picture>
-        <source
-          media="(min-width: 1024px)"
-          srcset="https://assets.spiritmediapublishing.com/scripture-alive/hero-1600.webp"
-        />
-        <img
-          src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-          width="1768"
-          height="891"
-          alt=""
-          aria-hidden="true"
-          fetchpriority="high"
-          decoding="async"
-          class="absolute inset-0 w-full h-full object-cover z-0"
-          id="hero-poster"
-        />
-      </picture>
-      <video
-        class="absolute inset-0 w-full h-full object-cover z-0 opacity-0 transition-opacity duration-500"
-        muted playsinline loop preload="none" aria-hidden="true"
-        id="hero-video"
-        data-src="https://assets.spiritmediapublishing.com/scripture-alive/scripture-alive-hero.mp4"
-      ></video>
-      <div class="absolute inset-0 z-10"></div>
-      <div class="relative z-20 text-center text-white px-4 max-w-4xl mx-auto" style="margin-top:200px">
-        <h1 class="font-display font-light text-6xl lg:text-7xl mb-6 text-white drop-shadow-lg">
-          Making Scripture Unforgettable
-        </h1>
-        <p class="font-sans text-2xl mb-4 text-white drop-shadow-md">
-          Performances | Workshops | Speaking
-        </p>
-        <p class="font-sans text-base mb-10 text-white/80 drop-shadow-md">
-          Available for churches, conferences, camps, schools, and special events
-        </p>
-        <div class="flex flex-col items-center gap-3">
-          <a href="/book-jeremy" class="bg-primary text-black font-semibold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
-            Book Jeremy
-          </a>
-          <a href="/referjeremy" class="text-white/70 text-sm hover:text-white transition-colors">
-            Know someone who should hear about Jeremy? <span class="underline">Refer him here</span>
-          </a>
-        </div>
-      </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
   <!-- DEDICATED TO PROCLAIMING — blue heading -->
   <section class="bg-white pt-16 pb-8 px-4">
@@ -270,50 +214,6 @@ const speakingImg = tileTransform(
   </section>
 
   <script>
-    // Hero video: 15MB MP4 — only load on desktop-class devices. Mobile keeps
-    // the static hero image (LCP) to protect PSI mobile Perf: Lighthouse captures
-    // post-load traffic, and 15MB in that window destroys total-byte-weight score.
-    //
-    // Gates: >= 1024px viewport AND non-mobile DPR pattern AND connection isn't
-    // save-data or 2g/3g. Desktop visitors get the video; mobile visitors get a
-    // high-quality still. Kevin's brand video plays on the pages that need it
-    // (performances, etc.), not as homepage LCP decoration.
-    function loadHeroVideo() {
-      const video = document.getElementById('hero-video') as HTMLVideoElement | null;
-      if (!video || video.dataset.loaded === '1') return;
-      // Width gate: desktop only
-      if (window.innerWidth < 1024) return;
-      // Data-saver / slow connection gate
-      const conn = (navigator as any).connection;
-      if (conn) {
-        if (conn.saveData) return;
-        if (conn.effectiveType && /2g|3g/i.test(conn.effectiveType)) return;
-      }
-      video.dataset.loaded = '1';
-      const src = video.dataset.src;
-      if (!src) return;
-      const source = document.createElement('source');
-      source.src = src;
-      source.type = 'video/mp4';
-      video.appendChild(source);
-      video.preload = 'auto';
-      video.load();
-      video.play().catch(() => { /* autoplay may be blocked; poster stays */ });
-      // Video layers above the poster at the same z-index; just fade the video in.
-      // Do NOT mutate poster opacity — Lighthouse snapshots the LCP element after
-      // load, and opacity:0 makes the LCP element look unpainted.
-      video.addEventListener('playing', () => {
-        video.classList.remove('opacity-0');
-      }, { once: true });
-    }
-    window.addEventListener('load', () => {
-      if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(loadHeroVideo, { timeout: 2000 });
-      } else {
-        setTimeout(loadHeroVideo, 1500);
-      }
-    });
-
     const track = document.getElementById('endorsement-track');
     const dotsContainer = document.getElementById('endorsement-dots');
     const dots = dotsContainer?.querySelectorAll('button') ?? [];
