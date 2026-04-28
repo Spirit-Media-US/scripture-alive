@@ -209,6 +209,15 @@ const currentPath = Astro.url.pathname;
         .sm\:flex-row{flex-direction:row}
         .sm\:items-start{align-items:flex-start}
       }
+      /* Hero overlay — mobile dark scrim and base sizing */
+      .text-lg{font-size:1.125rem;line-height:1.75rem}
+      .mb-8{margin-bottom:2rem}
+      .px-10{padding-inline:2.5rem}
+      .py-3{padding-block:.75rem}
+      .gap-3{gap:.75rem}
+      .hover\:opacity-90:hover{opacity:.9}
+      /* bg-black/30 — Tailwind alpha modifier expands to rgb()/30% */
+      .bg-black\/30{background-color:rgba(0,0,0,.3)}
       @media(min-width:768px){
         .md\:px-6{padding-inline:1.5rem}
         .md\:py-4{padding-block:1rem}
@@ -218,6 +227,7 @@ const currentPath = Astro.url.pathname;
         .md\:max-h-\[460px\]{max-height:460px}
         .md\:text-2xl{font-size:1.5rem;line-height:2rem}
         .md\:text-6xl{font-size:3.75rem;line-height:1}
+        .md\:text-xl{font-size:1.25rem;line-height:1.75rem}
         .md\:text-base{font-size:1rem;line-height:1.5rem}
         .md\:flex-row{flex-direction:row}
       }
@@ -232,7 +242,9 @@ const currentPath = Astro.url.pathname;
         .lg\:max-h-\[560px\]{max-height:560px}
         .lg\:text-base{font-size:1rem;line-height:1.5rem}
         .lg\:text-7xl{font-size:4.5rem;line-height:1}
-        /* Desktop homepage transparent nav over hero — see scroll handler below */
+        .lg\:text-2xl{font-size:1.5rem;line-height:2rem}
+        .lg\:mb-10{margin-bottom:2.5rem}
+        .lg\:mt-\[200px\]{margin-top:200px}
         .lg\:bg-transparent{background-color:transparent}
         .lg\:shadow-none{box-shadow:none}
         .lg\:text-white{color:#fff}
@@ -299,7 +311,7 @@ const currentPath = Astro.url.pathname;
     class={`sticky top-0 z-50 transition-colors duration-300 ${currentPath === '/' ? 'bg-white shadow-sm lg:bg-transparent lg:shadow-none' : 'bg-white shadow-sm'}`}
   >
     <nav class="max-w-6xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
-      <a href="/"><img src="/img/logo-320.webp" alt="Scripture Alive" width="120" height="60" decoding="async" class="h-[60px] md:h-[108px] w-auto" /></a>
+      <a href="/"><img src="/img/logo-320.webp" alt="Scripture Alive" width="120" height="60" decoding="async" fetchpriority="low" class="h-[60px] md:h-[108px] w-auto" /></a>
       <ul class="hidden lg:flex items-center gap-4 xl:gap-6">
         {navItems.map(item => (
           <li class="relative group">
