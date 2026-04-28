@@ -48,8 +48,22 @@ const speakingImg = tileTransform(
   }}
 >
 
+  <Fragment slot="head">
+    <!-- Pull the hero up under the transparent sticky nav so the video
+         shows through the (otherwise transparent) header at scroll=0.
+         Inline @media so it applies on first paint — a Tailwind
+         lg:-mt-[140px] would land in the deferred external stylesheet and
+         the section would paint at top:0 then jump up (CLS spike). Mobile
+         nav is ~84px tall, desktop nav is ~140px tall. -->
+    <style>
+      #hero-section{margin-top:-84px;padding-top:84px}
+      @media (min-width: 1024px){#hero-section{margin-top:-140px;padding-top:140px}}
+    </style>
+  </Fragment>
+
   <!-- HERO — autoplay video background, no image poster. Solid stone-900
-       fills the area until the video paints. -->
+       fills the area until the video paints. Pulled up under the sticky
+       nav so the video shows behind the transparent header at scroll=0. -->
   <section id="hero-section" class="relative bg-stone-900 flex items-center justify-center overflow-hidden py-24 md:py-32 lg:py-40 px-4">
     <video
       class="absolute inset-0 w-full h-full object-cover z-0"
