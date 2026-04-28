@@ -209,13 +209,30 @@ const currentPath = Astro.url.pathname;
 
       /* Homepage transparent-nav state — overrides Tailwind text-color
          utilities on nav links so the navigation reads white over the video
-         hero, then flips to dark gray once the JS adds is-scrolled at scrollY>80. */
+         hero, then flips to dark gray once the JS adds is-scrolled at scrollY>80.
+         !important is required because these rules live in @layer base (per the
+         project rule that everything must be layered) and the Tailwind
+         text-{color} utilities ship in @layer utilities — which beats @layer
+         base regardless of specificity. !important reverses the layer order
+         only for these specific overrides. */
       #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a,
-      #site-header[data-transparent-hero="true"]:not(.is-scrolled) #mobile-menu-btn{color:#fff}
-      #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a:hover{color:#FBC215}
+      #site-header[data-transparent-hero="true"]:not(.is-scrolled) #mobile-menu-btn{color:#fff!important}
+      #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a:hover{color:#FBC215!important}
       #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a,
-      #site-header[data-transparent-hero="true"].is-scrolled #mobile-menu-btn{color:#4b5563}
-      #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a:hover{color:#295a92}
+      #site-header[data-transparent-hero="true"].is-scrolled #mobile-menu-btn{color:#4b5563!important}
+      #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a:hover{color:#295a92!important}
+      /* Active link (the one matching currentPath) — Astro renders it with
+         text-accent (mobile) or lg:text-primary (desktop). Keep that link
+         yellow at top and blue when scrolled, regardless of the bulk override
+         above. */
+      #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a.text-accent,
+      #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a.lg\:text-primary{color:#FBC215!important}
+      #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a.text-accent,
+      #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a.lg\:text-primary{color:#295a92!important}
+      /* Keep the Book Jeremy CTA button untouched — it has its own .bg-primary
+         and .text-black, the bulk override above doesn't catch it because it
+         has no other text-{color} utility, but pin it explicitly for safety. */
+      #site-header[data-transparent-hero="true"] nav > ul > li > a.bg-primary{color:#000!important}
 
       /* Responsive — above the fold */
       @media(min-width:640px){
