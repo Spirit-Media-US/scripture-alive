@@ -68,15 +68,15 @@ const speakingImg = tileTransform(
     />
     <!-- Book Jeremy button uses Montserrat 500. -->
     <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2" crossorigin />
+    <!-- Desktop overlap with the sticky transparent nav. Inline @media so it
+         applies on first paint — a Tailwind lg:-mt-[140px] class lands in the
+         deferred external stylesheet and causes the desktop section to paint
+         at top:0 then jump up (CLS spike). Mobile nav is opaque so no overlap. -->
+    <style>@media (min-width: 1024px) { #hero-section { margin-top: -140px; } }</style>
   </Fragment>
 
   <!-- HERO — full-viewport overlay (poster + deferred video). Same design on
-       every viewport. The desktop overlap with the transparent sticky nav uses
-       an inline <style> with @media so it applies on first paint (a Tailwind
-       lg:-mt-[140px] class gets bundled into deferred CSS and causes the
-       desktop section to start at top:0 then jump up — CLS spike).
-       Mobile nav is opaque so the section starts cleanly below it. -->
-  <style>@media (min-width: 1024px) { #hero-section { margin-top: -140px; } }</style>
+       every viewport. -->
   <section id="hero-section" class="relative h-screen flex items-center justify-center overflow-hidden">
     <picture>
       <source
