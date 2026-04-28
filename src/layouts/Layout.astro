@@ -319,7 +319,7 @@ const currentPath = Astro.url.pathname;
   <!-- Google Analytics GA4 — loaded on first user interaction to protect LCP/TBT.
        Lighthouse never interacts, so GA doesn't load in audits. Real users get
        GA after they engage (post-LCP). 8s fallback covers bots/idle users. -->
-  <script is:inline define:vars={{ GA_ID }}>
+  <script is:inline set:html={`
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     window.gtag = gtag;
@@ -328,16 +328,16 @@ const currentPath = Astro.url.pathname;
       window.__gaLoaded = true;
       var s = document.createElement('script');
       s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=${GA_ID}';
       document.head.appendChild(s);
       gtag('js', new Date());
-      gtag('config', GA_ID);
+      gtag('config', '${GA_ID}');
     }
     var gaEvents = ['scroll','mousemove','touchstart','keydown','click'];
     function gaTrigger(){ gaEvents.forEach(function(e){ window.removeEventListener(e, gaTrigger); }); loadGA(); }
     gaEvents.forEach(function(e){ window.addEventListener(e, gaTrigger, { passive: true, once: true }); });
     setTimeout(function(){ if(!window.__gaLoaded) loadGA(); }, 8000);
-  </script>
+  `} />
 </head>
 <body>
   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded focus:shadow">Skip to main content</a>
