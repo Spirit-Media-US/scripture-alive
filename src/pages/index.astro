@@ -66,8 +66,11 @@ const speakingImg = tileTransform(
       fetchpriority="high"
       media="(min-width: 1024px)"
     />
-    <!-- Book Jeremy button uses Montserrat 500. -->
-    <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2" crossorigin />
+    <!-- Montserrat 500 (Book Jeremy CTA) is loaded by the @font-face in
+         deferred.css — not preloaded here because the CTA isn't the LCP and
+         a 36KB high-priority font fetch competes with the hero image
+         download on Slow-4G. -->
+
     <!-- Desktop overlap with the sticky transparent nav. Inline @media so it
          applies on first paint — a Tailwind lg:-mt-[140px] class lands in the
          deferred external stylesheet and causes the desktop section to paint

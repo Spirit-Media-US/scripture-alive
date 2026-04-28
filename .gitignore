@@ -16,6 +16,7 @@ node_modules/
 *.gif
 *.webp
 !public/img/hero-480.webp
+!public/img/logo-320.webp
 *.svg
 *.mp4
 *.mp3
