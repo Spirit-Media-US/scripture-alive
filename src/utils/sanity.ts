@@ -40,7 +40,7 @@ export const TESTIMONIALS_QUERY = defineQuery(`
 export const FEATURED_TESTIMONIALS_QUERY = defineQuery(`
   *[_type == "testimonial" && featured == true] | order(order asc) {
     _id,
-    quote,
+    "quote": coalesce(homeQuote, quote),
     authorName,
     authorTitle,
     authorOrganization
