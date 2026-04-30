@@ -129,37 +129,63 @@ const speakingImg = tileTransform(
     </div>
   </section>
 
-  <!-- SERVICE TILES -->
-  <section class="bg-white px-4 py-10">
-    <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+  <!-- DISCOVER THE MINISTRY — section header + 3 service cards -->
+  <section class="bg-white px-4 py-12 md:py-16">
+    <div class="max-w-5xl mx-auto">
 
-      <a href="/performances" class="block group text-center">
-        <div class="relative overflow-hidden rounded h-48">
-          <img src={performancesImg}
-            alt={settings?.homePerformancesAlt || "Scripture Performances"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+      <!-- Section header with yellow flanking lines -->
+      <div class="flex items-center justify-center gap-4 md:gap-6 mb-10">
+        <span aria-hidden="true" class="h-1 w-16 md:w-24 bg-primary"></span>
+        <h2 class="font-sans font-bold text-3xl md:text-4xl text-accent">Discover the Ministry</h2>
+        <span aria-hidden="true" class="h-1 w-16 md:w-24 bg-primary"></span>
+      </div>
+
+      <!-- 3 cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden flex flex-col">
+          <div class="relative overflow-hidden h-48">
+            <img src={performancesImg}
+              alt={settings?.homePerformancesAlt || "Scripture Performances"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-sans font-bold text-xl text-accent mb-2">Scripture Performances</h3>
+            <p class="text-gray-600 text-sm leading-relaxed flex-1">Immersive, word-for-word dramatizations of entire books, characters, and narratives of the Bible that bring the Word to life.</p>
+            <a href="/performances" class="text-accent font-semibold mt-4 hover:underline inline-flex items-center gap-1">
+              View Performances <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
-        <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Performances</h3>
-        <p class="text-gray-600 text-sm">Full books of the Bible performed word-for-word from memory.</p>
-      </a>
 
-      <a href="/workshops" class="block group text-center">
-        <div class="relative overflow-hidden rounded h-48">
-          <img src={workshopsImg}
-            alt={settings?.homeWorkshopsAlt || "Scripture Memory Workshops"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden flex flex-col">
+          <div class="relative overflow-hidden h-48">
+            <img src={workshopsImg}
+              alt={settings?.homeWorkshopsAlt || "Scripture Memory Workshops"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-sans font-bold text-xl text-accent mb-2">Memory Workshops</h3>
+            <p class="text-gray-600 text-sm leading-relaxed flex-1">Engaging, hands-on training to equip people to remember and live out God's Word.</p>
+            <a href="/workshops" class="text-accent font-semibold mt-4 hover:underline inline-flex items-center gap-1">
+              Explore Workshops <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
-        <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Workshops</h3>
-        <p class="text-gray-600 text-sm">Hands-on sessions that equip people to memorize Scripture and live it out.</p>
-      </a>
 
-      <a href="/speaking" class="block group text-center">
-        <div class="relative overflow-hidden rounded h-48">
-          <img src={speakingImg}
-            alt={settings?.homeSpeakingAlt || "Guest Speaking"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden flex flex-col">
+          <div class="relative overflow-hidden h-48">
+            <img src={speakingImg}
+              alt={settings?.homeSpeakingAlt || "Guest Speaking"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-sans font-bold text-xl text-accent mb-2">Guest Speaking</h3>
+            <p class="text-gray-600 text-sm leading-relaxed flex-1">Dynamic, Scripture-centered messages for churches, camps, conferences, and podcasts.</p>
+            <a href="/speaking" class="text-accent font-semibold mt-4 hover:underline inline-flex items-center gap-1">
+              See Speaking Topics <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
-        <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Speaking</h3>
-        <p class="text-gray-600 text-sm">Powerful spoken messages for churches, camps, podcasts, and events.</p>
-      </a>
 
+      </div>
     </div>
   </section>
 
