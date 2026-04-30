@@ -1,0 +1,62 @@
+---
+interface Props {
+	title: string;
+	imageUrl?: string;
+	imageFallbackText?: string;
+	imageAlt?: string;
+	description?: string;
+	ctaLabel?: string;
+	ctaHref: string;
+	defaultOpen?: boolean;
+}
+
+const {
+	title,
+	imageUrl,
+	imageFallbackText,
+	imageAlt,
+	description,
+	ctaLabel = "Book This",
+	ctaHref,
+	defaultOpen = false,
+} = Astro.props;
+
+const altText = imageAlt || title;
+const fallbackText = imageFallbackText || title;
+---
+
+<details class="bg-white rounded-lg shadow-sm overflow-hidden group" open={defaultOpen}>
+  <summary class="flex items-center justify-between px-6 py-5 cursor-pointer list-none select-none">
+    <h2 class="text-lg font-bold text-gray-800 font-serif">{title}</h2>
+    <span class="text-accent font-bold text-xl transition-transform group-open:rotate-45">+</span>
+  </summary>
+  <div class="px-6 pb-6 flex flex-col gap-4 md:grid md:grid-cols-3 md:gap-x-6 md:gap-y-3 md:items-start">
+    {imageUrl ? (
+      <img
+        src={imageUrl}
+        alt={altText}
+        loading="lazy"
+        class="w-full rounded"
+      />
+    ) : (
+      <div class="w-full h-48 bg-gray-800 rounded flex items-center justify-center">
+        <span class="text-white text-lg font-semibold text-center px-4">{fallbackText}</span>
+      </div>
+    )}
+    {description ? (
+      <p class="text-gray-600 leading-relaxed text-sm md:col-span-2">{description}</p>
+    ) : (
+      <div class="md:col-span-2">
+        <slot />
+      </div>
+    )}
+    <div class="md:flex md:justify-center">
+      <a
+        href={ctaHref}
+        class="inline-block bg-primary text-gray-900 font-bold px-6 py-3 rounded hover:opacity-90 transition-opacity text-sm"
+      >
+        {ctaLabel}
+      </a>
+    </div>
+  </div>
+</details>
