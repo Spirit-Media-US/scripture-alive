@@ -193,7 +193,13 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     "interviewsBioPhoto": interviewsBioPhoto.asset->url,
     "interviewsBioPhotoAlt": interviewsBioPhoto.alt,
     "interviewsGenericThumb": interviewsGenericThumb.asset->url,
-    "interviewsGenericThumbAlt": interviewsGenericThumb.alt
+    "interviewsGenericThumbAlt": interviewsGenericThumb.alt,
+    "eventsPerformancesImage": eventsPerformancesImage.asset->url,
+    "eventsPerformancesAlt": eventsPerformancesImage.alt,
+    "eventsWorkshopsImage": eventsWorkshopsImage.asset->url,
+    "eventsWorkshopsAlt": eventsWorkshopsImage.alt,
+    "eventsSpeakingImage": eventsSpeakingImage.asset->url,
+    "eventsSpeakingAlt": eventsSpeakingImage.alt
   }
 `);
 

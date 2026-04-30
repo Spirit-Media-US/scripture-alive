@@ -68,11 +68,38 @@ export const siteSettings = defineType({
 			fields: [{ name: "alt", title: "Alt Text", type: "string" }],
 			group: "interviews",
 		}),
+
+		// ── Events Page ──────────────────────────────────────────
+		defineField({
+			name: "eventsPerformancesImage",
+			title: "Events — Performances Card Image",
+			type: "image",
+			options: { hotspot: true },
+			fields: [{ name: "alt", title: "Alt Text", type: "string" }],
+			group: "events",
+		}),
+		defineField({
+			name: "eventsWorkshopsImage",
+			title: "Events — Workshops Card Image",
+			type: "image",
+			options: { hotspot: true },
+			fields: [{ name: "alt", title: "Alt Text", type: "string" }],
+			group: "events",
+		}),
+		defineField({
+			name: "eventsSpeakingImage",
+			title: "Events — Speaking Card Image",
+			type: "image",
+			options: { hotspot: true },
+			fields: [{ name: "alt", title: "Alt Text", type: "string" }],
+			group: "events",
+		}),
 	],
 	groups: [
 		{ name: "home", title: "Home Page" },
 		{ name: "about", title: "About Page" },
 		{ name: "interviews", title: "Interviews Page" },
+		{ name: "events", title: "Events Page" },
 	],
 	preview: {
 		prepare() {

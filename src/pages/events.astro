@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getEvents } from "../utils/sanity";
+import { getEvents, getSiteSettings } from "../utils/sanity";
 
 const title = "Events Calendar | Scripture Alive Ministry";
 const description =
@@ -11,6 +11,29 @@ const ogImage =
 const BASE = "https://assets.spiritmediapublishing.com/scripture-alive";
 
 const allEvents = await getEvents();
+const settings = await getSiteSettings();
+
+// Apply Sanity CDN transforms for the 3 service-card tiles. Cards render at
+// ~360×208 (h-52 in a 3-col grid on lg+, max-w-6xl) so DPR 2 fetches should be
+// 720×416 — matching the homepage tileTransform pattern.
+const cardTransform = (url: string | undefined, fallback: string) => {
+	const base = url || fallback;
+	if (!base.includes("cdn.sanity.io")) return base;
+	const sep = base.includes("?") ? "&" : "?";
+	return `${base}${sep}w=720&h=416&fit=crop&fm=webp&q=75`;
+};
+const performancesCardImg = cardTransform(
+	settings?.eventsPerformancesImage,
+	"https://cdn.sanity.io/images/vxczpihg/production/da0764f78c42eac49abd6c968a0ac4e505546fc0-1024x576.webp",
+);
+const workshopsCardImg = cardTransform(
+	settings?.eventsWorkshopsImage,
+	"https://cdn.sanity.io/images/vxczpihg/production/0d09808dd1e4a9bff945b742d454abf57c0a65f3-1200x900.webp",
+);
+const speakingCardImg = cardTransform(
+	settings?.eventsSpeakingImage,
+	"https://cdn.sanity.io/images/vxczpihg/production/95f6eca3784e25f56fab50d2b06c8245915244ac-1024x759.webp",
+);
 const now = new Date();
 const upcomingEvents = allEvents.filter(
 	(e: any) => new Date(e.startDate) >= now,
@@ -299,8 +322,10 @@ function makeAddToCalendarUrl(event: any): string {
         <div class="rounded-2xl overflow-hidden shadow-md border border-gray-100 flex flex-col">
           <div class="relative overflow-hidden">
             <img
-              src={"https://cdn.sanity.io/images/vxczpihg/production/da0764f78c42eac49abd6c968a0ac4e505546fc0-1024x576.webp"}
-              alt="Scripture Alive Performance"
+              src={performancesCardImg}
+              alt={settings?.eventsPerformancesAlt || "Scripture Alive Performance"}
+              width="720"
+              height="416"
               class="w-full h-52 object-cover"
               loading="lazy"
             />
@@ -320,8 +345,10 @@ function makeAddToCalendarUrl(event: any): string {
         <div class="rounded-2xl overflow-hidden shadow-md border border-gray-100 flex flex-col">
           <div class="relative overflow-hidden">
             <img
-              src={"https://cdn.sanity.io/images/vxczpihg/production/0d09808dd1e4a9bff945b742d454abf57c0a65f3-1200x900.webp"}
-              alt="Scripture Alive Workshop"
+              src={workshopsCardImg}
+              alt={settings?.eventsWorkshopsAlt || "Scripture Alive Workshop"}
+              width="720"
+              height="416"
               class="w-full h-52 object-cover"
               loading="lazy"
             />
@@ -341,8 +368,10 @@ function makeAddToCalendarUrl(event: any): string {
         <div class="rounded-2xl overflow-hidden shadow-md border border-gray-100 flex flex-col">
           <div class="relative overflow-hidden">
             <img
-              src={"https://cdn.sanity.io/images/vxczpihg/production/95f6eca3784e25f56fab50d2b06c8245915244ac-1024x759.webp"}
-              alt="Scripture Alive Speaking"
+              src={speakingCardImg}
+              alt={settings?.eventsSpeakingAlt || "Scripture Alive Speaking"}
+              width="720"
+              height="416"
               class="w-full h-52 object-cover"
               loading="lazy"
             />
