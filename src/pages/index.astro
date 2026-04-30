@@ -48,51 +48,49 @@ const speakingImg = tileTransform(
   }}
 >
 
-  <Fragment slot="head">
-    <!-- Pull the hero up under the transparent sticky nav so the video
-         shows through the (otherwise transparent) header at scroll=0.
-         Inline @media so it applies on first paint — a Tailwind
-         lg:-mt-[140px] would land in the deferred external stylesheet and
-         the section would paint at top:0 then jump up (CLS spike). Mobile
-         nav is ~84px tall, desktop nav is ~140px tall. -->
-    <style>
-      #hero-section{margin-top:-84px;padding-top:84px}
-      @media (min-width: 1024px){#hero-section{margin-top:-140px;padding-top:140px}}
-    </style>
-  </Fragment>
+  <!-- HERO. Mobile (<md): full-bleed video background with dark overlay,
+       text centered on top. Desktop (md+): 2-col split (text left, video
+       right) on bg-stone-900, no overlay. ONE <video> element switches
+       between absolute-full-bleed (mobile) and grid-item (desktop) via
+       responsive position/inset utilities. -->
+  <section id="hero-section" class="relative bg-stone-900 overflow-hidden min-h-screen md:min-h-[80vh] md:grid md:grid-cols-2">
+    <!-- Mobile-only dark overlay for text readability over video bg -->
+    <div class="absolute inset-0 z-10 bg-black/40 md:hidden"></div>
 
-  <!-- HERO — autoplay video background, no image poster. Solid stone-900
-       fills the area until the video paints. Pulled up under the sticky
-       nav so the video shows behind the transparent header at scroll=0.
-       h-screen = full viewport height; padding-top in the head <style>
-       above offsets the content below the sticky nav. -->
-  <section id="hero-section" class="relative bg-stone-900 h-screen flex items-center justify-center overflow-hidden px-4">
+    <!-- Text + CTA column (source order first → grid col 1 on desktop) -->
+    <div class="relative z-20 md:z-auto min-h-screen md:min-h-0 px-6 py-16 md:p-12 lg:p-16 flex flex-col justify-center items-center md:items-start text-center md:text-left text-white">
+      <h1 class="mb-6 leading-tight drop-shadow-lg md:drop-shadow-none">
+        <span class="block font-display font-light text-5xl md:text-6xl lg:text-7xl">Making Scripture</span>
+        <span class="block font-sans font-bold text-primary text-5xl md:text-6xl lg:text-7xl">Unforgettable</span>
+      </h1>
+      <p class="font-sans text-lg md:text-xl lg:text-2xl mb-6 drop-shadow-md md:drop-shadow-none">
+        <span class="text-white">Word-for-word Scripture.</span> <span class="text-primary">Performed live.</span>
+      </p>
+      <div class="h-1 w-32 bg-primary mb-4"></div>
+      <p class="font-sans text-sm md:text-base font-bold uppercase tracking-wide mb-3 drop-shadow-md md:drop-shadow-none">
+        Performances | Workshops | Speaking
+      </p>
+      <p class="font-sans text-sm md:text-base text-white/90 mb-6 drop-shadow-md md:drop-shadow-none">
+        For churches, conferences, camps, schools, and special events
+      </p>
+      <div class="h-1 w-32 bg-primary mb-6"></div>
+      <p class="font-sans text-base md:text-lg mb-8 max-w-md drop-shadow-md md:drop-shadow-none">
+        Bring a <span class="font-bold">powerful, Scripture-centered</span> experience to <span class="font-bold">your audience</span>.
+      </p>
+      <a href="/book-jeremy" class="bg-primary text-gray-900 font-bold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
+        Book Jeremy
+      </a>
+    </div>
+
+    <!-- Video. Mobile: absolute full-bleed bg. Desktop: relative grid item
+         in col 2 (placed after text in source order). object-right keeps
+         Jeremy in frame regardless of column width. -->
     <video
-      class="absolute inset-0 w-full h-full object-cover z-0"
+      class="absolute inset-0 w-full h-full object-cover z-0 md:relative md:inset-auto md:object-right md:z-auto"
       autoplay muted playsinline loop preload="auto" aria-hidden="true"
     >
       <source src="https://assets.spiritmediapublishing.com/scripture-alive/scripture-alive-hero.mp4" type="video/mp4" />
     </video>
-    <div class="absolute inset-0 z-10 bg-black/40"></div>
-    <div class="relative z-20 text-center text-white max-w-4xl mx-auto">
-      <h1 class="font-display font-light text-5xl md:text-6xl lg:text-7xl mb-6 text-white drop-shadow-lg">
-        Making Scripture Unforgettable
-      </h1>
-      <p class="font-sans text-lg md:text-xl lg:text-2xl mb-4 text-white drop-shadow-md">
-        Performances | Workshops | Speaking
-      </p>
-      <p class="font-sans text-sm md:text-base mb-8 lg:mb-10 text-white/80 drop-shadow-md">
-        Available for churches, conferences, camps, schools, and special events
-      </p>
-      <div class="flex flex-col items-center gap-3">
-        <a href="/book-jeremy" class="bg-primary text-black font-semibold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
-          Book Jeremy
-        </a>
-        <a href="/referjeremy" class="text-white/70 text-sm hover:text-white transition-colors">
-          Know someone who should hear about Jeremy? <span class="underline">Refer him here</span>
-        </a>
-      </div>
-    </div>
   </section>
 
   <!-- DEDICATED TO PROCLAIMING — blue heading -->
