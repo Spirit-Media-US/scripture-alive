@@ -40,7 +40,7 @@ export const TESTIMONIALS_QUERY = defineQuery(`
 export const FEATURED_TESTIMONIALS_QUERY = defineQuery(`
   *[_type == "testimonial" && featured == true] | order(order asc) {
     _id,
-    quote,
+    "quote": coalesce(homeQuote, quote),
     authorName,
     authorTitle,
     authorOrganization
@@ -193,7 +193,13 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     "interviewsBioPhoto": interviewsBioPhoto.asset->url,
     "interviewsBioPhotoAlt": interviewsBioPhoto.alt,
     "interviewsGenericThumb": interviewsGenericThumb.asset->url,
-    "interviewsGenericThumbAlt": interviewsGenericThumb.alt
+    "interviewsGenericThumbAlt": interviewsGenericThumb.alt,
+    "eventsPerformancesImage": eventsPerformancesImage.asset->url,
+    "eventsPerformancesAlt": eventsPerformancesImage.alt,
+    "eventsWorkshopsImage": eventsWorkshopsImage.asset->url,
+    "eventsWorkshopsAlt": eventsWorkshopsImage.alt,
+    "eventsSpeakingImage": eventsSpeakingImage.asset->url,
+    "eventsSpeakingAlt": eventsSpeakingImage.alt
   }
 `);
 

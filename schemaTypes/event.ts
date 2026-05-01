@@ -40,13 +40,11 @@ export const event = defineType({
 			name: "venueCity",
 			title: "City",
 			type: "string",
-			validation: (rule) => rule.required(),
 		}),
 		defineField({
 			name: "venueState",
 			title: "State / Region",
 			type: "string",
-			validation: (rule) => rule.required(),
 		}),
 		defineField({
 			name: "startDate",

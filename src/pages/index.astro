@@ -30,8 +30,8 @@ const speakingImg = tileTransform(
 ---
 
 <Layout
-  title="Performances | Workshops | Preaching | Scripture Alive"
-  description="Scripture Alive, a ministry that seeks to engage people with the Word of Truth to impact real lives."
+  title="Performances | Workshops | Speaking | Scripture Alive"
+  description="Scripture Alive, a ministry that exists to empower the Church to experience, engage, and embody God's Word."
   ogImage="https://cdn.sanity.io/images/vxczpihg/production/3817274e4a92fe337ca32760afefbb8391395ed7-1768x891.png"
   jsonld={{
     "@context": "https://schema.org",
@@ -39,7 +39,7 @@ const speakingImg = tileTransform(
     "name": "Scripture Alive",
     "url": "https://scripturealive.com",
     "logo": "https://cdn.sanity.io/images/vxczpihg/production/f95c2c1a3f77a64e7803bfcdc3138cc7a28937be-200x100.webp",
-    "description": "Scripture Alive is a ministry that engages people with the Word of Truth through dramatic performances, Bible memorization workshops, and guest preaching.",
+    "description": "Scripture Alive is a ministry that engages people with the Word of Truth through dramatic performances, Bible memorization workshops, and guest speaking.",
     "sameAs": ["https://scripturealive.com"],
     "founder": {
       "@type": "Person",
@@ -61,85 +61,44 @@ const speakingImg = tileTransform(
     </style>
   </Fragment>
 
-  <!-- HERO — autoplay video background, no image poster. Solid stone-900
-       fills the area until the video paints. Pulled up under the sticky
-       nav so the video shows behind the transparent header at scroll=0.
-       h-screen = full viewport height; padding-top in the head <style>
-       above offsets the content below the sticky nav. -->
-  <section id="hero-section" class="relative bg-stone-900 h-screen flex items-center justify-center overflow-hidden px-4">
+  <!-- HERO. Full-bleed video background with text + CTA overlaid on the left
+       half. Jeremy is composed right-of-center in the source video, so the
+       left side of the frame is mostly black — natural contrast for the
+       overlay text, no dark scrim needed. -->
+  <section id="hero-section" class="relative bg-stone-900 min-h-screen overflow-hidden">
+    <!-- Video: full-bleed background at every viewport -->
     <video
       class="absolute inset-0 w-full h-full object-cover z-0"
       autoplay muted playsinline loop preload="auto" aria-hidden="true"
     >
-      <source src="https://assets.spiritmediapublishing.com/scripture-alive/scripture-alive-hero.mp4" type="video/mp4" />
+      <source src="https://assets.spiritmediapublishing.com/scripture-alive/sa-opening-no-music.mp4" type="video/mp4" />
     </video>
-    <div class="absolute inset-0 z-10 bg-black/40"></div>
-    <div class="relative z-20 text-center text-white max-w-4xl mx-auto">
-      <h1 class="font-display font-light text-5xl md:text-6xl lg:text-7xl mb-6 text-white drop-shadow-lg">
-        Making Scripture Unforgettable
-      </h1>
-      <p class="font-sans text-lg md:text-xl lg:text-2xl mb-4 text-white drop-shadow-md">
-        Performances | Workshops | Speaking
-      </p>
-      <p class="font-sans text-sm md:text-base mb-8 lg:mb-10 text-white/80 drop-shadow-md">
-        Available for churches, conferences, camps, schools, and special events
-      </p>
-      <div class="flex flex-col items-center gap-3">
-        <a href="/book-jeremy" class="bg-primary text-black font-semibold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
+
+    <!-- Text + CTA overlay (left-aligned on desktop, centered on mobile) -->
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24 min-h-screen flex flex-col justify-center items-center md:items-start text-center md:text-left text-white">
+      <div class="max-w-2xl">
+        <h1 class="mb-6 leading-tight drop-shadow-lg">
+          <span class="block font-display font-light text-5xl md:text-6xl lg:text-7xl">Making Scripture</span>
+          <span class="block font-sans font-bold text-primary text-5xl md:text-6xl lg:text-7xl">Unforgettable</span>
+        </h1>
+        <p class="font-sans text-lg md:text-xl lg:text-2xl mb-6 drop-shadow-md">
+          <span class="text-white">Word-for-word Scripture.</span> <span class="text-primary">Performed live.</span>
+        </p>
+        <div class="h-1 w-32 md:w-72 lg:w-80 bg-primary mb-4 mx-auto md:mx-0"></div>
+        <p class="font-sans text-sm md:text-base font-bold uppercase tracking-wide mb-3 drop-shadow-md">
+          Performances | Workshops | Speaking
+        </p>
+        <p class="font-sans text-sm md:text-base text-white/90 mb-6 drop-shadow-md">
+          For churches, conferences, camps, schools, and special events
+        </p>
+        <div class="h-1 w-32 md:w-72 lg:w-80 bg-primary mb-6 mx-auto md:mx-0"></div>
+        <p class="font-sans text-base mb-8 drop-shadow-md">
+          Bring a <span class="font-bold">powerful, Scripture-centered</span> experience to <span class="font-bold">your audience</span>.
+        </p>
+        <a href="/book-jeremy" class="bg-primary text-gray-900 font-bold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
           Book Jeremy
         </a>
-        <a href="/referjeremy" class="text-white/70 text-sm hover:text-white transition-colors">
-          Know someone who should hear about Jeremy? <span class="underline">Refer him here</span>
-        </a>
       </div>
-    </div>
-  </section>
-
-  <!-- DEDICATED TO PROCLAIMING — blue heading -->
-  <section class="bg-white pt-16 pb-8 px-4">
-    <div class="max-w-5xl mx-auto text-center">
-      <h2 class="font-display font-bold text-2xl md:text-3xl lg:text-4xl leading-tight text-accent">
-        Dedicated to Proclaiming the Word with Creativity and Conviction
-      </h2>
-    </div>
-  </section>
-
-  <!-- FOUR FEATURES -->
-  <section class="bg-white py-8 px-4 pb-16">
-    <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-      <div class="flex flex-col items-center text-center p-6 border border-gray-200 rounded-lg shadow">
-        <div class="mb-4 flex items-center justify-center text-primary">
-          <svg aria-hidden="true" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" style="width:2.5rem;height:2.5rem;fill:currentColor;"><path d="M448 358.4V25.6c0-16-9.6-25.6-25.6-25.6H96C41.6 0 0 41.6 0 96v320c0 54.4 41.6 96 96 96h326.4c12.8 0 25.6-9.6 25.6-25.6v-16c0-6.4-3.2-12.8-9.6-19.2-3.2-16-3.2-60.8 0-73.6 6.4-3.2 9.6-9.6 9.6-19.2zM144 144c0-8.84 7.16-16 16-16h48V80c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v48h48c8.84 0 16 7.16 16 16v32c0 8.84-7.16 16-16 16h-48v112c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16V192h-48c-8.84 0-16-7.16-16-16v-32zm236.8 304H96c-19.2 0-32-12.8-32-32s16-32 32-32h284.8v64z"/></svg>
-        </div>
-        <h2 class="font-sans font-bold text-lg mb-2 text-accent">Pure Scripture</h2>
-        <p class="text-gray-600 leading-relaxed">Every performance is quoted word for word from the Bible.</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center p-6 border border-gray-200 rounded-lg shadow">
-        <div class="mb-4 flex items-center justify-center text-primary">
-          <svg aria-hidden="true" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" style="width:2.5rem;height:2.5rem;fill:currentColor;"><path d="M206.86 245.15c-35.88 10.45-59.95 41.2-57.53 74.1 11.4-12.72 28.81-23.7 49.9-30.92l7.63-43.18zM95.81 295L64.08 115.49c-.29-1.62.28-2.62.24-2.65 57.76-32.06 123.12-49.01 189.01-49.01 1.61 0 3.23.17 4.85.19 13.95-13.47 31.73-22.83 51.59-26 18.89-3.02 38.05-4.55 57.18-5.32-9.99-13.95-24.48-24.23-41.77-27C301.27 1.89 277.24 0 253.32 0 176.66 0 101.02 19.42 33.2 57.06 9.03 70.48-3.92 98.48 1.05 126.58l31.73 179.51c14.23 80.52 136.33 142.08 204.45 142.08 3.59 0 6.75-.46 10.01-.8-13.52-17.08-28.94-40.48-39.5-67.58-47.61-12.98-106.06-51.62-111.93-84.79zm97.55-137.46c-.73-4.12-2.23-7.87-4.07-11.4-8.25 8.91-20.67 15.75-35.32 18.32-14.65 2.58-28.67.4-39.48-5.17-.52 3.94-.64 7.98.09 12.1 3.84 21.7 24.58 36.19 46.34 32.37 21.75-3.82 36.28-24.52 32.44-46.22zM606.8 120.9c-88.98-49.38-191.43-67.41-291.98-51.35-27.31 4.36-49.08 26.26-54.04 54.36l-31.73 179.51c-15.39 87.05 95.28 196.27 158.31 207.35 63.03 11.09 204.47-53.79 219.86-140.84l31.73-179.51c4.97-28.11-7.98-56.11-32.15-69.52zm-273.24 96.8c3.84-21.7 24.58-36.19 46.34-32.36 21.76 3.83 36.28 24.52 32.45 46.22-.73 4.12-2.23 7.87-4.07 11.4-8.25-8.91-20.67-15.75-35.32-18.32-14.65-2.58-28.67-.4-39.48 5.17-.53-3.95-.65-7.99.08-12.11zm70.47 198.76c-55.68-9.79-93.52-59.27-89.04-112.9 20.6 25.54 56.21 46.17 99.49 53.78 43.28 7.61 83.82.37 111.93-16.6-14.18 51.94-66.71 85.51-122.38 75.72zm130.3-151.34c-8.25-8.91-20.68-15.75-35.33-18.32-14.65-2.58-28.67-.4-39.48 5.17-.52-3.94-.64-7.98.09-12.1 3.84-21.7 24.58-36.19 46.34-32.37 21.75 3.83 36.28 24.52 32.45 46.22-.73 4.13-2.23 7.88-4.07 11.4z"/></svg>
-        </div>
-        <h2 class="font-sans font-bold text-lg mb-2 text-accent">Skillfully Dramatized</h2>
-        <p class="text-gray-600 leading-relaxed">A high-quality theatrical production makes Scripture leap off of the page.</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center p-6 border border-gray-200 rounded-lg shadow">
-        <div class="mb-4 flex items-center justify-center text-primary">
-          <svg aria-hidden="true" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg" style="width:2.5rem;height:2.5rem;fill:currentColor;"><path d="M96,128A64,64,0,1,0,32,64,64,64,0,0,0,96,128Zm0,176.08a44.11,44.11,0,0,1,13.64-32L181.77,204c1.65-1.55,3.77-2.31,5.61-3.57A63.91,63.91,0,0,0,128,160H64A64,64,0,0,0,0,224v96a32,32,0,0,0,32,32V480a32,32,0,0,0,32,32h64a32,32,0,0,0,32-32V383.61l-50.36-47.53A44.08,44.08,0,0,1,96,304.08ZM480,128a64,64,0,1,0-64-64A64,64,0,0,0,480,128Zm32,32H448a63.91,63.91,0,0,0-59.38,40.42c1.84,1.27,4,2,5.62,3.59l72.12,68.06a44.37,44.37,0,0,1,0,64L416,383.62V480a32,32,0,0,0,32,32h64a32,32,0,0,0,32-32V352a32,32,0,0,0,32-32V224A64,64,0,0,0,512,160ZM444.4,295.34l-72.12-68.06A12,12,0,0,0,352,236v36H224V236a12,12,0,0,0-20.28-8.73L131.6,295.34a12.4,12.4,0,0,0,0,17.47l72.12,68.07A12,12,0,0,0,224,372.14V336H352v36.14a12,12,0,0,0,20.28,8.74l72.12-68.07A12.4,12.4,0,0,0,444.4,295.34Z"/></svg>
-        </div>
-        <h2 class="font-sans font-bold text-lg mb-2 text-accent">Impacting Lives</h2>
-        <p class="text-gray-600 leading-relaxed">People regularly say how moved they are and how it helps them better understand the Bible.</p>
-      </div>
-
-      <div class="flex flex-col items-center text-center p-6 border border-gray-200 rounded-lg shadow">
-        <div class="mb-4 flex items-center justify-center text-primary">
-          <svg aria-hidden="true" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg" style="width:2.5rem;height:2.5rem;fill:currentColor;"><path d="M120 72c0-39.765 32.235-72 72-72s72 32.235 72 72c0 39.764-32.235 72-72 72s-72-32.236-72-72zm254.627 1.373c-12.496-12.497-32.758-12.497-45.254 0L242.745 160H141.254L54.627 73.373c-12.496-12.497-32.758-12.497-45.254 0-12.497 12.497-12.497 32.758 0 45.255L104 213.254V480c0 17.673 14.327 32 32 32h16c17.673 0 32-14.327 32-32V368h16v112c0 17.673 14.327 32 32 32h16c17.673 0 32-14.327 32-32V213.254l94.627-94.627c12.497-12.497 12.497-32.757 0-45.254z"/></svg>
-        </div>
-        <h2 class="font-sans font-bold text-lg mb-2 text-accent">Unique and Memorable</h2>
-        <p class="text-gray-600 leading-relaxed">Your audience will never forget when Scripture is dramatically presented!</p>
-      </div>
-
     </div>
   </section>
 
@@ -179,37 +138,125 @@ const speakingImg = tileTransform(
     </div>
   </section>
 
-  <!-- SERVICE TILES -->
-  <section class="bg-white px-4 py-10">
-    <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+  <!-- EXPERIENCE. ENGAGE. EMBODY. — brand pillars with 3 icon tiles -->
+  <section class="bg-white px-4 py-12 md:py-16">
+    <div class="max-w-5xl mx-auto">
 
-      <a href="/performances" class="block group text-center">
-        <div class="relative overflow-hidden rounded h-48">
-          <img src={performancesImg}
-            alt={settings?.homePerformancesAlt || "Scripture Performances"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+      <h2 class="font-sans font-bold text-3xl md:text-4xl lg:text-5xl text-center mb-10">
+        <span class="text-accent">Experience. Engage. Embody.</span> <span class="text-primary">God's Word.</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+
+        <div class="flex flex-col items-center text-center">
+          <div class="text-primary mb-3 flex justify-center">
+            <svg aria-hidden="true" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" style="width:4rem;height:4rem;fill:currentColor;"><path d="M206.86 245.15c-35.88 10.45-59.95 41.2-57.53 74.1 11.4-12.72 28.81-23.7 49.9-30.92l7.63-43.18zM95.81 295L64.08 115.49c-.29-1.62.28-2.62.24-2.65 57.76-32.06 123.12-49.01 189.01-49.01 1.61 0 3.23.17 4.85.19 13.95-13.47 31.73-22.83 51.59-26 18.89-3.02 38.05-4.55 57.18-5.32-9.99-13.95-24.48-24.23-41.77-27C301.27 1.89 277.24 0 253.32 0 176.66 0 101.02 19.42 33.2 57.06 9.03 70.48-3.92 98.48 1.05 126.58l31.73 179.51c14.23 80.52 136.33 142.08 204.45 142.08 3.59 0 6.75-.46 10.01-.8-13.52-17.08-28.94-40.48-39.5-67.58-47.61-12.98-106.06-51.62-111.93-84.79zm97.55-137.46c-.73-4.12-2.23-7.87-4.07-11.4-8.25 8.91-20.67 15.75-35.32 18.32-14.65 2.58-28.67.4-39.48-5.17-.52 3.94-.64 7.98.09 12.1 3.84 21.7 24.58 36.19 46.34 32.37 21.75-3.82 36.28-24.52 32.44-46.22zM606.8 120.9c-88.98-49.38-191.43-67.41-291.98-51.35-27.31 4.36-49.08 26.26-54.04 54.36l-31.73 179.51c-15.39 87.05 95.28 196.27 158.31 207.35 63.03 11.09 204.47-53.79 219.86-140.84l31.73-179.51c4.97-28.11-7.98-56.11-32.15-69.52zm-273.24 96.8c3.84-21.7 24.58-36.19 46.34-32.36 21.76 3.83 36.28 24.52 32.45 46.22-.73 4.12-2.23 7.87-4.07 11.4-8.25-8.91-20.67-15.75-35.32-18.32-14.65-2.58-28.67-.4-39.48 5.17-.53-3.95-.65-7.99.08-12.11zm70.47 198.76c-55.68-9.79-93.52-59.27-89.04-112.9 20.6 25.54 56.21 46.17 99.49 53.78 43.28 7.61 83.82.37 111.93-16.6-14.18 51.94-66.71 85.51-122.38 75.72zm130.3-151.34c-8.25-8.91-20.68-15.75-35.33-18.32-14.65-2.58-28.67-.4-39.48 5.17-.52-3.94-.64-7.98.09-12.1 3.84-21.7 24.58-36.19 46.34-32.37 21.75 3.83 36.28 24.52 32.45 46.22-.73 4.13-2.23 7.88-4.07 11.4z"/></svg>
+          </div>
+          <p class="font-sans font-bold text-xl md:text-2xl text-accent">Performances</p>
         </div>
-        <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Performances</h3>
-        <p class="text-gray-600 text-sm">Full books of the Bible performed word-for-word from memory.</p>
-      </a>
 
-      <a href="/workshops" class="block group text-center">
-        <div class="relative overflow-hidden rounded h-48">
-          <img src={workshopsImg}
-            alt={settings?.homeWorkshopsAlt || "Scripture Memory Workshops"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        <div class="flex flex-col items-center text-center">
+          <div class="text-primary mb-3 flex justify-center">
+            <svg aria-hidden="true" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="width:4rem;height:4rem;fill:currentColor;"><path d="M184 0c30.9 0 56 25.1 56 56V456c0 30.9-25.1 56-56 56c-28.9 0-52.7-21.9-55.7-50.1c-5.2 1.4-10.7 2.1-16.3 2.1c-35.3 0-64-28.7-64-64c0-7.4 1.3-14.6 3.6-21.2C21.4 367.4 0 338.2 0 304c0-31.9 18.7-59.5 45.8-72.3C37.1 220.8 32 207 32 192c0-30.7 21.6-56.3 50.4-62.6C80.8 123.9 80 118 80 112c0-29.9 20.6-55.1 48.3-62.1C131.3 21.9 155.1 0 184 0zM328 0c28.9 0 52.6 21.9 55.7 49.9c27.8 7 48.3 32.1 48.3 62.1c0 6-.8 11.9-2.4 17.4c28.8 6.2 50.4 31.9 50.4 62.6c0 15-5.1 28.8-13.8 39.7C493.3 244.5 512 272.1 512 304c0 34.2-21.4 63.4-51.6 74.8c2.3 6.6 3.6 13.8 3.6 21.2c0 35.3-28.7 64-64 64c-5.6 0-11.1-.7-16.3-2.1c-3 28.2-26.8 50.1-55.7 50.1c-30.9 0-56-25.1-56-56V56c0-30.9 25.1-56 56-56z"/></svg>
+          </div>
+          <p class="font-sans font-bold text-xl md:text-2xl text-accent">Workshops</p>
         </div>
-        <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Workshops</h3>
-        <p class="text-gray-600 text-sm">Hands-on sessions that equip people to memorize Scripture and live it out.</p>
-      </a>
 
-      <a href="/speaking" class="block group text-center">
-        <div class="relative overflow-hidden rounded h-48">
-          <img src={speakingImg}
-            alt={settings?.homeSpeakingAlt || "Guest Speaking"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+        <div class="flex flex-col items-center text-center">
+          <div class="text-primary mb-3 flex justify-center">
+            <svg aria-hidden="true" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" style="width:4rem;height:4rem;fill:currentColor;"><path d="M448 358.4V25.6c0-16-9.6-25.6-25.6-25.6H96C41.6 0 0 41.6 0 96v320c0 54.4 41.6 96 96 96h326.4c12.8 0 25.6-9.6 25.6-25.6v-16c0-6.4-3.2-12.8-9.6-19.2-3.2-16-3.2-60.8 0-73.6 6.4-3.2 9.6-9.6 9.6-19.2zM144 144c0-8.84 7.16-16 16-16h48V80c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v48h48c8.84 0 16 7.16 16 16v32c0 8.84-7.16 16-16 16h-48v112c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16V192h-48c-8.84 0-16-7.16-16-16v-32zm236.8 304H96c-19.2 0-32-12.8-32-32s16-32 32-32h284.8v64z"/></svg>
+          </div>
+          <p class="font-sans font-bold text-xl md:text-2xl text-accent">Speaking</p>
         </div>
-        <h3 class="font-bold text-lg text-accent font-sans mt-3 mb-1">Speaking</h3>
-        <p class="text-gray-600 text-sm">Powerful spoken messages for churches, camps, podcasts, and events.</p>
-      </a>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCOVER THE MINISTRY — section header + 3 service cards -->
+  <section class="bg-white px-4 py-12 md:py-16">
+    <div class="max-w-5xl mx-auto">
+
+      <!-- Section header with yellow flanking lines -->
+      <div class="flex items-center justify-center gap-4 md:gap-6 mb-10">
+        <span aria-hidden="true" class="h-1 w-16 md:w-24 bg-primary"></span>
+        <h2 class="font-sans font-bold text-3xl md:text-4xl text-accent">Discover the Ministry</h2>
+        <span aria-hidden="true" class="h-1 w-16 md:w-24 bg-primary"></span>
+      </div>
+
+      <!-- 3 cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden flex flex-col">
+          <div class="relative overflow-hidden h-48">
+            <img src={performancesImg}
+              alt={settings?.homePerformancesAlt || "Scripture Performances"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-sans font-bold text-xl text-accent mb-2">Scripture Performances</h3>
+            <p class="text-gray-600 text-sm leading-relaxed flex-1">Immersive, word-for-word dramatizations of entire books, characters, and narratives of the Bible that bring the Word to life.</p>
+            <a href="/performances" class="text-accent font-semibold mt-4 hover:underline inline-flex items-center gap-1">
+              View Performances <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden flex flex-col">
+          <div class="relative overflow-hidden h-48">
+            <img src={workshopsImg}
+              alt={settings?.homeWorkshopsAlt || "Scripture Memory Workshops"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-sans font-bold text-xl text-accent mb-2">Memory Workshops</h3>
+            <p class="text-gray-600 text-sm leading-relaxed flex-1">Engaging, hands-on training to equip people to remember and live out God's Word.</p>
+            <a href="/workshops" class="text-accent font-semibold mt-4 hover:underline inline-flex items-center gap-1">
+              Explore Workshops <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden flex flex-col">
+          <div class="relative overflow-hidden h-48">
+            <img src={speakingImg}
+              alt={settings?.homeSpeakingAlt || "Guest Speaking"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-sans font-bold text-xl text-accent mb-2">Guest Speaking</h3>
+            <p class="text-gray-600 text-sm leading-relaxed flex-1">Dynamic, Scripture-centered messages for churches, camps, conferences, and podcasts.</p>
+            <a href="/speaking" class="text-accent font-semibold mt-4 hover:underline inline-flex items-center gap-1">
+              See Speaking Topics <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- READY-TO-BOOK CTA — contained blue rounded bar with calendar icon + button -->
+  <section class="bg-white py-8 md:py-10 px-4">
+    <div class="max-w-5xl mx-auto bg-accent rounded-lg px-6 md:px-10 py-6 md:py-8 flex flex-col md:flex-row items-center md:justify-between gap-4 md:gap-6 text-center md:text-left">
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <div class="text-primary flex-shrink-0">
+          <svg aria-hidden="true" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" style="width:3rem;height:3rem;fill:currentColor;"><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v96c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16z"/></svg>
+        </div>
+        <p class="font-sans font-bold text-xl md:text-2xl text-white">Ready to bring this to your people?</p>
+      </div>
+      <a href="/book-jeremy" class="bg-primary text-gray-900 font-bold font-sans px-6 py-3 rounded hover:opacity-90 transition-opacity flex-shrink-0">
+        Book Jeremy
+      </a>
+    </div>
+  </section>
+
+  <!-- REFER LINE — yellow people icon + refer link -->
+  <section class="bg-white py-6 md:py-8 px-4">
+    <div class="max-w-5xl mx-auto flex items-center justify-center gap-3 text-center flex-wrap">
+      <div class="text-primary flex-shrink-0">
+        <svg aria-hidden="true" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" style="width:1.5rem;height:1.5rem;fill:currentColor;"><path d="M192 256c61.9 0 112-50.1 112-112S253.9 32 192 32 80 82.1 80 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C51.6 288 0 339.6 0 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zM480 256c53 0 96-43 96-96s-43-96-96-96-96 43-96 96 43 96 96 96zm48 32h-3.8c-13.9 4.8-28.6 8-44.2 8s-30.3-3.2-44.2-8H432c-20.4 0-39.2 5.9-55.7 15.4 24.4 26.3 39.7 61.2 39.7 99.8v38.4c0 2.2-.5 4.3-.6 6.4H592c26.5 0 48-21.5 48-48 0-61.9-50.1-112-112-112z"/></svg>
+      </div>
+      <p class="text-gray-800 font-sans">
+        Know someone who should hear about Jeremy? <a href="/referjeremy" class="text-primary font-semibold underline hover:opacity-80">Refer him here</a>
+      </p>
     </div>
   </section>
 

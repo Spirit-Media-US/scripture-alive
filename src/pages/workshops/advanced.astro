@@ -1,4 +1,5 @@
 ---
+import AccordionItem from "../../components/AccordionItem.astro";
 import Layout from "../../layouts/Layout.astro";
 import { getServiceItems } from "../../utils/sanity";
 
@@ -36,30 +37,16 @@ const workshops = await getServiceItems("workshops-advanced");
   <!-- Accordion Items -->
   <section class="py-10 px-4 bg-cream">
     <div class="max-w-5xl mx-auto flex flex-col gap-4">
-      {workshops.map((workshop) => (
-        <details class="bg-white rounded-lg shadow-sm overflow-hidden group" open>
-          <summary class="flex items-center justify-between px-6 py-5 cursor-pointer list-none select-none">
-            <h2 class="text-lg font-bold text-gray-800 font-serif">{workshop.title}</h2>
-            <span class="text-accent font-bold text-xl transition-transform group-open:rotate-45">+</span>
-          </summary>
-          <div class="px-6 pb-6 flex flex-col gap-4">
-            <img
-              src={workshop.imageUrl}
-              alt={`${workshop.title} Workshop`}
-              loading="lazy"
-              class="w-full rounded"
-            />
-            <p class="text-gray-600 leading-relaxed text-sm">{workshop.description}</p>
-            <div>
-              <a
-                href="/book-jeremy"
-                class="inline-block bg-primary text-gray-900 font-bold px-6 py-3 rounded hover:opacity-90 transition-opacity text-sm"
-              >
-                Book This Workshop
-              </a>
-            </div>
-          </div>
-        </details>
+      {workshops.map((workshop, i) => (
+        <AccordionItem
+          title={workshop.title}
+          imageUrl={workshop.imageUrl}
+          imageAlt={`${workshop.title} Workshop`}
+          description={workshop.description}
+          ctaLabel="Book This Workshop"
+          ctaHref="/book-jeremy"
+          defaultOpen={i === 0}
+        />
       ))}
     </div>
   </section>
