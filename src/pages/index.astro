@@ -61,49 +61,45 @@ const speakingImg = tileTransform(
     </style>
   </Fragment>
 
-  <!-- HERO. Mobile (<md): full-bleed video background with dark overlay,
-       text centered on top. Desktop (md+): 2-col split (text left, video
-       right) on bg-stone-900, no overlay. ONE <video> element switches
-       between absolute-full-bleed (mobile) and grid-item (desktop) via
-       responsive position/inset utilities. -->
-  <section id="hero-section" class="relative bg-stone-900 overflow-hidden min-h-screen md:min-h-[80vh] md:grid md:grid-cols-5">
-    <!-- Mobile-only dark overlay for text readability over video bg -->
-    <div class="absolute inset-0 z-10 bg-black/40 md:hidden"></div>
-
-    <!-- Text + CTA column (source order first → grid col 1 on desktop) -->
-    <div class="relative z-20 md:z-auto md:col-span-3 min-h-screen md:min-h-0 px-6 py-16 md:pl-8 md:pr-6 md:py-12 lg:pl-12 lg:pr-8 lg:py-16 flex flex-col justify-center items-center md:items-start text-center md:text-left text-white">
-      <h1 class="mb-6 leading-tight drop-shadow-lg md:drop-shadow-none">
-        <span class="block font-display font-light text-5xl md:text-6xl lg:text-7xl">Making Scripture</span>
-        <span class="block font-sans font-bold text-primary text-5xl md:text-6xl lg:text-7xl">Unforgettable</span>
-      </h1>
-      <p class="font-sans text-lg md:text-xl lg:text-2xl mb-6 drop-shadow-md md:drop-shadow-none">
-        <span class="text-white">Word-for-word Scripture.</span> <span class="text-primary">Performed live.</span>
-      </p>
-      <div class="h-1 w-32 md:w-72 lg:w-80 bg-primary mb-4"></div>
-      <p class="font-sans text-sm md:text-base font-bold uppercase tracking-wide mb-3 drop-shadow-md md:drop-shadow-none">
-        Performances | Workshops | Speaking
-      </p>
-      <p class="font-sans text-sm md:text-base text-white/90 mb-6 drop-shadow-md md:drop-shadow-none">
-        For churches, conferences, camps, schools, and special events
-      </p>
-      <div class="h-1 w-32 md:w-72 lg:w-80 bg-primary mb-6"></div>
-      <p class="font-sans text-base mb-8 drop-shadow-md md:drop-shadow-none">
-        Bring a <span class="font-bold">powerful, Scripture-centered</span> experience to <span class="font-bold">your audience</span>.
-      </p>
-      <a href="/book-jeremy" class="bg-primary text-gray-900 font-bold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
-        Book Jeremy
-      </a>
-    </div>
-
-    <!-- Video. Mobile: absolute full-bleed bg. Desktop: relative grid item
-         in col 2 (placed after text in source order). object-right keeps
-         Jeremy in frame regardless of column width. -->
+  <!-- HERO. Full-bleed video background with text + CTA overlaid on the left
+       half. Jeremy is composed right-of-center in the source video, so the
+       left side of the frame is mostly black — natural contrast for the
+       overlay text, no dark scrim needed. -->
+  <section id="hero-section" class="relative bg-stone-900 min-h-screen overflow-hidden">
+    <!-- Video: full-bleed background at every viewport -->
     <video
-      class="absolute inset-0 w-full h-full object-cover z-0 md:relative md:inset-auto md:col-span-2 md:object-right md:z-auto"
+      class="absolute inset-0 w-full h-full object-cover z-0"
       autoplay muted playsinline loop preload="auto" aria-hidden="true"
     >
       <source src="https://assets.spiritmediapublishing.com/scripture-alive/sa-opening-no-music.mp4" type="video/mp4" />
     </video>
+
+    <!-- Text + CTA overlay (left-aligned on desktop, centered on mobile) -->
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24 min-h-screen flex flex-col justify-center items-center md:items-start text-center md:text-left text-white">
+      <div class="max-w-2xl">
+        <h1 class="mb-6 leading-tight drop-shadow-lg">
+          <span class="block font-display font-light text-5xl md:text-6xl lg:text-7xl">Making Scripture</span>
+          <span class="block font-sans font-bold text-primary text-5xl md:text-6xl lg:text-7xl">Unforgettable</span>
+        </h1>
+        <p class="font-sans text-lg md:text-xl lg:text-2xl mb-6 drop-shadow-md">
+          <span class="text-white">Word-for-word Scripture.</span> <span class="text-primary">Performed live.</span>
+        </p>
+        <div class="h-1 w-32 md:w-72 lg:w-80 bg-primary mb-4"></div>
+        <p class="font-sans text-sm md:text-base font-bold uppercase tracking-wide mb-3 drop-shadow-md">
+          Performances | Workshops | Speaking
+        </p>
+        <p class="font-sans text-sm md:text-base text-white/90 mb-6 drop-shadow-md">
+          For churches, conferences, camps, schools, and special events
+        </p>
+        <div class="h-1 w-32 md:w-72 lg:w-80 bg-primary mb-6"></div>
+        <p class="font-sans text-base mb-8 drop-shadow-md">
+          Bring a <span class="font-bold">powerful, Scripture-centered</span> experience to <span class="font-bold">your audience</span>.
+        </p>
+        <a href="/book-jeremy" class="bg-primary text-gray-900 font-bold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
+          Book Jeremy
+        </a>
+      </div>
+    </div>
   </section>
 
   <!-- ENDORSEMENTS CAROUSEL -->
