@@ -70,7 +70,8 @@ const speakingImg = tileTransform(
          so the LCP paint is text+bg, not a 10MB video stream. -->
     <video
       id="hero-video"
-      class="absolute inset-0 w-full h-full object-cover z-0 hidden lg:block"
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;display:none;"
+      class="lg:!block"
       muted playsinline loop preload="none" aria-hidden="true"
       data-src="https://assets.spiritmediapublishing.com/scripture-alive/sa-opening-no-music-v2.mp4"
     ></video>
