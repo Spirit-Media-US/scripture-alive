@@ -18,6 +18,9 @@
   /* Accent bumped from #3472B7 to #295a92 to clear 4.5:1 AA contrast on cream/white. */
   --color-accent:  #295a92;
   --color-gold:    #FBC215;
+  /* Darker brand-yellow for use on cream/white bg — clears WCAG AA 4.5:1.
+     #FBC215 only hits 1.5:1 on white; this hits ~5.0:1 while still reading as gold. */
+  --color-gold-deep: #876e00;
   --color-cream:   #f5f0e8;
   --font-sans:     'Montserrat', ui-sans-serif, system-ui, sans-serif;
   --font-serif:    'Roboto Slab', Georgia, ui-serif, serif;
