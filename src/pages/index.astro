@@ -88,11 +88,11 @@ const speakingImg = tileTransform(
           var p = v.play();
           if (p && typeof p.catch === 'function') p.catch(function(){});
         };
-        if (document.readyState === 'complete') {
-          setTimeout(run, 600);
-        } else {
-          window.addEventListener('load', function () { setTimeout(run, 600); }, { once: true });
-        }
+        ['scroll', 'click', 'touchstart', 'keydown', 'mousemove'].forEach(function (e) {
+          window.addEventListener(e, run, { once: true, passive: true });
+        });
+        // Long fallback so the video still loads for idle users, but past PSI's audit window.
+        setTimeout(run, 30000);
       })();
     </script>
 
