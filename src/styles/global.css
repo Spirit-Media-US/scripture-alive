@@ -62,3 +62,8 @@
 		#d6b600 100%
 	);
 }
+@media (min-width: 768px) {
+	.gradient-divider {
+		width: 75%;
+	}
+}
