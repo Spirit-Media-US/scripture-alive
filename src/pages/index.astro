@@ -95,6 +95,7 @@ const speakingImg = tileTransform(
         var run = function () {
           var v = document.getElementById('hero-video');
           if (!v || v.dataset.loaded) return;
+          if (getComputedStyle(v).display === 'none') return; // mobile: skip — section uses bg-stone-900 only
           v.dataset.loaded = '1';
           var s = document.createElement('source');
           s.src = v.dataset.src;
