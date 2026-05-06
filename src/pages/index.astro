@@ -65,13 +65,28 @@ const speakingImg = tileTransform(
        half. Jeremy is composed right-of-center in the source video, so the
        left side of the frame is mostly black — natural contrast for the
        overlay text, no dark scrim needed. -->
-  <section id="hero-section" style="position:relative;background-color:#1c1917;min-height:100vh;overflow:hidden;" class="relative bg-stone-900 min-h-screen overflow-hidden">
+  <style is:global>
+    /* Critical hero layout — keep above-the-fold paint stable before
+       async Tailwind bundle arrives. Without this, mobile and desktop
+       shifted ~0.15-0.30 CLS as padding/max-width/alignment classes
+       hydrated. */
+    #hero-section{position:relative;background-color:#1c1917;min-height:100vh;overflow:hidden;}
+    #hero-section > .hero-text-wrap{position:relative;z-index:10;max-width:80rem;margin-left:auto;margin-right:auto;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;padding:6rem 2rem;}
+    #hero-section .hero-content{max-width:42rem;width:100%;}
+    @media (min-width:768px){
+      #hero-section > .hero-text-wrap{padding:3rem 3rem 4rem 3rem;justify-content:flex-start;align-items:flex-start;text-align:left;}
+    }
+    @media (min-width:1024px){
+      #hero-section > .hero-text-wrap{padding-left:4rem;padding-right:4rem;}
+    }
+  </style>
+  <section id="hero-section" class="relative bg-stone-900 min-h-screen overflow-hidden">
     <!-- Video: hidden on mobile (text-LCP path), shown lg+ as full-bleed bg.
          Source injected after window.load so PSI captures text-paint, not video. -->
     <video
       id="hero-video"
       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;display:none;"
-      class="lg:!block"
+      class="lg:!block hero-video"
       muted playsinline loop preload="none" aria-hidden="true"
       data-src="https://assets.spiritmediapublishing.com/scripture-alive/sa-opening-no-music-v2.mp4"
     ></video>
@@ -98,8 +113,8 @@ const speakingImg = tileTransform(
     </script>
 
     <!-- Text + CTA overlay (left-aligned on desktop, centered on mobile) -->
-    <div style="position:relative;z-index:10;max-width:80rem;margin-left:auto;margin-right:auto;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;color:#fff;text-align:center;" class="relative z-10 max-w-7xl mx-auto px-8 md:px-12 lg:px-16 py-24 md:pt-12 md:pb-16 min-h-screen flex flex-col justify-center md:justify-start items-center md:items-start text-center md:text-left text-white">
-      <div class="max-w-2xl">
+    <div class="hero-text-wrap relative z-10 max-w-7xl mx-auto px-8 md:px-12 lg:px-16 py-24 md:pt-12 md:pb-16 min-h-screen flex flex-col justify-center md:justify-start items-center md:items-start text-center md:text-left text-white">
+      <div class="hero-content max-w-2xl">
         <h1 class="mb-6 leading-tight drop-shadow-lg">
           <span class="block font-display font-light text-5xl md:text-6xl lg:text-7xl">Making Scripture</span>
           <span class="block font-sans font-bold text-primary text-5xl md:text-6xl lg:text-7xl">Unforgettable</span>
