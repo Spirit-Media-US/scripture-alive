@@ -66,13 +66,35 @@ const speakingImg = tileTransform(
        left side of the frame is mostly black — natural contrast for the
        overlay text, no dark scrim needed. -->
   <section id="hero-section" class="relative bg-stone-900 min-h-screen overflow-hidden">
-    <!-- Video: full-bleed background at every viewport -->
+    <!-- Video: full-bleed background. Source injected after window.load
+         so the LCP paint is text+bg, not a 10MB video stream. -->
     <video
+      id="hero-video"
       class="absolute inset-0 w-full h-full object-cover z-0"
-      autoplay muted playsinline loop preload="auto" aria-hidden="true"
-    >
-      <source src="https://assets.spiritmediapublishing.com/scripture-alive/sa-opening-no-music-v2.mp4" type="video/mp4" />
-    </video>
+      muted playsinline loop preload="none" aria-hidden="true"
+      data-src="https://assets.spiritmediapublishing.com/scripture-alive/sa-opening-no-music-v2.mp4"
+    ></video>
+    <script is:inline>
+      (function () {
+        var run = function () {
+          var v = document.getElementById('hero-video');
+          if (!v || v.dataset.loaded) return;
+          v.dataset.loaded = '1';
+          var s = document.createElement('source');
+          s.src = v.dataset.src;
+          s.type = 'video/mp4';
+          v.appendChild(s);
+          v.load();
+          var p = v.play();
+          if (p && typeof p.catch === 'function') p.catch(function(){});
+        };
+        if (document.readyState === 'complete') {
+          setTimeout(run, 600);
+        } else {
+          window.addEventListener('load', function () { setTimeout(run, 600); }, { once: true });
+        }
+      })();
+    </script>
 
     <!-- Text + CTA overlay (left-aligned on desktop, centered on mobile) -->
     <div class="relative z-10 max-w-7xl mx-auto px-8 md:px-12 lg:px-16 py-24 md:pt-12 md:pb-16 min-h-screen flex flex-col justify-center md:justify-start items-center md:items-start text-center md:text-left text-white">
