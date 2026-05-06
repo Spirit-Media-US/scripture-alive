@@ -105,18 +105,40 @@ const speakingImg = tileTransform(
   <!-- ENDORSEMENTS CAROUSEL -->
   <section class="bg-cream py-14 px-4">
     <div class="max-w-4xl mx-auto">
-      <div class="relative overflow-hidden" id="endorsement-track-wrapper">
-        <div id="endorsement-track" class="flex transition-transform duration-500 ease-in-out">
-          {featuredTestimonials.slice(0, 4).map((t: any) => (
-            <div class="min-w-full px-4 text-center">
-              <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
-                "{t.quote}"
-              </p>
-              <p class="font-semibold text-accent">{t.authorName}{t.authorTitle ? `, ${t.authorTitle}` : ''}</p>
-              <p class="text-sm text-gray-700 font-medium">{t.authorOrganization}</p>
-            </div>
-          ))}
+      <div class="relative" id="endorsement-track-wrapper">
+        <div class="overflow-hidden">
+          <div id="endorsement-track" class="flex transition-transform duration-500 ease-in-out">
+            {featuredTestimonials.slice(0, 4).map((t: any) => (
+              <div class="min-w-full px-10 md:px-12 text-center">
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
+                  "{t.quote}"
+                </p>
+                <p class="font-semibold text-accent">{t.authorName}{t.authorTitle ? `, ${t.authorTitle}` : ''}</p>
+                <p class="text-sm text-gray-700 font-medium">{t.authorOrganization}</p>
+              </div>
+            ))}
+          </div>
         </div>
+        <button
+          type="button"
+          id="endorsement-prev"
+          aria-label="Previous endorsement"
+          class="absolute left-0 md:-left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white shadow-md text-accent hover:bg-primary hover:text-gray-900 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          id="endorsement-next"
+          aria-label="Next endorsement"
+          class="absolute right-0 md:-right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white shadow-md text-accent hover:bg-primary hover:text-gray-900 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
       </div>
       <div id="endorsement-dots" class="flex justify-center gap-1 mt-6" data-total={Math.min(featuredTestimonials.length, 4)}>
         {featuredTestimonials.slice(0, 4).map((_: any, i: number) => (
@@ -279,6 +301,8 @@ const speakingImg = tileTransform(
     }
 
     dots.forEach(d => d.addEventListener('click', () => goTo(Number(d.dataset.index))));
+    document.getElementById('endorsement-prev')?.addEventListener('click', () => goTo(current - 1));
+    document.getElementById('endorsement-next')?.addEventListener('click', () => goTo(current + 1));
     setInterval(() => goTo(current + 1), 5000);
   </script>
 
