@@ -50,3 +50,16 @@
 		@apply transition-colors;
 	}
 }
+
+.gradient-divider {
+	width: 100%;
+	height: 3px;
+	background: linear-gradient(
+		90deg,
+		transparent 0%,
+		#a58a00 15%,
+		#d6b600 50%,
+		#a58a00 85%,
+		transparent 100%
+	);
+}
