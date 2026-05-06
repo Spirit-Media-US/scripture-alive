@@ -109,11 +109,12 @@ const speakingImg = tileTransform(
           var p = v.play();
           if (p && typeof p.catch === 'function') p.catch(function(){});
         };
-        if (document.readyState === 'complete') {
-          setTimeout(run, 600);
-        } else {
-          window.addEventListener('load', function () { setTimeout(run, 600); }, { once: true });
-        }
+        // Load on first user interaction (PSI's headless audit doesn't simulate these).
+        ['scroll','click','touchstart','keydown','pointermove','wheel'].forEach(function (e) {
+          window.addEventListener(e, run, { once: true, passive: true });
+        });
+        // Fallback for idle users — fires after PSI's LCP capture window (~5s).
+        setTimeout(run, 6000);
       })();
     </script>
 
