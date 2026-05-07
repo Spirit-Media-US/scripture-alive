@@ -68,17 +68,17 @@ const speakingImg = tileTransform(
   <style is:global>
     /* Hero layout — stacked on mobile (video on top, text below),
        overlay on desktop (video full-bleed bg, text on top). */
-    #hero-section{position:relative;background-color:#1c1917;}
+    #hero-section{position:relative;background-color:#fff;}
     #hero-section .hero-video-wrap{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background-color:#1c1917;}
     #hero-section .hero-video-wrap > video{width:100%;height:100%;object-fit:cover;}
     #hero-section .hero-mobile-h1{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;text-align:center;color:#fff;z-index:5;pointer-events:none;}
-    #hero-section .hero-text-wrap{display:flex;flex-direction:column;align-items:center;text-align:center;color:#fff;padding:2.5rem 1.5rem 3rem;}
+    #hero-section .hero-text-wrap{display:flex;flex-direction:column;align-items:center;text-align:center;color:#1f2937;padding:2.5rem 1.5rem 3rem;}
     #hero-section .hero-content{max-width:36rem;width:100%;}
     @media (min-width:1024px){
-      #hero-section{min-height:100vh;overflow:hidden;}
+      #hero-section{background-color:#1c1917;min-height:100vh;overflow:hidden;}
       #hero-section .hero-video-wrap{position:absolute;inset:0;aspect-ratio:auto;width:100%;height:100%;z-index:0;}
       #hero-section .hero-mobile-h1{display:none;}
-      #hero-section .hero-text-wrap{position:relative;z-index:10;max-width:80rem;margin-left:auto;margin-right:auto;min-height:100vh;justify-content:flex-start;align-items:flex-start;text-align:left;padding:3rem 4rem 4rem 4rem;}
+      #hero-section .hero-text-wrap{position:relative;z-index:10;max-width:80rem;margin-left:auto;margin-right:auto;min-height:100vh;justify-content:flex-start;align-items:flex-start;text-align:left;padding:3rem 4rem 4rem 4rem;color:#fff;}
       #hero-section .hero-content{max-width:42rem;}
     }
   </style>
@@ -129,14 +129,14 @@ const speakingImg = tileTransform(
           <span class="block font-display font-light text-5xl md:text-6xl lg:text-7xl">Making Scripture</span>
           <span class="block font-sans font-bold text-primary text-5xl md:text-6xl lg:text-7xl">Unforgettable</span>
         </h1>
-        <p class="font-sans text-lg md:text-xl lg:text-2xl mb-6 drop-shadow-md">
-          <span class="text-white font-bold">Word-for-word Scripture.</span><br class="md:hidden" /> <span class="text-primary font-extrabold">Performed live.</span>
+        <p class="font-sans text-lg md:text-xl lg:text-2xl mb-6 lg:drop-shadow-md">
+          <span class="text-accent lg:text-white font-bold">Word-for-word Scripture.</span><br class="md:hidden" /> <span class="text-primary font-extrabold">Performed live.</span>
         </p>
         <div class="gradient-divider mb-4"></div>
-        <p class="font-sans text-sm md:text-lg font-bold uppercase tracking-wide mb-6 md:mb-3 drop-shadow-md">
+        <p class="font-sans text-sm md:text-lg font-bold uppercase tracking-wide mb-6 md:mb-3 text-accent lg:text-white lg:drop-shadow-md">
           Performances | Workshops | Speaking
         </p>
-        <p class="font-sans text-sm md:text-base text-white/90 mb-8 drop-shadow-md">
+        <p class="font-sans text-sm md:text-base text-gray-600 lg:text-white/90 mb-8 lg:drop-shadow-md">
           For churches, conferences, camps,<br class="md:hidden" /> schools, and special events
         </p>
         <a href="/book-jeremy" class="bg-primary text-gray-900 font-bold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
