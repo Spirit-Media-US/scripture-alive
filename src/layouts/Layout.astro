@@ -221,13 +221,22 @@ const currentPath = Astro.url.pathname;
          because Lightning CSS strips the bare `nav > ul > li > a` selector
          from comma groups during build optimization, leaving only the
          #mobile-menu-btn half. Splitting bypasses that. */
-      /* Homepage nav has solid black bg at top of page (over the hero video on
-         desktop, over the hero's mobile padding band) and flips to solid white
-         when scrolled past 80px. Both states are real bg colors, so the
-         transition-colors duration-300 fade looks smooth on all viewports. */
-      #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a{color:#fff!important}
-      #site-header[data-transparent-hero="true"]:not(.is-scrolled) #mobile-menu-btn{color:#fff!important}
-      #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a:hover{color:#fff!important;text-decoration:none}
+      /* Transparent-hero overlay treatment only applies on desktop, where the
+         hero video is the nav background. On mobile the nav sits over the
+         hero section's white padding band, so default gray icons/links must
+         remain visible. */
+      @media (min-width: 1024px){
+        #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a{color:#fff!important}
+        #site-header[data-transparent-hero="true"]:not(.is-scrolled) #mobile-menu-btn{color:#fff!important}
+        #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a:hover{color:#fff!important;text-decoration:none}
+      }
+      /* On mobile the nav has no actual transparent state — it always sits over
+         a white background. Force solid white + shadow at all scroll positions
+         to eliminate the visual "flash" when the JS toggles is-scrolled past
+         80px. Desktop keeps the transparent → solid transition. */
+      @media (max-width: 1023px){
+        #site-header[data-transparent-hero="true"]{background-color:#fff!important;box-shadow:0 1px 2px 0 rgba(0,0,0,0.05)!important}
+      }
       #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a{color:#4b5563!important}
       #site-header[data-transparent-hero="true"].is-scrolled #mobile-menu-btn{color:#4b5563!important}
       #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a:hover{color:#295a92!important}
@@ -354,7 +363,7 @@ const currentPath = Astro.url.pathname;
   <header
     id="site-header"
     data-transparent-hero={currentPath === '/' ? 'true' : 'false'}
-    class={`sticky top-0 z-50 transition-colors duration-300 ${currentPath === '/' ? 'bg-black shadow-none' : 'bg-white shadow-sm'}`}
+    class={`sticky top-0 z-50 transition-colors duration-300 ${currentPath === '/' ? 'bg-transparent shadow-none' : 'bg-white shadow-sm'}`}
   >
     <nav class="max-w-6xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
       <a href="/"><img src="/img/logo-320.webp" alt="Scripture Alive" width="120" height="60" decoding="async" fetchpriority="low" class="h-[60px] md:h-[108px] w-auto" /></a>
@@ -461,12 +470,12 @@ const currentPath = Astro.url.pathname;
         const onScroll = () => {
           if (window.scrollY > 80) {
             header?.classList.add('is-scrolled');
-            header?.classList.remove('bg-black', 'shadow-none');
+            header?.classList.remove('bg-transparent', 'shadow-none');
             header?.classList.add('bg-white', 'shadow-sm');
           } else {
             header?.classList.remove('is-scrolled');
             header?.classList.remove('bg-white', 'shadow-sm');
-            header?.classList.add('bg-black', 'shadow-none');
+            header?.classList.add('bg-transparent', 'shadow-none');
           }
         };
         window.addEventListener('scroll', onScroll, { passive: true });
