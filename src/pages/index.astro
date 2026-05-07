@@ -8,7 +8,7 @@ const totalSlides = featuredTestimonials.length;
 
 // Apply Sanity CDN transforms. Service tiles display at ~320×192 (h-48 in a
 // 3-col grid on lg+, max-w-5xl) so DPR 2 fetches should be 640×384 — matching
-// the width/height attrs on the <img>.
+// the rendered image attrs.
 const tileTransform = (url: string | undefined, fallback: string) => {
 	const base = url || fallback;
 	if (!base.includes("cdn.sanity.io")) return base;
