@@ -30,4 +30,7 @@ public/studio/
 .playwright-mcp/
 
 # Per-machine Claude Code settings
-.claude/settings.local.json
+.claude/
+
+# Wrangler local state
+.wrangler/
