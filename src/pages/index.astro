@@ -333,6 +333,12 @@ const speakingImg = tileTransform(
     let current = 0;
     const total = Number(dotsContainer?.dataset.total ?? dots.length);
 
+    let autoTimer;
+    function scheduleNext() {
+      clearTimeout(autoTimer);
+      autoTimer = setTimeout(() => goTo(current + 1), 10000);
+    }
+
     function goTo(n) {
       current = (n + total) % total;
       track.style.transform = `translateX(-${current * 100}%)`;
@@ -342,12 +348,13 @@ const speakingImg = tileTransform(
         inner.classList.toggle('bg-primary', i === current);
         inner.classList.toggle('bg-gray-400', i !== current);
       });
+      scheduleNext();
     }
 
     dots.forEach(d => d.addEventListener('click', () => goTo(Number(d.dataset.index))));
     document.getElementById('endorsement-prev')?.addEventListener('click', () => goTo(current - 1));
     document.getElementById('endorsement-next')?.addEventListener('click', () => goTo(current + 1));
-    setInterval(() => goTo(current + 1), 10000);
+    scheduleNext();
   </script>
 
 </Layout>
