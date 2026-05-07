@@ -221,9 +221,15 @@ const currentPath = Astro.url.pathname;
          because Lightning CSS strips the bare `nav > ul > li > a` selector
          from comma groups during build optimization, leaving only the
          #mobile-menu-btn half. Splitting bypasses that. */
-      #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a{color:#fff!important}
-      #site-header[data-transparent-hero="true"]:not(.is-scrolled) #mobile-menu-btn{color:#fff!important}
-      #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a:hover{color:#fff!important;text-decoration:none}
+      /* Transparent-hero overlay treatment only applies on desktop, where the
+         hero video is the nav background. On mobile the nav sits over the
+         hero section's white padding band, so default gray icons/links must
+         remain visible. */
+      @media (min-width: 1024px){
+        #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a{color:#fff!important}
+        #site-header[data-transparent-hero="true"]:not(.is-scrolled) #mobile-menu-btn{color:#fff!important}
+        #site-header[data-transparent-hero="true"]:not(.is-scrolled) nav > ul > li > a:hover{color:#fff!important;text-decoration:none}
+      }
       #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a{color:#4b5563!important}
       #site-header[data-transparent-hero="true"].is-scrolled #mobile-menu-btn{color:#4b5563!important}
       #site-header[data-transparent-hero="true"].is-scrolled nav > ul > li > a:hover{color:#295a92!important}
