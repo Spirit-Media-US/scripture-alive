@@ -129,17 +129,17 @@ const speakingImg = tileTransform(
           <span class="block font-display font-light text-5xl md:text-6xl lg:text-7xl">Making Scripture</span>
           <span class="block font-sans font-bold text-primary text-5xl md:text-6xl lg:text-7xl">Unforgettable</span>
         </h1>
-        <p class="font-sans text-lg md:text-xl lg:text-2xl mb-6 lg:drop-shadow-md">
+        <p class="font-sans text-lg md:text-xl lg:text-2xl mb-6 lg:mb-5 lg:drop-shadow-md">
           <span class="text-accent lg:text-white font-bold">Word-for-word Scripture.</span><br class="md:hidden" /> <span class="text-primary font-extrabold">Performed live.</span>
         </p>
-        <div class="gradient-divider mb-4"></div>
-        <p class="font-sans text-sm md:text-lg font-bold uppercase tracking-wide mb-6 md:mb-3 text-accent lg:text-white lg:drop-shadow-md">
+        <div class="gradient-divider mb-4 lg:mb-16"></div>
+        <p class="font-sans text-sm md:text-lg lg:text-xl font-bold uppercase tracking-wide lg:tracking-widest mb-6 md:mb-3 lg:mb-4 text-accent lg:text-white lg:drop-shadow-md">
           Performances | Workshops | Speaking
         </p>
         <p class="font-sans text-sm md:text-base text-gray-600 lg:text-white/90 mb-8 lg:drop-shadow-md">
           For churches, conferences, camps,<br class="md:hidden" /> schools, and special events
         </p>
-        <a href="/book-jeremy" class="bg-primary text-gray-900 font-bold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
+        <a href="/book-jeremy" class="bg-primary text-gray-900 font-bold font-sans px-10 py-3 lg:px-12 lg:py-4 rounded text-base lg:text-lg transition-all duration-300 hover:opacity-90">
           Book Jeremy
         </a>
       </div>
@@ -336,7 +336,7 @@ const speakingImg = tileTransform(
     let autoTimer;
     function scheduleNext() {
       clearTimeout(autoTimer);
-      autoTimer = setTimeout(() => goTo(current + 1), 10000);
+      autoTimer = setTimeout(() => goTo(current + 1), 20000);
     }
 
     function goTo(n) {
