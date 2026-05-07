@@ -9,6 +9,8 @@
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2') format('woff2');}
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2') format('woff2');}
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-600.woff2') format('woff2');}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2') format('woff2');}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-800.woff2') format('woff2');}
 /* Non-critical @font-face blocks (heavier weights, secondary families) are loaded via /deferred.css */
 
 @theme {
@@ -16,6 +18,9 @@
   /* Accent bumped from #3472B7 to #295a92 to clear 4.5:1 AA contrast on cream/white. */
   --color-accent:  #295a92;
   --color-gold:    #FBC215;
+  /* Darker brand-yellow for use on cream/white bg — clears WCAG AA 4.5:1.
+     #FBC215 only hits 1.5:1 on white; this hits ~5.0:1 while still reading as gold. */
+  --color-gold-deep: #876e00;
   --color-cream:   #f5f0e8;
   --font-sans:     'Montserrat', ui-sans-serif, system-ui, sans-serif;
   --font-serif:    'Roboto Slab', Georgia, ui-serif, serif;
@@ -48,5 +53,22 @@
 	}
 	a {
 		@apply transition-colors;
+	}
+}
+
+.gradient-divider {
+	width: 100%;
+	height: 3px;
+	background: linear-gradient(
+		90deg,
+		transparent 0%,
+		#a58a00 15%,
+		#d6b600 50%,
+		#d6b600 100%
+	);
+}
+@media (min-width: 768px) {
+	.gradient-divider {
+		width: 60%;
 	}
 }

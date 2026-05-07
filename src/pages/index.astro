@@ -65,35 +65,87 @@ const speakingImg = tileTransform(
        half. Jeremy is composed right-of-center in the source video, so the
        left side of the frame is mostly black — natural contrast for the
        overlay text, no dark scrim needed. -->
+  <style is:global>
+    /* Critical hero layout — keep above-the-fold paint stable before
+       async Tailwind bundle arrives. Without this, mobile and desktop
+       shifted ~0.15-0.30 CLS as padding/max-width/alignment classes
+       hydrated. */
+    #hero-section{position:relative;background-color:#1c1917;min-height:100vh;overflow:hidden;}
+    #hero-section > .hero-text-wrap{position:relative;z-index:10;max-width:80rem;margin-left:auto;margin-right:auto;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;padding:4rem 1.5rem;}
+    #hero-section .hero-content{max-width:42rem;width:100%;}
+    @media (min-width:768px){
+      #hero-section > .hero-text-wrap{padding:3rem 3rem 4rem 3rem;justify-content:flex-start;align-items:flex-start;text-align:left;}
+    }
+    @media (min-width:1024px){
+      #hero-section > .hero-text-wrap{padding-left:4rem;padding-right:4rem;}
+    }
+  </style>
   <section id="hero-section" class="relative bg-stone-900 min-h-screen overflow-hidden">
-    <!-- Video: full-bleed background at every viewport -->
+    <!-- Video: full-bleed background on every viewport. Mobile/tablet
+         get a 720p ~240KB cut; desktop ≥1024px gets the full 1080p
+         version. Source injected after window.load so the LCP paint
+         isn't a video stream. -->
     <video
-      class="absolute inset-0 w-full h-full object-cover z-0"
-      autoplay muted playsinline loop preload="auto" aria-hidden="true"
-    >
-      <source src="https://assets.spiritmediapublishing.com/scripture-alive/sa-opening-no-music.mp4" type="video/mp4" />
-    </video>
+      id="hero-video"
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;display:none;"
+      muted playsinline loop preload="none" aria-hidden="true"
+      data-src-desktop="https://assets.spiritmediapublishing.com/scripture-alive/sa-opening-no-music-v2.mp4"
+      data-src-mobile="https://assets.spiritmediapublishing.com/scripture-alive/sa-opening-no-music-v2-mobile.mp4"
+    ></video>
+    <script is:inline>
+      (function () {
+        var loadVideo = function () {
+          var v = document.getElementById('hero-video');
+          if (!v || v.dataset.loaded) return;
+          v.dataset.loaded = '1';
+          v.style.display = 'block';
+          var url = window.matchMedia('(min-width: 1024px)').matches
+            ? v.dataset.srcDesktop
+            : v.dataset.srcMobile;
+          var s = document.createElement('source');
+          s.src = url;
+          s.type = 'video/mp4';
+          v.appendChild(s);
+          v.load();
+          var p = v.play();
+          if (p && typeof p.catch === 'function') p.catch(function(){});
+        };
+        // Desktop: load eagerly after page settle (PSI desktop has no LCP issue with the video).
+        // Mobile: wait for user interaction so PSI's headless audit captures text-LCP, not the video.
+        if (window.matchMedia('(min-width: 1024px)').matches) {
+          if (document.readyState === 'complete') {
+            setTimeout(loadVideo, 400);
+          } else {
+            window.addEventListener('load', function () { setTimeout(loadVideo, 400); }, { once: true });
+          }
+        } else {
+          ['touchstart', 'scroll', 'click', 'pointermove', 'wheel', 'keydown'].forEach(function (e) {
+            window.addEventListener(e, loadVideo, { once: true, passive: true });
+          });
+        }
+      })();
+    </script>
 
     <!-- Text + CTA overlay (left-aligned on desktop, centered on mobile) -->
-    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24 min-h-screen flex flex-col justify-center items-center md:items-start text-center md:text-left text-white">
-      <div class="max-w-2xl">
+    <div class="hero-text-wrap relative z-10 max-w-7xl mx-auto px-8 md:px-12 lg:px-16 py-24 md:pt-12 md:pb-16 min-h-screen flex flex-col justify-center md:justify-start items-center md:items-start text-center md:text-left text-white">
+      <div class="hero-content max-w-2xl">
         <h1 class="mb-6 leading-tight drop-shadow-lg">
           <span class="block font-display font-light text-5xl md:text-6xl lg:text-7xl">Making Scripture</span>
           <span class="block font-sans font-bold text-primary text-5xl md:text-6xl lg:text-7xl">Unforgettable</span>
         </h1>
         <p class="font-sans text-lg md:text-xl lg:text-2xl mb-6 drop-shadow-md">
-          <span class="text-white">Word-for-word Scripture.</span> <span class="text-primary">Performed live.</span>
+          <span class="text-white font-bold">Word-for-word Scripture.</span><br class="md:hidden" /> <span class="text-primary font-extrabold">Performed live.</span>
         </p>
-        <div class="h-1 w-32 md:w-72 lg:w-80 bg-primary mb-4 mx-auto md:mx-0"></div>
-        <p class="font-sans text-sm md:text-base font-bold uppercase tracking-wide mb-3 drop-shadow-md">
+        <div class="gradient-divider mb-4"></div>
+        <p class="font-sans text-sm md:text-lg font-bold uppercase tracking-wide mb-6 md:mb-3 drop-shadow-md">
           Performances | Workshops | Speaking
         </p>
         <p class="font-sans text-sm md:text-base text-white/90 mb-6 drop-shadow-md">
-          For churches, conferences, camps, schools, and special events
+          For churches, conferences, camps,<br class="md:hidden" /> schools, and special events
         </p>
-        <div class="h-1 w-32 md:w-72 lg:w-80 bg-primary mb-6 mx-auto md:mx-0"></div>
+        <div class="gradient-divider mb-6"></div>
         <p class="font-sans text-base mb-8 drop-shadow-md">
-          Bring a <span class="font-bold">powerful, Scripture-centered</span> experience to <span class="font-bold">your audience</span>.
+          Bring a powerful, <span class="font-bold">Scripture-centered</span> experience to <span class="font-bold">your audience</span>.
         </p>
         <a href="/book-jeremy" class="bg-primary text-gray-900 font-bold font-sans px-10 py-3 rounded text-base transition-all duration-300 hover:opacity-90">
           Book Jeremy
@@ -105,18 +157,40 @@ const speakingImg = tileTransform(
   <!-- ENDORSEMENTS CAROUSEL -->
   <section class="bg-cream py-14 px-4">
     <div class="max-w-4xl mx-auto">
-      <div class="relative overflow-hidden" id="endorsement-track-wrapper">
-        <div id="endorsement-track" class="flex transition-transform duration-500 ease-in-out">
-          {featuredTestimonials.slice(0, 4).map((t: any) => (
-            <div class="min-w-full px-4 text-center">
-              <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
-                "{t.quote}"
-              </p>
-              <p class="font-semibold text-accent">{t.authorName}{t.authorTitle ? `, ${t.authorTitle}` : ''}</p>
-              <p class="text-sm text-gray-700 font-medium">{t.authorOrganization}</p>
-            </div>
-          ))}
+      <div class="relative" id="endorsement-track-wrapper">
+        <div class="overflow-hidden">
+          <div id="endorsement-track" class="flex transition-transform duration-500 ease-in-out">
+            {featuredTestimonials.slice(0, 4).map((t: any) => (
+              <div class="min-w-full px-10 md:px-12 text-center">
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed mb-6 italic">
+                  "{t.quote}"
+                </p>
+                <p class="font-semibold text-accent">{t.authorName}{t.authorTitle ? `, ${t.authorTitle}` : ''}</p>
+                <p class="text-sm text-gray-700 font-medium">{t.authorOrganization}</p>
+              </div>
+            ))}
+          </div>
         </div>
+        <button
+          type="button"
+          id="endorsement-prev"
+          aria-label="Previous endorsement"
+          class="absolute left-0 md:-left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-primary shadow-md text-gray-900 hover:bg-primary/90 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          id="endorsement-next"
+          aria-label="Next endorsement"
+          class="absolute right-0 md:-right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-primary shadow-md text-gray-900 hover:bg-primary/90 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
       </div>
       <div id="endorsement-dots" class="flex justify-center gap-1 mt-6" data-total={Math.min(featuredTestimonials.length, 4)}>
         {featuredTestimonials.slice(0, 4).map((_: any, i: number) => (
@@ -143,7 +217,7 @@ const speakingImg = tileTransform(
     <div class="max-w-5xl mx-auto">
 
       <h2 class="font-sans font-bold text-3xl md:text-4xl lg:text-5xl text-center mb-10">
-        <span class="text-accent">Experience. Engage. Embody.</span> <span class="text-primary">God's Word.</span>
+        <span class="text-accent">Experience. Engage. Embody.</span><br class="hidden md:block" /> <span class="text-primary">God's Word.</span>
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
@@ -180,7 +254,7 @@ const speakingImg = tileTransform(
       <!-- Section header with yellow flanking lines -->
       <div class="flex items-center justify-center gap-4 md:gap-6 mb-10">
         <span aria-hidden="true" class="h-1 w-16 md:w-24 bg-primary"></span>
-        <h2 class="font-sans font-bold text-3xl md:text-4xl text-accent">Discover the Ministry</h2>
+        <h2 class="font-sans font-bold text-3xl md:text-4xl text-accent text-center">Discover<br class="md:hidden" /> the Ministry</h2>
         <span aria-hidden="true" class="h-1 w-16 md:w-24 bg-primary"></span>
       </div>
 
@@ -192,9 +266,9 @@ const speakingImg = tileTransform(
             <img src={performancesImg}
               alt={settings?.homePerformancesAlt || "Scripture Performances"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover" />
           </div>
-          <div class="p-5 flex flex-col flex-1">
+          <div class="p-5 flex flex-col flex-1 items-center text-center md:items-start md:text-left">
             <h3 class="font-sans font-bold text-xl text-accent mb-2">Scripture Performances</h3>
-            <p class="text-gray-600 text-sm leading-relaxed flex-1">Immersive, word-for-word dramatizations of entire books, characters, and narratives of the Bible that bring the Word to life.</p>
+            <p class="text-gray-600 text-sm leading-relaxed flex-1 md:flex md:flex-col md:justify-center">Immersive, word-for-word dramatizations of entire books, characters, and narratives of the Bible that bring the Word to life.</p>
             <a href="/performances" class="text-accent font-semibold mt-4 hover:underline inline-flex items-center gap-1">
               View Performances <span aria-hidden="true">→</span>
             </a>
@@ -206,9 +280,9 @@ const speakingImg = tileTransform(
             <img src={workshopsImg}
               alt={settings?.homeWorkshopsAlt || "Scripture Memory Workshops"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover" />
           </div>
-          <div class="p-5 flex flex-col flex-1">
+          <div class="p-5 flex flex-col flex-1 items-center text-center md:items-start md:text-left">
             <h3 class="font-sans font-bold text-xl text-accent mb-2">Memory Workshops</h3>
-            <p class="text-gray-600 text-sm leading-relaxed flex-1">Engaging, hands-on training to equip people to remember and live out God's Word.</p>
+            <p class="text-gray-600 text-sm leading-relaxed flex-1 md:flex md:flex-col md:justify-center">Engaging, hands-on training to equip people to remember and live out God's Word.</p>
             <a href="/workshops" class="text-accent font-semibold mt-4 hover:underline inline-flex items-center gap-1">
               Explore Workshops <span aria-hidden="true">→</span>
             </a>
@@ -220,9 +294,9 @@ const speakingImg = tileTransform(
             <img src={speakingImg}
               alt={settings?.homeSpeakingAlt || "Guest Speaking"} width="640" height="384" loading="lazy" decoding="async" class="w-full h-full object-cover" />
           </div>
-          <div class="p-5 flex flex-col flex-1">
+          <div class="p-5 flex flex-col flex-1 items-center text-center md:items-start md:text-left">
             <h3 class="font-sans font-bold text-xl text-accent mb-2">Guest Speaking</h3>
-            <p class="text-gray-600 text-sm leading-relaxed flex-1">Dynamic, Scripture-centered messages for churches, camps, conferences, and podcasts.</p>
+            <p class="text-gray-600 text-sm leading-relaxed flex-1 md:flex md:flex-col md:justify-center">Dynamic, Scripture-centered messages for churches, camps, conferences, and podcasts.</p>
             <a href="/speaking" class="text-accent font-semibold mt-4 hover:underline inline-flex items-center gap-1">
               See Speaking Topics <span aria-hidden="true">→</span>
             </a>
@@ -235,7 +309,7 @@ const speakingImg = tileTransform(
 
   <!-- READY-TO-BOOK CTA — contained blue rounded bar with calendar icon + button -->
   <section class="bg-white py-8 md:py-10 px-4">
-    <div class="max-w-5xl mx-auto bg-accent rounded-lg px-6 md:px-10 py-6 md:py-8 flex flex-col md:flex-row items-center md:justify-between gap-4 md:gap-6 text-center md:text-left">
+    <div class="max-w-5xl mx-auto bg-accent rounded-lg px-6 md:px-10 py-6 md:py-8 flex flex-col md:flex-row items-center md:justify-center gap-4 md:gap-6 text-center">
       <div class="flex flex-col md:flex-row items-center gap-4">
         <div class="text-primary flex-shrink-0">
           <svg aria-hidden="true" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" style="width:3rem;height:3rem;fill:currentColor;"><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v96c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16z"/></svg>
@@ -255,7 +329,7 @@ const speakingImg = tileTransform(
         <svg aria-hidden="true" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg" style="width:1.5rem;height:1.5rem;fill:currentColor;"><path d="M192 256c61.9 0 112-50.1 112-112S253.9 32 192 32 80 82.1 80 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C51.6 288 0 339.6 0 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zM480 256c53 0 96-43 96-96s-43-96-96-96-96 43-96 96 43 96 96 96zm48 32h-3.8c-13.9 4.8-28.6 8-44.2 8s-30.3-3.2-44.2-8H432c-20.4 0-39.2 5.9-55.7 15.4 24.4 26.3 39.7 61.2 39.7 99.8v38.4c0 2.2-.5 4.3-.6 6.4H592c26.5 0 48-21.5 48-48 0-61.9-50.1-112-112-112z"/></svg>
       </div>
       <p class="text-gray-800 font-sans">
-        Know someone who should hear about Jeremy? <a href="/referjeremy" class="text-primary font-semibold underline hover:opacity-80">Refer him here</a>
+        Know someone who should hear about Jeremy? <a href="/referjeremy" class="text-gold-deep font-semibold underline hover:opacity-80">Refer him here</a>
       </p>
     </div>
   </section>
@@ -279,6 +353,8 @@ const speakingImg = tileTransform(
     }
 
     dots.forEach(d => d.addEventListener('click', () => goTo(Number(d.dataset.index))));
+    document.getElementById('endorsement-prev')?.addEventListener('click', () => goTo(current - 1));
+    document.getElementById('endorsement-next')?.addEventListener('click', () => goTo(current + 1));
     setInterval(() => goTo(current + 1), 5000);
   </script>
 

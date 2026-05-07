@@ -1,5 +1,25 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getSiteSettings } from "../utils/sanity";
+
+const settings = await getSiteSettings();
+
+const FALLBACK_PERFORMANCES =
+	"https://cdn.sanity.io/images/vxczpihg/production/77e01b90ecf67d8a98bd7b81065106b062648bf3-354x177.webp";
+const FALLBACK_WORKSHOPS =
+	"https://cdn.sanity.io/images/vxczpihg/production/adab64545b5f89913fecdfea364d41c884f063cc-354x177.webp";
+const FALLBACK_SPEAKING =
+	"https://cdn.sanity.io/images/vxczpihg/production/8e31433446554b2eb54ea4a475dec26aa0af6dcd-354x177.webp";
+
+const performancesImg =
+	settings?.referralPerformancesImage || FALLBACK_PERFORMANCES;
+const performancesAlt =
+	settings?.referralPerformancesAlt || "Scripture Performances";
+const workshopsImg = settings?.referralWorkshopsImage || FALLBACK_WORKSHOPS;
+const workshopsAlt =
+	settings?.referralWorkshopsAlt || "Scripture Memory Workshops";
+const speakingImg = settings?.referralSpeakingImage || FALLBACK_SPEAKING;
+const speakingAlt = settings?.referralSpeakingAlt || "Guest Preaching";
 ---
 
 <Layout
@@ -27,36 +47,27 @@ import Layout from "../layouts/Layout.astro";
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
         <div class="relative overflow-hidden rounded-lg shadow-md">
           <img
-            src="https://cdn.sanity.io/images/vxczpihg/production/77e01b90ecf67d8a98bd7b81065106b062648bf3-354x177.webp"
-            alt="Scripture Performances"
+            src={performancesImg}
+            alt={performancesAlt}
             loading="lazy"
             class="w-full h-48 object-cover"
           />
-          <div class="absolute inset-0 flex items-center justify-center bg-black/30">
-            <span class="text-white font-semibold text-lg drop-shadow-lg italic">Scripture Performances</span>
-          </div>
         </div>
         <div class="relative overflow-hidden rounded-lg shadow-md">
           <img
-            src="https://cdn.sanity.io/images/vxczpihg/production/adab64545b5f89913fecdfea364d41c884f063cc-354x177.webp"
-            alt="Scripture Memory Workshops"
+            src={workshopsImg}
+            alt={workshopsAlt}
             loading="lazy"
             class="w-full h-48 object-cover"
           />
-          <div class="absolute inset-0 flex items-center justify-center bg-black/30">
-            <span class="text-white font-semibold text-lg drop-shadow-lg italic">Scripture Memory Workshops</span>
-          </div>
         </div>
         <div class="relative overflow-hidden rounded-lg shadow-md">
           <img
-            src="https://cdn.sanity.io/images/vxczpihg/production/8e31433446554b2eb54ea4a475dec26aa0af6dcd-354x177.webp"
-            alt="Guest Preaching"
+            src={speakingImg}
+            alt={speakingAlt}
             loading="lazy"
             class="w-full h-48 object-cover"
           />
-          <div class="absolute inset-0 flex items-center justify-center bg-black/30">
-            <span class="text-white font-semibold text-lg drop-shadow-lg italic">Guest Preaching</span>
-          </div>
         </div>
       </div>
 
@@ -64,7 +75,7 @@ import Layout from "../layouts/Layout.astro";
         <iframe
           src="https://mail.spiritmediaone.com/widget/form/FAIca66I1ZhNOtTZxCPq"
           class="w-full border-0"
-          style="height:2583px"
+          style="min-height:600px"
           id="inline-FAIca66I1ZhNOtTZxCPq"
           data-layout="{'id':'INLINE'}"
           data-trigger-type="alwaysShow"
@@ -74,11 +85,12 @@ import Layout from "../layouts/Layout.astro";
           data-deactivation-type="neverDeactivate"
           data-deactivation-value=""
           data-form-name="Scripture Alive Referral Form"
-          data-height="2583"
+          data-height="600"
           data-layout-iframe-id="inline-FAIca66I1ZhNOtTZxCPq"
           data-form-id="FAIca66I1ZhNOtTZxCPq"
           title="Scripture Alive Referral Form"
         ></iframe>
+        <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
       </div>
 
     </section>

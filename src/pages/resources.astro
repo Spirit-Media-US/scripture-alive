@@ -67,7 +67,7 @@ const resources = await getResources();
             />
             <h2 class="text-lg font-bold text-primary font-serif">{r.title}</h2>
             <p class="text-gray-700 leading-relaxed flex-1">{r.description}</p>
-            <div class="flex gap-3 flex-wrap">
+            <div class="flex gap-3 flex-wrap justify-center md:justify-start">
               <a
                 href={`/${r.slug}`}
                 class="inline-block bg-accent text-white font-semibold px-4 py-2 rounded text-sm hover:bg-accent/90 transition-colors"

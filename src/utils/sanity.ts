@@ -199,7 +199,13 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     "eventsWorkshopsImage": eventsWorkshopsImage.asset->url,
     "eventsWorkshopsAlt": eventsWorkshopsImage.alt,
     "eventsSpeakingImage": eventsSpeakingImage.asset->url,
-    "eventsSpeakingAlt": eventsSpeakingImage.alt
+    "eventsSpeakingAlt": eventsSpeakingImage.alt,
+    "referralPerformancesImage": referralPerformancesImage.asset->url,
+    "referralPerformancesAlt": referralPerformancesImage.alt,
+    "referralWorkshopsImage": referralWorkshopsImage.asset->url,
+    "referralWorkshopsAlt": referralWorkshopsImage.alt,
+    "referralSpeakingImage": referralSpeakingImage.asset->url,
+    "referralSpeakingAlt": referralSpeakingImage.alt
   }
 `);
 

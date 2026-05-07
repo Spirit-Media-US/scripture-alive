@@ -94,12 +94,39 @@ export const siteSettings = defineType({
 			fields: [{ name: "alt", title: "Alt Text", type: "string" }],
 			group: "events",
 		}),
+
+		// ── Refer Jeremy Page ────────────────────────────────────
+		defineField({
+			name: "referralPerformancesImage",
+			title: "Refer Jeremy — Scripture Performances Image",
+			type: "image",
+			options: { hotspot: true },
+			fields: [{ name: "alt", title: "Alt Text", type: "string" }],
+			group: "referral",
+		}),
+		defineField({
+			name: "referralWorkshopsImage",
+			title: "Refer Jeremy — Memory Workshops Image",
+			type: "image",
+			options: { hotspot: true },
+			fields: [{ name: "alt", title: "Alt Text", type: "string" }],
+			group: "referral",
+		}),
+		defineField({
+			name: "referralSpeakingImage",
+			title: "Refer Jeremy — Guest Preaching Image",
+			type: "image",
+			options: { hotspot: true },
+			fields: [{ name: "alt", title: "Alt Text", type: "string" }],
+			group: "referral",
+		}),
 	],
 	groups: [
 		{ name: "home", title: "Home Page" },
 		{ name: "about", title: "About Page" },
 		{ name: "interviews", title: "Interviews Page" },
 		{ name: "events", title: "Events Page" },
+		{ name: "referral", title: "Refer Jeremy Page" },
 	],
 	preview: {
 		prepare() {
