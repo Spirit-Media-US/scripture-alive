@@ -347,7 +347,7 @@ const speakingImg = tileTransform(
     dots.forEach(d => d.addEventListener('click', () => goTo(Number(d.dataset.index))));
     document.getElementById('endorsement-prev')?.addEventListener('click', () => goTo(current - 1));
     document.getElementById('endorsement-next')?.addEventListener('click', () => goTo(current + 1));
-    setInterval(() => goTo(current + 1), 5000);
+    setInterval(() => goTo(current + 1), 10000);
   </script>
 
 </Layout>
