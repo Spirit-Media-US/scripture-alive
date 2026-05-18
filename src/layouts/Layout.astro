@@ -83,7 +83,7 @@ const currentPath = Astro.url.pathname;
        if the font isn't ready within ~100ms of nav, never swap (fallback stays for
        this session). Slow-4G Lighthouse audits never see the swap → LCP = FCP.
        Real users on fast/cached connections still get Dancing Script. */
-    @font-face{font-family:'Dancing Script';font-style:normal;font-weight:400;font-display:block;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2') format('woff2')}
+    @font-face{font-family:'Dancing Script';font-style:normal;font-weight:400;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2') format('woff2')}
     @font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2') format('woff2')}
     @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2') format('woff2')}
     /* font-display:optional — if Montserrat isn't ready within ~100ms, the browser
