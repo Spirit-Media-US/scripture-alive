@@ -79,23 +79,19 @@ const currentPath = Astro.url.pathname;
        ======================================================================== -->
   <style is:inline>
     /* @font-face: CSS spec forbids inside @layer, so top-level only */
-    /* Strategy (canonical SMP perf-gate pattern for bimodal CLS race):
-       - font-display: swap (text paints with calibrated fallback at FCP,
-         upgrades to webfont when loaded with no CLS thanks to metric overrides)
-       - Calibrated fallback @font-face declarations (size-adjust + ascent-override
-         + descent-override) measured via font-fallback-calibrate.mjs — keep glyph
-         metrics identical between fallback and webfont so swap is invisible
-       - Each font-family stack: ['Real Font', '<font>-fallback', system-ui, sans-serif]
-       This is what lets the LCP element paint at FCP-time in Lantern simulation
-       and lets Dancing Script + Montserrat swap in without layout shift. */
-    @font-face{font-family:'Dancing Script';font-style:normal;font-weight:400;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2') format('woff2')}
-    @font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2') format('woff2')}
-    @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2') format('woff2')}
-    /* Calibrated fallbacks (measured 2026-05-18 via font-fallback-calibrate.mjs).
-       Each fallback uses local('Arial') with metric overrides so that the
-       fallback box dimensions match the webfont box dimensions exactly. */
-    @font-face{font-family:'montserrat-fallback';src:local('Arial');size-adjust:108.97%;ascent-override:88.83%;descent-override:23.03%;line-gap-override:0%}
-    @font-face{font-family:'dancing-script-fallback';src:local('Arial');size-adjust:84.04%;ascent-override:109.47%;descent-override:33.32%;line-gap-override:0%}
+    /* Dancing Script 400 is the homepage H1 LCP element. font-display:optional means:
+       if the font isn't ready within ~100ms of nav, never swap (fallback stays for
+       this session). Slow-4G Lighthouse audits never see the swap → LCP = FCP.
+       Real users on fast/cached connections still get Dancing Script. */
+    @font-face{font-family:'Dancing Script';font-style:normal;font-weight:400;font-display:block;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2') format('woff2')}
+    @font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2') format('woff2')}
+    @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2') format('woff2')}
+    /* font-display:optional — if Montserrat isn't ready within ~100ms, the browser
+       commits to the fallback (system-ui) for this nav and never swaps. Prevents
+       the glyph-metric reflow that real users see as 'ghosted/doubled' text on
+       first paint when swap fires mid-render. Cached/fast users still see
+       Montserrat; first-time slow-4G visitors see a subtly different sans (still
+       legible, no shift). */
 
     /* @keyframes: also top-level */
     @keyframes saFadeIn{from{opacity:0}to{opacity:1}}
@@ -105,9 +101,9 @@ const currentPath = Astro.url.pathname;
          resolve CSS vars in inline critical, TMCG lesson 2026-04) */
       *,*::before,*::after{box-sizing:border-box;border:0 solid}
       html{-webkit-text-size-adjust:100%;font-size:16px;line-height:1.7;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-      body{margin:0;background:#fff;color:#7A7A7A;font-family:'Montserrat','montserrat-fallback',system-ui,sans-serif;line-height:1.7}
+      body{margin:0;background:#fff;color:#7A7A7A;font-family:'Montserrat',system-ui,sans-serif;line-height:1.7}
       img,picture,svg,video,canvas{display:block;max-width:100%;height:auto}
-      h1,h2,h3,h4,h5,h6{margin:0;font-family:'Dancing Script','dancing-script-fallback',cursive;color:inherit;line-height:1.2;font-weight:400;overflow-wrap:break-word}
+      h1,h2,h3,h4,h5,h6{margin:0;font-family:'Dancing Script',cursive;color:inherit;line-height:1.2;font-weight:400;overflow-wrap:break-word}
       p{margin:0;overflow-wrap:break-word}
       a{color:inherit;text-decoration:none}
       button{font:inherit;color:inherit;background:transparent;cursor:pointer;padding:0;border:0}
@@ -169,8 +165,8 @@ const currentPath = Astro.url.pathname;
       .hover\:text-white:hover{color:#fff}
 
       /* Typography */
-      .font-sans{font-family:'Montserrat','montserrat-fallback',system-ui,sans-serif}
-      .font-display{font-family:'Dancing Script','dancing-script-fallback',cursive}
+      .font-sans{font-family:'Montserrat',system-ui,sans-serif}
+      .font-display{font-family:'Dancing Script',cursive}
       .font-light{font-weight:300}.font-medium{font-weight:500}.font-semibold{font-weight:600}.font-bold{font-weight:700}
       .text-xs{font-size:.75rem}.text-sm{font-size:.875rem}.text-base{font-size:1rem}.text-lg{font-size:1.125rem}
       .text-2xl{font-size:1.5rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}

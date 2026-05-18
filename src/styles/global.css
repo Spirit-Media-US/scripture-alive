@@ -1,21 +1,16 @@
 @import "tailwindcss";
 
-/* Critical fonts — used above-the-fold on homepage (LCP hero, subheading, nav).
-   Same @font-face values are declared inline in Layout.astro's critical CSS for
-   first-paint resolution. Duplicate declarations are idempotent per CSS spec —
-   kept here for the async Tailwind bundle (which references these families). */
-@font-face{font-family:'Dancing Script';font-style:normal;font-weight:400;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2') format('woff2');}
-@font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2') format('woff2');}
-@font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2') format('woff2');}
-@font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-600.woff2') format('woff2');}
-@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2') format('woff2');}
-@font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-800.woff2') format('woff2');}
-/* Calibrated metric-override fallbacks — measured 2026-05-18 via
-   /home/deploy/bin/font-fallback-calibrate.mjs against Arial. These keep the
-   fallback's glyph box dimensions identical to the webfont's, so font-display:
-   swap is invisible (no CLS, no glyph reflow). */
-@font-face{font-family:'montserrat-fallback';src:local('Arial');size-adjust:108.97%;ascent-override:88.83%;descent-override:23.03%;line-gap-override:0%;}
-@font-face{font-family:'dancing-script-fallback';src:local('Arial');size-adjust:84.04%;ascent-override:109.47%;descent-override:33.32%;line-gap-override:0%;}
+/* Critical fonts — used above-the-fold on homepage (LCP hero, subheading, nav) */
+/* Critical fonts — ALSO declared inline in Layout.astro critical CSS with the same
+   font-display values. Duplicate @font-face is idempotent per CSS spec. Kept here
+   so the external Tailwind bundle (async-loaded) has font-family resolution when
+   utilities reference these families. */
+@font-face{font-family:'Dancing Script';font-style:normal;font-weight:400;font-display:block;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2') format('woff2');}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2') format('woff2');}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2') format('woff2');}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-600.woff2') format('woff2');}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2') format('woff2');}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-800.woff2') format('woff2');}
 /* Non-critical @font-face blocks (heavier weights, secondary families) are loaded via /deferred.css */
 
 @theme {
@@ -27,9 +22,9 @@
      #FBC215 only hits 1.5:1 on white; this hits ~5.0:1 while still reading as gold. */
   --color-gold-deep: #876e00;
   --color-cream:   #f5f0e8;
-  --font-sans:     'Montserrat', 'montserrat-fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-sans:     'Montserrat', ui-sans-serif, system-ui, sans-serif;
   --font-serif:    'Roboto Slab', Georgia, ui-serif, serif;
-  --font-display:  'Dancing Script', 'dancing-script-fallback', cursive;
+  --font-display:  'Dancing Script', cursive;
 }
 
 @layer base {
