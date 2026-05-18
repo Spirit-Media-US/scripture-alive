@@ -101,6 +101,11 @@ const speakingImg = tileTransform(
     </div>
     <script is:inline>
       (function () {
+        // 10MB video — desktop only. On mobile (< 1024px) the video sits in a
+        // 412×232 box at top of hero; loading 10MB on slow-4G blew PSI mobile
+        // FCP/LCP into bimodal 80/93 territory (2026-05-17). Mobile hero is
+        // already visually complete with the static dark background + h1 overlay.
+        if (!window.matchMedia('(min-width: 1024px)').matches) return;
         var loadVideo = function () {
           var v = document.getElementById('hero-video');
           if (!v || v.dataset.loaded) return;
