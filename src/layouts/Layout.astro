@@ -56,10 +56,14 @@ const currentPath = Astro.url.pathname;
   <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
   <link rel="preconnect" href="https://assets.spiritmediapublishing.com" crossorigin />
 
-  <!-- Critical font preload — homepage hero LCP H1 uses Dancing Script 400. -->
+  <!-- Critical font preload — homepage hero LCP H1 uses Dancing Script 400.
+       Montserrat preloads were removed (2026-05-18): with font-display:optional
+       a preloaded Montserrat 400/700 loaded INSIDE the 100ms grace window in
+       Lantern slow-4G simulation → swap fired → ~0.22 CLS on the testimonial
+       section. Without preload the optional window closes before the font
+       arrives → fallback stays → no swap → no CLS. Real users with cache hits
+       still see Montserrat on subsequent navigations. -->
   <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2" crossorigin />
-  <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2" crossorigin />
-  <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2" crossorigin />
 
   <!-- Per-page head slot — hoisted so page-specific LCP preloads (e.g., hero image) come early -->
   <slot name="head-early" />
