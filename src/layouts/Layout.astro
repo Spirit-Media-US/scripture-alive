@@ -87,11 +87,7 @@ const currentPath = Astro.url.pathname;
     @font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2') format('woff2')}
     @font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2') format('woff2')}
     @font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-600.woff2') format('woff2')}
-    /* Montserrat 700: 'Unforgettable' hero h1 span is the mobile LCP element.
-       font-display:swap so the fallback paints at FCP and the LCP locks in
-       early; the real font then swaps in (no in-viewport CLS thanks to the
-       endorsement carousel being moved below the fold — see index.astro). */
-    @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2') format('woff2')}
+    @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2') format('woff2')}
     @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-800.woff2') format('woff2')}
     /* font-display:optional — if Montserrat isn't ready within ~100ms, the browser
        commits to the fallback (system-ui) for this nav and never swaps. Prevents
