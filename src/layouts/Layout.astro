@@ -83,7 +83,11 @@ const currentPath = Astro.url.pathname;
        if the font isn't ready within ~100ms of nav, never swap (fallback stays for
        this session). Slow-4G Lighthouse audits never see the swap → LCP = FCP.
        Real users on fast/cached connections still get Dancing Script. */
-    @font-face{font-family:'Dancing Script';font-style:normal;font-weight:400;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2') format('woff2')}
+    /* Dancing Script: hero h1 'Making Scripture' span (mobile + desktop).
+       font-display:swap so the cursive fallback paints at FCP; Dancing Script
+       upgrades in once loaded. Endorsement carousel now below fold so no
+       in-viewport CLS. */
+    @font-face{font-family:'Dancing Script';font-style:normal;font-weight:400;font-display:swap;src:url('https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2') format('woff2')}
     @font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2') format('woff2')}
     @font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-500.woff2') format('woff2')}
     @font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-600.woff2') format('woff2')}
