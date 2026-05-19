@@ -11,10 +11,6 @@
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-600.woff2') format('woff2');}
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2') format('woff2');}
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-800.woff2') format('woff2');}
-/* Metric-adjusted Montserrat fallback — also declared inline in Layout.astro
-   critical CSS. Same calibrator output. Kept here so the async Tailwind bundle
-   resolves 'montserrat fallback' when utilities reference it. */
-@font-face{font-family:'montserrat fallback';src:local('Arial');size-adjust:108.97%;ascent-override:88.83%;descent-override:23.03%;line-gap-override:0%;}
 /* Non-critical @font-face blocks (heavier weights, secondary families) are loaded via /deferred.css */
 
 @theme {
@@ -26,7 +22,7 @@
      #FBC215 only hits 1.5:1 on white; this hits ~5.0:1 while still reading as gold. */
   --color-gold-deep: #876e00;
   --color-cream:   #f5f0e8;
-  --font-sans:     'Montserrat', 'montserrat fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-sans:     'Montserrat', ui-sans-serif, system-ui, sans-serif;
   --font-serif:    'Roboto Slab', Georgia, ui-serif, serif;
   --font-display:  'Dancing Script', cursive;
 }
