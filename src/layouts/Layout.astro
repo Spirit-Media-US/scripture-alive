@@ -56,14 +56,9 @@ const currentPath = Astro.url.pathname;
   <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
   <link rel="preconnect" href="https://assets.spiritmediapublishing.com" crossorigin />
 
-  <!-- Critical font preload — ONLY the LCP font weight. PSI 2026-05-19 confirmed
-       LCP element is <span class="font-sans font-bold">Unforgettable</span> →
-       Montserrat 700. Dancing Script 400 (above-LCP "Making Scripture" line) +
-       Montserrat 400 (body) were also preloaded but they're not LCP-critical;
-       removing them frees bandwidth in the Lantern simulator (Slow-4G PSI was
-       contending all three preloads in the LCP window). Both still load
-       font-display:optional from the inline @font-face decls — slow-4G users
-       just paint the calibrated 'montserrat fallback' until cached. -->
+  <!-- Critical font preload — homepage hero LCP H1 uses Dancing Script 400. -->
+  <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/dancing-script/dancing-script-400.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-400.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2" crossorigin />
 
   <!-- Per-page head slot — hoisted so page-specific LCP preloads (e.g., hero image) come early -->
