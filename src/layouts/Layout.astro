@@ -89,12 +89,20 @@ const currentPath = Astro.url.pathname;
     @font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-600.woff2') format('woff2')}
     @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2') format('woff2')}
     @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:optional;src:url('https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-800.woff2') format('woff2')}
+    /* Metric-adjusted Montserrat fallback — measured against the live woff2
+       via font-fallback-calibrate.mjs on 2026-05-19. When font-display:optional
+       commits the fallback (slow-4G PSI runs), the fallback occupies the same
+       glyph width / line height as Montserrat, so the LCP element (h1 span
+       'Unforgettable', font-bold = 700) paints at the final position from
+       FCP onward — no font-swap re-paint inflating simulated LCP. Same fix
+       pattern as FHB (commit 91367db) and lioncrest-media (commit 6ea5385). */
+    @font-face{font-family:'montserrat fallback';src:local('Arial');size-adjust:108.97%;ascent-override:88.83%;descent-override:23.03%;line-gap-override:0%}
     /* font-display:optional — if Montserrat isn't ready within ~100ms, the browser
-       commits to the fallback (system-ui) for this nav and never swaps. Prevents
-       the glyph-metric reflow that real users see as 'ghosted/doubled' text on
+       commits to the fallback for this nav and never swaps. Prevents the
+       glyph-metric reflow that real users see as 'ghosted/doubled' text on
        first paint when swap fires mid-render. Cached/fast users still see
-       Montserrat; first-time slow-4G visitors see a subtly different sans (still
-       legible, no shift). */
+       Montserrat; first-time slow-4G visitors see the calibrated Arial fallback
+       (same dimensions, no shift). */
 
     /* @keyframes: also top-level */
     @keyframes saFadeIn{from{opacity:0}to{opacity:1}}
@@ -104,7 +112,7 @@ const currentPath = Astro.url.pathname;
          resolve CSS vars in inline critical, TMCG lesson 2026-04) */
       *,*::before,*::after{box-sizing:border-box;border:0 solid}
       html{-webkit-text-size-adjust:100%;font-size:16px;line-height:1.7;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-      body{margin:0;background:#fff;color:#7A7A7A;font-family:'Montserrat',system-ui,sans-serif;line-height:1.7}
+      body{margin:0;background:#fff;color:#7A7A7A;font-family:'Montserrat','montserrat fallback',system-ui,sans-serif;line-height:1.7}
       img,picture,svg,video,canvas{display:block;max-width:100%;height:auto}
       h1,h2,h3,h4,h5,h6{margin:0;font-family:'Dancing Script',cursive;color:inherit;line-height:1.2;font-weight:400;overflow-wrap:break-word}
       p{margin:0;overflow-wrap:break-word}
@@ -168,7 +176,7 @@ const currentPath = Astro.url.pathname;
       .hover\:text-white:hover{color:#fff}
 
       /* Typography */
-      .font-sans{font-family:'Montserrat',system-ui,sans-serif}
+      .font-sans{font-family:'Montserrat','montserrat fallback',system-ui,sans-serif}
       .font-display{font-family:'Dancing Script',cursive}
       .font-light{font-weight:300}.font-medium{font-weight:500}.font-semibold{font-weight:600}.font-bold{font-weight:700}
       .text-xs{font-size:.75rem}.text-sm{font-size:.875rem}.text-base{font-size:1rem}.text-lg{font-size:1.125rem}
