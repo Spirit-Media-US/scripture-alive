@@ -56,15 +56,17 @@ const currentPath = Astro.url.pathname;
   <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
   <link rel="preconnect" href="https://assets.spiritmediapublishing.com" crossorigin />
 
-  <!-- Critical font preload — ONLY the LCP font weight. PSI 2026-05-19 confirmed
-       LCP element is <span class="font-sans font-bold">Unforgettable</span> →
-       Montserrat 700. Dancing Script 400 (above-LCP "Making Scripture" line) +
-       Montserrat 400 (body) were also preloaded but they're not LCP-critical;
-       removing them frees bandwidth in the Lantern simulator (Slow-4G PSI was
-       contending all three preloads in the LCP window). Both still load
-       font-display:optional from the inline @font-face decls — slow-4G users
-       just paint the calibrated 'montserrat fallback' until cached. -->
-  <link rel="preload" as="font" type="font/woff2" href="https://assets.spiritmediapublishing.com/fonts/montserrat/montserrat-700.woff2" crossorigin />
+  <!-- No font preloads. PSI 2026-05-19 — iteration #3.
+       LCP element is the H1 span "Unforgettable" in Montserrat 700. Combined
+       with the calibrated 'montserrat fallback' (commit 4617661 — measured
+       size-adjust 108.97% / ascent 88.83% / descent 23.03%) and
+       font-display:optional, slow-4G PSI runs commit to the fallback at FCP
+       and never swap to Montserrat. The fallback paints at the same glyph
+       dimensions as Montserrat 700, so LCP = FCP and the simulator can't
+       inflate LCP with a re-paint event. Real users on warm connections still
+       get Montserrat from the inline @font-face — they just don't pay the
+       preload bandwidth contention. -->
+
 
   <!-- Per-page head slot — hoisted so page-specific LCP preloads (e.g., hero image) come early -->
   <slot name="head-early" />
