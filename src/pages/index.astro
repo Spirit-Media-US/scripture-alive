@@ -90,6 +90,7 @@ const speakingImg = tileTransform(
         id="hero-video"
         muted playsinline loop preload="none" aria-hidden="true"
         data-src="https://assets.spiritmediapublishing.com/scripture-alive/sa-opening-no-music-v2.mp4"
+        data-src-mobile="https://assets.spiritmediapublishing.com/scripture-alive/sa-opening-no-music-v2-mobile.mp4"
       ></video>
       <!-- Mobile-only headline overlay on the video -->
       <div class="hero-mobile-h1 lg:hidden">
@@ -101,17 +102,17 @@ const speakingImg = tileTransform(
     </div>
     <script is:inline>
       (function () {
-        // 10MB video — desktop only. On mobile (< 1024px) the video sits in a
-        // 412×232 box at top of hero; loading 10MB on slow-4G blew PSI mobile
-        // FCP/LCP into bimodal 80/93 territory (2026-05-17). Mobile hero is
-        // already visually complete with the static dark background + h1 overlay.
-        if (!window.matchMedia('(min-width: 1024px)').matches) return;
+        // Desktop loads the full 1080p source (~10MB). Mobile loads a 720x406
+        // ~240KB encode (data-src-mobile) — the full file blew PSI mobile
+        // FCP/LCP into bimodal 80/93 territory (2026-05-17), the light encode
+        // is negligible and deferred past the load event so LCP is unaffected.
+        var isDesktop = window.matchMedia('(min-width: 1024px)').matches;
         var loadVideo = function () {
           var v = document.getElementById('hero-video');
           if (!v || v.dataset.loaded) return;
           v.dataset.loaded = '1';
           var s = document.createElement('source');
-          s.src = v.dataset.src;
+          s.src = isDesktop ? v.dataset.src : v.dataset.srcMobile;
           s.type = 'video/mp4';
           v.appendChild(s);
           v.load();
